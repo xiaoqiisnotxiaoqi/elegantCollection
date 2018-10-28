@@ -1,0 +1,144 @@
+body {
+    background-color: rgb(245, 245, 245);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: grey;
+}
+
+li {
+    display: inline-block;
+    list-style: none;
+}
+
+.block-segmentation {
+    display: inline-block;
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    height: 30px;
+}
+
+.order-introduction span {
+    display: inline-block;
+    margin: 3px 20px;
+}
+
+.waiter-link img {
+    width: 20px;
+    height: 20px;
+}
+
+.order-item {
+    border: 1px rgb(205, 205, 205) solid;
+    background-color: rgb(255, 255, 255);
+}
+
+.order-tip {
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    height: 70px;
+    padding: 15px 0 0 15px;
+}
+
+.order-show-top {
+    margin-top: 30px;
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+}
+
+.td-segmentation {
+    width: 100%;
+    height: 30px;
+}
+
+.order-tb {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.order-state-list {
+    display: inline-block;
+    width: 70%;
+    height: 70px;
+    padding: 15px 0 0 15px;
+}
+
+.order-state-filter {
+    display: inline-block;
+    width: 20%;
+    height: 40px;
+}
+
+.order-state-filter a:visited {
+    color: red;
+}
+
+.order-state-filter a:hover {
+    font-weight: bold;
+    border-bottom: 1px red solid;
+    color: red;
+}
+
+.search {
+    display: inline-block;
+    margin-left: 2.5%;
+    padding-left: 5px;
+    width: 160px;
+    border: 1px grey solid;
+}
+
+.search-txt {
+    height: 30px;
+    border: none;
+    outline: none;
+}
+
+.search-button {
+    margin: 5px 0 0 5px;
+    position: absolute;
+    display: inline-block;
+}
+
+.search img {
+    width: 20px;
+    height: 20px;
+}
+
+.book-img img {
+    width: 200px;
+    height: 200px;
+}
+
+.book-msg {
+    display: inline-block;
+    width: 80%;
+}
+
+.book-number {
+    display: inline-block;
+    width: 20%;
+    float: right;
+}
+
+.page-information {
+    padding-right: 50px;
+}
+
+.page-information a {
+    text-align: center;
+    display: inline-block;
+    float: right;
+    width: 60px;
+}
+.page-code{
+    text-align: center;
+    display: inline-block;
+    float: right;
+    width: 40px;
+}

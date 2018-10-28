@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.elegantcollection.dao.EvaluateDao">
+  <resultMap id="BaseResultMap" type="com.elegantcollection.entity.Evaluate">
+    <id column="evaluate_id" jdbcType="INTEGER" property="evaluateId" />
+    <result column="book_id" jdbcType="INTEGER" property="bookId" />
+    <result column="cust_id" jdbcType="INTEGER" property="custId" />
+    <result column="evaluate_img" jdbcType="VARCHAR" property="evaluateImg" />
+    <result column="describe_score" jdbcType="INTEGER" property="describeScore" />
+    <result column="logistics_score" jdbcType="INTEGER" property="logisticsScore" />
+    <result column="service_score" jdbcType="INTEGER" property="serviceScore" />
+    <result column="evaluate_time" jdbcType="DATE" property="evaluateTime" />
+    <result column="is_anonymous" jdbcType="INTEGER" property="isAnonymous" />
+    <result column="evaluate_status" jdbcType="INTEGER" property="evaluateStatus" />
+    <result column="evaluate_anonymous" jdbcType="INTEGER" property="evaluateAnonymous" />
+    <result column="evaluate_isimage" jdbcType="INTEGER" property="evaluateIsimage" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.elegantcollection.entity.Evaluate">
+    <result column="evaluate_text" jdbcType="LONGVARCHAR" property="evaluateText" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    evaluate_id, book_id, cust_id, evaluate_img, describe_score, logistics_score, service_score, 
+    evaluate_time, is_anonymous, evaluate_status, evaluate_anonymous, evaluate_isimage
+  </sql>
+  <sql id="Blob_Column_List">
+    evaluate_text
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.elegantcollection.entity.EvaluateExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from evaluate
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.elegantcollection.entity.EvaluateExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from evaluate
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from evaluate
+    where evaluate_id = #{evaluateId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from evaluate
+    where evaluate_id = #{evaluateId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.elegantcollection.entity.EvaluateExample">
+    delete from evaluate
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.elegantcollection.entity.Evaluate">
+    insert into evaluate (evaluate_id, book_id, cust_id, 
+      evaluate_img, describe_score, logistics_score, 
+      service_score, evaluate_time, is_anonymous, 
+      evaluate_status, evaluate_anonymous, evaluate_isimage, 
+      evaluate_text)
+    values (#{evaluateId,jdbcType=INTEGER}, #{bookId,jdbcType=INTEGER}, #{custId,jdbcType=INTEGER}, 
+      #{evaluateImg,jdbcType=VARCHAR}, #{describeScore,jdbcType=INTEGER}, #{logisticsScore,jdbcType=INTEGER}, 
+      #{serviceScore,jdbcType=INTEGER}, #{evaluateTime,jdbcType=DATE}, #{isAnonymous,jdbcType=INTEGER}, 
+      #{evaluateStatus,jdbcType=INTEGER}, #{evaluateAnonymous,jdbcType=INTEGER}, #{evaluateIsimage,jdbcType=INTEGER}, 
+      #{evaluateText,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.elegantcollection.entity.Evaluate">
+    insert into evaluate
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="evaluateId != null">
+        evaluate_id,
+      </if>
+      <if test="bookId != null">
+        book_id,
+      </if>
+      <if test="custId != null">
+        cust_id,
+      </if>
+      <if test="evaluateImg != null">
+        evaluate_img,
+      </if>
+      <if test="describeScore != null">
+        describe_score,
+      </if>
+      <if test="logisticsScore != null">
+        logistics_score,
+      </if>
+      <if test="serviceScore != null">
+        service_score,
+      </if>
+      <if test="evaluateTime != null">
+        evaluate_time,
+      </if>
+      <if test="isAnonymous != null">
+        is_anonymous,
+      </if>
+      <if test="evaluateStatus != null">
+        evaluate_status,
+      </if>
+      <if test="evaluateAnonymous != null">
+        evaluate_anonymous,
+      </if>
+      <if test="evaluateIsimage != null">
+        evaluate_isimage,
+      </if>
+      <if test="evaluateText != null">
+        evaluate_text,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="evaluateId != null">
+        #{evaluateId,jdbcType=INTEGER},
+      </if>
+      <if test="bookId != null">
+        #{bookId,jdbcType=INTEGER},
+      </if>
+      <if test="custId != null">
+        #{custId,jdbcType=INTEGER},
+      </if>
+      <if test="evaluateImg != null">
+        #{evaluateImg,jdbcType=VARCHAR},
+      </if>
+      <if test="describeScore != null">
+        #{describeScore,jdbcType=INTEGER},
+      </if>
+      <if test="logisticsScore != null">
+        #{logisticsScore,jdbcType=INTEGER},
+      </if>
+      <if test="serviceScore != null">
+        #{serviceScore,jdbcType=INTEGER},
+      </if>
+      <if test="evaluateTime != null">
+        #{evaluateTime,jdbcType=DATE},
+      </if>
+      <if test="isAnonymous != null">
+        #{isAnonymous,jdbcType=INTEGER},
+      </if>
+      <if test="evaluateStatus != null">
+        #{evaluateStatus,jdbcType=INTEGER},
+      </if>
+      <if test="evaluateAnonymous != null">
+        #{evaluateAnonymous,jdbcType=INTEGER},
+      </if>
+      <if test="evaluateIsimage != null">
+        #{evaluateIsimage,jdbcType=INTEGER},
+      </if>
+      <if test="evaluateText != null">
+        #{evaluateText,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.elegantcollection.entity.EvaluateExample" resultType="java.lang.Long">
+    select count(*) from evaluate
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update evaluate
+    <set>
+      <if test="record.evaluateId != null">
+        evaluate_id = #{record.evaluateId,jdbcType=INTEGER},
+      </if>
+      <if test="record.bookId != null">
+        book_id = #{record.bookId,jdbcType=INTEGER},
+      </if>
+      <if test="record.custId != null">
+        cust_id = #{record.custId,jdbcType=INTEGER},
+      </if>
+      <if test="record.evaluateImg != null">
+        evaluate_img = #{record.evaluateImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.describeScore != null">
+        describe_score = #{record.describeScore,jdbcType=INTEGER},
+      </if>
+      <if test="record.logisticsScore != null">
+        logistics_score = #{record.logisticsScore,jdbcType=INTEGER},
+      </if>
+      <if test="record.serviceScore != null">
+        service_score = #{record.serviceScore,jdbcType=INTEGER},
+      </if>
+      <if test="record.evaluateTime != null">
+        evaluate_time = #{record.evaluateTime,jdbcType=DATE},
+      </if>
+      <if test="record.isAnonymous != null">
+        is_anonymous = #{record.isAnonymous,jdbcType=INTEGER},
+      </if>
+      <if test="record.evaluateStatus != null">
+        evaluate_status = #{record.evaluateStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.evaluateAnonymous != null">
+        evaluate_anonymous = #{record.evaluateAnonymous,jdbcType=INTEGER},
+      </if>
+      <if test="record.evaluateIsimage != null">
+        evaluate_isimage = #{record.evaluateIsimage,jdbcType=INTEGER},
+      </if>
+      <if test="record.evaluateText != null">
+        evaluate_text = #{record.evaluateText,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update evaluate
+    set evaluate_id = #{record.evaluateId,jdbcType=INTEGER},
+      book_id = #{record.bookId,jdbcType=INTEGER},
+      cust_id = #{record.custId,jdbcType=INTEGER},
+      evaluate_img = #{record.evaluateImg,jdbcType=VARCHAR},
+      describe_score = #{record.describeScore,jdbcType=INTEGER},
+      logistics_score = #{record.logisticsScore,jdbcType=INTEGER},
+      service_score = #{record.serviceScore,jdbcType=INTEGER},
+      evaluate_time = #{record.evaluateTime,jdbcType=DATE},
+      is_anonymous = #{record.isAnonymous,jdbcType=INTEGER},
+      evaluate_status = #{record.evaluateStatus,jdbcType=INTEGER},
+      evaluate_anonymous = #{record.evaluateAnonymous,jdbcType=INTEGER},
+      evaluate_isimage = #{record.evaluateIsimage,jdbcType=INTEGER},
+      evaluate_text = #{record.evaluateText,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update evaluate
+    set evaluate_id = #{record.evaluateId,jdbcType=INTEGER},
+      book_id = #{record.bookId,jdbcType=INTEGER},
+      cust_id = #{record.custId,jdbcType=INTEGER},
+      evaluate_img = #{record.evaluateImg,jdbcType=VARCHAR},
+      describe_score = #{record.describeScore,jdbcType=INTEGER},
+      logistics_score = #{record.logisticsScore,jdbcType=INTEGER},
+      service_score = #{record.serviceScore,jdbcType=INTEGER},
+      evaluate_time = #{record.evaluateTime,jdbcType=DATE},
+      is_anonymous = #{record.isAnonymous,jdbcType=INTEGER},
+      evaluate_status = #{record.evaluateStatus,jdbcType=INTEGER},
+      evaluate_anonymous = #{record.evaluateAnonymous,jdbcType=INTEGER},
+      evaluate_isimage = #{record.evaluateIsimage,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.elegantcollection.entity.Evaluate">
+    update evaluate
+    <set>
+      <if test="bookId != null">
+        book_id = #{bookId,jdbcType=INTEGER},
+      </if>
+      <if test="custId != null">
+        cust_id = #{custId,jdbcType=INTEGER},
+      </if>
+      <if test="evaluateImg != null">
+        evaluate_img = #{evaluateImg,jdbcType=VARCHAR},
+      </if>
+      <if test="describeScore != null">
+        describe_score = #{describeScore,jdbcType=INTEGER},
+      </if>
+      <if test="logisticsScore != null">
+        logistics_score = #{logisticsScore,jdbcType=INTEGER},
+      </if>
+      <if test="serviceScore != null">
+        service_score = #{serviceScore,jdbcType=INTEGER},
+      </if>
+      <if test="evaluateTime != null">
+        evaluate_time = #{evaluateTime,jdbcType=DATE},
+      </if>
+      <if test="isAnonymous != null">
+        is_anonymous = #{isAnonymous,jdbcType=INTEGER},
+      </if>
+      <if test="evaluateStatus != null">
+        evaluate_status = #{evaluateStatus,jdbcType=INTEGER},
+      </if>
+      <if test="evaluateAnonymous != null">
+        evaluate_anonymous = #{evaluateAnonymous,jdbcType=INTEGER},
+      </if>
+      <if test="evaluateIsimage != null">
+        evaluate_isimage = #{evaluateIsimage,jdbcType=INTEGER},
+      </if>
+      <if test="evaluateText != null">
+        evaluate_text = #{evaluateText,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where evaluate_id = #{evaluateId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.elegantcollection.entity.Evaluate">
+    update evaluate
+    set book_id = #{bookId,jdbcType=INTEGER},
+      cust_id = #{custId,jdbcType=INTEGER},
+      evaluate_img = #{evaluateImg,jdbcType=VARCHAR},
+      describe_score = #{describeScore,jdbcType=INTEGER},
+      logistics_score = #{logisticsScore,jdbcType=INTEGER},
+      service_score = #{serviceScore,jdbcType=INTEGER},
+      evaluate_time = #{evaluateTime,jdbcType=DATE},
+      is_anonymous = #{isAnonymous,jdbcType=INTEGER},
+      evaluate_status = #{evaluateStatus,jdbcType=INTEGER},
+      evaluate_anonymous = #{evaluateAnonymous,jdbcType=INTEGER},
+      evaluate_isimage = #{evaluateIsimage,jdbcType=INTEGER},
+      evaluate_text = #{evaluateText,jdbcType=LONGVARCHAR}
+    where evaluate_id = #{evaluateId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.elegantcollection.entity.Evaluate">
+    update evaluate
+    set book_id = #{bookId,jdbcType=INTEGER},
+      cust_id = #{custId,jdbcType=INTEGER},
+      evaluate_img = #{evaluateImg,jdbcType=VARCHAR},
+      describe_score = #{describeScore,jdbcType=INTEGER},
+      logistics_score = #{logisticsScore,jdbcType=INTEGER},
+      service_score = #{serviceScore,jdbcType=INTEGER},
+      evaluate_time = #{evaluateTime,jdbcType=DATE},
+      is_anonymous = #{isAnonymous,jdbcType=INTEGER},
+      evaluate_status = #{evaluateStatus,jdbcType=INTEGER},
+      evaluate_anonymous = #{evaluateAnonymous,jdbcType=INTEGER},
+      evaluate_isimage = #{evaluateIsimage,jdbcType=INTEGER}
+    where evaluate_id = #{evaluateId,jdbcType=INTEGER}
+  </update>
+</mapper>

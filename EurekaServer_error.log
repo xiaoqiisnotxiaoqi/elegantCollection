@@ -1,0 +1,34 @@
+2018-10-04 15:53:52,366 ERROR PropertiesConfigurationFactory:365 -Properties configuration failed validation
+2018-10-04 15:53:52,367 ERROR PropertiesConfigurationFactory:367 -Field error in object 'spring.datasource.druid' on field 'filters': rejected value [stat,wall,log4j]; codes [methodInvocation.spring.datasource.druid.filters,methodInvocation.filters,methodInvocation.java.lang.String,methodInvocation]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [spring.datasource.druid.filters,filters]; arguments []; default message [filters]]; default message [Property 'filters' threw exception; nested exception is java.lang.NoClassDefFoundError: org/apache/log4j/Logger]
+2018-10-04 15:53:52,433 ERROR LoggingFailureAnalysisReporter:42 -
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Binding to target {
+	CreateTime:"2018-10-04 15:53:51",
+	ActiveCount:0,
+	PoolingCount:0,
+	CreateCount:0,
+	DestroyCount:0,
+	CloseCount:0,
+	ConnectCount:0,
+	Connections:[
+	]
+}
+
+[
+] failed:
+
+    Property: spring.datasource.druid.filters
+    Value: stat,wall,log4j
+    Reason: Property 'filters' threw exception; nested exception is java.lang.NoClassDefFoundError: org/apache/log4j/Logger
+
+
+Action:
+
+Update your application's configuration
+

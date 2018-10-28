@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.elegantcollection.dao.LoginDao">
+  <resultMap id="BaseResultMap" type="com.elegantcollection.entity.Login">
+    <id column="login_id" jdbcType="INTEGER" property="loginId" />
+    <result column="cust_id" jdbcType="INTEGER" property="custId" />
+    <result column="login_time" jdbcType="TIMESTAMP" property="loginTime" />
+    <result column="login_ip" jdbcType="VARCHAR" property="loginIp" />
+    <result column="login_status" jdbcType="INTEGER" property="loginStatus" />
+    <result column="login_petname" jdbcType="VARCHAR" property="loginPetname" />
+    <result column="login_exception" jdbcType="INTEGER" property="loginException" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    login_id, cust_id, login_time, login_ip, login_status, login_petname, login_exception
+  </sql>
+  <select id="selectByExample" parameterType="com.elegantcollection.entity.LoginExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from login
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from login
+    where login_id = #{loginId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from login
+    where login_id = #{loginId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.elegantcollection.entity.LoginExample">
+    delete from login
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.elegantcollection.entity.Login">
+    insert into login (login_id, cust_id, login_time, 
+      login_ip, login_status, login_petname, 
+      login_exception)
+    values (#{loginId,jdbcType=INTEGER}, #{custId,jdbcType=INTEGER}, #{loginTime,jdbcType=TIMESTAMP}, 
+      #{loginIp,jdbcType=VARCHAR}, #{loginStatus,jdbcType=INTEGER}, #{loginPetname,jdbcType=VARCHAR}, 
+      #{loginException,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.elegantcollection.entity.Login">
+    insert into login
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="loginId != null">
+        login_id,
+      </if>
+      <if test="custId != null">
+        cust_id,
+      </if>
+      <if test="loginTime != null">
+        login_time,
+      </if>
+      <if test="loginIp != null">
+        login_ip,
+      </if>
+      <if test="loginStatus != null">
+        login_status,
+      </if>
+      <if test="loginPetname != null">
+        login_petname,
+      </if>
+      <if test="loginException != null">
+        login_exception,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="loginId != null">
+        #{loginId,jdbcType=INTEGER},
+      </if>
+      <if test="custId != null">
+        #{custId,jdbcType=INTEGER},
+      </if>
+      <if test="loginTime != null">
+        #{loginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginIp != null">
+        #{loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="loginStatus != null">
+        #{loginStatus,jdbcType=INTEGER},
+      </if>
+      <if test="loginPetname != null">
+        #{loginPetname,jdbcType=VARCHAR},
+      </if>
+      <if test="loginException != null">
+        #{loginException,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.elegantcollection.entity.LoginExample" resultType="java.lang.Long">
+    select count(*) from login
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update login
+    <set>
+      <if test="record.loginId != null">
+        login_id = #{record.loginId,jdbcType=INTEGER},
+      </if>
+      <if test="record.custId != null">
+        cust_id = #{record.custId,jdbcType=INTEGER},
+      </if>
+      <if test="record.loginTime != null">
+        login_time = #{record.loginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.loginIp != null">
+        login_ip = #{record.loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginStatus != null">
+        login_status = #{record.loginStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.loginPetname != null">
+        login_petname = #{record.loginPetname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginException != null">
+        login_exception = #{record.loginException,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update login
+    set login_id = #{record.loginId,jdbcType=INTEGER},
+      cust_id = #{record.custId,jdbcType=INTEGER},
+      login_time = #{record.loginTime,jdbcType=TIMESTAMP},
+      login_ip = #{record.loginIp,jdbcType=VARCHAR},
+      login_status = #{record.loginStatus,jdbcType=INTEGER},
+      login_petname = #{record.loginPetname,jdbcType=VARCHAR},
+      login_exception = #{record.loginException,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.elegantcollection.entity.Login">
+    update login
+    <set>
+      <if test="custId != null">
+        cust_id = #{custId,jdbcType=INTEGER},
+      </if>
+      <if test="loginTime != null">
+        login_time = #{loginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginIp != null">
+        login_ip = #{loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="loginStatus != null">
+        login_status = #{loginStatus,jdbcType=INTEGER},
+      </if>
+      <if test="loginPetname != null">
+        login_petname = #{loginPetname,jdbcType=VARCHAR},
+      </if>
+      <if test="loginException != null">
+        login_exception = #{loginException,jdbcType=INTEGER},
+      </if>
+    </set>
+    where login_id = #{loginId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.elegantcollection.entity.Login">
+    update login
+    set cust_id = #{custId,jdbcType=INTEGER},
+      login_time = #{loginTime,jdbcType=TIMESTAMP},
+      login_ip = #{loginIp,jdbcType=VARCHAR},
+      login_status = #{loginStatus,jdbcType=INTEGER},
+      login_petname = #{loginPetname,jdbcType=VARCHAR},
+      login_exception = #{loginException,jdbcType=INTEGER}
+    where login_id = #{loginId,jdbcType=INTEGER}
+  </update>
+</mapper>

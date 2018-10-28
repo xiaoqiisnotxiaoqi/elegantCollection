@@ -1,0 +1,205 @@
+body {
+    color: gray;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: grey;
+}
+
+li {
+    display: inline-block;
+    list-style: none;
+}
+
+.order-preview {
+    margin: 0 auto;
+    width: 80%;
+    height: auto;
+    border: 1px rgb(245, 245, 245) solid;
+}
+
+.preview-tip {
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+    display: block;
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+}
+
+.address-options {
+    height: 500px;
+}
+
+.block-segmentation1 {
+    background-color: rgb(235, 235, 235);
+    margin: 0 auto;
+    width: 80%;
+    height: 1px;
+}
+
+.block-segmentation2 {
+    background-color: rgb(235, 235, 235);
+    margin: 0 auto;
+    width: 90%;
+    height: 1px;
+}
+
+.address-options {
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+.address-options li {
+    margin-top: 10px;
+    display: block;
+}
+
+.address-option {
+    display: inline-block;
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    border: 1px rgb(245, 245, 245) solid;
+    text-align: center;
+    transition: border 1.5s, width 0.5s, height 0.5s;
+    -moz-transition: border 1.5s, width 0.5s, height 0.5s; /* Firefox 4 */
+    -webkit-transition: border 1.5s, width 0.5s, height 0.5s; /* Safari 和 Chrome */
+    -o-transition: border 1.5s, width 0.5s, height 0.5s; /* Opera */
+}
+
+.address-option:hover {
+    width: 103px;
+    height: 32px;
+    border: 1px red solid;
+}
+
+.address-option:active {
+    width: 103px;
+    height: 32px;
+    border: 1px red solid;
+}
+
+.address-detail {
+    font-size: 15px;
+}
+
+.payment-ways {
+    height: 150px;
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+.payment-option {
+    margin-left: 20px;
+    display: inline-block;
+    width: 80px;
+    height: 30px;
+    line-height: 30px;
+    border: 1px rgb(245, 245, 245) solid;
+    text-align: center;
+    transition: border 1.5s, width 0.5s, height 0.5s;
+    -moz-transition: border 1.5s, width 0.5s, height 0.5s; /* Firefox 4 */
+    -webkit-transition: border 1.5s, width 0.5s, height 0.5s; /* Safari 和 Chrome */
+    -o-transition: border 1.5s, width 0.5s, height 0.5s; /* Opera */
+}
+
+.payment-option:hover {
+    width: 83px;
+    height: 32px;
+    border: 1px red solid;
+    color: black;
+}
+
+.transport {
+    float: left;
+    background-color: rgb(247, 247, 247);
+    height: 250px;
+    display: inline-block;
+    width: 39%;
+
+}
+
+.transport span {
+    display: inline-block;
+    width: 80%;
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 10px;
+}
+
+.order-simple-info {
+    float: left;
+    background-color: rgb(234, 251, 254);
+    height: 250px;
+    display: inline-block;
+    width: 61%;
+}
+
+.transport-date {
+    margin: 25px;
+    width: 200px;
+    height: 30px;
+    font-size: 15px;
+}
+
+.list-tip {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.book_img {
+    float: left;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.book_img img {
+    height: 100px;
+    width: 80px;
+}
+
+.book-info {
+    margin: 15px 10px;
+    height: 100px;
+    width: 100%;
+}
+
+.book-name {
+    display: inline-block;
+    margin:15px;
+    float: left;
+    font-size: 10px;
+}
+.book-number{
+    font-size: 13px;
+    color: #ff2832;
+    float: right;
+    margin-right: 40px;
+    margin-top: 5px;
+}
+.book-price{
+    font-size: 13px;
+    color: #ff2832;
+    float: right;
+    margin-right: 40px;
+    margin-top: 5px;
+}
+.total-price{
+    font-size: 13px;
+    color: #ff2832;
+    float: right;
+    margin-right: 30px;
+    margin-top: 5px;
+}

@@ -1,0 +1,173 @@
+
+.post-news2{
+    width: 980px;
+    height: 160px;
+    border: 1px solid #DCDCDC;
+    margin-bottom: 12px;
+}
+
+.post-news{
+    width: 980px;
+    height: 80px;
+    border: 1px solid #DCDCDC;
+    margin-bottom: 12px;
+}
+
+.post-new{
+    width: 880px;
+    height: 30px;
+    margin-left: 20px;
+    padding-top: 10px;
+}
+
+.replier1{
+    font-size: 12px;
+    color: #2D64BA;
+    line-height: 20px;
+}
+
+.replier2{
+    font-size: 12px;
+    color: #2D64BA;
+}
+
+.my-new{
+    width: 800px;
+    height: 30px;
+    margin-left: 80px;
+    padding-left: 20px;
+    background-color: #F3F5F8 ;
+}
+
+.replier5{
+    font-size: 12px;
+    line-height: 30px;
+}
+
+.post-operater{
+    float: right;
+    width: 80px;
+    height: 80px;
+    margin-top: -70px;
+}
+
+
+.post-revert,.post-remove,.to-bookReview{
+    color: #2D64BA;
+    display: block;
+    text-align: center;
+    line-height: 20px;
+    cursor:pointer;
+}
+
+.post-revert:hover,.post-remove:hover,.to-bookReview:hover{
+    color: #ff0000;
+}
+
+
+
+.post-revert{
+    margin-top: 10px;
+}
+
+.comment-box{
+    width: 980px;
+    height: 90px;
+}
+
+.comment1{
+    width: 816px;
+    height: 76px;
+    margin: 10px 0 0 80px;
+    border: 2px solid #269abc;
+}
+
+.comment2,.comment3{
+    cursor: pointer;
+    color: #2D64BA;
+    width: 78px;
+    height: 20px;
+    display: block;
+    float: right;
+    text-align: center;
+}
+
+
+.comment2{
+    margin-top: -60px;
+}
+
+.comment3{
+    margin-top: -40px;
+}
+
+.comment2:hover,.comment3:hover{
+    color: #ff0000;
+    background-color: #ffffff;
+}
+
+.cust-black{
+    position: absolute;
+    top:0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0,0,0,.6);
+    z-index: 999;
+    display: none;
+}
+
+.cust-deleve{
+    position: fixed;
+    display: none;
+    top:50%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -200px;
+    z-index: 9999;
+    width: 360px;
+    height: 140px;
+    border: 1px solid #aeaeae;
+    border-radius: 3px;
+    padding: 20px;
+    background: #fff;
+}
+.cust-deleve .title{
+    font-size: 14px;
+    color: #3c3c3c;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+.cust-deleve .title .closeModel{
+    float: right;
+    cursor: pointer;
+}
+.cust-deleve p{
+    line-height:16px;
+}
+.cust-deleve .opBtn{
+    margin-top: 20px;
+}
+.cust-deleve .opBtn a{
+    width: 58px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    -webkit-border-radius: 1px;
+    -moz-border-radius: 1px;
+    border-radius: 1px;
+    display: inline-block;
+    margin-right: 10px;
+    font-weight: 700;
+}
+.cust-deleve .dialog-sure{
+    background: #52a0e5;
+    color: #fff;
+    border: 1px solid #52a0e5;
+}
+
+.cust-deleve .dialog-close{
+    background: #fff;
+    border: 1px solid #d9d9d9;
+    color: #3c3c3c;
+}

@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.elegantcollection.dao.ShopOrderDetailDao">
+  <resultMap id="BaseResultMap" type="com.elegantcollection.entity.ShopOrderDetail">
+    <id column="order_id" jdbcType="INTEGER" property="orderId"/>
+    <id column="book_id" jdbcType="INTEGER" property="bookId"/>
+    <result column="quality" jdbcType="INTEGER" property="quality"/>
+    <result column="redundancy_field" jdbcType="VARCHAR" property="redundancyField"/>
+    <result column="redundancy_field2" jdbcType="VARCHAR" property="redundancyField2"/>
+  </resultMap>
+  <resultMap id="OrderDetailMap" type="java.util.HashMap">
+    <id column="order_id" jdbcType="INTEGER" property="orderId"/>
+    <id column="book_id" jdbcType="INTEGER" property="bookId"/>
+    <result column="quality" jdbcType="INTEGER" property="quality"/>
+    <result column="book_name" jdbcType="VARCHAR" property="bookName" />
+    <result column="author_id" jdbcType="INTEGER" property="authorId" />
+    <result column="publishing_name" jdbcType="VARCHAR" property="publishingName" />
+    <result column="book_isbn" jdbcType="BIGINT" property="bookIsbn" />
+    <result column="book_edition" jdbcType="VARCHAR" property="bookEdition" />
+    <result column="book_pagination" jdbcType="INTEGER" property="bookPagination" />
+    <result column="book_size" jdbcType="INTEGER" property="bookSize" />
+    <result column="book_time" jdbcType="DATE" property="bookTime" />
+    <result column="book_word_count" jdbcType="INTEGER" property="bookWordCount" />
+    <result column="book_marked_price" jdbcType="REAL" property="bookMarkedPrice" />
+    <result column="book_selling_price" jdbcType="REAL" property="bookSellingPrice" />
+    <result column="book_stock" jdbcType="INTEGER" property="bookStock" />
+    <result column="book_status" jdbcType="INTEGER" property="bookStatus" />
+    <result column="book_sales_total" jdbcType="INTEGER" property="bookSalesTotal" />
+    <result column="book_sales_last_month" jdbcType="INTEGER" property="bookSalesLastMonth" />
+    <result column="book_sales_volumo" jdbcType="INTEGER" property="bookSalesVolumo" />
+    <result column="book_img" jdbcType="VARCHAR" property="bookImg" />
+    <result column="book_main_category" jdbcType="INTEGER" property="bookMainCategory" />
+    <result column="book_first_category" jdbcType="INTEGER" property="bookFirstCategory" />
+    <result column="book_second_category" jdbcType="INTEGER" property="bookSecondCategory" />
+    <result column="book_packing" jdbcType="VARCHAR" property="bookPacking" />
+    <result column="translator_id" jdbcType="INTEGER" property="translatorId" />
+    <result column="book_language" jdbcType="VARCHAR" property="bookLanguage" />
+  </resultMap>
+
+
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="("
+                           separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="("
+                           separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    order_id, book_id, quality, redundancy_field, redundancy_field2
+  </sql>
+  <select id="selectByExample" parameterType="com.elegantcollection.entity.ShopOrderDetailExample"
+          resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List"/>
+    from shop_order_detail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause"/>
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="com.elegantcollection.entity.ShopOrderDetailKey"
+          resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from shop_order_detail
+    where order_id = #{orderId,jdbcType=INTEGER}
+    and book_id = #{bookId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.elegantcollection.entity.ShopOrderDetailKey">
+    delete from shop_order_detail
+    where order_id = #{orderId,jdbcType=INTEGER}
+      and book_id = #{bookId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.elegantcollection.entity.ShopOrderDetailExample">
+    delete from shop_order_detail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause"/>
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.elegantcollection.entity.ShopOrderDetail">
+    insert into shop_order_detail (order_id, book_id, quality,
+      redundancy_field, redundancy_field2)
+    values (#{orderId,jdbcType=INTEGER}, #{bookId,jdbcType=INTEGER}, #{quality,jdbcType=INTEGER},
+      #{redundancyField,jdbcType=VARCHAR}, #{redundancyField2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.elegantcollection.entity.ShopOrderDetail">
+    insert into shop_order_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="bookId != null">
+        book_id,
+      </if>
+      <if test="quality != null">
+        quality,
+      </if>
+      <if test="redundancyField != null">
+        redundancy_field,
+      </if>
+      <if test="redundancyField2 != null">
+        redundancy_field2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="bookId != null">
+        #{bookId,jdbcType=INTEGER},
+      </if>
+      <if test="quality != null">
+        #{quality,jdbcType=INTEGER},
+      </if>
+      <if test="redundancyField != null">
+        #{redundancyField,jdbcType=VARCHAR},
+      </if>
+      <if test="redundancyField2 != null">
+        #{redundancyField2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.elegantcollection.entity.ShopOrderDetailExample"
+          resultType="java.lang.Long">
+    select count(*) from shop_order_detail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause"/>
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update shop_order_detail
+    <set>
+      <if test="record.orderId != null">
+        order_id = #{record.orderId,jdbcType=INTEGER},
+      </if>
+      <if test="record.bookId != null">
+        book_id = #{record.bookId,jdbcType=INTEGER},
+      </if>
+      <if test="record.quality != null">
+        quality = #{record.quality,jdbcType=INTEGER},
+      </if>
+      <if test="record.redundancyField != null">
+        redundancy_field = #{record.redundancyField,jdbcType=VARCHAR},
+      </if>
+      <if test="record.redundancyField2 != null">
+        redundancy_field2 = #{record.redundancyField2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause"/>
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update shop_order_detail
+    set order_id = #{record.orderId,jdbcType=INTEGER},
+    book_id = #{record.bookId,jdbcType=INTEGER},
+    quality = #{record.quality,jdbcType=INTEGER},
+    redundancy_field = #{record.redundancyField,jdbcType=VARCHAR},
+    redundancy_field2 = #{record.redundancyField2,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause"/>
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.elegantcollection.entity.ShopOrderDetail">
+    update shop_order_detail
+    <set>
+      <if test="quality != null">
+        quality = #{quality,jdbcType=INTEGER},
+      </if>
+      <if test="redundancyField != null">
+        redundancy_field = #{redundancyField,jdbcType=VARCHAR},
+      </if>
+      <if test="redundancyField2 != null">
+        redundancy_field2 = #{redundancyField2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where order_id = #{orderId,jdbcType=INTEGER}
+    and book_id = #{bookId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.elegantcollection.entity.ShopOrderDetail">
+    update shop_order_detail
+    set quality = #{quality,jdbcType=INTEGER},
+      redundancy_field = #{redundancyField,jdbcType=VARCHAR},
+      redundancy_field2 = #{redundancyField2,jdbcType=VARCHAR}
+    where order_id = #{orderId,jdbcType=INTEGER}
+      and book_id = #{bookId,jdbcType=INTEGER}
+  </update>
+
+
+  <select id="selectByOrderId4Detail" parameterType="java.lang.Integer" resultMap="OrderDetailMap">
+    select * from shop_order_detail left join book on shop_order_detail.book_id=book.book_id  where shop_order_detail.order_id=${value};
+  </select>
+
+</mapper>

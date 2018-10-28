@@ -1,0 +1,708 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.elegantcollection.dao.BookDao">
+  <resultMap id="BaseResultMap" type="com.elegantcollection.entity.Book">
+    <id column="book_id" jdbcType="INTEGER" property="bookId" />
+    <result column="book_name" jdbcType="VARCHAR" property="bookName" />
+    <result column="author_id" jdbcType="INTEGER" property="authorId" />
+    <result column="publishing_name" jdbcType="VARCHAR" property="publishingName" />
+    <result column="book_isbn" jdbcType="BIGINT" property="bookIsbn" />
+    <result column="book_edition" jdbcType="VARCHAR" property="bookEdition" />
+    <result column="book_pagination" jdbcType="INTEGER" property="bookPagination" />
+    <result column="book_size" jdbcType="INTEGER" property="bookSize" />
+    <result column="book_time" jdbcType="DATE" property="bookTime" />
+    <result column="book_word_count" jdbcType="INTEGER" property="bookWordCount" />
+    <result column="book_marked_price" jdbcType="REAL" property="bookMarkedPrice" />
+    <result column="book_selling_price" jdbcType="REAL" property="bookSellingPrice" />
+    <result column="book_stock" jdbcType="INTEGER" property="bookStock" />
+    <result column="book_status" jdbcType="INTEGER" property="bookStatus" />
+    <result column="book_sales_total" jdbcType="INTEGER" property="bookSalesTotal" />
+    <result column="book_sales_last_month" jdbcType="INTEGER" property="bookSalesLastMonth" />
+    <result column="book_sales_volumo" jdbcType="INTEGER" property="bookSalesVolumo" />
+    <result column="book_img" jdbcType="VARCHAR" property="bookImg" />
+    <result column="book_main_category" jdbcType="INTEGER" property="bookMainCategory" />
+    <result column="book_first_category" jdbcType="INTEGER" property="bookFirstCategory" />
+    <result column="book_second_category" jdbcType="INTEGER" property="bookSecondCategory" />
+    <result column="book_packing" jdbcType="VARCHAR" property="bookPacking" />
+    <result column="translator_id" jdbcType="INTEGER" property="translatorId" />
+    <result column="book_language" jdbcType="VARCHAR" property="bookLanguage" />
+    <result column="redundancy_field" jdbcType="VARCHAR" property="redundancyField" />
+    <result column="redundancy_field2" jdbcType="VARCHAR" property="redundancyField2" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.elegantcollection.entity.BookWithBLOBs">
+    <result column="book_intro" jdbcType="LONGVARCHAR" property="bookIntro" />
+    <result column="book_catalog" jdbcType="LONGVARCHAR" property="bookCatalog" />
+    <result column="book_wonderful" jdbcType="LONGVARCHAR" property="bookWonderful" />
+    <result column="book_media_evaluation" jdbcType="LONGVARCHAR" property="bookMediaEvaluation" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    book_id, book_name, author_id, publishing_name, book_isbn, book_edition, book_pagination, 
+    book_size, book_time, book_word_count, book_marked_price, book_selling_price, book_stock, 
+    book_status, book_sales_total, book_sales_last_month, book_sales_volumo, book_img, 
+    book_main_category, book_first_category, book_second_category, book_packing, translator_id, 
+    book_language, redundancy_field, redundancy_field2
+  </sql>
+  <sql id="Blob_Column_List">
+    book_intro, book_catalog, book_wonderful, book_media_evaluation
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.elegantcollection.entity.BookExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from book
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.elegantcollection.entity.BookExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from book
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from book
+    where book_id = #{bookId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from book
+    where book_id = #{bookId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.elegantcollection.entity.BookExample">
+    delete from book
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.elegantcollection.entity.BookWithBLOBs">
+    insert into book (book_id, book_name, author_id, 
+      publishing_name, book_isbn, book_edition, 
+      book_pagination, book_size, book_time, 
+      book_word_count, book_marked_price, book_selling_price, 
+      book_stock, book_status, book_sales_total, 
+      book_sales_last_month, book_sales_volumo, book_img, 
+      book_main_category, book_first_category, book_second_category, 
+      book_packing, translator_id, book_language, 
+      redundancy_field, redundancy_field2, book_intro, 
+      book_catalog, book_wonderful, book_media_evaluation
+      )
+    values (#{bookId,jdbcType=INTEGER}, #{bookName,jdbcType=VARCHAR}, #{authorId,jdbcType=INTEGER}, 
+      #{publishingName,jdbcType=VARCHAR}, #{bookIsbn,jdbcType=BIGINT}, #{bookEdition,jdbcType=VARCHAR}, 
+      #{bookPagination,jdbcType=INTEGER}, #{bookSize,jdbcType=INTEGER}, #{bookTime,jdbcType=DATE}, 
+      #{bookWordCount,jdbcType=INTEGER}, #{bookMarkedPrice,jdbcType=REAL}, #{bookSellingPrice,jdbcType=REAL}, 
+      #{bookStock,jdbcType=INTEGER}, #{bookStatus,jdbcType=INTEGER}, #{bookSalesTotal,jdbcType=INTEGER}, 
+      #{bookSalesLastMonth,jdbcType=INTEGER}, #{bookSalesVolumo,jdbcType=INTEGER}, #{bookImg,jdbcType=VARCHAR}, 
+      #{bookMainCategory,jdbcType=INTEGER}, #{bookFirstCategory,jdbcType=INTEGER}, #{bookSecondCategory,jdbcType=INTEGER}, 
+      #{bookPacking,jdbcType=VARCHAR}, #{translatorId,jdbcType=INTEGER}, #{bookLanguage,jdbcType=VARCHAR}, 
+      #{redundancyField,jdbcType=VARCHAR}, #{redundancyField2,jdbcType=VARCHAR}, #{bookIntro,jdbcType=LONGVARCHAR}, 
+      #{bookCatalog,jdbcType=LONGVARCHAR}, #{bookWonderful,jdbcType=LONGVARCHAR}, #{bookMediaEvaluation,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.elegantcollection.entity.BookWithBLOBs">
+    insert into book
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bookId != null">
+        book_id,
+      </if>
+      <if test="bookName != null">
+        book_name,
+      </if>
+      <if test="authorId != null">
+        author_id,
+      </if>
+      <if test="publishingName != null">
+        publishing_name,
+      </if>
+      <if test="bookIsbn != null">
+        book_isbn,
+      </if>
+      <if test="bookEdition != null">
+        book_edition,
+      </if>
+      <if test="bookPagination != null">
+        book_pagination,
+      </if>
+      <if test="bookSize != null">
+        book_size,
+      </if>
+      <if test="bookTime != null">
+        book_time,
+      </if>
+      <if test="bookWordCount != null">
+        book_word_count,
+      </if>
+      <if test="bookMarkedPrice != null">
+        book_marked_price,
+      </if>
+      <if test="bookSellingPrice != null">
+        book_selling_price,
+      </if>
+      <if test="bookStock != null">
+        book_stock,
+      </if>
+      <if test="bookStatus != null">
+        book_status,
+      </if>
+      <if test="bookSalesTotal != null">
+        book_sales_total,
+      </if>
+      <if test="bookSalesLastMonth != null">
+        book_sales_last_month,
+      </if>
+      <if test="bookSalesVolumo != null">
+        book_sales_volumo,
+      </if>
+      <if test="bookImg != null">
+        book_img,
+      </if>
+      <if test="bookMainCategory != null">
+        book_main_category,
+      </if>
+      <if test="bookFirstCategory != null">
+        book_first_category,
+      </if>
+      <if test="bookSecondCategory != null">
+        book_second_category,
+      </if>
+      <if test="bookPacking != null">
+        book_packing,
+      </if>
+      <if test="translatorId != null">
+        translator_id,
+      </if>
+      <if test="bookLanguage != null">
+        book_language,
+      </if>
+      <if test="redundancyField != null">
+        redundancy_field,
+      </if>
+      <if test="redundancyField2 != null">
+        redundancy_field2,
+      </if>
+      <if test="bookIntro != null">
+        book_intro,
+      </if>
+      <if test="bookCatalog != null">
+        book_catalog,
+      </if>
+      <if test="bookWonderful != null">
+        book_wonderful,
+      </if>
+      <if test="bookMediaEvaluation != null">
+        book_media_evaluation,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bookId != null">
+        #{bookId,jdbcType=INTEGER},
+      </if>
+      <if test="bookName != null">
+        #{bookName,jdbcType=VARCHAR},
+      </if>
+      <if test="authorId != null">
+        #{authorId,jdbcType=INTEGER},
+      </if>
+      <if test="publishingName != null">
+        #{publishingName,jdbcType=VARCHAR},
+      </if>
+      <if test="bookIsbn != null">
+        #{bookIsbn,jdbcType=BIGINT},
+      </if>
+      <if test="bookEdition != null">
+        #{bookEdition,jdbcType=VARCHAR},
+      </if>
+      <if test="bookPagination != null">
+        #{bookPagination,jdbcType=INTEGER},
+      </if>
+      <if test="bookSize != null">
+        #{bookSize,jdbcType=INTEGER},
+      </if>
+      <if test="bookTime != null">
+        #{bookTime,jdbcType=DATE},
+      </if>
+      <if test="bookWordCount != null">
+        #{bookWordCount,jdbcType=INTEGER},
+      </if>
+      <if test="bookMarkedPrice != null">
+        #{bookMarkedPrice,jdbcType=REAL},
+      </if>
+      <if test="bookSellingPrice != null">
+        #{bookSellingPrice,jdbcType=REAL},
+      </if>
+      <if test="bookStock != null">
+        #{bookStock,jdbcType=INTEGER},
+      </if>
+      <if test="bookStatus != null">
+        #{bookStatus,jdbcType=INTEGER},
+      </if>
+      <if test="bookSalesTotal != null">
+        #{bookSalesTotal,jdbcType=INTEGER},
+      </if>
+      <if test="bookSalesLastMonth != null">
+        #{bookSalesLastMonth,jdbcType=INTEGER},
+      </if>
+      <if test="bookSalesVolumo != null">
+        #{bookSalesVolumo,jdbcType=INTEGER},
+      </if>
+      <if test="bookImg != null">
+        #{bookImg,jdbcType=VARCHAR},
+      </if>
+      <if test="bookMainCategory != null">
+        #{bookMainCategory,jdbcType=INTEGER},
+      </if>
+      <if test="bookFirstCategory != null">
+        #{bookFirstCategory,jdbcType=INTEGER},
+      </if>
+      <if test="bookSecondCategory != null">
+        #{bookSecondCategory,jdbcType=INTEGER},
+      </if>
+      <if test="bookPacking != null">
+        #{bookPacking,jdbcType=VARCHAR},
+      </if>
+      <if test="translatorId != null">
+        #{translatorId,jdbcType=INTEGER},
+      </if>
+      <if test="bookLanguage != null">
+        #{bookLanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="redundancyField != null">
+        #{redundancyField,jdbcType=VARCHAR},
+      </if>
+      <if test="redundancyField2 != null">
+        #{redundancyField2,jdbcType=VARCHAR},
+      </if>
+      <if test="bookIntro != null">
+        #{bookIntro,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="bookCatalog != null">
+        #{bookCatalog,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="bookWonderful != null">
+        #{bookWonderful,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="bookMediaEvaluation != null">
+        #{bookMediaEvaluation,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.elegantcollection.entity.BookExample" resultType="java.lang.Long">
+    select count(*) from book
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update book
+    <set>
+      <if test="record.bookId != null">
+        book_id = #{record.bookId,jdbcType=INTEGER},
+      </if>
+      <if test="record.bookName != null">
+        book_name = #{record.bookName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.authorId != null">
+        author_id = #{record.authorId,jdbcType=INTEGER},
+      </if>
+      <if test="record.publishingName != null">
+        publishing_name = #{record.publishingName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bookIsbn != null">
+        book_isbn = #{record.bookIsbn,jdbcType=BIGINT},
+      </if>
+      <if test="record.bookEdition != null">
+        book_edition = #{record.bookEdition,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bookPagination != null">
+        book_pagination = #{record.bookPagination,jdbcType=INTEGER},
+      </if>
+      <if test="record.bookSize != null">
+        book_size = #{record.bookSize,jdbcType=INTEGER},
+      </if>
+      <if test="record.bookTime != null">
+        book_time = #{record.bookTime,jdbcType=DATE},
+      </if>
+      <if test="record.bookWordCount != null">
+        book_word_count = #{record.bookWordCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.bookMarkedPrice != null">
+        book_marked_price = #{record.bookMarkedPrice,jdbcType=REAL},
+      </if>
+      <if test="record.bookSellingPrice != null">
+        book_selling_price = #{record.bookSellingPrice,jdbcType=REAL},
+      </if>
+      <if test="record.bookStock != null">
+        book_stock = #{record.bookStock,jdbcType=INTEGER},
+      </if>
+      <if test="record.bookStatus != null">
+        book_status = #{record.bookStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.bookSalesTotal != null">
+        book_sales_total = #{record.bookSalesTotal,jdbcType=INTEGER},
+      </if>
+      <if test="record.bookSalesLastMonth != null">
+        book_sales_last_month = #{record.bookSalesLastMonth,jdbcType=INTEGER},
+      </if>
+      <if test="record.bookSalesVolumo != null">
+        book_sales_volumo = #{record.bookSalesVolumo,jdbcType=INTEGER},
+      </if>
+      <if test="record.bookImg != null">
+        book_img = #{record.bookImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bookMainCategory != null">
+        book_main_category = #{record.bookMainCategory,jdbcType=INTEGER},
+      </if>
+      <if test="record.bookFirstCategory != null">
+        book_first_category = #{record.bookFirstCategory,jdbcType=INTEGER},
+      </if>
+      <if test="record.bookSecondCategory != null">
+        book_second_category = #{record.bookSecondCategory,jdbcType=INTEGER},
+      </if>
+      <if test="record.bookPacking != null">
+        book_packing = #{record.bookPacking,jdbcType=VARCHAR},
+      </if>
+      <if test="record.translatorId != null">
+        translator_id = #{record.translatorId,jdbcType=INTEGER},
+      </if>
+      <if test="record.bookLanguage != null">
+        book_language = #{record.bookLanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.redundancyField != null">
+        redundancy_field = #{record.redundancyField,jdbcType=VARCHAR},
+      </if>
+      <if test="record.redundancyField2 != null">
+        redundancy_field2 = #{record.redundancyField2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bookIntro != null">
+        book_intro = #{record.bookIntro,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.bookCatalog != null">
+        book_catalog = #{record.bookCatalog,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.bookWonderful != null">
+        book_wonderful = #{record.bookWonderful,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.bookMediaEvaluation != null">
+        book_media_evaluation = #{record.bookMediaEvaluation,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update book
+    set book_id = #{record.bookId,jdbcType=INTEGER},
+      book_name = #{record.bookName,jdbcType=VARCHAR},
+      author_id = #{record.authorId,jdbcType=INTEGER},
+      publishing_name = #{record.publishingName,jdbcType=VARCHAR},
+      book_isbn = #{record.bookIsbn,jdbcType=BIGINT},
+      book_edition = #{record.bookEdition,jdbcType=VARCHAR},
+      book_pagination = #{record.bookPagination,jdbcType=INTEGER},
+      book_size = #{record.bookSize,jdbcType=INTEGER},
+      book_time = #{record.bookTime,jdbcType=DATE},
+      book_word_count = #{record.bookWordCount,jdbcType=INTEGER},
+      book_marked_price = #{record.bookMarkedPrice,jdbcType=REAL},
+      book_selling_price = #{record.bookSellingPrice,jdbcType=REAL},
+      book_stock = #{record.bookStock,jdbcType=INTEGER},
+      book_status = #{record.bookStatus,jdbcType=INTEGER},
+      book_sales_total = #{record.bookSalesTotal,jdbcType=INTEGER},
+      book_sales_last_month = #{record.bookSalesLastMonth,jdbcType=INTEGER},
+      book_sales_volumo = #{record.bookSalesVolumo,jdbcType=INTEGER},
+      book_img = #{record.bookImg,jdbcType=VARCHAR},
+      book_main_category = #{record.bookMainCategory,jdbcType=INTEGER},
+      book_first_category = #{record.bookFirstCategory,jdbcType=INTEGER},
+      book_second_category = #{record.bookSecondCategory,jdbcType=INTEGER},
+      book_packing = #{record.bookPacking,jdbcType=VARCHAR},
+      translator_id = #{record.translatorId,jdbcType=INTEGER},
+      book_language = #{record.bookLanguage,jdbcType=VARCHAR},
+      redundancy_field = #{record.redundancyField,jdbcType=VARCHAR},
+      redundancy_field2 = #{record.redundancyField2,jdbcType=VARCHAR},
+      book_intro = #{record.bookIntro,jdbcType=LONGVARCHAR},
+      book_catalog = #{record.bookCatalog,jdbcType=LONGVARCHAR},
+      book_wonderful = #{record.bookWonderful,jdbcType=LONGVARCHAR},
+      book_media_evaluation = #{record.bookMediaEvaluation,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update book
+    set book_id = #{record.bookId,jdbcType=INTEGER},
+      book_name = #{record.bookName,jdbcType=VARCHAR},
+      author_id = #{record.authorId,jdbcType=INTEGER},
+      publishing_name = #{record.publishingName,jdbcType=VARCHAR},
+      book_isbn = #{record.bookIsbn,jdbcType=BIGINT},
+      book_edition = #{record.bookEdition,jdbcType=VARCHAR},
+      book_pagination = #{record.bookPagination,jdbcType=INTEGER},
+      book_size = #{record.bookSize,jdbcType=INTEGER},
+      book_time = #{record.bookTime,jdbcType=DATE},
+      book_word_count = #{record.bookWordCount,jdbcType=INTEGER},
+      book_marked_price = #{record.bookMarkedPrice,jdbcType=REAL},
+      book_selling_price = #{record.bookSellingPrice,jdbcType=REAL},
+      book_stock = #{record.bookStock,jdbcType=INTEGER},
+      book_status = #{record.bookStatus,jdbcType=INTEGER},
+      book_sales_total = #{record.bookSalesTotal,jdbcType=INTEGER},
+      book_sales_last_month = #{record.bookSalesLastMonth,jdbcType=INTEGER},
+      book_sales_volumo = #{record.bookSalesVolumo,jdbcType=INTEGER},
+      book_img = #{record.bookImg,jdbcType=VARCHAR},
+      book_main_category = #{record.bookMainCategory,jdbcType=INTEGER},
+      book_first_category = #{record.bookFirstCategory,jdbcType=INTEGER},
+      book_second_category = #{record.bookSecondCategory,jdbcType=INTEGER},
+      book_packing = #{record.bookPacking,jdbcType=VARCHAR},
+      translator_id = #{record.translatorId,jdbcType=INTEGER},
+      book_language = #{record.bookLanguage,jdbcType=VARCHAR},
+      redundancy_field = #{record.redundancyField,jdbcType=VARCHAR},
+      redundancy_field2 = #{record.redundancyField2,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.elegantcollection.entity.BookWithBLOBs">
+    update book
+    <set>
+      <if test="bookName != null">
+        book_name = #{bookName,jdbcType=VARCHAR},
+      </if>
+      <if test="authorId != null">
+        author_id = #{authorId,jdbcType=INTEGER},
+      </if>
+      <if test="publishingName != null">
+        publishing_name = #{publishingName,jdbcType=VARCHAR},
+      </if>
+      <if test="bookIsbn != null">
+        book_isbn = #{bookIsbn,jdbcType=BIGINT},
+      </if>
+      <if test="bookEdition != null">
+        book_edition = #{bookEdition,jdbcType=VARCHAR},
+      </if>
+      <if test="bookPagination != null">
+        book_pagination = #{bookPagination,jdbcType=INTEGER},
+      </if>
+      <if test="bookSize != null">
+        book_size = #{bookSize,jdbcType=INTEGER},
+      </if>
+      <if test="bookTime != null">
+        book_time = #{bookTime,jdbcType=DATE},
+      </if>
+      <if test="bookWordCount != null">
+        book_word_count = #{bookWordCount,jdbcType=INTEGER},
+      </if>
+      <if test="bookMarkedPrice != null">
+        book_marked_price = #{bookMarkedPrice,jdbcType=REAL},
+      </if>
+      <if test="bookSellingPrice != null">
+        book_selling_price = #{bookSellingPrice,jdbcType=REAL},
+      </if>
+      <if test="bookStock != null">
+        book_stock = #{bookStock,jdbcType=INTEGER},
+      </if>
+      <if test="bookStatus != null">
+        book_status = #{bookStatus,jdbcType=INTEGER},
+      </if>
+      <if test="bookSalesTotal != null">
+        book_sales_total = #{bookSalesTotal,jdbcType=INTEGER},
+      </if>
+      <if test="bookSalesLastMonth != null">
+        book_sales_last_month = #{bookSalesLastMonth,jdbcType=INTEGER},
+      </if>
+      <if test="bookSalesVolumo != null">
+        book_sales_volumo = #{bookSalesVolumo,jdbcType=INTEGER},
+      </if>
+      <if test="bookImg != null">
+        book_img = #{bookImg,jdbcType=VARCHAR},
+      </if>
+      <if test="bookMainCategory != null">
+        book_main_category = #{bookMainCategory,jdbcType=INTEGER},
+      </if>
+      <if test="bookFirstCategory != null">
+        book_first_category = #{bookFirstCategory,jdbcType=INTEGER},
+      </if>
+      <if test="bookSecondCategory != null">
+        book_second_category = #{bookSecondCategory,jdbcType=INTEGER},
+      </if>
+      <if test="bookPacking != null">
+        book_packing = #{bookPacking,jdbcType=VARCHAR},
+      </if>
+      <if test="translatorId != null">
+        translator_id = #{translatorId,jdbcType=INTEGER},
+      </if>
+      <if test="bookLanguage != null">
+        book_language = #{bookLanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="redundancyField != null">
+        redundancy_field = #{redundancyField,jdbcType=VARCHAR},
+      </if>
+      <if test="redundancyField2 != null">
+        redundancy_field2 = #{redundancyField2,jdbcType=VARCHAR},
+      </if>
+      <if test="bookIntro != null">
+        book_intro = #{bookIntro,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="bookCatalog != null">
+        book_catalog = #{bookCatalog,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="bookWonderful != null">
+        book_wonderful = #{bookWonderful,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="bookMediaEvaluation != null">
+        book_media_evaluation = #{bookMediaEvaluation,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where book_id = #{bookId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.elegantcollection.entity.BookWithBLOBs">
+    update book
+    set book_name = #{bookName,jdbcType=VARCHAR},
+      author_id = #{authorId,jdbcType=INTEGER},
+      publishing_name = #{publishingName,jdbcType=VARCHAR},
+      book_isbn = #{bookIsbn,jdbcType=BIGINT},
+      book_edition = #{bookEdition,jdbcType=VARCHAR},
+      book_pagination = #{bookPagination,jdbcType=INTEGER},
+      book_size = #{bookSize,jdbcType=INTEGER},
+      book_time = #{bookTime,jdbcType=DATE},
+      book_word_count = #{bookWordCount,jdbcType=INTEGER},
+      book_marked_price = #{bookMarkedPrice,jdbcType=REAL},
+      book_selling_price = #{bookSellingPrice,jdbcType=REAL},
+      book_stock = #{bookStock,jdbcType=INTEGER},
+      book_status = #{bookStatus,jdbcType=INTEGER},
+      book_sales_total = #{bookSalesTotal,jdbcType=INTEGER},
+      book_sales_last_month = #{bookSalesLastMonth,jdbcType=INTEGER},
+      book_sales_volumo = #{bookSalesVolumo,jdbcType=INTEGER},
+      book_img = #{bookImg,jdbcType=VARCHAR},
+      book_main_category = #{bookMainCategory,jdbcType=INTEGER},
+      book_first_category = #{bookFirstCategory,jdbcType=INTEGER},
+      book_second_category = #{bookSecondCategory,jdbcType=INTEGER},
+      book_packing = #{bookPacking,jdbcType=VARCHAR},
+      translator_id = #{translatorId,jdbcType=INTEGER},
+      book_language = #{bookLanguage,jdbcType=VARCHAR},
+      redundancy_field = #{redundancyField,jdbcType=VARCHAR},
+      redundancy_field2 = #{redundancyField2,jdbcType=VARCHAR},
+      book_intro = #{bookIntro,jdbcType=LONGVARCHAR},
+      book_catalog = #{bookCatalog,jdbcType=LONGVARCHAR},
+      book_wonderful = #{bookWonderful,jdbcType=LONGVARCHAR},
+      book_media_evaluation = #{bookMediaEvaluation,jdbcType=LONGVARCHAR}
+    where book_id = #{bookId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.elegantcollection.entity.Book">
+    update book
+    set book_name = #{bookName,jdbcType=VARCHAR},
+      author_id = #{authorId,jdbcType=INTEGER},
+      publishing_name = #{publishingName,jdbcType=VARCHAR},
+      book_isbn = #{bookIsbn,jdbcType=BIGINT},
+      book_edition = #{bookEdition,jdbcType=VARCHAR},
+      book_pagination = #{bookPagination,jdbcType=INTEGER},
+      book_size = #{bookSize,jdbcType=INTEGER},
+      book_time = #{bookTime,jdbcType=DATE},
+      book_word_count = #{bookWordCount,jdbcType=INTEGER},
+      book_marked_price = #{bookMarkedPrice,jdbcType=REAL},
+      book_selling_price = #{bookSellingPrice,jdbcType=REAL},
+      book_stock = #{bookStock,jdbcType=INTEGER},
+      book_status = #{bookStatus,jdbcType=INTEGER},
+      book_sales_total = #{bookSalesTotal,jdbcType=INTEGER},
+      book_sales_last_month = #{bookSalesLastMonth,jdbcType=INTEGER},
+      book_sales_volumo = #{bookSalesVolumo,jdbcType=INTEGER},
+      book_img = #{bookImg,jdbcType=VARCHAR},
+      book_main_category = #{bookMainCategory,jdbcType=INTEGER},
+      book_first_category = #{bookFirstCategory,jdbcType=INTEGER},
+      book_second_category = #{bookSecondCategory,jdbcType=INTEGER},
+      book_packing = #{bookPacking,jdbcType=VARCHAR},
+      translator_id = #{translatorId,jdbcType=INTEGER},
+      book_language = #{bookLanguage,jdbcType=VARCHAR},
+      redundancy_field = #{redundancyField,jdbcType=VARCHAR},
+      redundancy_field2 = #{redundancyField2,jdbcType=VARCHAR}
+    where book_id = #{bookId,jdbcType=INTEGER}
+  </update>
+</mapper>

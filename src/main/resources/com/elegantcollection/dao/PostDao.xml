@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.elegantcollection.dao.PostDao">
+  <resultMap id="BaseResultMap" type="com.elegantcollection.entity.Post">
+    <id column="post_id" jdbcType="INTEGER" property="postId" />
+    <result column="post_title" jdbcType="VARCHAR" property="postTitle" />
+    <result column="cust_id" jdbcType="INTEGER" property="custId" />
+    <result column="post_time" jdbcType="TIMESTAMP" property="postTime" />
+    <result column="reply_count" jdbcType="INTEGER" property="replyCount" />
+    <result column="is_stick" jdbcType="INTEGER" property="isStick" />
+    <result column="post_status" jdbcType="INTEGER" property="postStatus" />
+    <result column="post_petname" jdbcType="VARCHAR" property="postPetname" />
+    <result column="post_isreply" jdbcType="INTEGER" property="postIsreply" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.elegantcollection.entity.Post">
+    <result column="post_text" jdbcType="LONGVARCHAR" property="postText" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    post_id, post_title, cust_id, post_time, reply_count, is_stick, post_status, post_petname, 
+    post_isreply
+  </sql>
+  <sql id="Blob_Column_List">
+    post_text
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.elegantcollection.entity.PostExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from post
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.elegantcollection.entity.PostExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from post
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from post
+    where post_id = #{postId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from post
+    where post_id = #{postId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.elegantcollection.entity.PostExample">
+    delete from post
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.elegantcollection.entity.Post">
+    insert into post (post_id, post_title, cust_id, 
+      post_time, reply_count, is_stick, 
+      post_status, post_petname, post_isreply, 
+      post_text)
+    values (#{postId,jdbcType=INTEGER}, #{postTitle,jdbcType=VARCHAR}, #{custId,jdbcType=INTEGER}, 
+      #{postTime,jdbcType=TIMESTAMP}, #{replyCount,jdbcType=INTEGER}, #{isStick,jdbcType=INTEGER}, 
+      #{postStatus,jdbcType=INTEGER}, #{postPetname,jdbcType=VARCHAR}, #{postIsreply,jdbcType=INTEGER}, 
+      #{postText,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.elegantcollection.entity.Post">
+    insert into post
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="postId != null">
+        post_id,
+      </if>
+      <if test="postTitle != null">
+        post_title,
+      </if>
+      <if test="custId != null">
+        cust_id,
+      </if>
+      <if test="postTime != null">
+        post_time,
+      </if>
+      <if test="replyCount != null">
+        reply_count,
+      </if>
+      <if test="isStick != null">
+        is_stick,
+      </if>
+      <if test="postStatus != null">
+        post_status,
+      </if>
+      <if test="postPetname != null">
+        post_petname,
+      </if>
+      <if test="postIsreply != null">
+        post_isreply,
+      </if>
+      <if test="postText != null">
+        post_text,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="postId != null">
+        #{postId,jdbcType=INTEGER},
+      </if>
+      <if test="postTitle != null">
+        #{postTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="custId != null">
+        #{custId,jdbcType=INTEGER},
+      </if>
+      <if test="postTime != null">
+        #{postTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="replyCount != null">
+        #{replyCount,jdbcType=INTEGER},
+      </if>
+      <if test="isStick != null">
+        #{isStick,jdbcType=INTEGER},
+      </if>
+      <if test="postStatus != null">
+        #{postStatus,jdbcType=INTEGER},
+      </if>
+      <if test="postPetname != null">
+        #{postPetname,jdbcType=VARCHAR},
+      </if>
+      <if test="postIsreply != null">
+        #{postIsreply,jdbcType=INTEGER},
+      </if>
+      <if test="postText != null">
+        #{postText,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.elegantcollection.entity.PostExample" resultType="java.lang.Long">
+    select count(*) from post
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update post
+    <set>
+      <if test="record.postId != null">
+        post_id = #{record.postId,jdbcType=INTEGER},
+      </if>
+      <if test="record.postTitle != null">
+        post_title = #{record.postTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custId != null">
+        cust_id = #{record.custId,jdbcType=INTEGER},
+      </if>
+      <if test="record.postTime != null">
+        post_time = #{record.postTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.replyCount != null">
+        reply_count = #{record.replyCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.isStick != null">
+        is_stick = #{record.isStick,jdbcType=INTEGER},
+      </if>
+      <if test="record.postStatus != null">
+        post_status = #{record.postStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.postPetname != null">
+        post_petname = #{record.postPetname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.postIsreply != null">
+        post_isreply = #{record.postIsreply,jdbcType=INTEGER},
+      </if>
+      <if test="record.postText != null">
+        post_text = #{record.postText,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update post
+    set post_id = #{record.postId,jdbcType=INTEGER},
+      post_title = #{record.postTitle,jdbcType=VARCHAR},
+      cust_id = #{record.custId,jdbcType=INTEGER},
+      post_time = #{record.postTime,jdbcType=TIMESTAMP},
+      reply_count = #{record.replyCount,jdbcType=INTEGER},
+      is_stick = #{record.isStick,jdbcType=INTEGER},
+      post_status = #{record.postStatus,jdbcType=INTEGER},
+      post_petname = #{record.postPetname,jdbcType=VARCHAR},
+      post_isreply = #{record.postIsreply,jdbcType=INTEGER},
+      post_text = #{record.postText,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update post
+    set post_id = #{record.postId,jdbcType=INTEGER},
+      post_title = #{record.postTitle,jdbcType=VARCHAR},
+      cust_id = #{record.custId,jdbcType=INTEGER},
+      post_time = #{record.postTime,jdbcType=TIMESTAMP},
+      reply_count = #{record.replyCount,jdbcType=INTEGER},
+      is_stick = #{record.isStick,jdbcType=INTEGER},
+      post_status = #{record.postStatus,jdbcType=INTEGER},
+      post_petname = #{record.postPetname,jdbcType=VARCHAR},
+      post_isreply = #{record.postIsreply,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.elegantcollection.entity.Post">
+    update post
+    <set>
+      <if test="postTitle != null">
+        post_title = #{postTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="custId != null">
+        cust_id = #{custId,jdbcType=INTEGER},
+      </if>
+      <if test="postTime != null">
+        post_time = #{postTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="replyCount != null">
+        reply_count = #{replyCount,jdbcType=INTEGER},
+      </if>
+      <if test="isStick != null">
+        is_stick = #{isStick,jdbcType=INTEGER},
+      </if>
+      <if test="postStatus != null">
+        post_status = #{postStatus,jdbcType=INTEGER},
+      </if>
+      <if test="postPetname != null">
+        post_petname = #{postPetname,jdbcType=VARCHAR},
+      </if>
+      <if test="postIsreply != null">
+        post_isreply = #{postIsreply,jdbcType=INTEGER},
+      </if>
+      <if test="postText != null">
+        post_text = #{postText,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where post_id = #{postId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.elegantcollection.entity.Post">
+    update post
+    set post_title = #{postTitle,jdbcType=VARCHAR},
+      cust_id = #{custId,jdbcType=INTEGER},
+      post_time = #{postTime,jdbcType=TIMESTAMP},
+      reply_count = #{replyCount,jdbcType=INTEGER},
+      is_stick = #{isStick,jdbcType=INTEGER},
+      post_status = #{postStatus,jdbcType=INTEGER},
+      post_petname = #{postPetname,jdbcType=VARCHAR},
+      post_isreply = #{postIsreply,jdbcType=INTEGER},
+      post_text = #{postText,jdbcType=LONGVARCHAR}
+    where post_id = #{postId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.elegantcollection.entity.Post">
+    update post
+    set post_title = #{postTitle,jdbcType=VARCHAR},
+      cust_id = #{custId,jdbcType=INTEGER},
+      post_time = #{postTime,jdbcType=TIMESTAMP},
+      reply_count = #{replyCount,jdbcType=INTEGER},
+      is_stick = #{isStick,jdbcType=INTEGER},
+      post_status = #{postStatus,jdbcType=INTEGER},
+      post_petname = #{postPetname,jdbcType=VARCHAR},
+      post_isreply = #{postIsreply,jdbcType=INTEGER}
+    where post_id = #{postId,jdbcType=INTEGER}
+  </update>
+</mapper>

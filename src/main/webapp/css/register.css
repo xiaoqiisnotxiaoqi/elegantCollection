@@ -1,0 +1,216 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+#register{
+    position: absolute;
+    width: 340px;
+    height: 460px;
+    margin: 0 auto;
+    background-color: #d6e9c6;
+}
+
+
+.phone span{
+    position: absolute;
+    top: 82px;
+    left: 32px;
+    font-size: 14px;
+}
+
+.phone input{
+    position: absolute;
+    top: 80px;
+    left: 100px;
+    border: none;
+    width: 200px;
+    height: 24px;
+
+}
+
+#phone-span {
+    position: absolute;
+    top: 104px;
+    left: 100px;
+    font-size: 14px;
+}
+
+.password span{
+    position: absolute;
+    top: 136px;
+    left: 32px;
+    font-size: 14px;
+}
+
+.password input{
+    position: absolute;
+    top: 134px;
+    left: 100px;
+    border: none;
+    width: 200px;
+    height: 24px;
+}
+
+#password-span{
+    position: absolute;
+    top: 156px;
+    left: 100px;
+    font-size: 2px;
+}
+
+.confirm-password span{
+    position: absolute;
+    top: 188px;
+    left: 32px;
+    font-size: 14px;
+}
+
+#register input{
+    background-color: #ffffff;
+}
+
+.confirm-password input{
+    position: absolute;
+    top: 186px;
+    left: 100px;
+    border: none;
+    width: 200px;
+    height: 24px;
+}
+
+
+#confirm-password-span{
+    position: absolute;
+    top: 210px;
+    left: 100px;
+    font-size: 14px;
+}
+
+.captcha span{
+    position: absolute;
+    top: 240px;
+    left: 46px;
+    font-size: 14px;
+}
+
+.captcha input{
+    position: absolute;
+    top: 238px;
+    left: 100px;
+    border: none;
+    width: 60px;
+    height: 24px;
+}
+
+.captcha img{
+    position: absolute;
+    top: 238px;
+    left: 161px;
+    border: none;
+    width: 60px;
+    height: 24px;
+}
+
+.captcha a{
+    position: absolute;
+    top: 247px;
+    left: 222px;
+    font-size: 12px;
+}
+
+#captcha-span{
+    position: absolute;
+    top: 264px;
+    left: 100px;
+    font-size: 14px;
+}
+
+
+
+
+.message-authentication-code span{
+    position: absolute;
+    top: 300px;
+    left: 20px;
+    font-size: 14px;
+}
+
+.message-authentication-code input{
+    position: absolute;
+    top: 300px;
+    left:100px;
+    border: none;
+    width: 100px;
+    height: 24px;
+}
+
+#message-span{
+    position: absolute;
+    top: 326px;
+    left:100px;
+}
+
+#sms{
+    position: absolute;
+    top: 300px;
+    left:200px;
+    width: 100px;
+    height: 24px;
+    font-size: 10px;
+    background-color: #5cb85c;
+}
+
+.register-button{
+    position: absolute;
+    top: 380px;
+    left:100px;
+    width: 140px;
+    height: 40px;
+    background-color: #5cb85c;
+    border: none;
+    border-radius: 8px;
+}
+
+#register-title{
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    font-size: 24px;
+}
+
+#register-having{
+    position: absolute;
+    top: 30px;
+    left: 180px;
+    font-size: 14px;
+}
+
+#register-now{
+    position: absolute;
+    top: 34px;
+    left: 244px;
+    font-size: 14px;
+    text-decoration:none;
+    color: orange;
+}
+
+.register-title{
+    position: absolute;
+    top: 54px;
+    width: 340px;
+    height: 1px;
+    background-color: #000000;
+}
+
+#register-cross{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    cursor:pointer;
+}
+
+
+

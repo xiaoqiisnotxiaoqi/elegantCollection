@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.elegantcollection.dao.DiscountDetailDao">
+  <resultMap id="BaseResultMap" type="com.elegantcollection.entity.DiscountDetail">
+    <id column="discount_id" jdbcType="INTEGER" property="discountId" />
+    <id column="book_id" jdbcType="INTEGER" property="bookId" />
+    <result column="detail_status" jdbcType="INTEGER" property="detailStatus" />
+    <result column="more1" jdbcType="VARCHAR" property="more1" />
+    <result column="more2" jdbcType="VARCHAR" property="more2" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    discount_id, book_id, detail_status, more1, more2
+  </sql>
+  <select id="selectByExample" parameterType="com.elegantcollection.entity.DiscountDetailExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from discount_detail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="com.elegantcollection.entity.DiscountDetailKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from discount_detail
+    where discount_id = #{discountId,jdbcType=INTEGER}
+      and book_id = #{bookId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.elegantcollection.entity.DiscountDetailKey">
+    delete from discount_detail
+    where discount_id = #{discountId,jdbcType=INTEGER}
+      and book_id = #{bookId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.elegantcollection.entity.DiscountDetailExample">
+    delete from discount_detail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.elegantcollection.entity.DiscountDetail">
+    insert into discount_detail (discount_id, book_id, detail_status, 
+      more1, more2)
+    values (#{discountId,jdbcType=INTEGER}, #{bookId,jdbcType=INTEGER}, #{detailStatus,jdbcType=INTEGER}, 
+      #{more1,jdbcType=VARCHAR}, #{more2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.elegantcollection.entity.DiscountDetail">
+    insert into discount_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="discountId != null">
+        discount_id,
+      </if>
+      <if test="bookId != null">
+        book_id,
+      </if>
+      <if test="detailStatus != null">
+        detail_status,
+      </if>
+      <if test="more1 != null">
+        more1,
+      </if>
+      <if test="more2 != null">
+        more2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="discountId != null">
+        #{discountId,jdbcType=INTEGER},
+      </if>
+      <if test="bookId != null">
+        #{bookId,jdbcType=INTEGER},
+      </if>
+      <if test="detailStatus != null">
+        #{detailStatus,jdbcType=INTEGER},
+      </if>
+      <if test="more1 != null">
+        #{more1,jdbcType=VARCHAR},
+      </if>
+      <if test="more2 != null">
+        #{more2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.elegantcollection.entity.DiscountDetailExample" resultType="java.lang.Long">
+    select count(*) from discount_detail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update discount_detail
+    <set>
+      <if test="record.discountId != null">
+        discount_id = #{record.discountId,jdbcType=INTEGER},
+      </if>
+      <if test="record.bookId != null">
+        book_id = #{record.bookId,jdbcType=INTEGER},
+      </if>
+      <if test="record.detailStatus != null">
+        detail_status = #{record.detailStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.more1 != null">
+        more1 = #{record.more1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.more2 != null">
+        more2 = #{record.more2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update discount_detail
+    set discount_id = #{record.discountId,jdbcType=INTEGER},
+      book_id = #{record.bookId,jdbcType=INTEGER},
+      detail_status = #{record.detailStatus,jdbcType=INTEGER},
+      more1 = #{record.more1,jdbcType=VARCHAR},
+      more2 = #{record.more2,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.elegantcollection.entity.DiscountDetail">
+    update discount_detail
+    <set>
+      <if test="detailStatus != null">
+        detail_status = #{detailStatus,jdbcType=INTEGER},
+      </if>
+      <if test="more1 != null">
+        more1 = #{more1,jdbcType=VARCHAR},
+      </if>
+      <if test="more2 != null">
+        more2 = #{more2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where discount_id = #{discountId,jdbcType=INTEGER}
+      and book_id = #{bookId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.elegantcollection.entity.DiscountDetail">
+    update discount_detail
+    set detail_status = #{detailStatus,jdbcType=INTEGER},
+      more1 = #{more1,jdbcType=VARCHAR},
+      more2 = #{more2,jdbcType=VARCHAR}
+    where discount_id = #{discountId,jdbcType=INTEGER}
+      and book_id = #{bookId,jdbcType=INTEGER}
+  </update>
+</mapper>

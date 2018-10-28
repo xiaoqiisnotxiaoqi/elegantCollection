@@ -1,0 +1,123 @@
+2018-10-04 15:53:48,942 INFO  ElegantCollectionApplication:48 -Starting ElegantCollectionApplication on pc-qinjb with PID 6800 (E:\idea\elegantCollection\target\classes started by Administrator in E:\idea\elegantCollection)
+2018-10-04 15:53:48,948 DEBUG ElegantCollectionApplication:51 -Running with Spring Boot v1.5.16.RELEASE, Spring v4.3.19.RELEASE
+2018-10-04 15:53:48,950 INFO  ElegantCollectionApplication:597 -The following profiles are active: dev
+2018-10-04 15:53:49,297 DEBUG logging:19 -Logging Provider: org.jboss.logging.Log4j2LoggerProvider
+2018-10-04 15:53:49,299 INFO  Version:30 -HV000001: Hibernate Validator 5.3.6.Final
+2018-10-04 15:53:49,327 DEBUG DefaultTraversableResolver:70 -Cannot find javax.persistence.Persistence on classpath. Assuming non JPA 2 environment. All properties will per default be traversable.
+2018-10-04 15:53:49,907 DEBUG ClassPathMapperScanner:294 -Identified candidate component class: file [E:\idea\elegantCollection\target\classes\com\elegantcollection\dao\AddressMapper.class]
+2018-10-04 15:53:49,907 DEBUG ClassPathMapperScanner:294 -Identified candidate component class: file [E:\idea\elegantCollection\target\classes\com\elegantcollection\dao\AdminMapper.class]
+2018-10-04 15:53:49,908 DEBUG ClassPathMapperScanner:294 -Identified candidate component class: file [E:\idea\elegantCollection\target\classes\com\elegantcollection\dao\AuthorMapper.class]
+2018-10-04 15:53:49,908 DEBUG ClassPathMapperScanner:294 -Identified candidate component class: file [E:\idea\elegantCollection\target\classes\com\elegantcollection\dao\BlockMapper.class]
+2018-10-04 15:53:49,909 DEBUG ClassPathMapperScanner:294 -Identified candidate component class: file [E:\idea\elegantCollection\target\classes\com\elegantcollection\dao\BookCategoryMapper.class]
+2018-10-04 15:53:49,909 DEBUG ClassPathMapperScanner:294 -Identified candidate component class: file [E:\idea\elegantCollection\target\classes\com\elegantcollection\dao\BookMapper.class]
+2018-10-04 15:53:49,910 DEBUG ClassPathMapperScanner:294 -Identified candidate component class: file [E:\idea\elegantCollection\target\classes\com\elegantcollection\dao\BookOrderDetailMapper.class]
+2018-10-04 15:53:49,911 DEBUG ClassPathMapperScanner:294 -Identified candidate component class: file [E:\idea\elegantCollection\target\classes\com\elegantcollection\dao\BookOrderMapper.class]
+2018-10-04 15:53:49,911 DEBUG ClassPathMapperScanner:294 -Identified candidate component class: file [E:\idea\elegantCollection\target\classes\com\elegantcollection\dao\CartMapper.class]
+2018-10-04 15:53:49,911 DEBUG ClassPathMapperScanner:294 -Identified candidate component class: file [E:\idea\elegantCollection\target\classes\com\elegantcollection\dao\CustomerMapper.class]
+2018-10-04 15:53:49,912 DEBUG ClassPathMapperScanner:294 -Identified candidate component class: file [E:\idea\elegantCollection\target\classes\com\elegantcollection\dao\DiscountDetailMapper.class]
+2018-10-04 15:53:49,913 DEBUG ClassPathMapperScanner:294 -Identified candidate component class: file [E:\idea\elegantCollection\target\classes\com\elegantcollection\dao\DiscountMapper.class]
+2018-10-04 15:53:49,914 DEBUG ClassPathMapperScanner:294 -Identified candidate component class: file [E:\idea\elegantCollection\target\classes\com\elegantcollection\dao\EvaluateMapper.class]
+2018-10-04 15:53:49,914 DEBUG ClassPathMapperScanner:294 -Identified candidate component class: file [E:\idea\elegantCollection\target\classes\com\elegantcollection\dao\LoginMapper.class]
+2018-10-04 15:53:49,915 DEBUG ClassPathMapperScanner:294 -Identified candidate component class: file [E:\idea\elegantCollection\target\classes\com\elegantcollection\dao\MessageMapper.class]
+2018-10-04 15:53:49,915 DEBUG ClassPathMapperScanner:294 -Identified candidate component class: file [E:\idea\elegantCollection\target\classes\com\elegantcollection\dao\PostMapper.class]
+2018-10-04 15:53:49,916 DEBUG ClassPathMapperScanner:294 -Identified candidate component class: file [E:\idea\elegantCollection\target\classes\com\elegantcollection\dao\PostReplyMapper.class]
+2018-10-04 15:53:49,917 DEBUG ClassPathMapperScanner:294 -Identified candidate component class: file [E:\idea\elegantCollection\target\classes\com\elegantcollection\dao\ShopOrderDetailMapper.class]
+2018-10-04 15:53:49,917 DEBUG ClassPathMapperScanner:294 -Identified candidate component class: file [E:\idea\elegantCollection\target\classes\com\elegantcollection\dao\ShopOrderMapper.class]
+2018-10-04 15:53:49,918 DEBUG ClassPathMapperScanner:294 -Identified candidate component class: file [E:\idea\elegantCollection\target\classes\com\elegantcollection\dao\WaiterMapper.class]
+2018-10-04 15:53:49,919 DEBUG ClassPathMapperScanner:180 -Creating MapperFactoryBean with name 'addressMapper' and 'com.elegantcollection.dao.AddressMapper' mapperInterface
+2018-10-04 15:53:49,919 DEBUG ClassPathMapperScanner:216 -Enabling autowire by type for MapperFactoryBean with name 'addressMapper'.
+2018-10-04 15:53:49,920 DEBUG ClassPathMapperScanner:180 -Creating MapperFactoryBean with name 'adminMapper' and 'com.elegantcollection.dao.AdminMapper' mapperInterface
+2018-10-04 15:53:49,920 DEBUG ClassPathMapperScanner:216 -Enabling autowire by type for MapperFactoryBean with name 'adminMapper'.
+2018-10-04 15:53:49,920 DEBUG ClassPathMapperScanner:180 -Creating MapperFactoryBean with name 'authorMapper' and 'com.elegantcollection.dao.AuthorMapper' mapperInterface
+2018-10-04 15:53:49,920 DEBUG ClassPathMapperScanner:216 -Enabling autowire by type for MapperFactoryBean with name 'authorMapper'.
+2018-10-04 15:53:49,921 DEBUG ClassPathMapperScanner:180 -Creating MapperFactoryBean with name 'blockMapper' and 'com.elegantcollection.dao.BlockMapper' mapperInterface
+2018-10-04 15:53:49,921 DEBUG ClassPathMapperScanner:216 -Enabling autowire by type for MapperFactoryBean with name 'blockMapper'.
+2018-10-04 15:53:49,921 DEBUG ClassPathMapperScanner:180 -Creating MapperFactoryBean with name 'bookCategoryMapper' and 'com.elegantcollection.dao.BookCategoryMapper' mapperInterface
+2018-10-04 15:53:49,922 DEBUG ClassPathMapperScanner:216 -Enabling autowire by type for MapperFactoryBean with name 'bookCategoryMapper'.
+2018-10-04 15:53:49,922 DEBUG ClassPathMapperScanner:180 -Creating MapperFactoryBean with name 'bookMapper' and 'com.elegantcollection.dao.BookMapper' mapperInterface
+2018-10-04 15:53:49,922 DEBUG ClassPathMapperScanner:216 -Enabling autowire by type for MapperFactoryBean with name 'bookMapper'.
+2018-10-04 15:53:49,922 DEBUG ClassPathMapperScanner:180 -Creating MapperFactoryBean with name 'bookOrderDetailMapper' and 'com.elegantcollection.dao.BookOrderDetailMapper' mapperInterface
+2018-10-04 15:53:49,922 DEBUG ClassPathMapperScanner:216 -Enabling autowire by type for MapperFactoryBean with name 'bookOrderDetailMapper'.
+2018-10-04 15:53:49,923 DEBUG ClassPathMapperScanner:180 -Creating MapperFactoryBean with name 'bookOrderMapper' and 'com.elegantcollection.dao.BookOrderMapper' mapperInterface
+2018-10-04 15:53:49,923 DEBUG ClassPathMapperScanner:216 -Enabling autowire by type for MapperFactoryBean with name 'bookOrderMapper'.
+2018-10-04 15:53:49,924 DEBUG ClassPathMapperScanner:180 -Creating MapperFactoryBean with name 'cartMapper' and 'com.elegantcollection.dao.CartMapper' mapperInterface
+2018-10-04 15:53:49,924 DEBUG ClassPathMapperScanner:216 -Enabling autowire by type for MapperFactoryBean with name 'cartMapper'.
+2018-10-04 15:53:49,924 DEBUG ClassPathMapperScanner:180 -Creating MapperFactoryBean with name 'customerMapper' and 'com.elegantcollection.dao.CustomerMapper' mapperInterface
+2018-10-04 15:53:49,925 DEBUG ClassPathMapperScanner:216 -Enabling autowire by type for MapperFactoryBean with name 'customerMapper'.
+2018-10-04 15:53:49,925 DEBUG ClassPathMapperScanner:180 -Creating MapperFactoryBean with name 'discountDetailMapper' and 'com.elegantcollection.dao.DiscountDetailMapper' mapperInterface
+2018-10-04 15:53:49,925 DEBUG ClassPathMapperScanner:216 -Enabling autowire by type for MapperFactoryBean with name 'discountDetailMapper'.
+2018-10-04 15:53:49,925 DEBUG ClassPathMapperScanner:180 -Creating MapperFactoryBean with name 'discountMapper' and 'com.elegantcollection.dao.DiscountMapper' mapperInterface
+2018-10-04 15:53:49,926 DEBUG ClassPathMapperScanner:216 -Enabling autowire by type for MapperFactoryBean with name 'discountMapper'.
+2018-10-04 15:53:49,926 DEBUG ClassPathMapperScanner:180 -Creating MapperFactoryBean with name 'evaluateMapper' and 'com.elegantcollection.dao.EvaluateMapper' mapperInterface
+2018-10-04 15:53:49,926 DEBUG ClassPathMapperScanner:216 -Enabling autowire by type for MapperFactoryBean with name 'evaluateMapper'.
+2018-10-04 15:53:49,926 DEBUG ClassPathMapperScanner:180 -Creating MapperFactoryBean with name 'loginMapper' and 'com.elegantcollection.dao.LoginMapper' mapperInterface
+2018-10-04 15:53:49,927 DEBUG ClassPathMapperScanner:216 -Enabling autowire by type for MapperFactoryBean with name 'loginMapper'.
+2018-10-04 15:53:49,927 DEBUG ClassPathMapperScanner:180 -Creating MapperFactoryBean with name 'messageMapper' and 'com.elegantcollection.dao.MessageMapper' mapperInterface
+2018-10-04 15:53:49,927 DEBUG ClassPathMapperScanner:216 -Enabling autowire by type for MapperFactoryBean with name 'messageMapper'.
+2018-10-04 15:53:49,928 DEBUG ClassPathMapperScanner:180 -Creating MapperFactoryBean with name 'postMapper' and 'com.elegantcollection.dao.PostMapper' mapperInterface
+2018-10-04 15:53:49,928 DEBUG ClassPathMapperScanner:216 -Enabling autowire by type for MapperFactoryBean with name 'postMapper'.
+2018-10-04 15:53:49,928 DEBUG ClassPathMapperScanner:180 -Creating MapperFactoryBean with name 'postReplyMapper' and 'com.elegantcollection.dao.PostReplyMapper' mapperInterface
+2018-10-04 15:53:49,928 DEBUG ClassPathMapperScanner:216 -Enabling autowire by type for MapperFactoryBean with name 'postReplyMapper'.
+2018-10-04 15:53:49,929 DEBUG ClassPathMapperScanner:180 -Creating MapperFactoryBean with name 'shopOrderDetailMapper' and 'com.elegantcollection.dao.ShopOrderDetailMapper' mapperInterface
+2018-10-04 15:53:49,929 DEBUG ClassPathMapperScanner:216 -Enabling autowire by type for MapperFactoryBean with name 'shopOrderDetailMapper'.
+2018-10-04 15:53:49,929 DEBUG ClassPathMapperScanner:180 -Creating MapperFactoryBean with name 'shopOrderMapper' and 'com.elegantcollection.dao.ShopOrderMapper' mapperInterface
+2018-10-04 15:53:49,930 DEBUG ClassPathMapperScanner:216 -Enabling autowire by type for MapperFactoryBean with name 'shopOrderMapper'.
+2018-10-04 15:53:49,930 DEBUG ClassPathMapperScanner:180 -Creating MapperFactoryBean with name 'waiterMapper' and 'com.elegantcollection.dao.WaiterMapper' mapperInterface
+2018-10-04 15:53:49,930 DEBUG ClassPathMapperScanner:216 -Enabling autowire by type for MapperFactoryBean with name 'waiterMapper'.
+2018-10-04 15:53:50,673 DEBUG DefaultTraversableResolver:70 -Cannot find javax.persistence.Persistence on classpath. Assuming non JPA 2 environment. All properties will per default be traversable.
+2018-10-04 15:53:50,680 DEBUG DefaultTraversableResolver:70 -Cannot find javax.persistence.Persistence on classpath. Assuming non JPA 2 environment. All properties will per default be traversable.
+2018-10-04 15:53:50,684 DEBUG ConfigurationImpl:163 -Setting custom MessageInterpolator of type org.springframework.validation.beanvalidation.LocaleContextMessageInterpolator
+2018-10-04 15:53:50,685 DEBUG ConfigurationImpl:185 -Setting custom ConstraintValidatorFactory of type org.springframework.validation.beanvalidation.SpringConstraintValidatorFactory
+2018-10-04 15:53:50,686 DEBUG ConfigurationImpl:199 -Setting custom ParameterNameProvider of type com.sun.proxy.$Proxy65
+2018-10-04 15:53:50,687 DEBUG ValidationXmlParser:99 -Trying to load META-INF/validation.xml for XML based Validator configuration.
+2018-10-04 15:53:50,689 DEBUG ResourceLoaderHelper:47 -Trying to load META-INF/validation.xml via user class loader
+2018-10-04 15:53:50,689 DEBUG ResourceLoaderHelper:54 -Trying to load META-INF/validation.xml via TCCL
+2018-10-04 15:53:50,689 DEBUG ResourceLoaderHelper:60 -Trying to load META-INF/validation.xml via Hibernate Validator's class loader
+2018-10-04 15:53:50,690 DEBUG ValidationXmlParser:106 -No META-INF/validation.xml found. Using annotation based configuration only.
+2018-10-04 15:53:51,032 INFO  Http11NioProtocol:180 -Initializing ProtocolHandler ["http-nio-8080"]
+2018-10-04 15:53:51,044 INFO  StandardService:180 -Starting service [Tomcat]
+2018-10-04 15:53:51,045 INFO  StandardEngine:180 -Starting Servlet Engine: Apache Tomcat/8.5.34
+2018-10-04 15:53:51,347 INFO  TldScanner:180 -At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2018-10-04 15:53:51,353 INFO  [/]:180 -Initializing Spring embedded WebApplicationContext
+2018-10-04 15:53:51,695 INFO  DruidDataSourceAutoConfigure:56 -Init DruidDataSource
+2018-10-04 15:53:52,366 ERROR PropertiesConfigurationFactory:365 -Properties configuration failed validation
+2018-10-04 15:53:52,367 ERROR PropertiesConfigurationFactory:367 -Field error in object 'spring.datasource.druid' on field 'filters': rejected value [stat,wall,log4j]; codes [methodInvocation.spring.datasource.druid.filters,methodInvocation.filters,methodInvocation.java.lang.String,methodInvocation]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [spring.datasource.druid.filters,filters]; arguments []; default message [filters]]; default message [Property 'filters' threw exception; nested exception is java.lang.NoClassDefFoundError: org/apache/log4j/Logger]
+2018-10-04 15:53:52,369 WARN  AnnotationConfigEmbeddedWebApplicationContext:551 -Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'indexController' defined in file [E:\idea\elegantCollection\target\classes\com\elegantcollection\controller\IndexController.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'adminMapper' defined in file [E:\idea\elegantCollection\target\classes\com\elegantcollection\dao\AdminMapper.class]: Unsatisfied dependency expressed through bean property 'sqlSessionFactory'; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'sqlSessionFactory' defined in class path resource [org/mybatis/spring/boot/autoconfigure/MybatisAutoConfiguration.class]: Unsatisfied dependency expressed through method 'sqlSessionFactory' parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'dataSource': Could not bind properties to DruidDataSourceWrapper (prefix=spring.datasource.druid, ignoreInvalidFields=false, ignoreUnknownFields=true, ignoreNestedProperties=false); nested exception is org.springframework.validation.BindException: org.springframework.boot.bind.RelaxedDataBinder$RelaxedBeanPropertyBindingResult: 1 errors
+Field error in object 'spring.datasource.druid' on field 'filters': rejected value [stat,wall,log4j]; codes [methodInvocation.spring.datasource.druid.filters,methodInvocation.filters,methodInvocation.java.lang.String,methodInvocation]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [spring.datasource.druid.filters,filters]; arguments []; default message [filters]]; default message [Property 'filters' threw exception; nested exception is java.lang.NoClassDefFoundError: org/apache/log4j/Logger]
+2018-10-04 15:53:52,371 INFO  StandardService:180 -Stopping service [Tomcat]
+2018-10-04 15:53:52,386 WARN  WebappClassLoaderBase:180 -The web application [ROOT] appears to have started a thread named [Abandoned connection cleanup thread] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:143)
+ com.mysql.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:43)
+2018-10-04 15:53:52,433 ERROR LoggingFailureAnalysisReporter:42 -
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Binding to target {
+	CreateTime:"2018-10-04 15:53:51",
+	ActiveCount:0,
+	PoolingCount:0,
+	CreateCount:0,
+	DestroyCount:0,
+	CloseCount:0,
+	ConnectCount:0,
+	Connections:[
+	]
+}
+
+[
+] failed:
+
+    Property: spring.datasource.druid.filters
+    Value: stat,wall,log4j
+    Reason: Property 'filters' threw exception; nested exception is java.lang.NoClassDefFoundError: org/apache/log4j/Logger
+
+
+Action:
+
+Update your application's configuration
+

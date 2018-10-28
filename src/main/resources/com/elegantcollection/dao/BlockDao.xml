@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.elegantcollection.dao.BlockDao">
+  <resultMap id="BaseResultMap" type="com.elegantcollection.entity.Block">
+    <id column="block_id" jdbcType="INTEGER" property="blockId" />
+    <result column="block_name" jdbcType="VARCHAR" property="blockName" />
+    <result column="book_id" jdbcType="INTEGER" property="bookId" />
+    <result column="category_id" jdbcType="INTEGER" property="categoryId" />
+    <result column="block_ima" jdbcType="VARCHAR" property="blockIma" />
+    <result column="block_status" jdbcType="INTEGER" property="blockStatus" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    block_id, block_name, book_id, category_id, block_ima, block_status
+  </sql>
+  <select id="selectByExample" parameterType="com.elegantcollection.entity.BlockExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from block
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from block
+    where block_id = #{blockId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from block
+    where block_id = #{blockId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.elegantcollection.entity.BlockExample">
+    delete from block
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.elegantcollection.entity.Block">
+    insert into block (block_id, block_name, book_id, 
+      category_id, block_ima, block_status
+      )
+    values (#{blockId,jdbcType=INTEGER}, #{blockName,jdbcType=VARCHAR}, #{bookId,jdbcType=INTEGER}, 
+      #{categoryId,jdbcType=INTEGER}, #{blockIma,jdbcType=VARCHAR}, #{blockStatus,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.elegantcollection.entity.Block">
+    insert into block
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="blockId != null">
+        block_id,
+      </if>
+      <if test="blockName != null">
+        block_name,
+      </if>
+      <if test="bookId != null">
+        book_id,
+      </if>
+      <if test="categoryId != null">
+        category_id,
+      </if>
+      <if test="blockIma != null">
+        block_ima,
+      </if>
+      <if test="blockStatus != null">
+        block_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="blockId != null">
+        #{blockId,jdbcType=INTEGER},
+      </if>
+      <if test="blockName != null">
+        #{blockName,jdbcType=VARCHAR},
+      </if>
+      <if test="bookId != null">
+        #{bookId,jdbcType=INTEGER},
+      </if>
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="blockIma != null">
+        #{blockIma,jdbcType=VARCHAR},
+      </if>
+      <if test="blockStatus != null">
+        #{blockStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.elegantcollection.entity.BlockExample" resultType="java.lang.Long">
+    select count(*) from block
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update block
+    <set>
+      <if test="record.blockId != null">
+        block_id = #{record.blockId,jdbcType=INTEGER},
+      </if>
+      <if test="record.blockName != null">
+        block_name = #{record.blockName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bookId != null">
+        book_id = #{record.bookId,jdbcType=INTEGER},
+      </if>
+      <if test="record.categoryId != null">
+        category_id = #{record.categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="record.blockIma != null">
+        block_ima = #{record.blockIma,jdbcType=VARCHAR},
+      </if>
+      <if test="record.blockStatus != null">
+        block_status = #{record.blockStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update block
+    set block_id = #{record.blockId,jdbcType=INTEGER},
+      block_name = #{record.blockName,jdbcType=VARCHAR},
+      book_id = #{record.bookId,jdbcType=INTEGER},
+      category_id = #{record.categoryId,jdbcType=INTEGER},
+      block_ima = #{record.blockIma,jdbcType=VARCHAR},
+      block_status = #{record.blockStatus,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.elegantcollection.entity.Block">
+    update block
+    <set>
+      <if test="blockName != null">
+        block_name = #{blockName,jdbcType=VARCHAR},
+      </if>
+      <if test="bookId != null">
+        book_id = #{bookId,jdbcType=INTEGER},
+      </if>
+      <if test="categoryId != null">
+        category_id = #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="blockIma != null">
+        block_ima = #{blockIma,jdbcType=VARCHAR},
+      </if>
+      <if test="blockStatus != null">
+        block_status = #{blockStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where block_id = #{blockId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.elegantcollection.entity.Block">
+    update block
+    set block_name = #{blockName,jdbcType=VARCHAR},
+      book_id = #{bookId,jdbcType=INTEGER},
+      category_id = #{categoryId,jdbcType=INTEGER},
+      block_ima = #{blockIma,jdbcType=VARCHAR},
+      block_status = #{blockStatus,jdbcType=INTEGER}
+    where block_id = #{blockId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!--如果不需要生成example的话将targetRuntime设置为MyBatis3Simple即可-->
+    <context id="test" targetRuntime="MyBatis3Simple">
+
+        <commentGenerator>
+            <!-- 生成的注释是否包含生成的时间，一般设置为true，不生成时间 -->
+            <property name="suppressDate" value="true" />
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+        <!--数据库链接URL，用户名、密码 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://134.175.17.147:3306/bookshopdb"
+                        userId="root"
+                        password="qin123456">
+        </jdbcConnection>
+        <javaTypeResolver>
+            <!-- 是否将数据库中的decimal类型转换为java的BigDecimal类型 -->
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+        <!-- 生成模型的包名和位置 -->
+        <javaModelGenerator targetPackage="com.elegantcollection.entity"
+                            targetProject="E:\idea\elegantCollection\src\main\java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+        <!-- 生成映射文件的包名和位置 -->
+        <sqlMapGenerator targetPackage="com.elegantcollection.dao"
+                         targetProject="E:\idea\elegantCollection\src\main\resources">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+        <!-- 生成DAO的包名和位置 -->
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="com.elegantcollection.dao"
+                             targetProject="E:\idea\elegantCollection\src\main\java">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        <!-- 要生成哪些表 -->
+        <!--<table tableName="address" domainObjectName="Address"/>
+        <table tableName="admin" domainObjectName="Admin"/>
+        <table tableName="author" domainObjectName="Author"/>
+        <table tableName="block" domainObjectName="Block"/>
+        <table tableName="book" domainObjectName="Book"/>
+        <table tableName="book_category" domainObjectName="BookCategory"/>
+        <table tableName="book_order" domainObjectName="BookOrder"/>
+        <table tableName="book_order_detail" domainObjectName="BookOrderDetail"/>
+        <table tableName="cart" domainObjectName="Cart"/>
+        <table tableName="customer" domainObjectName="Customer"/>
+        <table tableName="discount" domainObjectName="DiscountService"/>
+        <table tableName="discount_detail" domainObjectName="DiscountDetail"/>
+        <table tableName="evaluate" domainObjectName="Evaluate"/>
+        <table tableName="login" domainObjectName="Login"/>-->
+        <table tableName="message" domainObjectName="Message"/>
+        <!--<table tableName="post" domainObjectName="Post"/>
+        <table tableName="post_reply" domainObjectName="PostReply"/>
+        <table tableName="shop_order" domainObjectName="ShopOrder"/>
+        <table tableName="shop_order_detail" domainObjectName="ShopOrderDetail"/>
+        <table tableName="waiter" domainObjectName="Waiter"/>
+-->
+
+    </context>
+</generatorConfiguration>

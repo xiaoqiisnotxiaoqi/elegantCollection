@@ -1,0 +1,440 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+.mydang{
+    width: 1200px;
+    margin: 15px auto 50px;
+    overflow: hidden;
+    /*background: red;*/
+
+}
+.my_left{
+    width: 200px;
+    float: left;
+
+
+}
+.my_menu {
+
+}
+.my_menu-title{
+    width: 67%;
+    display: block;
+    margin-top: 0px;
+    font-weight: normal;
+    font-size:16px;
+    line-height:62px ;
+    height: 62px;
+
+    background: url(../images/icon_menu.png) 42px 24px no-repeat #fafafa;
+    margin-bottom: 1px;
+    border: 1px solid #dcdcdc;
+
+    padding-left: 64px;
+
+}
+.my_menu-title a:hover{
+    color: red;
+}
+.my_menu ul{
+    margin: 8px 0;
+    line-height: 18px;
+    font-size: 16px;
+    padding-left: 20px;
+    background: url(../images/icon_menu.png) 0 -35px no-repeat;
+}
+.my_menu .dl{
+    border: 1px solid #dcdcdc;
+    border-top: none 0;
+    width: 148px;
+    margin: 0 auto;
+    padding: 16px 0 0 42px;
+}
+.my_menu  li{
+    line-height: 32px;
+    padding-left: 20px;
+    font-size: 14px;
+    list-style: none;
+}
+
+
+.mydang a:hover{
+    color: rgba(77, 77, 77, 0.91);
+}
+a:link, a:visited {
+    text-decoration: none;
+    color: #969696;
+
+}
+.my_main{
+    position: relative;
+
+    width: 990px;
+    padding: 0 0 0 10px;
+    float: left;
+
+}
+.user_message{
+
+    position: relative;
+    background: url(../images/user_message_bg.png) 0 0 no-repeat;
+    padding: 8px 0 0 48px;
+    height: 160px;
+    margin: 0 auto 10px;
+
+    text-align: center;
+}
+.user_info{
+    float: left;
+    width: 135px;
+    padding: 5px 5px 0 0;
+    height: 150px;
+    position: relative;
+}
+.user_phone{
+    background: url("../images/user_photo_bg.png") 0 0 no-repeat;
+    width:85px;
+    height:85px;
+    padding: 15px;
+    margin-bottom: 2px;
+    position: relative;
+    cursor: pointer; /*光标呈现一只手*/
+
+}
+.user_phone:hover .edit_box{
+    display: block;
+}
+.user_phone img {
+    width: 85px;
+    height: 85px;
+}
+.user_phone .edit_box {
+    width: 85px;
+    display: none;
+    height: 85px;
+    position: absolute;
+    left: 17px;
+    top: 17px;
+}
+
+.user_phone .edit {
+    width: 85px;
+    height: 85px;
+    background-color: #000;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+    display: block;
+}
+
+
+.user_phone .edit_a {
+    width: 85px;
+    height: 20px;
+    display: block;
+    line-height: 20px;
+    position: relative;
+    left: 0;
+    top: -53px;
+    color: #fff;
+    background-color: #333;
+    opacity: 0.8;
+}
+
+.user_phone .opacity_mask {
+    width: 117px;
+    height: 117px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: url(../images/photo_mask.png);
+
+}
+.user_message .no_msg {
+    background-position: 0 -344px;
+}
+.user_message .message {
+    width: 25px;
+    height: 28px;
+    line-height: 28px;
+    padding: 0 3px 0 26px;
+    background: url(../images/icon.png) 0 -316px;
+    position: absolute;
+    left: 78px;
+    top: 80px;
+}
+
+.user_message .user_name {
+    width: 102px;
+    display: block;
+    margin: 0 auto;
+    line-height: 20px;
+    color: #fff;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 16px;
+}
+.safety_type .safety-level{
+    padding: 15px 0 0;
+    font-size: 14px;
+}
+.safety_type  .level{
+    color: #ff9804;
+}
+.safety_type {
+
+    width: 360px;
+    padding: 22px 0 0px 20px;
+    float: left;
+    text-align: left;
+}
+
+.safety_type .middle .level_line {
+    background-position: 0 -21px;
+
+}
+.to_left{
+    margin-left: 45px;
+}
+
+
+.safety_level .level_line {
+    height: 21px;
+    background: url(../images/icon_safety.png) 0 0 no-repeat;
+    margin: 10px 45px;
+}
+.setting{
+    margin-left:45px ;
+}
+.account_message{
+    padding-left: 35px;
+    float: left;
+    width: 385px;
+}
+
+.account_message li {
+    top:-15px;
+    width: 80px;
+    position: relative;
+    margin-right: 90px;
+    left: 25px;
+    /* overflow: hidden; */
+    float: left;
+    padding-top: 20px;
+    line-height: 20px;
+    font-size: 14px;
+    list-style-type: none;
+}
+.account_message li .lpk {
+    background-position: 0 -373px;
+}
+.account_message li .pic {
+    width: 60px;
+    height: 60px;
+    background-image: url(../images/icon.png);
+    position: relative;
+    margin: 0 auto 10px;
+}
+.account_message li a {
+    display: block;
+}
+.account_message li .ye {
+    background-position: 0 -433px;
+}
+.account_message li .lq {
+    background-position: 0 -493px;
+}
+.account_message li .jf{
+    background-position: 0 -553px;
+}
+.account_message li .price_show{
+    display: block;
+    text-align: center;
+    font-size: 12px;
+    margin-top: -3px;
+    color: #969696;
+    position: absolute;
+    bottom: -15px;
+    width: 120px;
+    left: -20px;
+}
+.account_message li:hover a{
+
+
+    top:-10px;
+}
+.my_order{
+    margin-bottom: 15px;
+    z-index: 9;
+}
+.my_title{
+    height: 48px;
+    line-height: 48px;
+    background: #fafafa;
+    border: 1px solid #dcdcdc;
+    overflow: hidden;
+}
+.my_title .tab_list {
+    float: right;
+    font-size: 13px;
+
+}
+.my_title .tab_list li {
+    padding: 0 21px;
+    position: relative;
+    height: 12px;
+    line-height: 12px;
+    float: left;
+    border-right: 1px solid #dcdcdc;
+    list-style-type: none;
+}
+.my_title .tab_list li a {
+    color: #646464;
+    padding: 0 3px;
+    display: inline-block;
+    height: 22px;
+
+}
+.my_title  .tab_list li:hover a{
+    border-bottom: 2px solid  #ff2832;
+}
+.my_title .title {
+    margin: 15px 0 15px 10px;
+    padding: 0 0 0 10px;
+    font-size: 16px;
+    color: #323232;
+    line-height: 18px;
+    border-left: 2px solid #ff2832;
+    display: inline-block;
+
+}
+
+.my_title .tab_list li.last {
+
+    border: none 0;
+}
+.my_order .none_box {
+    border: 1px solid #dcdcdc;
+    border-width: 0 1px 1px;
+}
+.none_box {
+    text-align: center;
+    padding: 25px 0 0;
+}
+.none_box a {
+    color: #ff2832;
+}
+
+.none_box h3 {
+    font-size: 14px;
+    color: #969696;
+    font-weight: normal;
+    padding: 20px 0;
+}
+.sidebar_wrap{
+    position:fixed;
+    top: 0;
+    right: 0;
+    z-index: 1;
+
+}
+.sidebar_wrap .sidebar{
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 42px;
+    padding: 0;
+    margin:0;
+    height: 100%;
+    background-color: #323232;
+    zoom: 1;
+
+
+}
+.sidebar_wrap .sidebar_code2{
+    margin:180px auto 6px;
+    position: relative;
+
+}
+.sidebar_wrap .sidebar_code2 .code2s{
+    background: url(../images/sidebar_icon.png) 0 0 no-repeat;
+    display:block;
+    width: 42px;
+    height:28px;
+
+}
+.sidebar_wrap .sidebar_cart{
+    text-align: center;
+}
+.sidebar_wrap .sidebar_cart  a{
+    font: 14px/14px "Microsoft Yahei";
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    width: 42px;
+    height: 120px;
+    padding: 8px 0 5px;
+}
+
+
+.sidebar_wrap .sidebar_cart span{
+    background: url("../images/sidebar_icon.png") 0 -50px no-repeat;
+    display: block;
+    height: 24px;
+    margin-bottom:  8px;
+}
+
+.sidebar_wrap .sidebar_cart a em {
+    width: 28px;
+    height: 28px;
+    border-radius: 14px;
+    background-color: #ff3228;
+    line-height: 28px;
+    font-size: 12px;
+    font-style: normal;
+    display: block;
+    margin: 12px auto;
+}
+
+.sidebar_wrap .sidebar_cart:hover span {
+
+    background: url("../images/sidebar_icon.png") -42px -50px no-repeat;
+    display: block;
+    height: 24px;
+    margin-bottom:  8px;
+
+}
+.sidebar_wrap .sidebar_cart:hover{
+    background: #ff3228;
+
+}
+.sidebar_wrap .sidebar_link {
+    position: absolute;
+    bottom: 33px;
+    text-align: center;
+    width: 42px;
+}
+.back_top {
+    background: url("../images/sidebar_icon.png") 0 -168px no-repeat;
+}
+
+
+
+.sidebar_wrap .sidebar_link a {
+    display: block;
+    font: 14px/16px "Microsoft Yahei";
+    color: #fff;
+    text-decoration: none;
+    width: 42px;
+    height: 40px;
+    position: relative;
+}
+.sidebar_wrap .sidebar_link .back_top:hover {
+    background-position: -42px -168px;
+    background-color: #ff3228;
+}

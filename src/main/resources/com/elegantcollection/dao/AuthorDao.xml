@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.elegantcollection.dao.AuthorDao">
+  <resultMap id="BaseResultMap" type="com.elegantcollection.entity.Author">
+    <id column="author_id" jdbcType="INTEGER" property="authorId" />
+    <result column="author_name" jdbcType="VARCHAR" property="authorName" />
+    <result column="author_img" jdbcType="VARCHAR" property="authorImg" />
+    <result column="author_country" jdbcType="VARCHAR" property="authorCountry" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.elegantcollection.entity.Author">
+    <result column="author_intro" jdbcType="LONGVARCHAR" property="authorIntro" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    author_id, author_name, author_img, author_country
+  </sql>
+  <sql id="Blob_Column_List">
+    author_intro
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.elegantcollection.entity.AuthorExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from author
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.elegantcollection.entity.AuthorExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from author
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from author
+    where author_id = #{authorId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from author
+    where author_id = #{authorId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.elegantcollection.entity.AuthorExample">
+    delete from author
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.elegantcollection.entity.Author">
+    insert into author (author_id, author_name, author_img, 
+      author_country, author_intro)
+    values (#{authorId,jdbcType=INTEGER}, #{authorName,jdbcType=VARCHAR}, #{authorImg,jdbcType=VARCHAR}, 
+      #{authorCountry,jdbcType=VARCHAR}, #{authorIntro,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.elegantcollection.entity.Author">
+    insert into author
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="authorId != null">
+        author_id,
+      </if>
+      <if test="authorName != null">
+        author_name,
+      </if>
+      <if test="authorImg != null">
+        author_img,
+      </if>
+      <if test="authorCountry != null">
+        author_country,
+      </if>
+      <if test="authorIntro != null">
+        author_intro,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="authorId != null">
+        #{authorId,jdbcType=INTEGER},
+      </if>
+      <if test="authorName != null">
+        #{authorName,jdbcType=VARCHAR},
+      </if>
+      <if test="authorImg != null">
+        #{authorImg,jdbcType=VARCHAR},
+      </if>
+      <if test="authorCountry != null">
+        #{authorCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="authorIntro != null">
+        #{authorIntro,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.elegantcollection.entity.AuthorExample" resultType="java.lang.Long">
+    select count(*) from author
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update author
+    <set>
+      <if test="record.authorId != null">
+        author_id = #{record.authorId,jdbcType=INTEGER},
+      </if>
+      <if test="record.authorName != null">
+        author_name = #{record.authorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.authorImg != null">
+        author_img = #{record.authorImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.authorCountry != null">
+        author_country = #{record.authorCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="record.authorIntro != null">
+        author_intro = #{record.authorIntro,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update author
+    set author_id = #{record.authorId,jdbcType=INTEGER},
+      author_name = #{record.authorName,jdbcType=VARCHAR},
+      author_img = #{record.authorImg,jdbcType=VARCHAR},
+      author_country = #{record.authorCountry,jdbcType=VARCHAR},
+      author_intro = #{record.authorIntro,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update author
+    set author_id = #{record.authorId,jdbcType=INTEGER},
+      author_name = #{record.authorName,jdbcType=VARCHAR},
+      author_img = #{record.authorImg,jdbcType=VARCHAR},
+      author_country = #{record.authorCountry,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.elegantcollection.entity.Author">
+    update author
+    <set>
+      <if test="authorName != null">
+        author_name = #{authorName,jdbcType=VARCHAR},
+      </if>
+      <if test="authorImg != null">
+        author_img = #{authorImg,jdbcType=VARCHAR},
+      </if>
+      <if test="authorCountry != null">
+        author_country = #{authorCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="authorIntro != null">
+        author_intro = #{authorIntro,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where author_id = #{authorId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.elegantcollection.entity.Author">
+    update author
+    set author_name = #{authorName,jdbcType=VARCHAR},
+      author_img = #{authorImg,jdbcType=VARCHAR},
+      author_country = #{authorCountry,jdbcType=VARCHAR},
+      author_intro = #{authorIntro,jdbcType=LONGVARCHAR}
+    where author_id = #{authorId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.elegantcollection.entity.Author">
+    update author
+    set author_name = #{authorName,jdbcType=VARCHAR},
+      author_img = #{authorImg,jdbcType=VARCHAR},
+      author_country = #{authorCountry,jdbcType=VARCHAR}
+    where author_id = #{authorId,jdbcType=INTEGER}
+  </update>
+</mapper>

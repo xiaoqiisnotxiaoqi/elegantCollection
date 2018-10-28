@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.elegantcollection.dao.PostReplyDao">
+  <resultMap id="BaseResultMap" type="com.elegantcollection.entity.PostReply">
+    <id column="reply_id" jdbcType="INTEGER" property="replyId" />
+    <result column="post_id" jdbcType="INTEGER" property="postId" />
+    <result column="by_reply_id" jdbcType="INTEGER" property="byReplyId" />
+    <result column="cust_id" jdbcType="INTEGER" property="custId" />
+    <result column="by_read" jdbcType="VARCHAR" property="byRead" />
+    <result column="reply_text" jdbcType="VARCHAR" property="replyText" />
+    <result column="reply_time" jdbcType="TIMESTAMP" property="replyTime" />
+    <result column="is_reply_id" jdbcType="INTEGER" property="isReplyId" />
+    <result column="reply_status" jdbcType="INTEGER" property="replyStatus" />
+    <result column="redundancy_field1" jdbcType="VARCHAR" property="redundancyField1" />
+    <result column="redundancy_field2" jdbcType="VARCHAR" property="redundancyField2" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    reply_id, post_id, by_reply_id, cust_id, by_read, reply_text, reply_time, is_reply_id, 
+    reply_status, redundancy_field1, redundancy_field2
+  </sql>
+  <select id="selectByExample" parameterType="com.elegantcollection.entity.PostReplyExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from post_reply
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from post_reply
+    where reply_id = #{replyId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from post_reply
+    where reply_id = #{replyId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.elegantcollection.entity.PostReplyExample">
+    delete from post_reply
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.elegantcollection.entity.PostReply">
+    insert into post_reply (reply_id, post_id, by_reply_id, 
+      cust_id, by_read, reply_text, 
+      reply_time, is_reply_id, reply_status, 
+      redundancy_field1, redundancy_field2)
+    values (#{replyId,jdbcType=INTEGER}, #{postId,jdbcType=INTEGER}, #{byReplyId,jdbcType=INTEGER}, 
+      #{custId,jdbcType=INTEGER}, #{byRead,jdbcType=VARCHAR}, #{replyText,jdbcType=VARCHAR}, 
+      #{replyTime,jdbcType=TIMESTAMP}, #{isReplyId,jdbcType=INTEGER}, #{replyStatus,jdbcType=INTEGER}, 
+      #{redundancyField1,jdbcType=VARCHAR}, #{redundancyField2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.elegantcollection.entity.PostReply">
+    insert into post_reply
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="replyId != null">
+        reply_id,
+      </if>
+      <if test="postId != null">
+        post_id,
+      </if>
+      <if test="byReplyId != null">
+        by_reply_id,
+      </if>
+      <if test="custId != null">
+        cust_id,
+      </if>
+      <if test="byRead != null">
+        by_read,
+      </if>
+      <if test="replyText != null">
+        reply_text,
+      </if>
+      <if test="replyTime != null">
+        reply_time,
+      </if>
+      <if test="isReplyId != null">
+        is_reply_id,
+      </if>
+      <if test="replyStatus != null">
+        reply_status,
+      </if>
+      <if test="redundancyField1 != null">
+        redundancy_field1,
+      </if>
+      <if test="redundancyField2 != null">
+        redundancy_field2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="replyId != null">
+        #{replyId,jdbcType=INTEGER},
+      </if>
+      <if test="postId != null">
+        #{postId,jdbcType=INTEGER},
+      </if>
+      <if test="byReplyId != null">
+        #{byReplyId,jdbcType=INTEGER},
+      </if>
+      <if test="custId != null">
+        #{custId,jdbcType=INTEGER},
+      </if>
+      <if test="byRead != null">
+        #{byRead,jdbcType=VARCHAR},
+      </if>
+      <if test="replyText != null">
+        #{replyText,jdbcType=VARCHAR},
+      </if>
+      <if test="replyTime != null">
+        #{replyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isReplyId != null">
+        #{isReplyId,jdbcType=INTEGER},
+      </if>
+      <if test="replyStatus != null">
+        #{replyStatus,jdbcType=INTEGER},
+      </if>
+      <if test="redundancyField1 != null">
+        #{redundancyField1,jdbcType=VARCHAR},
+      </if>
+      <if test="redundancyField2 != null">
+        #{redundancyField2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.elegantcollection.entity.PostReplyExample" resultType="java.lang.Long">
+    select count(*) from post_reply
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update post_reply
+    <set>
+      <if test="record.replyId != null">
+        reply_id = #{record.replyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.postId != null">
+        post_id = #{record.postId,jdbcType=INTEGER},
+      </if>
+      <if test="record.byReplyId != null">
+        by_reply_id = #{record.byReplyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.custId != null">
+        cust_id = #{record.custId,jdbcType=INTEGER},
+      </if>
+      <if test="record.byRead != null">
+        by_read = #{record.byRead,jdbcType=VARCHAR},
+      </if>
+      <if test="record.replyText != null">
+        reply_text = #{record.replyText,jdbcType=VARCHAR},
+      </if>
+      <if test="record.replyTime != null">
+        reply_time = #{record.replyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isReplyId != null">
+        is_reply_id = #{record.isReplyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.replyStatus != null">
+        reply_status = #{record.replyStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.redundancyField1 != null">
+        redundancy_field1 = #{record.redundancyField1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.redundancyField2 != null">
+        redundancy_field2 = #{record.redundancyField2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update post_reply
+    set reply_id = #{record.replyId,jdbcType=INTEGER},
+      post_id = #{record.postId,jdbcType=INTEGER},
+      by_reply_id = #{record.byReplyId,jdbcType=INTEGER},
+      cust_id = #{record.custId,jdbcType=INTEGER},
+      by_read = #{record.byRead,jdbcType=VARCHAR},
+      reply_text = #{record.replyText,jdbcType=VARCHAR},
+      reply_time = #{record.replyTime,jdbcType=TIMESTAMP},
+      is_reply_id = #{record.isReplyId,jdbcType=INTEGER},
+      reply_status = #{record.replyStatus,jdbcType=INTEGER},
+      redundancy_field1 = #{record.redundancyField1,jdbcType=VARCHAR},
+      redundancy_field2 = #{record.redundancyField2,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.elegantcollection.entity.PostReply">
+    update post_reply
+    <set>
+      <if test="postId != null">
+        post_id = #{postId,jdbcType=INTEGER},
+      </if>
+      <if test="byReplyId != null">
+        by_reply_id = #{byReplyId,jdbcType=INTEGER},
+      </if>
+      <if test="custId != null">
+        cust_id = #{custId,jdbcType=INTEGER},
+      </if>
+      <if test="byRead != null">
+        by_read = #{byRead,jdbcType=VARCHAR},
+      </if>
+      <if test="replyText != null">
+        reply_text = #{replyText,jdbcType=VARCHAR},
+      </if>
+      <if test="replyTime != null">
+        reply_time = #{replyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isReplyId != null">
+        is_reply_id = #{isReplyId,jdbcType=INTEGER},
+      </if>
+      <if test="replyStatus != null">
+        reply_status = #{replyStatus,jdbcType=INTEGER},
+      </if>
+      <if test="redundancyField1 != null">
+        redundancy_field1 = #{redundancyField1,jdbcType=VARCHAR},
+      </if>
+      <if test="redundancyField2 != null">
+        redundancy_field2 = #{redundancyField2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where reply_id = #{replyId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.elegantcollection.entity.PostReply">
+    update post_reply
+    set post_id = #{postId,jdbcType=INTEGER},
+      by_reply_id = #{byReplyId,jdbcType=INTEGER},
+      cust_id = #{custId,jdbcType=INTEGER},
+      by_read = #{byRead,jdbcType=VARCHAR},
+      reply_text = #{replyText,jdbcType=VARCHAR},
+      reply_time = #{replyTime,jdbcType=TIMESTAMP},
+      is_reply_id = #{isReplyId,jdbcType=INTEGER},
+      reply_status = #{replyStatus,jdbcType=INTEGER},
+      redundancy_field1 = #{redundancyField1,jdbcType=VARCHAR},
+      redundancy_field2 = #{redundancyField2,jdbcType=VARCHAR}
+    where reply_id = #{replyId,jdbcType=INTEGER}
+  </update>
+</mapper>

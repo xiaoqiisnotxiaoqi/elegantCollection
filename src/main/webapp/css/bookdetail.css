@@ -1,0 +1,391 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+a span {
+    float: left;
+    color: dimgrey;
+}
+
+a {
+    text-decoration: none;
+    color: lightskyblue;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+}
+
+div {
+    display: block;
+}
+
+/*广告1盒子*/
+#ad-top-box {
+    height: 65px;
+    width: 1200px;
+    margin: 0 auto;
+}
+
+#main-box {
+    height: 450px;
+    margin: 0 auto;
+    width: 1200px;
+}
+
+/*分类导航1*/
+#category-nav {
+    height: 35px;
+    width: 1200px;
+
+    margin: 0 auto;
+    line-height: 30px;
+    font-size: larger;
+}
+
+#main-area {
+    margin: 0 auto;
+    width: 1200px;
+    height: 100%;
+}
+
+/*商品图片区域*/
+#pic-area {
+    float: left;
+    width: 320px;
+    height: 100%;
+}
+
+/*主图片框*/
+#main-pic-box {
+
+    width: 320px;
+    height: 320px;
+}
+
+/*小图*/
+.other-pic {
+    margin-right: 5px;
+    float: left;
+    width: 70px;
+    height: 80px;
+}
+
+.other-pic:hover {
+    border: 0.5px #ebebeb dashed;
+}
+
+/*买书区域*/
+#info-area {
+    float: right;
+    /*background-color: cornsilk;*/
+    width: 880px;
+    height: 100%;
+}
+
+/*书名信息*/
+#name-info {
+    float: top;
+    padding-bottom: 10px;
+    border-bottom: lightgrey 1px solid;
+}
+
+/*出版信息*/
+#publish-info {
+    font: 12px "Verdana", "Simsun";
+    color: #646464;
+    line-height: 23px;
+    height: 50px;
+
+    width: 100%;
+}
+
+.publish-spans {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+/*价格区域*/
+#price-area {
+    padding-left: 10px;
+    height: 60px;
+    width: 100%;
+    background-color: #ebebeb;
+}
+
+#price-title {
+    font: 12px "Verdana", "Simsun";
+    color: dimgrey;
+}
+
+/*售价*/
+#sale-icon-price {
+    float: left;
+    color: red;
+}
+
+#sale-price {
+
+    font-size: 26px;
+}
+
+/*标价*/
+#mark-icon-price {
+    font: 12px "Verdana", "Simsun";
+    color: dimgrey;
+}
+
+#mark-price {
+    text-decoration: line-through;
+}
+
+/*促销区*/
+#cuxiao-info {
+    /*background-color: lightpink;*/
+    height: 135px;
+    width: 100%;
+    border-bottom: darkgrey 1px dashed;
+}
+
+/*信息选项*/
+.info-title {
+
+    letter-spacing: 24px;
+    float: left;
+    width: 68px;
+    color: darkgrey;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+#cuxiao-right {
+    float: left;
+
+    width: 90%;
+    height: 100%;
+}
+
+/*满减优惠*/
+#manjian {
+    width: 100%;
+    height: 25px;
+
+}
+
+.youhui-title {
+    float: left;
+    background-color: #f66;
+    color: #fff;
+    font-weight: normal;
+    padding: 0 6px;
+    height: 20px;
+    line-height: 20px;
+    border-radius: 3px;
+    margin-top: 5px;
+    overflow: hidden;
+}
+
+.youhui-detail {
+    font-size: small;
+    /*border: lightgrey 1px dashed;*/
+    margin: 15px 0 0 5px;
+
+}
+
+#zuhe {
+    height: 110px;
+    width: 100%;
+}
+
+#zuhe-box {
+    padding-top: 6px;
+    width: 100%;
+    height: 80px;
+
+}
+
+.zuhe-detail {
+    border: lightgrey 1px dashed;
+    margin-right: 10px;
+    float: left;
+
+    width: 210px;
+    height: 78px;
+}
+
+.zuhe-picbox {
+    float: left;
+    width: 56px;
+    height: 56px;
+    margin-top: 9px;
+    margin-left: 9px;
+}
+
+.zuhe-info {
+    display: block;
+    width: 100px;
+    height: 32px;
+    line-height: 16px;
+    overflow: hidden;
+    margin: 0 0 8px 0;
+    padding-top: 6px;
+}
+
+.zuhe-price {
+    color: red;
+}
+
+/*配送至*/
+#send-to {
+    padding-top: 5px;
+    width: 100%;
+    height: 30px;
+}
+
+.towhere {
+
+    float: left;
+    border: 1px solid #ccc;
+    height: 18px;
+    line-height: 16px;
+    line-height: 18px \9;
+    padding: 0 14px 0 5px;
+    cursor: pointer;
+    margin: 0 8px 0 0;
+    position: relative;
+    z-index: 88;
+}
+
+/*添加选项*/
+#num-box {
+    margin-top: 15px;
+    height: 80px;
+    width: 100%;
+    /*border: #646464 1px double;*/
+}
+
+#num-botton {
+    margin-left: 100px;
+    border: #cccccc 1px solid;
+    float: left;
+    height: 40px;
+    width: 70px;
+    border-right: none;
+}
+
+#booknum {
+    float: left;
+    border: none;
+    width: 60%;
+    height: 100%;
+}
+
+.num-buttons {
+
+    float: left;
+    display: block;
+    width: 40%;
+    height: 51%;
+}
+
+#addtocart {
+    margin-left: 20px;
+    width: 130px;
+    height: 40px;
+    border: none;
+    background-color: orangered;
+    color: white;
+    border-radius: 3px;
+}
+
+#buynow {
+    margin-left: 20px;
+    width: 130px;
+    height: 40px;
+    border: none;
+    background-color: orangered;
+    color: white;
+    border-radius: 3px;
+}
+
+/*详情区域*/
+#book-intro {
+    width: 1200px;
+    height: 500px;
+    margin: 0 auto;
+    /*background-color: antiquewhite;*/
+}
+
+#details {
+    width: 100%;
+    height: 25px;
+    border-bottom: black 1px solid;
+}
+
+#details2 {
+    width: 100%;
+    height: 50px;
+}
+
+.detail-options {
+    float: left;
+    text-align: center;
+    height: 25px;
+    width: 100px;
+}
+
+.detail-infos {
+    padding-left: 20px;
+    width: 286px;
+    overflow: hidden;
+    float: left;
+    line-height: 22px;
+    height: 22px;
+    color: #323232;
+}
+
+#book-imgs {
+    width: 100%;
+    height: 200px;
+    background-color: lawngreen;
+}
+
+.details-1 {
+    padding: 5px;
+    width: 100%;
+    height: auto;
+    color: #656565;
+    line-height: 22px;
+    font-size: 14px;
+    /*background-color: lightskyblue;*/
+}
+
+.details-1 p {
+    padding: 5px;
+}
+
+.title {
+    border-bottom: 2px solid #e5e5e5;
+    height: 22px;
+}
+
+.title span {
+    float: left;
+    border-left: 2px solid #ff2832;
+    padding: 0 30px 0 6px;
+    background: #e5e5e5 url(/images/product_sprites.png) no-repeat right -525px;
+    height: 22px;
+    padding-bottom: 2px;
+    margin-bottom: -2px;
+    position: relative;
+    font: 14px/22px "Microsoft Yahei";
+    color: #323232;
+}
+
+
+
+
+
+

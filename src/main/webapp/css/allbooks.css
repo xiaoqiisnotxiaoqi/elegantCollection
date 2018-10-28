@@ -1,0 +1,487 @@
+body, ul, li, ol, p, dl, dd, h1, h2, h3, h4, h5, h6, img, iframe, form {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    border: 0;
+}
+
+div {
+    display: block;
+}
+
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+a {
+    text-decoration: none;
+    outline: none;
+}
+
+/*广告1盒子*/
+#ad-top-box {
+    height: 65px;
+    width: 1200px;
+    margin: 0 auto;
+}
+
+#main-area {
+    width: 1200px;
+    margin: 0 auto;
+
+    height: auto;
+}
+
+#fenji-nav-box {
+    font-size: smaller;
+    line-height: 30px;
+    width: 100%;
+    height: 30px;
+}
+
+#fenji-nav-box .a {
+    color: #404040;
+    display: block;
+    float: left;
+    font-family: Microsoft YaHei;
+}
+
+#fenji-nav-box .a:hover {
+    color: #ff2832;
+    border-color: #ff2832;
+}
+
+#fenji-nav-box .sp {
+    font-family: 'Hiragino Sans GB', "Simsun";
+    margin: 0 6px;
+    display: block;
+    float: left;
+    _display: inline;
+    color: #b6b4b4;
+}
+
+#fenji-nav-box .sp-total {
+    color: #646464;
+    margin-left: 20px;
+    font-family: "MicroSoft YaHei";
+    white-space: nowrap;
+    margin: 0 6px;
+    display: block;
+    float: left;
+}
+
+#filtrate-box {
+    font-size: 13px;
+    border-top: 1px #cccccc solid;
+    width: 100%;
+    height: auto;
+}
+
+.li {
+
+    line-height: 30px;
+    display: block;
+    width: 100%;
+    height: 30px;
+    border-bottom: 1px dotted #eeeceb;
+}
+
+/*筛选左侧标题*/
+.li-title {
+    float: left;
+    font-family: Arial, 'Hiragino Sans GB', "Simsun", sans-serif;
+    display: block;
+    background-color: #FEF8F5;
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    color: #999;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.li-options {
+
+    float: left;
+    display: block;
+    margin-left: 20px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 120px;
+    color: #555;
+
+}
+
+.li-options:hover {
+    color: #ff6666;
+}
+
+#orderby-box {
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    background-color: #f5f5f5;
+}
+
+.on {
+    background-position: 0 -14px;
+    display: inline-block;
+    height: 14px;
+    line-height: 14px;
+    background: url(../images/tools_box_bg.png);
+    background-repeat: no-repeat;
+    padding-left: 18px;
+    text-decoration: none;
+}
+
+.orderby-ul {
+    float: left;
+    width: 43%;
+    height: 100%;
+}
+
+.options {
+    padding-left: 20px;
+    float: left;
+}
+
+.orderby-li {
+
+    font-size: 13px;
+    display: block;
+    text-align: center;
+    float: left;
+    width: 80px;
+    height: 30px;
+    border-right: darkgrey dashed 1px;
+}
+
+.orderby-input {
+    width: 30px;
+    height: 20px;
+    border: 1px solid #3c3c3c;
+}
+
+#price-btn {
+
+    color: white;
+    border-radius: 2px;
+    border: #ff6666;
+    background-color: #ff6666;
+    font-size: small;
+    width: 45px;
+    height: 20px;
+
+}
+
+#books-box {
+    margin: 10px 10px 0 0;
+    width: 80%;
+    float: left;
+    height: auto;
+}
+
+#right-adv {
+    margin: 10px 0 0 0;
+    float: right;
+    width: 19%;
+    background-color: darkkhaki;
+    height: auto;
+}
+
+.book {
+    width: 100%;
+    height: 242px;
+    /*border: #323232 1px solid;*/
+}
+
+.main-pic-box {
+    float: left;
+    margin: 21px 21px 21px 21px;
+    width: 200px;
+    height: 200px;
+}
+
+.main-pic-box img {
+    width: 100%;
+    height: 100%;
+}
+
+.book-info {
+    width: 70%;
+    float: left;
+    height: 240px;
+}
+
+.book-title {
+    margin-top: 20px;
+    width: auto;
+    display: block;
+
+}
+
+.price {
+    width: 100%;
+    height: 60px;
+}
+
+/*价格区域*/
+.price-area {
+    padding-left: 10px;
+    height: 60px;
+    width: 100%;
+    background-color: #f8f8f8;
+}
+
+.price-title {
+    font: 12px "Verdana", "Simsun";
+    color: dimgrey;
+}
+
+/*售价*/
+.sale-icon-price {
+    float: left;
+    color: red;
+}
+
+.sale-price {
+
+    font-size: 26px;
+}
+
+/*标价*/
+.mark-icon-price {
+    font: 12px "Verdana", "Simsun";
+    color: dimgrey;
+}
+
+.mark-price {
+    text-decoration: line-through;
+}
+
+/*评价*/
+.pingjia {
+    width: 100%;
+    height: 20px;
+}
+
+.miaoshu {
+    width: 100%;
+    height: 65px;
+    font: 15px "Verdana", "Simsun";
+}
+
+.btn-box {
+    width: 100%;
+    height: 30px;
+}
+
+.btn-box button {
+    margin-left: 30px;
+    background-color: #ff6666;
+    height: 30px;
+    width: 100px;
+    color: white;
+    border: #ff6666;
+    border-radius: 2px;
+}
+
+/*第二种模式*/
+.book-li {
+    float: left;
+    height: 379px;
+    width: 200px;
+    line-height: 20px;
+    position: relative;
+    margin-right: 27px;
+    padding: 5px;
+    border: 1px solid #ecebeb;
+    margin-bottom: 40px;
+    background: #fff;
+    font-size: small;
+}
+
+.book-li:hover {
+    border: #ff6666 1px solid;
+}
+
+/*图片*/
+.book-pic {
+    color: -webkit-link;
+    cursor: pointer;
+    text-decoration: none;
+    outline: none;
+    display: block;
+    position: relative;
+    margin-bottom: 10px;
+    width: 200px;
+    height: 200px;
+    left: 0;
+    top: 0;
+}
+
+.book-pic img {
+    display: block;
+    width: 200px;
+    height: 200px;
+}
+
+.book-price {
+    color: #878787;
+    position: static;
+    left: 0;
+    top: 0;
+    line-height: 20px;
+    width: 200px;
+    height: 22px;
+    overflow: hidden;
+    white-space: nowrap;
+
+}
+
+.price_n {
+    font-size: 16px;
+    font-weight: bold;
+    padding-right: 10px;
+    color: #fa5000;
+}
+
+.price_r {
+    color: #878787;
+    padding-right: 10px;
+
+    text-decoration: line-through;
+}
+
+.name {
+    display: block;
+    height: 20px;
+    line-height: 20px;
+    overflow: hidden;
+    width: 200px;
+    position: static;
+    left: 0;
+    top: 0;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+.name:hover {
+    color: #ff6666;
+}
+
+.name a {
+    color: #333;
+    font-size: 12px;
+}
+
+.intro {
+    height: 20px;
+    line-height: 20px;
+    color: #fa5000;
+    overflow: hidden;
+    font-size: 12px;
+}
+
+.level {
+    margin: -2px 10px 0 0;
+}
+
+.star {
+    color: #666;
+    padding: 1px 0 0;
+}
+
+.star .level {
+    margin: -2px 10px 0 0;
+    background: url(../images/icon_star3.png) 0 -16px repeat-x;
+    display: inline-block;
+    width: 76px;
+    height: 16px;
+    vertical-align: middle;
+    overflow: hidden;
+    line-height: 12px;
+    font-size: 0;
+
+}
+
+.level span {
+
+    background: url(../images/icon_star3.png) 0 -16px repeat-x;
+    display: inline-block;
+    width: 100%;
+    height: 16px;
+    vertical-align: middle;
+    overflow: hidden;
+    line-height: 12px;
+    font-size: 0;
+}
+
+.new-lable {
+    margin-top: 30px;
+    height: 20px;
+    display: block;
+    float: none !important;
+    margin-left: 0 !important;
+    overflow: hidden;
+    line-height: 16px;
+}
+
+.new-lable1 {
+    background-color: white;
+    border: 1px solid #ff2832;
+    color: #ff2832;
+    border-radius: 2px;
+    padding: 0 2px;
+    font-size: 12px;
+
+    margin-right: 5px;
+    display: inline-block;
+    white-space: nowrap;
+    margin-bottom: 4px;
+    line-height: 14px;
+}
+
+.new-lable2 {
+    background-color: #ff2933;
+    color: white;
+    margin-right: 5px;
+    font-size: 12px;
+
+    padding: 1px 2px;
+    border-radius: 2px;
+    display: inline-block;
+    white-space: nowrap;
+    margin-bottom: 4px;
+    line-height: 14px;
+}
+
+.tag_box {
+    top: 0px;
+    left: 158px;
+    position: absolute;
+    right: -4px;
+    width: 56px;
+    height: 56px;
+    z-index: 100;
+}
+
+.shop-button {
+    height: 34px;
+    position: relative;
+}
+
+.btn-cart {
+    margin: 10px 0 0 20px;
+    background-color: #ff6666;
+    color: white;
+    border-radius: 3px;
+    border: #ff6666;
+}
+
+
+

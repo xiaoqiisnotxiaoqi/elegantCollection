@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.elegantcollection.dao.CustomerDao">
+  <resultMap id="BaseResultMap" type="com.elegantcollection.entity.Customer">
+    <id column="cust_id" jdbcType="INTEGER" property="custId" />
+    <result column="cust_phone" jdbcType="VARCHAR" property="custPhone" />
+    <result column="cust_qq" jdbcType="VARCHAR" property="custQq" />
+    <result column="cust_wechat" jdbcType="VARCHAR" property="custWechat" />
+    <result column="cust_password" jdbcType="VARCHAR" property="custPassword" />
+    <result column="cust_name" jdbcType="VARCHAR" property="custName" />
+    <result column="cust_gender" jdbcType="INTEGER" property="custGender" />
+    <result column="cust_profile" jdbcType="VARCHAR" property="custProfile" />
+    <result column="cust_points" jdbcType="INTEGER" property="custPoints" />
+    <result column="cust_mail" jdbcType="VARCHAR" property="custMail" />
+    <result column="register_time" jdbcType="DATE" property="registerTime" />
+    <result column="cust_status" jdbcType="INTEGER" property="custStatus" />
+    <result column="cumm_status" jdbcType="INTEGER" property="cummStatus" />
+    <result column="login_status" jdbcType="INTEGER" property="loginStatus" />
+    <result column="more1" jdbcType="VARCHAR" property="more1" />
+    <result column="more2" jdbcType="VARCHAR" property="more2" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    cust_id, cust_phone, cust_qq, cust_wechat, cust_password, cust_name, cust_gender, 
+    cust_profile, cust_points, cust_mail, register_time, cust_status, cumm_status, login_status, 
+    more1, more2
+  </sql>
+  <select id="selectByExample" parameterType="com.elegantcollection.entity.CustomerExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from customer
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from customer
+    where cust_id = #{custId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from customer
+    where cust_id = #{custId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.elegantcollection.entity.CustomerExample">
+    delete from customer
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.elegantcollection.entity.Customer">
+    insert into customer (cust_id, cust_phone, cust_qq, 
+      cust_wechat, cust_password, cust_name, 
+      cust_gender, cust_profile, cust_points, 
+      cust_mail, register_time, cust_status, 
+      cumm_status, login_status, more1, 
+      more2)
+    values (#{custId,jdbcType=INTEGER}, #{custPhone,jdbcType=VARCHAR}, #{custQq,jdbcType=VARCHAR}, 
+      #{custWechat,jdbcType=VARCHAR}, #{custPassword,jdbcType=VARCHAR}, #{custName,jdbcType=VARCHAR}, 
+      #{custGender,jdbcType=INTEGER}, #{custProfile,jdbcType=VARCHAR}, #{custPoints,jdbcType=INTEGER}, 
+      #{custMail,jdbcType=VARCHAR}, #{registerTime,jdbcType=DATE}, #{custStatus,jdbcType=INTEGER}, 
+      #{cummStatus,jdbcType=INTEGER}, #{loginStatus,jdbcType=INTEGER}, #{more1,jdbcType=VARCHAR}, 
+      #{more2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.elegantcollection.entity.Customer">
+    insert into customer
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="custId != null">
+        cust_id,
+      </if>
+      <if test="custPhone != null">
+        cust_phone,
+      </if>
+      <if test="custQq != null">
+        cust_qq,
+      </if>
+      <if test="custWechat != null">
+        cust_wechat,
+      </if>
+      <if test="custPassword != null">
+        cust_password,
+      </if>
+      <if test="custName != null">
+        cust_name,
+      </if>
+      <if test="custGender != null">
+        cust_gender,
+      </if>
+      <if test="custProfile != null">
+        cust_profile,
+      </if>
+      <if test="custPoints != null">
+        cust_points,
+      </if>
+      <if test="custMail != null">
+        cust_mail,
+      </if>
+      <if test="registerTime != null">
+        register_time,
+      </if>
+      <if test="custStatus != null">
+        cust_status,
+      </if>
+      <if test="cummStatus != null">
+        cumm_status,
+      </if>
+      <if test="loginStatus != null">
+        login_status,
+      </if>
+      <if test="more1 != null">
+        more1,
+      </if>
+      <if test="more2 != null">
+        more2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="custId != null">
+        #{custId,jdbcType=INTEGER},
+      </if>
+      <if test="custPhone != null">
+        #{custPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="custQq != null">
+        #{custQq,jdbcType=VARCHAR},
+      </if>
+      <if test="custWechat != null">
+        #{custWechat,jdbcType=VARCHAR},
+      </if>
+      <if test="custPassword != null">
+        #{custPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="custName != null">
+        #{custName,jdbcType=VARCHAR},
+      </if>
+      <if test="custGender != null">
+        #{custGender,jdbcType=INTEGER},
+      </if>
+      <if test="custProfile != null">
+        #{custProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="custPoints != null">
+        #{custPoints,jdbcType=INTEGER},
+      </if>
+      <if test="custMail != null">
+        #{custMail,jdbcType=VARCHAR},
+      </if>
+      <if test="registerTime != null">
+        #{registerTime,jdbcType=DATE},
+      </if>
+      <if test="custStatus != null">
+        #{custStatus,jdbcType=INTEGER},
+      </if>
+      <if test="cummStatus != null">
+        #{cummStatus,jdbcType=INTEGER},
+      </if>
+      <if test="loginStatus != null">
+        #{loginStatus,jdbcType=INTEGER},
+      </if>
+      <if test="more1 != null">
+        #{more1,jdbcType=VARCHAR},
+      </if>
+      <if test="more2 != null">
+        #{more2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.elegantcollection.entity.CustomerExample" resultType="java.lang.Long">
+    select count(*) from customer
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update customer
+    <set>
+      <if test="record.custId != null">
+        cust_id = #{record.custId,jdbcType=INTEGER},
+      </if>
+      <if test="record.custPhone != null">
+        cust_phone = #{record.custPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custQq != null">
+        cust_qq = #{record.custQq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custWechat != null">
+        cust_wechat = #{record.custWechat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custPassword != null">
+        cust_password = #{record.custPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custName != null">
+        cust_name = #{record.custName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custGender != null">
+        cust_gender = #{record.custGender,jdbcType=INTEGER},
+      </if>
+      <if test="record.custProfile != null">
+        cust_profile = #{record.custProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custPoints != null">
+        cust_points = #{record.custPoints,jdbcType=INTEGER},
+      </if>
+      <if test="record.custMail != null">
+        cust_mail = #{record.custMail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registerTime != null">
+        register_time = #{record.registerTime,jdbcType=DATE},
+      </if>
+      <if test="record.custStatus != null">
+        cust_status = #{record.custStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.cummStatus != null">
+        cumm_status = #{record.cummStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.loginStatus != null">
+        login_status = #{record.loginStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.more1 != null">
+        more1 = #{record.more1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.more2 != null">
+        more2 = #{record.more2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update customer
+    set cust_id = #{record.custId,jdbcType=INTEGER},
+      cust_phone = #{record.custPhone,jdbcType=VARCHAR},
+      cust_qq = #{record.custQq,jdbcType=VARCHAR},
+      cust_wechat = #{record.custWechat,jdbcType=VARCHAR},
+      cust_password = #{record.custPassword,jdbcType=VARCHAR},
+      cust_name = #{record.custName,jdbcType=VARCHAR},
+      cust_gender = #{record.custGender,jdbcType=INTEGER},
+      cust_profile = #{record.custProfile,jdbcType=VARCHAR},
+      cust_points = #{record.custPoints,jdbcType=INTEGER},
+      cust_mail = #{record.custMail,jdbcType=VARCHAR},
+      register_time = #{record.registerTime,jdbcType=DATE},
+      cust_status = #{record.custStatus,jdbcType=INTEGER},
+      cumm_status = #{record.cummStatus,jdbcType=INTEGER},
+      login_status = #{record.loginStatus,jdbcType=INTEGER},
+      more1 = #{record.more1,jdbcType=VARCHAR},
+      more2 = #{record.more2,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.elegantcollection.entity.Customer">
+    update customer
+    <set>
+      <if test="custPhone != null">
+        cust_phone = #{custPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="custQq != null">
+        cust_qq = #{custQq,jdbcType=VARCHAR},
+      </if>
+      <if test="custWechat != null">
+        cust_wechat = #{custWechat,jdbcType=VARCHAR},
+      </if>
+      <if test="custPassword != null">
+        cust_password = #{custPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="custName != null">
+        cust_name = #{custName,jdbcType=VARCHAR},
+      </if>
+      <if test="custGender != null">
+        cust_gender = #{custGender,jdbcType=INTEGER},
+      </if>
+      <if test="custProfile != null">
+        cust_profile = #{custProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="custPoints != null">
+        cust_points = #{custPoints,jdbcType=INTEGER},
+      </if>
+      <if test="custMail != null">
+        cust_mail = #{custMail,jdbcType=VARCHAR},
+      </if>
+      <if test="registerTime != null">
+        register_time = #{registerTime,jdbcType=DATE},
+      </if>
+      <if test="custStatus != null">
+        cust_status = #{custStatus,jdbcType=INTEGER},
+      </if>
+      <if test="cummStatus != null">
+        cumm_status = #{cummStatus,jdbcType=INTEGER},
+      </if>
+      <if test="loginStatus != null">
+        login_status = #{loginStatus,jdbcType=INTEGER},
+      </if>
+      <if test="more1 != null">
+        more1 = #{more1,jdbcType=VARCHAR},
+      </if>
+      <if test="more2 != null">
+        more2 = #{more2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where cust_id = #{custId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.elegantcollection.entity.Customer">
+    update customer
+    set cust_phone = #{custPhone,jdbcType=VARCHAR},
+      cust_qq = #{custQq,jdbcType=VARCHAR},
+      cust_wechat = #{custWechat,jdbcType=VARCHAR},
+      cust_password = #{custPassword,jdbcType=VARCHAR},
+      cust_name = #{custName,jdbcType=VARCHAR},
+      cust_gender = #{custGender,jdbcType=INTEGER},
+      cust_profile = #{custProfile,jdbcType=VARCHAR},
+      cust_points = #{custPoints,jdbcType=INTEGER},
+      cust_mail = #{custMail,jdbcType=VARCHAR},
+      register_time = #{registerTime,jdbcType=DATE},
+      cust_status = #{custStatus,jdbcType=INTEGER},
+      cumm_status = #{cummStatus,jdbcType=INTEGER},
+      login_status = #{loginStatus,jdbcType=INTEGER},
+      more1 = #{more1,jdbcType=VARCHAR},
+      more2 = #{more2,jdbcType=VARCHAR}
+    where cust_id = #{custId,jdbcType=INTEGER}
+  </update>
+</mapper>

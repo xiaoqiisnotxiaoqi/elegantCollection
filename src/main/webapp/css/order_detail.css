@@ -1,0 +1,126 @@
+body {
+    background-color: rgb(245, 245, 245);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: grey;
+}
+
+li {
+    display: inline-block;
+    list-style: none;
+}
+
+.order-process {
+    display: block;
+    width: 100%;
+    height: 300px;
+}
+
+.order-introduction {
+    float: left;
+    display: inline-block;
+    height: 80%;
+    width: 28%;
+}
+
+.order-state-show {
+    float: left;
+    display: inline-block;
+    margin-top: 60px;
+    margin-left: 10px;
+    height: 80%;
+    width: 70%;
+}
+
+.order-state-icon {
+    display: inline-block;
+}
+
+.order-state-info {
+    display: block;
+}
+
+.order-state-icon img {
+    width: 30px;
+    height: 25px;
+}
+
+.order-state-segmentation {
+    display: inline-block;
+    width: 106px;
+    height: 23px;
+    background: url("../images/order-state-segmentation.PNG") 0 23px;
+    bottom: 25px;
+}
+
+.order-state-segmentation img {
+
+}
+
+.segmentation0 {
+
+}
+
+.segmentation1 {
+    float: left;
+    display: inline-block;
+    height: 250px;
+    width: 1px;
+    background-color: grey;
+}
+
+.order-process {
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    height: 300px;
+}
+
+.logistics {
+    margin-top: 40px;
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    height: 300px;
+}
+
+.order-information {
+    margin-top: 40px;
+
+}
+
+.order-items {
+    display: block;
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    height: 300px;
+}
+
+.order-item {
+    margin-left: 15px;
+    float: left;
+    margin-top: 20px;
+    display: inline-block;
+    width: 23%;
+    height: auto;
+    font-size: 15px;
+}
+
+.items {
+    font-size: 10px;
+}
+
+.item span {
+    display: inline-block;
+    width: 120px;
+    color: grey;
+}
+
+.item-info {
+    display: inline-block;
+}
