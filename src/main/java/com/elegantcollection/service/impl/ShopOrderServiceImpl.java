@@ -1,5 +1,7 @@
 package com.elegantcollection.service.impl;
 
+
+
 import com.elegantcollection.dao.ShopOrderDao;
 import com.elegantcollection.entity.ShopOrder;
 import com.elegantcollection.entity.ShopOrderExample;
@@ -19,6 +21,7 @@ import java.util.regex.Pattern;
 public class ShopOrderServiceImpl implements ShopOrderService {
     private final ShopOrderDao shopOrderDao;
 
+
     @Autowired
     public ShopOrderServiceImpl(ShopOrderDao shopOrderDao) {
         this.shopOrderDao = shopOrderDao;
@@ -32,21 +35,18 @@ public class ShopOrderServiceImpl implements ShopOrderService {
 
     @Override
     public int removeByOrderId(Integer orderId) {
-        ShopOrderExample shopOrderExample = new ShopOrderExample();
-        shopOrderExample.createCriteria().andOrderIdEqualTo(orderId);
         ShopOrder shopOrder = new ShopOrder();
         shopOrder.setOrderId(orderId);
         shopOrder.setOrderStatus(4);
-        return shopOrderDao.updateByExampleSelective(shopOrder, shopOrderExample);
+        return shopOrderDao.updateByPrimaryKeySelective(shopOrder);
     }
 
     @Override
     public int delByOrderId(Integer orderId) {
-        ShopOrderExample shopOrderExample = new ShopOrderExample();
-        shopOrderExample.createCriteria().andOrderIdEqualTo(orderId);
         ShopOrder shopOrder = new ShopOrder();
+        shopOrder.setOrderId(orderId);
         shopOrder.setOrderStatus(5);
-        return shopOrderDao.updateByExample(shopOrder, shopOrderExample);
+        return shopOrderDao.updateByPrimaryKeySelective(shopOrder);
     }
 
     @Override
@@ -64,7 +64,12 @@ public class ShopOrderServiceImpl implements ShopOrderService {
     }
 
     @Override
-    public Integer queryOrderId(Long orderNumber) {
+    public ShopOrder queryByOrderId(Integer orderId) {
+        return shopOrderDao.selectByPrimaryKey(orderId);
+    }
+
+    @Override
+    public Integer queryByOrderNumber(Long orderNumber) {
         ShopOrderExample shopOrderExample = new ShopOrderExample();
         shopOrderExample.createCriteria().andOrderNumberEqualTo(orderNumber);
         return shopOrderDao.selectByExample(shopOrderExample).get(0).getOrderId();

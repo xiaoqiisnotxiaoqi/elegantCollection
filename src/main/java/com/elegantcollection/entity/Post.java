@@ -35,26 +35,31 @@ public class Post implements Serializable {
 
     /**
      * 是否置顶
+0未置顶
+1置顶
      */
     private Integer isStick;
 
     /**
      * 发帖状态
+0普通帖子
+1精品帖子
+2已删除
      */
     private Integer postStatus;
 
     /**
-     * 发帖昵称
+     * 所在的模块id
      */
     private String postPetname;
 
     /**
-     * 该帖子所在的模块id
+     * 是否回复
      */
     private Integer postIsreply;
 
     /**
-     * 冗余字段
+     * 发帖内容
      */
     private String postText;
 

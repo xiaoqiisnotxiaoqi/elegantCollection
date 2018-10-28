@@ -605,73 +605,73 @@ public class ShopOrderExample {
             return (Criteria) this;
         }
 
-        public Criteria andRedundancyField2IsNull() {
-            addCriterion("redundancy_field2 is null");
+        public Criteria andDiscountAmountIsNull() {
+            addCriterion("discount_amount is null");
             return (Criteria) this;
         }
 
-        public Criteria andRedundancyField2IsNotNull() {
-            addCriterion("redundancy_field2 is not null");
+        public Criteria andDiscountAmountIsNotNull() {
+            addCriterion("discount_amount is not null");
             return (Criteria) this;
         }
 
-        public Criteria andRedundancyField2EqualTo(String value) {
-            addCriterion("redundancy_field2 =", value, "redundancyField2");
+        public Criteria andDiscountAmountEqualTo(String value) {
+            addCriterion("discount_amount =", value, "discountAmount");
             return (Criteria) this;
         }
 
-        public Criteria andRedundancyField2NotEqualTo(String value) {
-            addCriterion("redundancy_field2 <>", value, "redundancyField2");
+        public Criteria andDiscountAmountNotEqualTo(String value) {
+            addCriterion("discount_amount <>", value, "discountAmount");
             return (Criteria) this;
         }
 
-        public Criteria andRedundancyField2GreaterThan(String value) {
-            addCriterion("redundancy_field2 >", value, "redundancyField2");
+        public Criteria andDiscountAmountGreaterThan(String value) {
+            addCriterion("discount_amount >", value, "discountAmount");
             return (Criteria) this;
         }
 
-        public Criteria andRedundancyField2GreaterThanOrEqualTo(String value) {
-            addCriterion("redundancy_field2 >=", value, "redundancyField2");
+        public Criteria andDiscountAmountGreaterThanOrEqualTo(String value) {
+            addCriterion("discount_amount >=", value, "discountAmount");
             return (Criteria) this;
         }
 
-        public Criteria andRedundancyField2LessThan(String value) {
-            addCriterion("redundancy_field2 <", value, "redundancyField2");
+        public Criteria andDiscountAmountLessThan(String value) {
+            addCriterion("discount_amount <", value, "discountAmount");
             return (Criteria) this;
         }
 
-        public Criteria andRedundancyField2LessThanOrEqualTo(String value) {
-            addCriterion("redundancy_field2 <=", value, "redundancyField2");
+        public Criteria andDiscountAmountLessThanOrEqualTo(String value) {
+            addCriterion("discount_amount <=", value, "discountAmount");
             return (Criteria) this;
         }
 
-        public Criteria andRedundancyField2Like(String value) {
-            addCriterion("redundancy_field2 like", value, "redundancyField2");
+        public Criteria andDiscountAmountLike(String value) {
+            addCriterion("discount_amount like", value, "discountAmount");
             return (Criteria) this;
         }
 
-        public Criteria andRedundancyField2NotLike(String value) {
-            addCriterion("redundancy_field2 not like", value, "redundancyField2");
+        public Criteria andDiscountAmountNotLike(String value) {
+            addCriterion("discount_amount not like", value, "discountAmount");
             return (Criteria) this;
         }
 
-        public Criteria andRedundancyField2In(List<String> values) {
-            addCriterion("redundancy_field2 in", values, "redundancyField2");
+        public Criteria andDiscountAmountIn(List<String> values) {
+            addCriterion("discount_amount in", values, "discountAmount");
             return (Criteria) this;
         }
 
-        public Criteria andRedundancyField2NotIn(List<String> values) {
-            addCriterion("redundancy_field2 not in", values, "redundancyField2");
+        public Criteria andDiscountAmountNotIn(List<String> values) {
+            addCriterion("discount_amount not in", values, "discountAmount");
             return (Criteria) this;
         }
 
-        public Criteria andRedundancyField2Between(String value1, String value2) {
-            addCriterion("redundancy_field2 between", value1, value2, "redundancyField2");
+        public Criteria andDiscountAmountBetween(String value1, String value2) {
+            addCriterion("discount_amount between", value1, value2, "discountAmount");
             return (Criteria) this;
         }
 
-        public Criteria andRedundancyField2NotBetween(String value1, String value2) {
-            addCriterion("redundancy_field2 not between", value1, value2, "redundancyField2");
+        public Criteria andDiscountAmountNotBetween(String value1, String value2) {
+            addCriterion("discount_amount not between", value1, value2, "discountAmount");
             return (Criteria) this;
         }
 

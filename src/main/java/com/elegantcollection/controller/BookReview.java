@@ -44,7 +44,7 @@ public class BookReview {
         //根据书评id 查询出书评的详细信息
         Post post = postService.queryPostByPostId(postId);
         //根据书评模块的id 查询出 该模块的详细信息
-        Block block = blockService.quaryBlockByBlockId(Integer.valueOf(post.getPostPetname()));
+        Block block = blockService.queryByBlockId(Integer.valueOf(post.getPostPetname()));
         Map<String, Object> map = new HashMap<>();
         //将 模块名存入map中
         map.put("blockName", block.getBlockName());

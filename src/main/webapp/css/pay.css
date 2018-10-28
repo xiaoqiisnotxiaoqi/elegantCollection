@@ -35,7 +35,10 @@ li {
 }
 
 .address-options {
-    height: 500px;
+    height: 300px;
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-bottom: 40px;
 }
 
 .block-segmentation1 {
@@ -52,10 +55,16 @@ li {
     height: 1px;
 }
 
-.address-options {
-    margin-top: 10px;
-    margin-left: 20px;
-    margin-bottom: 10px;
+.book-list{
+    height: auto;
+}
+
+.block-segmentation3 {
+    float: left;
+    background-color: rgb(235, 235, 235);
+    margin: 0 auto;
+    width: 100%;
+    height: 1px;
 }
 
 .address-options li {
@@ -70,19 +79,13 @@ li {
     line-height: 30px;
     border: 1px rgb(245, 245, 245) solid;
     text-align: center;
-    transition: border 1.5s, width 0.5s, height 0.5s;
-    -moz-transition: border 1.5s, width 0.5s, height 0.5s; /* Firefox 4 */
-    -webkit-transition: border 1.5s, width 0.5s, height 0.5s; /* Safari 和 Chrome */
-    -o-transition: border 1.5s, width 0.5s, height 0.5s; /* Opera */
+    transition: border 1s, width 0.3s, height 0.3s;
+    -moz-transition: border 1s, width 0.3s, height 0.3s; /* Firefox 4 */
+    -webkit-transition: border 1s, width 0.3s, height 0.3s; /* Safari 和 Chrome */
+    -o-transition: border 1s, width 0.3s, height 0.3s; /* Opera */
 }
 
 .address-option:hover {
-    width: 103px;
-    height: 32px;
-    border: 1px red solid;
-}
-
-.address-option:active {
     width: 103px;
     height: 32px;
     border: 1px red solid;
@@ -107,10 +110,10 @@ li {
     line-height: 30px;
     border: 1px rgb(245, 245, 245) solid;
     text-align: center;
-    transition: border 1.5s, width 0.5s, height 0.5s;
-    -moz-transition: border 1.5s, width 0.5s, height 0.5s; /* Firefox 4 */
-    -webkit-transition: border 1.5s, width 0.5s, height 0.5s; /* Safari 和 Chrome */
-    -o-transition: border 1.5s, width 0.5s, height 0.5s; /* Opera */
+    transition: border 1s, width 0.3s, height 0.3s;
+    -moz-transition: border 1s, width 0.3s, height 0.3s; /* Firefox 4 */
+    -webkit-transition: border 1s, width 0.3s, height 0.3s; /* Safari 和 Chrome */
+    -o-transition: border 1s, width 0.3s, height 0.3s; /* Opera */
 }
 
 .payment-option:hover {
@@ -141,7 +144,7 @@ li {
 .order-simple-info {
     float: left;
     background-color: rgb(234, 251, 254);
-    height: 250px;
+    height: auto;
     display: inline-block;
     width: 61%;
 }
@@ -178,28 +181,86 @@ li {
 
 .book-name {
     display: inline-block;
-    margin:15px;
+    margin: 15px;
     float: left;
     font-size: 10px;
 }
-.book-number{
+
+.book-number {
     font-size: 13px;
     color: #ff2832;
     float: right;
     margin-right: 40px;
     margin-top: 5px;
 }
-.book-price{
+
+.book-price {
     font-size: 13px;
     color: #ff2832;
     float: right;
     margin-right: 40px;
     margin-top: 5px;
 }
-.total-price{
-    font-size: 13px;
+
+.price-block {
+    float: right;
+    width: 100%;
+}
+
+.dif-price-info {
+    font-size: 14px;
+    color: gray;
+    float: right;
+    margin-right: 30px;
+    margin-top: 5px;
+}
+
+.dif-price {
+    width: 80px;
+    font-size: 15px;
+    font-weight: bold;
     color: #ff2832;
     float: right;
     margin-right: 30px;
     margin-top: 5px;
+    text-align: right;
+}
+
+.total-price-block {
+    background-color: rgb(247, 247, 247);
+    float: right;
+    width: 100%;
+}
+
+.total-price-info {
+    font-size: 20px;
+    color: gray;
+    float: right;
+    margin-right: 30px;
+    margin-top: 5px;
+}
+
+.total-price {
+    margin-right: 10%;
+    font-size: 23px;
+    font-weight: bold;
+    color: #ff2832;
+    float: right;
+
+    margin-top: 5px;
+}
+
+.pay-button {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-right: 10%;
+    border-radius: 10px 10px;
+    width: 130px;
+    height: 40px;
+    float: right;
+    border: none;
+    color: white;
+    background-color: #ff2832;
+    font-size: 23px;
+    outline: none;
 }

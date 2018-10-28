@@ -6,6 +6,7 @@ import com.elegantcollection.dao.PostDao;
 import com.elegantcollection.dao.PostReplyDao;
 import com.elegantcollection.entity.*;
 import com.elegantcollection.service.PostService;
+import com.elegantcollection.util.PageModel;
 import javafx.geometry.Pos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -174,5 +175,83 @@ public class PostServiceImpl implements PostService{
         }
     }
 
+    /*-----------------------------------------------------------------------------*/
+
+
+    @Override
+    public Integer add(Post post) {
+        return postDao.insert(post);
+    }
+
+    @Override
+    public List<Post> queryStickPost(Integer blockId) {
+        PostExample postExample = new PostExample();
+        postExample.setLimit(5);
+        postExample.setOffset(0L);
+        postExample.createCriteria().andIsStickEqualTo(1).andPostPetnameEqualTo(blockId.toString());
+        return postDao.selectByExample(postExample);
+    }
+
+    @Override
+    public Integer queryPost4Size(Integer blockId) {
+        PostExample postExample = new PostExample();
+        postExample.createCriteria().andIsStickEqualTo(0).andPostPetnameEqualTo(blockId.toString());
+        return postDao.selectByExample(postExample).size();
+    }
+
+    @Override
+    public PageModel<Post> queryPost(Integer blockId, PageModel<Post> pageModel) {
+        PostExample postExample = new PostExample();
+        postExample.setLimit(pageModel.getPageSize());
+        postExample.setOffset(Long.valueOf(pageModel.getStartRecord()));
+        postExample.createCriteria().andIsStickEqualTo(0).andPostPetnameEqualTo(blockId.toString());
+        pageModel.setModelList(postDao.selectByExample(postExample));
+        return pageModel;
+    }
+
+    @Override
+    public Integer queryBestPost4Size(Integer blockId) {
+        PostExample postExample = new PostExample();
+        postExample.createCriteria().andPostStatusEqualTo(1).andPostPetnameEqualTo(blockId.toString());
+        return postDao.selectByExample(postExample).size();
+    }
+
+    @Override
+    public PageModel<Post> queryBestPost(Integer blockId, PageModel<Post> pageModel) {
+        PostExample postExample = new PostExample();
+        postExample.setLimit(pageModel.getPageSize());
+        postExample.setOffset(Long.valueOf(pageModel.getStartRecord()));
+        postExample.createCriteria().andPostStatusEqualTo(1).andPostPetnameEqualTo(blockId.toString());
+        pageModel.setModelList(postDao.selectByExample(postExample));
+        return pageModel;
+    }
+
+    @Override
+    public List<Post> queryBestPopularPost() {
+        PostExample postExample = new PostExample();
+        postExample.setLimit(10);
+        postExample.setOffset(0L);
+        postExample.setOrderByClause("reply_count");
+        postExample.createCriteria().andPostStatusBetween(0, 1);
+        return postDao.selectByExample(postExample);
+    }
+
+    @Override
+    public Integer addReplyCount(Integer postId) {
+        Integer replyCount = postDao.selectByPrimaryKey(postId).getReplyCount() + 1;
+        Post post = new Post();
+        post.setPostId(postId);
+        post.setReplyCount(replyCount);
+        return postDao.updateByPrimaryKey(post);
+    }
+
+    @Override
+    public Integer queryPostNumber(Integer blockId) {
+        PostExample postExample = new PostExample();
+        postExample.createCriteria().andPostStatusBetween(0, 1).andPostPetnameEqualTo(blockId.toString());
+        return postDao.selectByExample(postExample).size();
+    }
+
 
 }
+

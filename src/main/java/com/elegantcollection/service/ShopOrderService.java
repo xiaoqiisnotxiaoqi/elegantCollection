@@ -28,7 +28,7 @@ public interface ShopOrderService {
     int removeByOrderId(Integer orderId);
 
     /**
-     * 删除订单（改变状态）
+     * 完全删除订单（改变状态）
      *
      * @param orderId 订单id
      * @return
@@ -52,12 +52,20 @@ public interface ShopOrderService {
     int alterStatus(Integer orderId);
 
     /**
-     * 根据订单编号获取订单id
+     * 根据订单id获取订单
      *
-     * @param orderNumber 订单编号
+     * @param orderId 订单编号
      * @return
      */
-    Integer queryOrderId(Long orderNumber);
+    ShopOrder queryByOrderId(Integer orderId);
+
+    /**
+     * 根据订单编号获取订单
+     *
+     * @param orderNumber 订单编号
+     * @return 影响行数
+     */
+    Integer queryByOrderNumber(Long orderNumber);
 
     /**
      * 查询相应分页的订单
@@ -70,7 +78,7 @@ public interface ShopOrderService {
     /**
      * 分页记录总数
      *
-     * @return
+     * @return 结果数
      */
     Integer queryByPage4Size(Integer custId);
 
@@ -86,7 +94,7 @@ public interface ShopOrderService {
     /**
      * 状态，创建时间分页记录总数
      *
-     * @return
+     * @return 结果数
      */
     Integer queryByState4Size(Integer custId, Integer orderStatus, String createTime);
 
@@ -110,7 +118,7 @@ public interface ShopOrderService {
     /**
      * 图书名分页记录总数
      *
-     * @return
+     * @return 结果数
      */
     Integer queryByBookName4Size(Integer custId, String bookName);
 }

@@ -38,7 +38,7 @@ public interface BlockService {
      * @param startRecord 当前页的起始条数
      * @return 该书评贴的所有直接回复的数量
      */
-    List<PostReply> quaryPostReplyByPostId(Integer postId,Integer startRecord);
+    List<PostReply> quaryPostReplyByPostId(Integer postId, Integer startRecord);
 
 
     /**
@@ -47,7 +47,7 @@ public interface BlockService {
      * @param floor 楼层
      * @return 该楼层的所有子回复的数量
      */
-    Long quaryAllSubreplies(Integer postId,String floor);
+    Long quaryAllSubreplies(Integer postId, String floor);
 
 
     /**
@@ -57,7 +57,7 @@ public interface BlockService {
      * @param startRecord 当前页的起始条数
      * @return 该楼层的所有子回复
      */
-    List<PostReply> quarySubreplies(Integer postId,String floor,Integer startRecord);
+    List<PostReply> quarySubreplies(Integer postId, String floor, Integer startRecord);
 
 
     /**
@@ -82,7 +82,7 @@ public interface BlockService {
      * @param custId 用户id
      * @return 楼主直接 评论的数量
      */
-    Long quaryAllLandlordPostReplyNum(Integer postId,Integer custId);
+    Long quaryAllLandlordPostReplyNum(Integer postId, Integer custId);
 
 
     /**
@@ -92,7 +92,13 @@ public interface BlockService {
      * @param startRecord 开始记录的条数
      * @return 分页显示出楼主对自己的书评贴的直接回复
      */
-    List<PostReply> quaryLandlordPostReplyByPostId(Integer postId,Integer custId,Integer startRecord);
+    List<PostReply> quaryLandlordPostReplyByPostId(Integer postId, Integer custId, Integer startRecord);
 
-
+    /**
+     * 板块信息查询
+     *
+     * @param blockId 板块id
+     * @return 板块信息
+     */
+    Block queryByBlockId(Integer blockId);
 }

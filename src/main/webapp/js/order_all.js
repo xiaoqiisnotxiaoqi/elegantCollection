@@ -4,6 +4,30 @@ onload = function getFirstPage() {
     refreshByPage(1);
 }
 
+function refreshByPage(currentPageCode) {
+    allUrl = null;
+    allUrl = "/order/queryAll?currentPageCode=" + currentPageCode;
+    refreshData(allUrl)
+}
+
+function refresh(url) {
+    if (window.XMLHttpRequest) {
+        xhr = new XMLHttpRequest(); //for ie7+,FireFox,Chorme,Opera,Safai...
+    } else {
+        xhr = new ActiveXObject('Microsoft.XMLHTTP');//for ie6
+    }
+
+    if (xhr != null) {
+        xhr.open("GET", url, true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;");
+        xhr.onreadystatechange = function () {
+
+        };
+        xhr.send();
+    } else {
+        alert("不能创建XMLHttpRequest对象实例");
+    }
+};
 
 function refreshData(url) {
     if (window.XMLHttpRequest) {
@@ -21,12 +45,6 @@ function refreshData(url) {
         alert("不能创建XMLHttpRequest对象实例");
     }
 };
-
-function refreshByPage(currentPageCode) {
-    allUrl = null;
-    allUrl = "/order/queryAll?currentPageCode=" + currentPageCode;
-    refreshData(allUrl)
-}
 
 function getDate() {
     if (xhr.readyState === 4 && xhr.status === 200) {
@@ -83,7 +101,7 @@ function getDate() {
                     "    </td>\n" +
                     "    <td>\n" +
                     "        <div>" + StatusJudge(orderList[i].shopOrder.orderStatus) + "</div>\n" +
-                    "        <div><a href=\"www.baidu.com\">订单详情</a></div>\n" +
+                    "        <div><a href='javascript:void(0)' onclick='javascript:orderDetail(" + orderList[i].shopOrder.orderId + ")'>订单详情</a></div>\n" +
                     "    </td>\n" +
                     "    <td>\n" +
                     "        <a class=\"order-operate\" href=\"#\" onclick=\"remove(" + orderList[i].shopOrder.orderId + ")\">删除</a>\n" +
@@ -114,6 +132,12 @@ function getDate() {
 }
 
 
+function refreshByState(orderStatus, timeState, currentPageCode) {
+    allUrl = null;
+    allUrl = "/order/queryByState?orderStatus=" + orderStatus + "&timeState=" + timeState + "&currentPageCode=" + currentPageCode;
+    refreshData4State(allUrl)
+}
+
 function refreshData4State(url) {
     if (window.XMLHttpRequest) {
         xhr = new XMLHttpRequest(); //for ie7+,FireFox,Chorme,Opera,Safai...
@@ -129,12 +153,6 @@ function refreshData4State(url) {
     } else {
         alert("不能创建XMLHttpRequest对象实例");
     }
-}
-
-function refreshByState(orderStatus, timeState, currentPageCode) {
-    allUrl = null;
-    allUrl = "/order/queryByState?orderStatus=" + orderStatus + "&timeState=" + timeState + "&currentPageCode=" + currentPageCode;
-    refreshData4State(allUrl)
 }
 
 function getDate4State() {
@@ -157,7 +175,7 @@ function getDate4State() {
                 "        " + dataConversion(orderList[i].shopOrder.orderCreateTime) + "\n" +
                 "    </span>\n" +
                 "        <span id=\"order-number\">\n" +
-                "        " + orderList[i].shopOrder.orderNumber + "(订单号)\n" +
+                "        " + orderList[i].shopOrder.orderNumber +
                 "    </span>\n" +
                 "        <span>\n" +
                 "            <a class=\"waiter-link\" href=\"#\"><img src=\"../images/waiter-icon.png\">（客服）</a>\n" +
@@ -192,10 +210,11 @@ function getDate4State() {
                     "    </td>\n" +
                     "    <td>\n" +
                     "        <div>" + StatusJudge(orderList[i].shopOrder.orderStatus) + "</div>\n" +
-                    "        <div><a href=\"#\">订单详情</a></div>\n" +
+                    "        <div><a href=\"#\" onclick='javascript:orderDetail(" + orderList[i].shopOrder.orderId + ")'>订单详情</a></div>\n" +
                     "    </td>\n" +
-                    "    <td>\n" +
-                    "        <a class=\"order-operate\" href=\"#\" onclick=\"remove(" + orderList[i].shopOrder.orderId + ")\">删除</a>\n" +
+                    "    <td>\n" + (orderList[i].shopOrder.orderStatus == 4 ? " <a class=\"order-operate\" href=\"#\" onclick=\"del(" + orderList[i].shopOrder.orderId + ")\">完全删除</a>\n" :
+                    " <a class=\"order-operate\" href=\"#\" onclick=\"remove(" + orderList[i].shopOrder.orderId + ")\">删除</a>\n") +
+
                     "    </td>\n" : "<td colspan=\"4\"></td>") +
                     "</tr>\n" +
                     "<tr></tr>\n" +
@@ -224,6 +243,12 @@ function getDate4State() {
 }
 
 
+function refreshByCondition(condition, currentPageCode) {
+    allUrl = null;
+    allUrl = "/order/queryByCondition?condition=" + condition + "&currentPageCode=" + currentPageCode;
+    refreshData4Condition(allUrl)
+}
+
 function refreshData4Condition(url) {
     if (window.XMLHttpRequest) {
         xhr = new XMLHttpRequest(); //for ie7+,FireFox,Chorme,Opera,Safai...
@@ -239,12 +264,6 @@ function refreshData4Condition(url) {
     } else {
         alert("不能创建XMLHttpRequest对象实例");
     }
-}
-
-function refreshByCondition(condition, currentPageCode) {
-    allUrl = null;
-    allUrl = "/order/queryByCondition?condition=" + condition + "&currentPageCode=" + currentPageCode;
-    refreshData4Condition(allUrl)
 }
 
 function getDate4Condition() {
@@ -267,7 +286,7 @@ function getDate4Condition() {
                 "        " + dataConversion(orderList[i].shopOrder.orderCreateTime) + "\n" +
                 "    </span>\n" +
                 "        <span id=\"order-number\">\n" +
-                "        " + orderList[i].shopOrder.orderNumber + "(订单号)\n" +
+                "        " + orderList[i].shopOrder.orderNumber +
                 "    </span>\n" +
                 "        <span>\n" +
                 "            <a class=\"waiter-link\" href=\"#\"><img src=\"../images/waiter-icon.png\">（客服）</a>\n" +
@@ -302,7 +321,7 @@ function getDate4Condition() {
                     "    </td>\n" +
                     "    <td>\n" +
                     "        <div>" + StatusJudge(orderList[i].shopOrder.orderStatus) + "</div>\n" +
-                    "        <div><a href=\"#\">订单详情</a></div>\n" +
+                    "        <div><a href=\"#\"onclick='javascript:orderDetail(" + orderList[i].shopOrder.orderId + ")'>订单详情</a></div>\n" +
                     "    </td>\n" +
                     "    <td>\n" +
                     "        <a class=\"order-operate\" href=\"#\" onclick=\"remove(" + orderList[i].shopOrder.orderId + ")\">删除</a>\n" +
@@ -337,8 +356,15 @@ function getDate4Condition() {
 function remove(orderId) {
     allUrl = null;
     allUrl = "order/removeByOrderId?orderId=" + orderId;
-    refreshData(allUrl);
-    refreshByPage(1);
+    refresh(allUrl);
+    refreshByState(4,0,1)
+}
+
+function del(orderId) {
+    allUrl = null;
+    allUrl = "order/delByOrderId?orderId=" + orderId;
+    refresh(allUrl);
+    refreshByState(4,0,1)
 }
 
 function dataConversion(time) {
@@ -361,12 +387,11 @@ function StatusJudge(statusCode) {
     else if (statusCode == 2)
         statusMsg = '待收货';
     else if (statusCode == 3)
-        statusMsg = '待评价';
+        statusMsg = '已完成';
     else if (statusCode == 4)
         statusMsg = '已删除'
     return statusMsg;
 }
-
 
 var timeFilter = document.getElementById("order-time-filter");
 
@@ -376,9 +401,9 @@ timeFilter.addEventListener("change", function () {
 });
 
 var searchButton = document.getElementById("search-button");
-var searchTxt=document.getElementById("search-txt");
+var searchTxt = document.getElementById("search-txt");
 searchButton.addEventListener("click", function () {
-    refreshByCondition(searchTxt.value,1)
+    refreshByCondition(searchTxt.value, 1)
 })
 
 
@@ -397,3 +422,6 @@ function getTime() {
 }
 
 
+function orderDetail(orderId) {
+    window.location = "showOrderDetail?orderId=" + orderId;
+}

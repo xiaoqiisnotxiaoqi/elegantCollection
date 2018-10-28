@@ -8,6 +8,8 @@
     <result column="category_id" jdbcType="INTEGER" property="categoryId" />
     <result column="block_ima" jdbcType="VARCHAR" property="blockIma" />
     <result column="block_status" jdbcType="INTEGER" property="blockStatus" />
+    <result column="block_background" jdbcType="VARCHAR" property="blockBackground" />
+    <result column="block_info" jdbcType="VARCHAR" property="blockInfo" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,7 +70,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    block_id, block_name, book_id, category_id, block_ima, block_status
+    block_id, block_name, book_id, category_id, block_ima, block_status, block_background,
+    block_info
   </sql>
   <select id="selectByExample" parameterType="com.elegantcollection.entity.BlockExample" resultMap="BaseResultMap">
     select
@@ -93,7 +96,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from block
     where block_id = #{blockId,jdbcType=INTEGER}
@@ -109,12 +112,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.elegantcollection.entity.Block">
-    insert into block (block_id, block_name, book_id, 
-      category_id, block_ima, block_status
-      )
-    values (#{blockId,jdbcType=INTEGER}, #{blockName,jdbcType=VARCHAR}, #{bookId,jdbcType=INTEGER}, 
-      #{categoryId,jdbcType=INTEGER}, #{blockIma,jdbcType=VARCHAR}, #{blockStatus,jdbcType=INTEGER}
-      )
+    insert into block (block_id, block_name, book_id,
+      category_id, block_ima, block_status,
+      block_background, block_info)
+    values (#{blockId,jdbcType=INTEGER}, #{blockName,jdbcType=VARCHAR}, #{bookId,jdbcType=INTEGER},
+      #{categoryId,jdbcType=INTEGER}, #{blockIma,jdbcType=VARCHAR}, #{blockStatus,jdbcType=INTEGER},
+      #{blockBackground,jdbcType=VARCHAR}, #{blockInfo,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.elegantcollection.entity.Block">
     insert into block
@@ -137,6 +140,12 @@
       <if test="blockStatus != null">
         block_status,
       </if>
+      <if test="blockBackground != null">
+        block_background,
+      </if>
+      <if test="blockInfo != null">
+        block_info,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="blockId != null">
@@ -156,6 +165,12 @@
       </if>
       <if test="blockStatus != null">
         #{blockStatus,jdbcType=INTEGER},
+      </if>
+      <if test="blockBackground != null">
+        #{blockBackground,jdbcType=VARCHAR},
+      </if>
+      <if test="blockInfo != null">
+        #{blockInfo,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -186,6 +201,12 @@
       <if test="record.blockStatus != null">
         block_status = #{record.blockStatus,jdbcType=INTEGER},
       </if>
+      <if test="record.blockBackground != null">
+        block_background = #{record.blockBackground,jdbcType=VARCHAR},
+      </if>
+      <if test="record.blockInfo != null">
+        block_info = #{record.blockInfo,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -194,11 +215,13 @@
   <update id="updateByExample" parameterType="map">
     update block
     set block_id = #{record.blockId,jdbcType=INTEGER},
-      block_name = #{record.blockName,jdbcType=VARCHAR},
-      book_id = #{record.bookId,jdbcType=INTEGER},
-      category_id = #{record.categoryId,jdbcType=INTEGER},
-      block_ima = #{record.blockIma,jdbcType=VARCHAR},
-      block_status = #{record.blockStatus,jdbcType=INTEGER}
+    block_name = #{record.blockName,jdbcType=VARCHAR},
+    book_id = #{record.bookId,jdbcType=INTEGER},
+    category_id = #{record.categoryId,jdbcType=INTEGER},
+    block_ima = #{record.blockIma,jdbcType=VARCHAR},
+    block_status = #{record.blockStatus,jdbcType=INTEGER},
+    block_background = #{record.blockBackground,jdbcType=VARCHAR},
+    block_info = #{record.blockInfo,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -221,6 +244,12 @@
       <if test="blockStatus != null">
         block_status = #{blockStatus,jdbcType=INTEGER},
       </if>
+      <if test="blockBackground != null">
+        block_background = #{blockBackground,jdbcType=VARCHAR},
+      </if>
+      <if test="blockInfo != null">
+        block_info = #{blockInfo,jdbcType=VARCHAR},
+      </if>
     </set>
     where block_id = #{blockId,jdbcType=INTEGER}
   </update>
@@ -230,7 +259,9 @@
       book_id = #{bookId,jdbcType=INTEGER},
       category_id = #{categoryId,jdbcType=INTEGER},
       block_ima = #{blockIma,jdbcType=VARCHAR},
-      block_status = #{blockStatus,jdbcType=INTEGER}
+      block_status = #{blockStatus,jdbcType=INTEGER},
+      block_background = #{blockBackground,jdbcType=VARCHAR},
+      block_info = #{blockInfo,jdbcType=VARCHAR}
     where block_id = #{blockId,jdbcType=INTEGER}
   </update>
 </mapper>

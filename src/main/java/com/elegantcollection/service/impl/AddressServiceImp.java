@@ -20,14 +20,14 @@ public class AddressServiceImp implements AddressService {
     }
 
     @Override
-    public List<Address> queryAll(Integer addressId) {
-        return addressDao.selectByExample(null);
+    public List<Address> queryByCustId(Integer custId) {
+        AddressExample addressExample=new AddressExample();
+        addressExample.createCriteria().andCustIdEqualTo(custId);
+        return addressDao.selectByExample(addressExample);
     }
 
     @Override
-    public List<Address> queryByAddressId(Integer addressId) {
-        AddressExample addressExample = new AddressExample();
-        addressExample.createCriteria().andAddressIdEqualTo(addressId);
-        return addressDao.selectByExample(addressExample);
+    public Address queryByAddressId(Integer addressId) {
+        return addressDao.selectByPrimaryKey(addressId);
     }
 }

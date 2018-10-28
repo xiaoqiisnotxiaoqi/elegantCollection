@@ -54,6 +54,23 @@ public class Ui {
     }
 
 
+    @RequestMapping("showOrderDetail")
+    public String ui2OrderDetail(Integer orderId, HttpServletRequest request) {
+        request.getSession().setAttribute("orderId", orderId);
+        return "order_detail";
+    }
+
+    @RequestMapping("pay")
+    public String pay(){
+        return "pay";
+    }
+
+    @RequestMapping("post")
+    public String post() {
+        return "post";
+    }
+
+
     @RequestMapping("myEvaluate")
     public String ui4(HttpServletRequest request) {
         Customer customer = (Customer) request.getSession().getAttribute("customer");

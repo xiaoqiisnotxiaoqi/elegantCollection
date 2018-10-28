@@ -503,6 +503,146 @@ public class BlockExample {
             addCriterion("block_status not between", value1, value2, "blockStatus");
             return (Criteria) this;
         }
+
+        public Criteria andBlockBackgroundIsNull() {
+            addCriterion("block_background is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBlockBackgroundIsNotNull() {
+            addCriterion("block_background is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBlockBackgroundEqualTo(String value) {
+            addCriterion("block_background =", value, "blockBackground");
+            return (Criteria) this;
+        }
+
+        public Criteria andBlockBackgroundNotEqualTo(String value) {
+            addCriterion("block_background <>", value, "blockBackground");
+            return (Criteria) this;
+        }
+
+        public Criteria andBlockBackgroundGreaterThan(String value) {
+            addCriterion("block_background >", value, "blockBackground");
+            return (Criteria) this;
+        }
+
+        public Criteria andBlockBackgroundGreaterThanOrEqualTo(String value) {
+            addCriterion("block_background >=", value, "blockBackground");
+            return (Criteria) this;
+        }
+
+        public Criteria andBlockBackgroundLessThan(String value) {
+            addCriterion("block_background <", value, "blockBackground");
+            return (Criteria) this;
+        }
+
+        public Criteria andBlockBackgroundLessThanOrEqualTo(String value) {
+            addCriterion("block_background <=", value, "blockBackground");
+            return (Criteria) this;
+        }
+
+        public Criteria andBlockBackgroundLike(String value) {
+            addCriterion("block_background like", value, "blockBackground");
+            return (Criteria) this;
+        }
+
+        public Criteria andBlockBackgroundNotLike(String value) {
+            addCriterion("block_background not like", value, "blockBackground");
+            return (Criteria) this;
+        }
+
+        public Criteria andBlockBackgroundIn(List<String> values) {
+            addCriterion("block_background in", values, "blockBackground");
+            return (Criteria) this;
+        }
+
+        public Criteria andBlockBackgroundNotIn(List<String> values) {
+            addCriterion("block_background not in", values, "blockBackground");
+            return (Criteria) this;
+        }
+
+        public Criteria andBlockBackgroundBetween(String value1, String value2) {
+            addCriterion("block_background between", value1, value2, "blockBackground");
+            return (Criteria) this;
+        }
+
+        public Criteria andBlockBackgroundNotBetween(String value1, String value2) {
+            addCriterion("block_background not between", value1, value2, "blockBackground");
+            return (Criteria) this;
+        }
+
+        public Criteria andBlockInfoIsNull() {
+            addCriterion("block_info is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBlockInfoIsNotNull() {
+            addCriterion("block_info is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBlockInfoEqualTo(String value) {
+            addCriterion("block_info =", value, "blockInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andBlockInfoNotEqualTo(String value) {
+            addCriterion("block_info <>", value, "blockInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andBlockInfoGreaterThan(String value) {
+            addCriterion("block_info >", value, "blockInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andBlockInfoGreaterThanOrEqualTo(String value) {
+            addCriterion("block_info >=", value, "blockInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andBlockInfoLessThan(String value) {
+            addCriterion("block_info <", value, "blockInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andBlockInfoLessThanOrEqualTo(String value) {
+            addCriterion("block_info <=", value, "blockInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andBlockInfoLike(String value) {
+            addCriterion("block_info like", value, "blockInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andBlockInfoNotLike(String value) {
+            addCriterion("block_info not like", value, "blockInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andBlockInfoIn(List<String> values) {
+            addCriterion("block_info in", values, "blockInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andBlockInfoNotIn(List<String> values) {
+            addCriterion("block_info not in", values, "blockInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andBlockInfoBetween(String value1, String value2) {
+            addCriterion("block_info between", value1, value2, "blockInfo");
+            return (Criteria) this;
+        }
+
+        public Criteria andBlockInfoNotBetween(String value1, String value2) {
+            addCriterion("block_info not between", value1, value2, "blockInfo");
+            return (Criteria) this;
+        }
     }
 
     /**

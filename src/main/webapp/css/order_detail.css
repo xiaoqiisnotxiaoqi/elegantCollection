@@ -18,7 +18,7 @@ li {
 }
 
 .order-process {
-    display: block;
+    background-color: rgb(255, 255, 255);
     width: 100%;
     height: 300px;
 }
@@ -28,18 +28,43 @@ li {
     display: inline-block;
     height: 80%;
     width: 28%;
+    text-align: center;
 }
 
-.order-state-show {
+.order-number {
+    display: block;
+    margin-top: 15px;
+    color: gray;
+    font-size: 10px;
+}
+
+.order-state {
+    display: block;
+    margin-top: 55px;
+    font-size: 30px;
+}
+
+.order-state-show1 {
     float: left;
     display: inline-block;
-    margin-top: 60px;
-    margin-left: 10px;
+    margin-top: 80px;
+    margin-left: 15px;
     height: 80%;
     width: 70%;
 }
 
+.order-state-show2 {
+    float: left;
+    display: inline-block;
+    margin-top: 20px;
+    margin-left: 15px;
+    height: 80%;
+    width: 70%;
+    overflow: scroll;
+}
+
 .order-state-icon {
+    margin-left: 15px;
     display: inline-block;
 }
 
@@ -48,6 +73,7 @@ li {
 }
 
 .order-state-icon img {
+    margin-left: 10px;
     width: 30px;
     height: 25px;
 }
@@ -55,9 +81,25 @@ li {
 .order-state-segmentation {
     display: inline-block;
     width: 106px;
-    height: 23px;
-    background: url("../images/order-state-segmentation.PNG") 0 23px;
-    bottom: 25px;
+    height: 50px;
+}
+
+.order-img {
+    margin-top: 20px;
+    display: block;
+}
+
+.order-img img {
+    width: 100px;
+    height: 100px;
+}
+
+.order-post-way {
+    font-size: 13px;
+    display: block;
+    margin-top: 30px;
+    color: grey;
+
 }
 
 .order-state-segmentation img {
@@ -76,12 +118,6 @@ li {
     background-color: grey;
 }
 
-.order-process {
-    background-color: rgb(255, 255, 255);
-    width: 100%;
-    height: 300px;
-}
-
 .logistics {
     margin-top: 40px;
     background-color: rgb(255, 255, 255);
@@ -92,6 +128,25 @@ li {
 .order-information {
     margin-top: 40px;
 
+}
+
+.transport-item {
+    width: 90%;
+    margin-bottom: 20px;
+}
+
+.transport-time {
+    float: left;
+    display: inline-block;
+    color: gray;
+    font-size: 15px;
+    width: 25%;
+}
+
+.transport-context {
+    display: inline-block;
+    width: 73%;
+    font-size: 15px;
 }
 
 .order-items {
@@ -116,11 +171,52 @@ li {
 }
 
 .item span {
+    float: left;
     display: inline-block;
-    width: 120px;
+    width: 30%;
     color: grey;
 }
 
 .item-info {
     display: inline-block;
+    width: 67%;
+}
+
+.main-page {
+    display: block;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.books-info {
+    margin-top: 30px;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+}
+
+.book-all {
+    margin: 15px;
+    background-color: rgb(250, 250, 250);
+}
+
+.book-tip {
+    display: inline-block;
+    text-align: center;
+    width: 38%;
+}
+
+.book-tip > a > img {
+    width: 100px;
+    height: 100px;
+}
+
+.book-information {
+    display: inline-block;
+    text-align: center;
+    width: 20%;
+}
+
+.info-body {
+    width: 85%;
+    margin: 0 auto;
 }

@@ -37,6 +37,16 @@ public class Block implements Serializable {
      */
     private Integer blockStatus;
 
+    /**
+     * 模块背景
+     */
+    private String blockBackground;
+
+    /**
+     * 模块简介
+     */
+    private String blockInfo;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getBlockId() {
@@ -87,6 +97,22 @@ public class Block implements Serializable {
         this.blockStatus = blockStatus;
     }
 
+    public String getBlockBackground() {
+        return blockBackground;
+    }
+
+    public void setBlockBackground(String blockBackground) {
+        this.blockBackground = blockBackground;
+    }
+
+    public String getBlockInfo() {
+        return blockInfo;
+    }
+
+    public void setBlockInfo(String blockInfo) {
+        this.blockInfo = blockInfo;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -104,7 +130,9 @@ public class Block implements Serializable {
             && (this.getBookId() == null ? other.getBookId() == null : this.getBookId().equals(other.getBookId()))
             && (this.getCategoryId() == null ? other.getCategoryId() == null : this.getCategoryId().equals(other.getCategoryId()))
             && (this.getBlockIma() == null ? other.getBlockIma() == null : this.getBlockIma().equals(other.getBlockIma()))
-            && (this.getBlockStatus() == null ? other.getBlockStatus() == null : this.getBlockStatus().equals(other.getBlockStatus()));
+            && (this.getBlockStatus() == null ? other.getBlockStatus() == null : this.getBlockStatus().equals(other.getBlockStatus()))
+            && (this.getBlockBackground() == null ? other.getBlockBackground() == null : this.getBlockBackground().equals(other.getBlockBackground()))
+            && (this.getBlockInfo() == null ? other.getBlockInfo() == null : this.getBlockInfo().equals(other.getBlockInfo()));
     }
 
     @Override
@@ -117,6 +145,8 @@ public class Block implements Serializable {
         result = prime * result + ((getCategoryId() == null) ? 0 : getCategoryId().hashCode());
         result = prime * result + ((getBlockIma() == null) ? 0 : getBlockIma().hashCode());
         result = prime * result + ((getBlockStatus() == null) ? 0 : getBlockStatus().hashCode());
+        result = prime * result + ((getBlockBackground() == null) ? 0 : getBlockBackground().hashCode());
+        result = prime * result + ((getBlockInfo() == null) ? 0 : getBlockInfo().hashCode());
         return result;
     }
 
@@ -132,6 +162,8 @@ public class Block implements Serializable {
         sb.append(", categoryId=").append(categoryId);
         sb.append(", blockIma=").append(blockIma);
         sb.append(", blockStatus=").append(blockStatus);
+        sb.append(", blockBackground=").append(blockBackground);
+        sb.append(", blockInfo=").append(blockInfo);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

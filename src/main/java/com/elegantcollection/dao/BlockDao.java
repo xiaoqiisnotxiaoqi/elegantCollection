@@ -4,9 +4,9 @@ import com.elegantcollection.entity.Block;
 import com.elegantcollection.entity.BlockExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
-@Component
+@Repository
 public interface BlockDao {
     long countByExample(BlockExample example);
 

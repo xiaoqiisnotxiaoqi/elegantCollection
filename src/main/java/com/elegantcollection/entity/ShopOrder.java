@@ -35,11 +35,13 @@ public class ShopOrder implements Serializable {
 
     /**
      * 订单状态
+待付款0，待发货1，待收货2，待评价3，已删除4，完全删除5
      */
     private Integer orderStatus;
 
     /**
      * 评价状态
+未评价0，已评价1
      */
     private Integer evaluateStatus;
 
@@ -49,9 +51,9 @@ public class ShopOrder implements Serializable {
     private Integer addressId;
 
     /**
-     * 冗余字段2
+     * 优惠金额
      */
-    private String redundancyField2;
+    private String discountAmount;
 
     /**
      * 付款时间
@@ -144,12 +146,12 @@ public class ShopOrder implements Serializable {
         this.addressId = addressId;
     }
 
-    public String getRedundancyField2() {
-        return redundancyField2;
+    public String getDiscountAmount() {
+        return discountAmount;
     }
 
-    public void setRedundancyField2(String redundancyField2) {
-        this.redundancyField2 = redundancyField2;
+    public void setDiscountAmount(String discountAmount) {
+        this.discountAmount = discountAmount;
     }
 
     public Date getPaymentTime() {
@@ -212,7 +214,7 @@ public class ShopOrder implements Serializable {
             && (this.getOrderStatus() == null ? other.getOrderStatus() == null : this.getOrderStatus().equals(other.getOrderStatus()))
             && (this.getEvaluateStatus() == null ? other.getEvaluateStatus() == null : this.getEvaluateStatus().equals(other.getEvaluateStatus()))
             && (this.getAddressId() == null ? other.getAddressId() == null : this.getAddressId().equals(other.getAddressId()))
-            && (this.getRedundancyField2() == null ? other.getRedundancyField2() == null : this.getRedundancyField2().equals(other.getRedundancyField2()))
+            && (this.getDiscountAmount() == null ? other.getDiscountAmount() == null : this.getDiscountAmount().equals(other.getDiscountAmount()))
             && (this.getPaymentTime() == null ? other.getPaymentTime() == null : this.getPaymentTime().equals(other.getPaymentTime()))
             && (this.getOutlibraryTime() == null ? other.getOutlibraryTime() == null : this.getOutlibraryTime().equals(other.getOutlibraryTime()))
             && (this.getCourierCompanyId() == null ? other.getCourierCompanyId() == null : this.getCourierCompanyId().equals(other.getCourierCompanyId()))
@@ -232,7 +234,7 @@ public class ShopOrder implements Serializable {
         result = prime * result + ((getOrderStatus() == null) ? 0 : getOrderStatus().hashCode());
         result = prime * result + ((getEvaluateStatus() == null) ? 0 : getEvaluateStatus().hashCode());
         result = prime * result + ((getAddressId() == null) ? 0 : getAddressId().hashCode());
-        result = prime * result + ((getRedundancyField2() == null) ? 0 : getRedundancyField2().hashCode());
+        result = prime * result + ((getDiscountAmount() == null) ? 0 : getDiscountAmount().hashCode());
         result = prime * result + ((getPaymentTime() == null) ? 0 : getPaymentTime().hashCode());
         result = prime * result + ((getOutlibraryTime() == null) ? 0 : getOutlibraryTime().hashCode());
         result = prime * result + ((getCourierCompanyId() == null) ? 0 : getCourierCompanyId().hashCode());
@@ -255,7 +257,7 @@ public class ShopOrder implements Serializable {
         sb.append(", orderStatus=").append(orderStatus);
         sb.append(", evaluateStatus=").append(evaluateStatus);
         sb.append(", addressId=").append(addressId);
-        sb.append(", redundancyField2=").append(redundancyField2);
+        sb.append(", discountAmount=").append(discountAmount);
         sb.append(", paymentTime=").append(paymentTime);
         sb.append(", outlibraryTime=").append(outlibraryTime);
         sb.append(", courierCompanyId=").append(courierCompanyId);

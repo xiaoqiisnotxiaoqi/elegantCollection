@@ -103,7 +103,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from shop_order
     where order_id = #{orderId,jdbcType=INTEGER}
@@ -280,19 +280,19 @@
   <update id="updateByExample" parameterType="map">
     update shop_order
     set order_id = #{record.orderId,jdbcType=INTEGER},
-      order_number = #{record.orderNumber,jdbcType=BIGINT},
-      cust_id = #{record.custId,jdbcType=INTEGER},
-      order_create_time = #{record.orderCreateTime,jdbcType=TIMESTAMP},
-      order_price = #{record.orderPrice,jdbcType=REAL},
-      order_status = #{record.orderStatus,jdbcType=INTEGER},
-      evaluate_status = #{record.evaluateStatus,jdbcType=INTEGER},
-      address_id = #{record.addressId,jdbcType=INTEGER},
-      discount_amount = #{record.discountAmount,jdbcType=VARCHAR},
-      payment_time = #{record.paymentTime,jdbcType=TIMESTAMP},
-      outlibrary_time = #{record.outlibraryTime,jdbcType=TIMESTAMP},
-      courier_company_id = #{record.courierCompanyId,jdbcType=VARCHAR},
-      logistics_id = #{record.logisticsId,jdbcType=VARCHAR},
-      expectation_time = #{record.expectationTime,jdbcType=TIMESTAMP}
+    order_number = #{record.orderNumber,jdbcType=BIGINT},
+    cust_id = #{record.custId,jdbcType=INTEGER},
+    order_create_time = #{record.orderCreateTime,jdbcType=TIMESTAMP},
+    order_price = #{record.orderPrice,jdbcType=REAL},
+    order_status = #{record.orderStatus,jdbcType=INTEGER},
+    evaluate_status = #{record.evaluateStatus,jdbcType=INTEGER},
+    address_id = #{record.addressId,jdbcType=INTEGER},
+    discount_amount = #{record.discountAmount,jdbcType=VARCHAR},
+    payment_time = #{record.paymentTime,jdbcType=TIMESTAMP},
+    outlibrary_time = #{record.outlibraryTime,jdbcType=TIMESTAMP},
+    courier_company_id = #{record.courierCompanyId,jdbcType=VARCHAR},
+    logistics_id = #{record.logisticsId,jdbcType=VARCHAR},
+    expectation_time = #{record.expectationTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -360,17 +360,17 @@
     where order_id = #{orderId,jdbcType=INTEGER}
   </update>
   <select id="selectByBookName" parameterType="java.util.HashMap" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from shop_order where order_id in(select shop_order_detail.order_id from book left join shop_order_detail on
-        book.book_id=shop_order_detail.book_id where book_name like'%${bookName}%') and cust_id= ${custId}
-        limit ${pageModel.startRecord} ,${pageModel.pageSize}
-    </select>
-    <select id="selectByBookName4Size" parameterType="java.util.HashMap" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from shop_order where order_id in(select shop_order_detail.order_id from book left join shop_order_detail on
-        book.book_id=shop_order_detail.book_id where book_name like'%${bookName}%') and cust_id= ${custId}
-    </select>
+    select
+    <include refid="Base_Column_List"/>
+    from shop_order where order_id in(select shop_order_detail.order_id from book left join shop_order_detail on
+    book.book_id=shop_order_detail.book_id where book_name like'%${bookName}%') and cust_id= ${custId}
+    limit ${pageModel.startRecord} ,${pageModel.pageSize}
+  </select>
+  <select id="selectByBookName4Size" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from shop_order where order_id in(select shop_order_detail.order_id from book left join shop_order_detail on
+    book.book_id=shop_order_detail.book_id where book_name like'%${bookName}%') and cust_id= ${custId}
+  </select>
 
 </mapper>

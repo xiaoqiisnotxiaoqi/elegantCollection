@@ -103,4 +103,9 @@ public class BlockServiceImpl implements BlockService {
         postReplyExample.setOffset(startRecord.longValue());
         return postReplyDao.selectByExample(postReplyExample);
     }
+
+    @Override
+    public Block queryByBlockId(Integer blockId) {
+        return blockDao.selectByPrimaryKey(blockId);
+    }
 }
