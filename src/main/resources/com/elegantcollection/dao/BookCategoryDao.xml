@@ -97,6 +97,12 @@
     from book_category
     where category_id = #{categoryId,jdbcType=INTEGER}
   </select>
+  <select id="selectBookCategoryByUpIdNull" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from book_category
+    where category_up_id is not null
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from book_category
     where category_id = #{categoryId,jdbcType=INTEGER}

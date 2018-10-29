@@ -109,5 +109,18 @@ public class Ui {
         return "pay";
     }
 
+    @RequestMapping("author")
+    public String uiz(){
+        return "author";
+    }
 
+    @RequestMapping("booklist")
+    public String uih(){
+        return "booklist";
+    }
+
+    @RequestMapping("ranking")
+    public String uio(){
+        return "ranking";
+    }
 }
