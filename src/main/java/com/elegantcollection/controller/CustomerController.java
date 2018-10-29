@@ -1,8 +1,13 @@
 package com.elegantcollection.controller;
 
+import com.elegantcollection.entity.Book;
 import com.elegantcollection.entity.Customer;
+import com.elegantcollection.entity.Evaluate;
+import com.elegantcollection.service.BookService;
 import com.elegantcollection.service.CustomerService;
+import com.elegantcollection.service.EvaluateService;
 import com.elegantcollection.util.CodeUtil;
+import com.elegantcollection.util.PageModel;
 import com.elegantcollection.util.RandomNumberGeneration;
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
@@ -15,13 +20,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
 public class CustomerController {
     private final Producer captchaProducer;
     private final CustomerService customerService;
+    @Autowired
+    private EvaluateService evaluateService;
+
+    @Autowired
+    private BookService bookService;
 
     @Autowired
     public CustomerController(CustomerService customerService, Producer captchaProducer) {
@@ -50,27 +62,28 @@ public class CustomerController {
             customerList = customerService.quaryCustomerByPhone(custName, pwd);
         }
 
-        if (customerList.size() == 0){
+        if (customerList.size() == 0) {
             return "fail";
-        }else {
-            request.getSession().setAttribute("customer",customerList.get(0));
+        } else {
+            request.getSession().setAttribute("customer", customerList.get(0));
             //返回用户昵称
-            return  customerList.get(0).getCustName();
+            return customerList.get(0).getCustName();
         }
     }
 
     /**
      * 用户注册
-     * @param phone 用户填写的手机号
-     * @param password 用户填写的密码
-     * @param imgCode 用户输入的图片验证码
+     *
+     * @param phone     用户填写的手机号
+     * @param password  用户填写的密码
+     * @param imgCode   用户输入的图片验证码
      * @param phoneCode 用户输入的图片验证码
-     * @return 用户信息填写成功,返回""success" ,否则返回"fail"
+     * @return 用户信息填写成功, 返回""success" ,否则返回"fail"
      */
     @PostMapping("/singIn")
-    public String customerRegister(String phone,String password,String imgCode,String phoneCode,HttpServletRequest request){
+    public String customerRegister(String phone, String password, String imgCode, String phoneCode, HttpServletRequest request) {
         //验证图片验证码是否正确
-        if(!CodeUtil.checkVerifyCode(request,imgCode)){
+        if (!CodeUtil.checkVerifyCode(request, imgCode)) {
             return "图片验证码错误";
         }
 
@@ -91,11 +104,11 @@ public class CustomerController {
         //用户的积分
         customer.setCustPoints(0);
         //生成用户昵称
-        String name ;
-        do{
+        String name;
+        do {
             name = RandomNumberGeneration.getRandomString(10);
             System.out.println(name);
-        }while (customerService.queryNumByCustName(name) != 0);
+        } while (customerService.queryNumByCustName(name) != 0);
 
         //添加用户昵称
         customer.setCustName(name);
@@ -106,17 +119,18 @@ public class CustomerController {
         Customer newCustomer = customerService.quaryCustomerByCustName(name);
         newCustomer.setCustName("");
         //将用户对象存入session中
-        request.getSession().setAttribute("customer",newCustomer);
+        request.getSession().setAttribute("customer", newCustomer);
         return "success";
     }
 
     /**
      * 用户注销(退出登录)
+     *
      * @param request 用户的请求信息
      * @return success(退出成功)
      */
     @DeleteMapping("loginOut")
-    public String loginOut(HttpServletRequest request){
+    public String loginOut(HttpServletRequest request) {
         System.out.println("用户退出中");
         HttpSession session = request.getSession();
         session.removeAttribute("customer");
@@ -125,7 +139,8 @@ public class CustomerController {
 
     /**
      * 用于生成 验证码图片 并以字节流返回
-     * @param request 请求信息
+     *
+     * @param request  请求信息
      * @param response 返回的信息
      * @throws Exception 抛出的异常
      */
@@ -152,21 +167,54 @@ public class CustomerController {
     }
 
 
-
     @GetMapping("/phoneIsRegistered")
-    public String phoneNumberIsRegistered(String phone){
+    public String phoneNumberIsRegistered(String phone) {
         List list = customerService.queryCustomerByPhone(phone);
-        if (list.size() == 0){
+        if (list.size() == 0) {
             return "success";
-        }else{
+        } else {
             return "手机号码已被占用";
         }
     }
 
 
+    /**
+     * 查询我的评价
+     *
+     * @param pageCode 当前页码
+     * @param request  用来获取session
+     * @return 查询结果, 包含pagemodel booklist
+     */
+    @GetMapping("getMyEvaluate")
+    public HashMap myEvaluate(Integer pageCode, HttpServletRequest request) {
+        HashMap map = new HashMap();
+        PageModel pageModel = new PageModel();
+        Customer customer = (Customer) request.getSession().getAttribute("customer");
+        if (pageCode == null) {
+            pageModel.setCurrentPageCode(1);
+        } else {
+            pageModel.setCurrentPageCode(pageCode);
+        }
+        System.out.println("当前是第" + pageModel.getCurrentPageCode() + "页");
+        pageModel.setTotalRecord(evaluateService.countByCustomerId(customer.getCustId()));
+        System.out.println("共有 " + evaluateService.countByCustomerId(customer.getCustId()) + " 条记录");
+        pageModel.setTotalPages(pageModel.getTotalRecord() % pageModel.getPageSize() == 0 ? pageModel.getTotalRecord() / pageModel.getPageSize() : pageModel.getTotalRecord() / pageModel.getPageSize() + 1);
+        pageModel.setStartRecord((pageModel.getCurrentPageCode() - 1) * pageModel.getPageSize());
+
+        List<Evaluate> evaluateList = evaluateService.queryEvaluateByPage(pageModel, customer.getCustId());
+        List<Book> bookList = new ArrayList<>();
+        for (Evaluate e : evaluateList) {
+            Book book = bookService.quaryBookByBookId(e.getBookId());
+            bookList.add(book);
+        }
+
+        pageModel.setModelList(evaluateService.queryEvaluateByPage(pageModel, customer.getCustId()));
 
 
-
+        map.put("pageModel", pageModel);
+        map.put("bookList", bookList);
+        return map;
+    }
 
 
 }

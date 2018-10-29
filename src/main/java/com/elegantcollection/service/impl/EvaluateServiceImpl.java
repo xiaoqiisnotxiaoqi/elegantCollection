@@ -17,16 +17,27 @@ public class EvaluateServiceImpl implements EvaluateService {
     private EvaluateDao evaluateDao;
 
 
-    //    根据customerId 分页查询所有评论
+    /**
+     * 根据customerId 分页查询所有评论
+     *
+     * @param customerId 用户ID
+     * @return
+     */
     @Override
     public int countByCustomerId(Integer customerId) {
         EvaluateExample evaluateExample = new EvaluateExample();
         EvaluateExample.Criteria criteria = evaluateExample.createCriteria();
         criteria.andCustIdEqualTo(customerId);
-
         return (int) evaluateDao.countByExample(evaluateExample);
     }
 
+    /**
+     * 根据customerId 分页查询所有评论
+     *
+     * @param pageModel  pagemodel
+     * @param customerId 用户ID
+     * @return 评价集合
+     */
     @Override
     public List<Evaluate> queryEvaluateByPage(PageModel pageModel, Integer customerId) {
         EvaluateExample evaluateExample = new EvaluateExample();

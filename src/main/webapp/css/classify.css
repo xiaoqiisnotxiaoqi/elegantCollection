@@ -1,0 +1,298 @@
+.classify {
+    width: 188px;
+}
+
+#classify-title {
+    background: #ff2832;
+
+}
+
+.classify-font {
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.classify-content-title {
+    color: #ff2832;
+    font-weight: 800;
+}
+
+.classify-content-con {
+    width: auto;
+    color: grey;
+    padding: 0;
+    margin-left: 5px;
+    margin-top: 10px;
+    font-size: 12px;
+    /*border-right:solid 1px black;*/
+}
+
+.classify-con {
+
+    float: left;
+    /*background:chocolate;*/
+}
+
+.classify-xian {
+    margin-top: 4px;
+    margin-left: 3px;
+    float: left;
+    width: 1px;
+    height: 10px;
+    background: #b0b0b0;
+}
+
+.classify-content-all {
+    /*background:chartreuse;*/
+    margin-left: -5px;
+}
+
+.classify-bottom-xian {
+    display: inline-block;
+    position: relative;
+    top: 0;
+    height: 1px;
+    width: 155px;
+    background: #b0b0b0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.trun_img {
+    position: relative;
+    top: -610px;
+    left: 360px;
+}
+
+.new-trends {
+    width: 240px;
+    position: relative;
+    top: -920px;
+    left: 1150px;
+    border: solid 1px #d6d6d6;
+    border-radius: 2%;
+}
+
+.new-trends-title {
+
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.new-trends-content {
+    margin-top: 10px;
+}
+
+.new-trends-content ul {
+    list-style: none;
+}
+
+.new-trends-content li {
+    margin-bottom: 5px;
+}
+
+.new-trends-content li a {
+    color: black;
+    font-size: 13px;
+}
+
+.new-trends-content li img {
+    width: 10px;
+    height: 10px;
+}
+
+.little-lunbotu {
+    width: 240px;
+    height: 180px;
+    position: relative;
+    top: -910px;
+    left: 1150px;
+    border: solid 1px #d6d6d6;
+    border-radius: 2%;
+}
+
+/*小轮播图*/
+.test {
+    width: 250px;
+    position: relative;
+    left: -10px;
+    /*height: 400px;*/
+}
+
+.item {
+    width: 250px;
+}
+
+.active {
+    width: 250px;
+}
+
+#myCarousel .carousel-indicators .active {
+    background: #c7c7c7;
+    width: 10px;
+    height: 10px;
+    margin-bottom: 5px;
+}
+
+.test-word {
+    width: 100px;
+    position: relative;
+    left: 120px;
+    top: -105px;
+}
+
+.carousel-control {
+    background: none;
+    box-shadow: none;
+}
+
+.glyphicon-chevron-left {
+    color: #ff2832;
+    position: relative;
+    top: -100px;
+}
+
+.glyphicon-chevron-right {
+    color: #ff2832;
+    position: relative;
+    top: -100px;
+    left: 190px;
+}
+
+.carousel-indicators li {
+    /*color:#487A6F ;*/
+    background: #ff2832;
+}
+
+.new-all {
+    position: relative;
+    top: -925px;
+    left: 200px;
+}
+
+.new-title {
+    float: left;
+    text-align: center;
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    color: white;
+    font-size: 38px;
+    font-weight: 400;
+    font-family: 楷体;
+    background: #ff2832;
+    border-radius: 50%;
+}
+
+.new-content {
+    margin-top: 10px;
+    margin-left: 10px;
+    float: left;
+    color: #ff2832;
+    font-size: 20px;
+}
+
+.new-xian {
+    width: 695px;
+    height: 1px;
+    background: #ff2832;
+    position: relative;
+    top: -930px;
+    left: 270px;
+}
+
+/*中间新书的轮播图*/
+/*控制被选中点点的颜色*/
+#new-myCarousel .carousel-indicators .active {
+    background: #c7c7c7;
+    width: 10px;
+    height: 10px;
+    margin-bottom: 1px;
+}
+
+#new-row {
+    width: 750px;
+    height: 545px;
+}
+
+.new-car-inn {
+    width: 750px;
+    height: 545px;
+}
+
+.new-car {
+    width: 750px;
+    height: 545px;
+    position: relative;
+    top: -905px;
+    left: 370px;
+}
+
+#new-myCarousel {
+    width: 750px;
+    height: 545px;
+}
+
+.new-active {
+    width: 750px;
+    height: 545px;
+}
+
+/*新书左右翻滚*/
+.new-left {
+    position: relative;
+    top: -240px;
+}
+
+.new-right {
+    position: relative;
+    top: -240px;
+    left: 500px;
+}
+
+.new-title-word {
+    margin-left: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 12px;
+}
+
+.new-author {
+    margin-bottom: 3px;
+    margin-left: 20px;
+    font-size: 12px;
+    color: #929292;
+}
+
+.cost-price-icon {
+    margin-left: 20px;
+    float: left;
+    font-size: 15px;
+    font-weight: 600;
+    color: #D45328;
+}
+
+.cost-price {
+    float: left;
+    font-size: 15px;
+    font-weight: 600;
+    color: #D45328;
+}
+
+.original-price-icon {
+    float: left;
+    font-size: 14px;
+    color: #929292;
+    text-decoration: line-through;
+    margin-left: 10px;
+
+}
+
+.original-price {
+    float: left;
+    font-size: 14px;
+    color: #929292;
+    text-decoration: line-through;
+}

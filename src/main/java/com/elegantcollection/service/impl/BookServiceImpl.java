@@ -24,31 +24,133 @@ public class BookServiceImpl implements BookService {
     private final BookDao bookDao;
     @Autowired
     private BookCategoryDao bookCategoryDao;
+    @Autowired
+    private BookOrderDao bookOrderDao;
 
     @Autowired
     public BookServiceImpl(BookDao bookDao) {
         this.bookDao = bookDao;
     }
 
-    //分页查询所有
+
+    /**
+     * 根据条件分页查询图书(计数)
+     *
+     * @param map 查询条件
+     * @return 数量
+     */
     @Override
-    public Integer countAll() {
+    public Integer countByCondition(HashMap map) {
         BookExample bookExample = new BookExample();
+        BookExample.Criteria criterion1 = bookExample.createCriteria();
+        BookExample.Criteria criterion2 = bookExample.createCriteria();
+
+
+        //        根据bookid集合查询,查询在此集合中的图书
+        if (map.get("bookIdList") != null) {
+
+            criterion1.andBookIdIn((List<Integer>) map.get("bookIdList"));
+        }
+
+        //        根据关键字
+        if (map.get("keyWord") != null && map.get("keyWord") != "")
+            criterion1.andBookNameLike("%" + map.get("keyWord") + "%");
+
+
+        //         只看有货(status==1 表示有货,正在出售)
+        if (map.get("bookStatus") != null && map.get("bookStatus") != "")
+            criterion1.andBookStatusEqualTo((Integer) map.get("bookStatus"));
+
+
+        //        根据语言
+        if (map.get("bookLanguage") != null && map.get("bookLanguage") != "")
+            criterion1.andBookLanguageEqualTo((String) map.get("bookLanguage"));
+
+        //        根据价格区间
+        if (map.get("minPrice") != null && map.get("minPrice") != "")
+            criterion1.andBookSellingPriceGreaterThan((Float) map.get("minPrice"));
+
+        if (map.get("maxPrice") != null && map.get("maxPrice") != "")
+            criterion1.andBookSellingPriceLessThan((Float) map.get("maxPrice"));
+//      只看优惠
+        if (map.get("isDiscount") != null && map.get("isDiscount") != "")
+            criterion1.andRedundancyFieldIsNotNull();
+
+        //        排序方式
+        if (map.get("orderBy") != null && map.get("orderBy") != "")
+            bookExample.setOrderByClause((String) map.get("orderBy"));
+
+        //        去重查询
+        bookExample.setDistinct(true);
         return (int) bookDao.countByExample(bookExample);
     }
 
+    /**
+     * 多条件动态分页查询图书
+     *
+     * @param map 封装查询条件
+     * @return 图书集合
+     */
     @Override
-    public List<BookWithBLOBs> queryAll(PageModel pageModel) {
+    public List<BookWithBLOBs> queryByCondition(HashMap map) {
         BookExample bookExample = new BookExample();
-        bookExample.setLimit(pageModel.getPageSize());
-        bookExample.setOffset((long) pageModel.getStartRecord());
+        BookExample.Criteria criterion1 = bookExample.createCriteria();
+        BookExample.Criteria criterion2 = bookExample.createCriteria();
 
+//        根据bookid集合查询,查询在此集合中的图书
+        if (map.get("bookIdList") != null) {
+            criterion1.andBookIdIn((List<Integer>) map.get("bookIdList"));
+        }
+
+        //        根据关键字
+        if (map.get("keyWord") != null && map.get("keyWord") != "")
+            criterion1.andBookNameLike("%" + map.get("keyWord") + "%");
+
+
+        //         只看有货(status==1 表示有货,正在出售)
+        if (map.get("bookStatus") != null && map.get("bookStatus") != "")
+            criterion1.andBookStatusEqualTo((Integer) map.get("bookStatus"));
+
+
+        //        根据语言
+        if (map.get("bookLanguage") != null && map.get("bookLanguage") != "")
+            criterion1.andBookLanguageEqualTo((String) map.get("bookLanguage"));
+
+
+        //        根据价格区间
+        if (map.get("minPrice") != null && map.get("minPrice") != "")
+            criterion1.andBookSellingPriceGreaterThan((Float) map.get("minPrice"));
+
+        if (map.get("maxPrice") != null && map.get("maxPrice") != "")
+            criterion1.andBookSellingPriceLessThan((Float) map.get("maxPrice"));
+
+
+        //根据pagemodel查询
+        if (map.get("pageModel") != null) {
+            bookExample.setLimit(((PageModel) map.get("pageModel")).getPageSize());
+            bookExample.setOffset((long) ((PageModel) map.get("pageModel")).getStartRecord());
+        }
+//      只看满减优惠
+        if (map.get("isDiscount") != null && map.get("isDiscount") != "")
+            criterion1.andRedundancyFieldIsNotNull();
+
+
+//        排序方式
+        if (map.get("orderBy") != null && map.get("orderBy") != "")
+            bookExample.setOrderByClause((String) map.get("orderBy"));
+//        表示去重查询
+        bookExample.setDistinct(true);
 
         return bookDao.selectByExampleWithBLOBs(bookExample);
-
     }
 
-    //    根据bookid查询所有图片
+
+    /**
+     * 根据bookid查询所有图片
+     *
+     * @param bookId 图书ID
+     * @return 图片集合
+     */
     @Override
     public List<BookImg> queryBookImgsById(Integer bookId) {
         BookImgExample bookImgExample = new BookImgExample();
@@ -59,25 +161,31 @@ public class BookServiceImpl implements BookService {
         return bookImgDao.selectByExample(bookImgExample);
     }
 
+
     /**
      * 根据bookID获得评论数
      *
-     * @param bookId
-     * @return
+     * @param bookId 图书ID
+     * @return 评论数量
      */
     @Override
-    public int getEvaluateCountByBookId(Integer bookId) {
+    public int countEvaluateByBookId(Integer bookId) {
         EvaluateExample evaluateExample = new EvaluateExample();
         EvaluateExample.Criteria criteria = evaluateExample.createCriteria();
         criteria.andBookIdEqualTo(bookId);
         return (int) evaluateDao.countByExample(evaluateExample);
-
-
     }
 
-    ////    根据bookid获得所有评论(分页)
+
+    /**
+     * 根据bookid获得所有评论(分页)
+     *
+     * @param bookId    图书Id
+     * @param pageModel PageModel对象
+     * @return 评论集合
+     */
     @Override
-    public List<Evaluate> getEvaluateListByBookId(Integer bookId, PageModel pageModel) {
+    public List<Evaluate> queryEvaluateListByBookId(Integer bookId, PageModel pageModel) {
         EvaluateExample evaluateExample = new EvaluateExample();
         EvaluateExample.Criteria criteria = evaluateExample.createCriteria();
         criteria.andBookIdEqualTo(bookId);
@@ -86,16 +194,29 @@ public class BookServiceImpl implements BookService {
         return evaluateDao.selectByExampleWithBLOBs(evaluateExample);
     }
 
+
+    /**
+     * 根据bookID获得作者对象
+     *
+     * @param bookId 图书Id
+     * @return 作者对象
+     */
     @Override
-    public Author getAuthorByBookId(Integer bookId) {
+    public Author queryAuthorByBookId(Integer bookId) {
         AuthorExample authorExample = new AuthorExample();
         AuthorExample.Criteria criteria = authorExample.createCriteria();
         criteria.andAuthorIdEqualTo(bookId);
 
-        return authorDao.selectByExampleWithBLOBs(authorExample).get(0);
+        return authorDao.selectByExampleWithBLOBs(authorExample).size() == 0 ? null : authorDao.selectByExampleWithBLOBs(authorExample).get(0);
     }
 
 
+    /**
+     * 根据id查询图书
+     *
+     * @param bookId 图书ID
+     * @return book对象
+     */
     @Override
     public Book quaryBookByBookId(Integer bookId) {
         return bookDao.selectByPrimaryKey(bookId);
@@ -103,51 +224,42 @@ public class BookServiceImpl implements BookService {
 
 
     /**
-     * 根据分类ID计数
+     * 根据分类ID查询图书
      *
-     * @return
+     * @param categoryId 分类ID
+     * @return 图书集合
      */
     @Override
-    public long countByCategoryId(Integer categoryId) {
+    public List<Book> queryByCategoryId(Integer categoryId) {
         BookExample bookExample = new BookExample();
         BookExample.Criteria criteria = bookExample.createCriteria();
         BookExample.Criteria criteria2 = bookExample.createCriteria();
         BookExample.Criteria criteria3 = bookExample.createCriteria();
         bookExample.setDistinct(true);
-
-        criteria.andBookMainCategoryEqualTo(categoryId);
-        criteria2.andBookFirstCategoryEqualTo(categoryId);
-        criteria3.andBookSecondCategoryEqualTo(categoryId);
-
-        bookExample.or(criteria2);
-        bookExample.or(criteria3);
-        return bookDao.countByExample(bookExample);
+        if (categoryId != null) {
+            criteria.andBookMainCategoryEqualTo(categoryId);
+            criteria2.andBookFirstCategoryEqualTo(categoryId);
+            criteria3.andBookSecondCategoryEqualTo(categoryId);
+            bookExample.or(criteria2);
+            bookExample.or(criteria3);
+        }
+        return bookDao.selectByExample(bookExample);
     }
 
     /**
-     * 根据分类ID分页查询
+     * 查询展示的书单(3条记录)
      *
-     * @param pageModel pagemodel对象
-     * @param map       封装了查询条件
-     * @return
+     * @return 书单集合
      */
     @Override
-    public List<BookWithBLOBs> queryByCategoryId(HashMap map, PageModel<Book> pageModel) {
-        BookExample bookExample = new BookExample();
-        BookExample.Criteria criteria = bookExample.createCriteria();
-        BookExample.Criteria criteria2 = bookExample.createCriteria();
-        BookExample.Criteria criteria3 = bookExample.createCriteria();
-        bookExample.setDistinct(true);
+    public List<BookOrder> queryBookOrder() {
+        BookOrderExample bookOrderExample = new BookOrderExample();
+        BookOrderExample.Criteria criteria = bookOrderExample.createCriteria();
 
-        criteria.andBookMainCategoryEqualTo((Integer) map.get("categoryId"));
-        criteria2.andBookFirstCategoryEqualTo((Integer) map.get("categoryId"));
-        criteria3.andBookSecondCategoryEqualTo((Integer) map.get("categoryId"));
-
-        bookExample.or(criteria2);
-        bookExample.or(criteria3);
-
-
-        return bookDao.selectByExampleWithBLOBs(bookExample);
+        criteria.andOrderStatusEqualTo(1);
+        bookOrderExample.setLimit(3);
+        bookOrderExample.setOffset(0l);
+        return bookOrderDao.selectByExample(bookOrderExample);
     }
 
 

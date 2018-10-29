@@ -12,7 +12,13 @@ import java.util.Map;
 
 @Controller
 public class Ui {
+    //    跳转首页
+    @RequestMapping("index")
+    public String index() {
+        return "index";
+    }
 
+    //跳转图书列表
     @RequestMapping("allbooks")
     public String ui1() {
         return "allbooks";
@@ -24,21 +30,24 @@ public class Ui {
 
         return "top";
     }
+
     @RequestMapping("userinfo")
     public String ui3() {
 
         return "user_info";
     }
 
-   @RequestMapping("updatainfo")
-    public String  ui4(){
+    @RequestMapping("updatainfo")
+    public String ui4() {
         return "updatainfo";
-   }
+    }
+
     @RequestMapping("myelegant")
-    public String  ui5(){
+    public String ui5() {
         return "my_Elegant";
     }
 
+    //    跳转图书详情
     @RequestMapping("bookdetail")
     public String ui3(Integer bookId, HttpServletRequest request) {
         System.out.println("跳转到detail页面");
@@ -61,7 +70,7 @@ public class Ui {
     }
 
     @RequestMapping("pay")
-    public String pay(){
+    public String pay() {
         return "pay";
     }
 
@@ -70,7 +79,7 @@ public class Ui {
         return "post";
     }
 
-
+    //跳转我的评价
     @RequestMapping("myEvaluate")
     public String ui4(HttpServletRequest request) {
         Customer customer = (Customer) request.getSession().getAttribute("customer");
@@ -79,24 +88,24 @@ public class Ui {
     }
 
     @RequestMapping("custCart")
-    public String custCart(){
+    public String custCart() {
         return "custCart";
     }
 
 
     @RequestMapping("postReply")
-    public String custPostReply(){
+    public String custPostReply() {
         return "postReply";
     }
 
     @RequestMapping("review")
-    public String review(){
+    public String review() {
         return "reviewTheDetails";
     }
 
     @RequestMapping("butNow")
-    public  String butNow(@RequestParam Map<String,String> map,HttpServletRequest request){
-        request.getSession().setAttribute("buyThis",map);
+    public String butNow(@RequestParam Map<String, String> map, HttpServletRequest request) {
+        request.getSession().setAttribute("buyThis", map);
         return "pay";
     }
 

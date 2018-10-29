@@ -9,52 +9,50 @@
 <html>
 <head>
     <title>所有图书</title>
-    <link rel="stylesheet" href="../../css/allbooks.css">
-
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/allbooks.css">
+    <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 </head>
 <body>
+<jsp:include page="top.jsp"/>
+<input id="current-category" name="10034" type="hidden"/>
+<input id="keyword" name="" type="hidden"/>
+<input id="minPrice" name="" type="hidden"/>
+<input id="maxPrice" name="" type="hidden"/>
+<input id="language" name="" type="hidden"/>
+<input id="discount" name="" type="hidden"/>
+<input id="orderBy" name="" value="" type="hidden"/>
+<input id="bookStatus" name="" type="hidden"/>
+<input id="isDiscount" name="" type="hidden"/>
+<input id="currentPageCode" name="1" type="hidden"/>
 
-<!--广告1-->
-<a href="">
-    <div id="ad-top-box">
-        <div id="ad-top">
-            <img src="../../images/广告图001.jpg"/>
-        </div>
-    </div>
-</a>
 
 <div id="main-area">
     <div id="fenji-nav-box">
-        <a href="" class="a">图书 </a>
-        <span class="sp">></span>
-        <a href="" class="a">分类1 </a> <span class="sp">></span>
+        <a href="" class="a" id="categoryname">当前分类>所有图书</a>
 
-        <a href="" class="a"> 分类2</a>
     </div>
     <div id="filtrate-box">
         <ul id="filtrate-list">
-            <li class="li">
+            <li class="li" id="zifenlei">
                 <span class="li-title">子分类</span>
-                <a class="li-options">子分类1</a>
-                <a class="li-options">子分类2</a>
-                <a class="li-options">子分类3</a>
-                <a class="li-options">子分类4</a>
+                <a class="li-options" name=" 123" href="javascript:refresh()"></a>
+
             </li>
 
             <li class="li">
                 <span class="li-title">价格</span>
-                <a class="li-options">0-9</a>
-                <a class="li-options">9-19</a>
-                <a class="li-options">19-29</a>
-                <a class="li-options">29-49</a>
-                <a class="li-options">49以上</a>
+                <a class="li-options" name="1" onclick="javascript:clickPrice(this)">0-9</a>
+                <a class="li-options" name="2" onclick="javascript:clickPrice(this)">9-19</a>
+                <a class="li-options" name="3" onclick="javascript:clickPrice(this)">19-29</a>
+                <a class="li-options" name="4" onclick="javascript:clickPrice(this)">29-49</a>
+                <a class="li-options" name="6" onclick="javascript:clickPrice(this)">49以上</a>
             </li>
             <li class="li">
                 <span class="li-title">语言</span>
-                <a class="li-options">中文</a>
-                <a class="li-options">英文</a>
-                <a class="li-options">日文</a>
-                <a class="li-options">其他语言</a>
+                <a class="li-options" onclick="javascript:clickLanguage(this)" name="中文">中文</a>
+                <a class="li-options" onclick="javascript:clickLanguage(this)" name="英文">英文</a>
+                <a class="li-options" onclick="javascript:clickLanguage(this)" name="日文">日文</a>
+                <a class="li-options" onclick="javascript:clickLanguage(this)" name="俄文">俄文</a>
 
             </li>
             <li class="li">
@@ -72,22 +70,22 @@
     </div>
     <div id="orderby-box">
         <ul class="orderby-ul">
-            <li class="orderby-li"><a href=" " class="sort-box-a">综合排序<span class="icon"></span></a></li>
-            <li class="orderby-li">销量</li>
-            <li class="orderby-li">好评</li>
-            <li class="orderby-li">出版时间</li>
+            <li class="orderby-li" value="1" onclick="clickOrderBy(this)"><a href=" " class="sort-box-a">综合排序<span
+                    class="icon"></span></a></li>
+            <li class="orderby-li" value="2" onclick="clickOrderBy(this)">销量</li>
+            <li class="orderby-li" value="3" onclick="clickOrderBy(this)">价格</li>
+            <li class="orderby-li" value="4" onclick="clickOrderBy(this)">出版时间</li>
 
             <li class="orderby-li" style="width: 180px">
                 价格
-                <input type="text" class="orderby-input"><span> -</span>
-                <input type="text" class="orderby-input">
-                <button id="price-btn">确定</button>
+                <input type="text" class="orderby-input" id="mininput"><span> -</span>
+                <input type="text" class="orderby-input" id="maxinput">
+                <button id="price-btn" name="5" onclick="javascript:clickPrice(this)">确定</button>
             </li>
         </ul>
         <ul class="orderby-ul">
-            <li class="options"><a href=" " class="on">只看有货</a></li>
-            <li class="options"><a href=" " class="on">打折</a></li>
-            <li class="options"><a href=" " class="on">组合优惠</a></li>
+            <li class="options"><a class="on" onclick="javascript:clickStatus(this)">只看有货</a></li>
+            <li class="options"><a class="on" onclick="javascript:clickIsDiscount(this)">只看优惠</a></li>
         </ul>
     </div>
     <%--图书区域--%>
@@ -95,13 +93,30 @@
 
 
     </ul>
+    <%--分页--%>
+    <div id="pagination" class="pagination">
+        <ul>
+            <li value="1" onclick="page(this)">首页</li>
+            <li value="" id="shangye" onclick="page(this)">&lt;</li>
+            <li value="" class="active" id="currentPage"></li>
+            <li value="" id="xiaye" onclick="page(this)">&gt;</li>
+            <li value="" id="last" onclick="page(this)">尾页</li>
+            <li class="totalPage"><span>跳转到</span><input type="number" value="1" id="pageinput"/><span>页</span></li>
+            <li onclick="page(this)" id="pageBtn">跳转</li>
+            <li class="totalPage">共&nbsp;<span id="totalPages"></span>&nbsp;页</li>
+
+            <li class="totalPage">每页&nbsp;<span id="pageSize"></span>&nbsp;条</li>
+            <li class="totalPage">合计&nbsp;<span id="totalRecord"></span>&nbsp;条记录</li>
+        </ul>
+    </div>
 
     <!--右侧广告-->
-    <div id="right-adv">右侧广告区域</div>
+
 </div>
 </div>
 
 <%--加载js--%>
-<script src="../../js/allbooks.js"></script>
+<script src="${pageContext.request.contextPath}/js/allbooks.js"></script>
+<script src="${pageContext.request.contextPath}/js/utilsnotoken.js"></script>
 </body>
 </html>

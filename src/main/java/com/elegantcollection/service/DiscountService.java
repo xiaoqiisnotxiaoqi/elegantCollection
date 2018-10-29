@@ -24,5 +24,14 @@ public interface DiscountService {
     DiscountDetail quereDiscountDetailByDiscountId(Integer discountId);
 
 
+    /**
+     * 根据discountId查询参与满减优惠详情
+     *
+     * @param discountId 优惠ID
+     * @return discount对象
+     */
+    Discount queryManjianByDiscountId(Integer discountId);
+
+
 
 }
