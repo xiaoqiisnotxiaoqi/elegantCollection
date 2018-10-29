@@ -41,7 +41,9 @@
             <%--</div>--%>
         </div>
         <div id="fenye" class="fenye">
-
+            <%--<span class="ye"><a href="#">下一页</a> </span>--%>
+            <%--<span class="ma">1</span>--%>
+            <%--<span class="ye"><a href="#">上一页</a> </span>--%>
         </div>
     </div>
 </div>

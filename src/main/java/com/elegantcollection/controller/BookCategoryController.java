@@ -34,7 +34,7 @@ public class BookCategoryController {
 
     /**
      * 根据总销量降序显示书籍
-     * @param pagecode 分页对象
+     * @param request
      * @return
      */
     @GetMapping("getbooktotal")
@@ -46,6 +46,7 @@ public class BookCategoryController {
         }else {
             pageModel.setCurrentPageCode(pagecode);
         }
+        pageModel.setPageSize(10);
         pageModel.setTotalRecord(this.bookService.queryCountAll());
         pageModel.setTotalPages(pageModel.getTotalRecord() % pageModel.getPageSize() == 0 ? pageModel.getTotalRecord()
                 / pageModel.getPageSize() : pageModel.getTotalRecord() / pageModel.getPageSize() + 1);
@@ -54,14 +55,9 @@ public class BookCategoryController {
         return pageModel;
     }
 
-    @GetMapping("getbooktotal/page/{page}")
-    public PageModel<Book> getByPage(HttpServletRequest request){
-        return getBookByTotal(request);
-    }
-
     /**
      * 根据上月销量降序显示书籍
-     * @param pagecode 分页对象
+     * @param request
      * @return
      */
     @GetMapping("getbooklastmonth")
@@ -73,6 +69,7 @@ public class BookCategoryController {
         }else {
             pageModel.setCurrentPageCode(pagecode);
         }
+        pageModel.setPageSize(20);
         pageModel.setTotalRecord(this.bookService.queryCountAll());
         pageModel.setTotalPages(pageModel.getTotalRecord() % pageModel.getPageSize() == 0 ? pageModel.getTotalRecord()
                 / pageModel.getPageSize() : pageModel.getTotalRecord() / pageModel.getPageSize() + 1);
@@ -81,15 +78,9 @@ public class BookCategoryController {
         return pageModel;
     }
 
-    @GetMapping("getbooklastmonth/page/{page}")
-    public PageModel<Book> getByPage2(HttpServletRequest request){
-        return getBookByLastMonth(request);
-    }
-
     /**
      * 根据上月销量和类别降序显示书籍
-     * @param id 类别id
-     * @param pagecode 分页对象
+     * @param request
      * @return
      */
     @GetMapping("getbooklastmonthcategory")
@@ -102,16 +93,12 @@ public class BookCategoryController {
         }else {
             pageModel.setCurrentPageCode(pagecode);
         }
+        pageModel.setPageSize(20);
         pageModel.setTotalRecord(this.bookService.queryCountOne(id));
         pageModel.setTotalPages(pageModel.getTotalRecord() % pageModel.getPageSize() == 0 ? pageModel.getTotalRecord()
                 / pageModel.getPageSize() : pageModel.getTotalRecord() / pageModel.getPageSize() + 1);
         pageModel.setStartRecord((pageModel.getCurrentPageCode() - 1) * pageModel.getPageSize());
         pageModel = this.bookService.queryBookByBookSalesLastMonthAndBookCategory(id,pageModel);
         return pageModel;
-    }
-
-    @GetMapping("getbooklastmonthcategory/page/{page}")
-    public PageModel<Book> getByPage3(HttpServletRequest request){
-        return getBookByLastMonthCategory(request);
     }
 }

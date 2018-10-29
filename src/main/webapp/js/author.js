@@ -43,9 +43,13 @@ function loadBook() {
         var zuo = document.getElementById("zuo");
         zuo.innerHTML = "";
         for (var i = 0; i < result.length; i++) {
-            zuo.innerHTML += ('<div class="pin"><a href="#"> <img src="' + result[i].bookImg + '"></a>' +
-                '<a href="#"><span class="shuzi">' + result[i].bookName + '</span></a><label class="jia">¥' +
+            zuo.innerHTML += ('<div class="pin"><a href="#" name="' + result[i].bookId + '" onclick="getDetail(this)' +
+                '"> <img src="' + result[i].bookImg + '"></a><a href="#" name="' + result[i].bookId + '" onclick="' +
+                'getDetail(this)"><span class="shuzi">' + result[i].bookName + '</span></a><label class="jia">¥' +
                 '</label><span class="jia">' + result[i].bookSellingPrice + '</span></div>');
         }
     }
+}
+function getDetail(pro) {
+    window.location = "bookdetail/?bookId=" + pro.name;
 }
