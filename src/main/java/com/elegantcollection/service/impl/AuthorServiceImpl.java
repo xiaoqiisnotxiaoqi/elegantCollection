@@ -20,8 +20,6 @@ public class AuthorServiceImpl implements AuthorService {
      */
     @Override
     public Author queryAuthorById(Integer authorId) {
-        AuthorExample authorExample = new AuthorExample();
-        authorExample.createCriteria().andAuthorIdEqualTo(authorId);
-        return authorDao.selectByExample(authorExample).get(0);
+        return authorDao.selectByPrimaryKey(authorId);
     }
 }

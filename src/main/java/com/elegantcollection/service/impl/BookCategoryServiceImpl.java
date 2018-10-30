@@ -61,4 +61,13 @@ public class BookCategoryServiceImpl implements BookCategoryService {
         criteria.andCategoryIdEqualTo(categoryId);
         return bookCategoryDao.selectByExample(bookCategoryExample).get(0);
     }
+
+    /**
+     * 获取第一级分类
+     * @return 第一级类别集合
+     */
+    @Override
+    public List<BookCategory> queryBookCategoryByUpIdNull() {
+        return bookCategoryDao.selectBookCategoryByUpIdNull();
+    }
 }

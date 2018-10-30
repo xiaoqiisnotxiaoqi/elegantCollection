@@ -5,10 +5,11 @@ import com.elegantcollection.dao.*;
 import com.elegantcollection.entity.*;
 import com.elegantcollection.service.BookService;
 import com.elegantcollection.util.PageModel;
-import org.mybatis.generator.codegen.ibatis2.model.ExampleGenerator;
+import com.elegantcollection.util.ServerResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -26,12 +27,57 @@ public class BookServiceImpl implements BookService {
     private BookCategoryDao bookCategoryDao;
     @Autowired
     private BookOrderDao bookOrderDao;
+    @Autowired
+    private CartDao cartDao;
 
     @Autowired
     public BookServiceImpl(BookDao bookDao) {
         this.bookDao = bookDao;
     }
 
+    /**
+     * xml文件版本的多条件动态分页查询
+     *
+     * @param conditions 封装查询条件
+     * @return 封装了图书集合, 分页信息
+     */
+    @Override
+    public ServerResponse<HashMap> sjTest(HashMap conditions) {
+        HashMap result = new HashMap();
+
+//        设置分页信息
+        PageModel pageModel = new PageModel();
+        if (conditions.get("pageCode") == null) {
+            pageModel.setCurrentPageCode(1);
+        } else {
+            pageModel.setCurrentPageCode((Integer) conditions.get("pageCode"));
+        }
+        pageModel.setPageSize(15);
+        pageModel.setTotalRecord(bookDao.testCount(conditions));
+        pageModel.setTotalPages(pageModel.getTotalRecord() % pageModel.getPageSize() == 0 ? pageModel.getTotalRecord() / pageModel.getPageSize() : pageModel.getTotalRecord() / pageModel.getPageSize() + 1);
+        pageModel.setStartRecord((pageModel.getCurrentPageCode() - 1) * pageModel.getPageSize());
+        conditions.put("pageModel", pageModel);
+
+        List<BookWithBLOBs> bookList = bookDao.test(conditions);
+        pageModel.setModelList(bookList);
+
+        result.put("pageModel", pageModel);
+
+//        根据分类ID查询子分类
+        Integer categoryId = (Integer) conditions.get("categoryId");
+        if (categoryId == null) {
+            categoryId = 10034;
+        }
+        BookCategoryExample bookCategoryExample = new BookCategoryExample();
+        bookCategoryExample.createCriteria().andCategoryUpIdEqualTo(categoryId);
+        List<BookCategory> childCategoryList = bookCategoryDao.selectByExample(bookCategoryExample);
+        result.put("childCategoryList", childCategoryList);
+
+
+        return ServerResponse.createBySuccess("查询成功", result);
+
+
+    }
 
     /**
      * 根据条件分页查询图书(计数)
@@ -99,7 +145,7 @@ public class BookServiceImpl implements BookService {
 
 //        根据bookid集合查询,查询在此集合中的图书
         if (map.get("bookIdList") != null) {
-            criterion1.andBookIdIn((List<Integer>) map.get("bookIdList"));
+            criterion2.andBookIdIn((List<Integer>) map.get("bookIdList"));
         }
 
         //        根据关键字
@@ -139,6 +185,7 @@ public class BookServiceImpl implements BookService {
         if (map.get("orderBy") != null && map.get("orderBy") != "")
             bookExample.setOrderByClause((String) map.get("orderBy"));
 //        表示去重查询
+        bookExample.or(criterion2);
         bookExample.setDistinct(true);
 
         return bookDao.selectByExampleWithBLOBs(bookExample);
@@ -262,5 +309,103 @@ public class BookServiceImpl implements BookService {
         return bookOrderDao.selectByExample(bookOrderExample);
     }
 
+    /**
+     * 从详情页添添加到购物车
+     *
+     * @param custId    用户ID
+     * @param bookId    图书ID
+     * @param bookCount 图书数量
+     * @return 受影响行数
+     */
+    @Override
+    public ServerResponse<Integer> add2Cart(Integer custId, Integer bookId, Integer bookCount) {
+        CartExample cartExample = new CartExample();
+//        先查询购物车里是否已经存在
+        cartExample.createCriteria().andCustIdEqualTo(custId).andBookIdEqualTo(bookId);
+        List<Cart> carts = cartDao.selectByExample(cartExample);
+        if (carts.size() != 0) {
+            return ServerResponse.createByError("购物车中已存在!");
+        } else {
+//            添加操作
+            Cart cart = new Cart(null, custId, bookId, bookCount, new Date(), 0, null, null);
+            Integer rows = cartDao.insert(cart);
+            if (rows == 1) {
+                return ServerResponse.createBySuccess("添加成功!", rows);
+            } else {
+                return ServerResponse.createByError("添加失败");
+            }
+        }
+    }
 
+    /**
+     * 根据作者id查询书籍
+     *
+     * @param authorId 作者id
+     * @return 书集合
+     */
+    @Override
+    public List<Book> queryBookByAuthorId(Integer authorId) {
+        return bookDao.selectBookByAuthorId(authorId);
+    }
+
+    /**
+     * 根据总销量降序查书
+     *
+     * @param pageModel
+     * @return
+     */
+    @Override
+    public PageModel<Book> queryBookByBookSalesTotal(PageModel<Book> pageModel) {
+        List<Book> list = bookDao.selectBookByBookSalesTotal(pageModel);
+        pageModel.setModelList(list);
+        return pageModel;
+    }
+
+    /**
+     * 根据上月销量降序查书
+     *
+     * @param pageModel
+     * @return
+     */
+    @Override
+    public PageModel<Book> queryBookByBookSalesLastMonth(PageModel<Book> pageModel) {
+        List<Book> list = this.bookDao.selectBookByBookSalesLastMonth(pageModel);
+        pageModel.setModelList(list);
+        return pageModel;
+    }
+
+    /**
+     * 根据上月销量和类别降序查书
+     *
+     * @param categoryId 类别id
+     * @param pageModel
+     * @return
+     */
+    @Override
+    public PageModel<Book> queryBookByBookSalesLastMonthAndBookCategory(Integer categoryId, PageModel<Book> pageModel) {
+        List<Book> list = this.bookDao.selectBookByBookSalesLastMonthAndBookCategory(categoryId, pageModel);
+        pageModel.setModelList(list);
+        return pageModel;
+    }
+
+    /**
+     * 计数
+     *
+     * @return
+     */
+    @Override
+    public Integer queryCountAll() {
+        return bookDao.selectCountAll();
+    }
+
+    /**
+     * 单一类别计数
+     *
+     * @param categoryId 类别id
+     * @return
+     */
+    @Override
+    public Integer queryCountOne(Integer categoryId) {
+        return bookDao.selectCountOne(categoryId);
+    }
 }

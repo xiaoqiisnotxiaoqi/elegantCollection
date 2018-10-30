@@ -2,10 +2,10 @@ body{
     margin: 0;
     padding: 0;
 }
-a{
-    text-decoration: none;
-    color: black;
-}
+ a{
+     text-decoration: none;
+     color: black;
+ }
 .mydang{
     width: 1200px;
     margin: 15px auto 50px;
@@ -24,7 +24,7 @@ a{
 }
 .my_menu-title{
     width: 67%;
-    display: block;
+   display: block;
     margin-top: 0px;
     font-weight: normal;
     font-size:16px;
@@ -63,7 +63,7 @@ a{
 }
 
 
-.mydang a:hover{
+ .mydang a:hover{
     color: rgba(77, 77, 77, 0.91);
 }
 a:link, a:visited {
@@ -145,7 +145,7 @@ a:link, a:visited {
     opacity: 0.8;
 }
 
-.user_phone .opacity_mask {
+ .user_phone .opacity_mask {
     width: 117px;
     height: 117px;
     position: absolute;
@@ -180,12 +180,12 @@ a:link, a:visited {
     font-size: 16px;
 }
 .safety_type .safety-level{
-    padding: 15px 0 0;
-    font-size: 14px;
-}
+     padding: 15px 0 0;
+     font-size: 14px;
+ }
 .safety_type  .level{
-    color: #ff9804;
-}
+     color: #ff9804;
+ }
 .safety_type {
 
     width: 360px;
@@ -419,7 +419,7 @@ a:link, a:visited {
     text-align: center;
     width: 42px;
 }
-.back_top {
+ .back_top {
     background: url("../images/sidebar_icon.png") 0 -168px no-repeat;
 }
 
@@ -438,3 +438,84 @@ a:link, a:visited {
     background-position: -42px -168px;
     background-color: #ff3228;
 }
+
+
+.info_list ul {
+    padding: 0 15px;
+    font-size: 14px;
+    line-height: 32px;
+}
+
+.info_list li {
+    padding: 12px 0;
+    position: relative;
+    list-style-type: none;
+}
+.info_list li .name {
+    width: 76px;
+    text-align: right;
+    padding-right: 10px;
+    display: inline-block;
+    vertical-align: top;
+}
+.info_list li input[type="text"]{
+    height: 30px;
+    line-height: 30px;
+    width: 150px;
+    padding: 0 5px;
+    border: 2px solid #d2d2d2;
+    margin: 0 15px 0 0;
+    border-radius: 3px;
+}
+
+.info_list li .alart_tip {
+    left: 86px;
+    position: absolute;
+    top: 40px;
+    color: #ff2832;
+}
+.red {
+    color: #ff2832 !important;
+}
+
+.info_list li .select_add {
+    position: relative;
+    display: inline-block;
+    font-size: 12px;
+    *display: inline;
+    *zoom: 1;
+}
+
+.info_list li .text {
+    display: inline-block;
+    height: 30px;
+    padding: 0 12px 0 8px;
+    color: #505050;
+    margin-right: 8px;
+    border: 1px solid #d2d2d2;
+    border-radius: 3px;
+    line-height: 30px;
+    background: url(../images/area_drop.png) right bottom no-repeat #fff;
+    z-index: 8;
+    position: relative;
+}
+
+.info_list li .area_pop {
+    position: absolute;
+    width: 369px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    z-index: 7;
+    padding: 0 2px;
+    top: 30px;
+    left: 0;
+    min-height: 88px;
+}
+.info_list li .alart_tip {
+    left: 86px;
+    position: absolute;
+    top: 40px;
+    color: #ff2832;
+    font-size: 12px;
+}
+

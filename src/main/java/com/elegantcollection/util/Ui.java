@@ -22,7 +22,15 @@ public class Ui {
     //跳转图书列表
     @RequestMapping("allbooks")
     public String ui1() {
+        System.out.println("★★★★★★★★★★★★★★★★--跳转到allbooks--★★★★★★★★★★★★★★★");
         return "allbooks";
+
+    }
+
+    //    测试
+    @RequestMapping("my")
+    public String ui6() {
+        return "My_address";
 
     }
 
@@ -112,5 +120,18 @@ public class Ui {
         return "pay";
     }
 
+    @RequestMapping("author")
+    public String uiz(){
+        return "author";
+    }
 
+    @RequestMapping("booklist")
+    public String uih(){
+        return "booklist";
+    }
+
+    @RequestMapping("ranking")
+    public String uio(){
+        return "ranking";
+    }
 }

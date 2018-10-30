@@ -3,12 +3,21 @@ package com.elegantcollection.service;
 
 import com.elegantcollection.entity.*;
 import com.elegantcollection.util.PageModel;
+import com.elegantcollection.util.ServerResponse;
 import org.omg.PortableInterceptor.INACTIVE;
 
 import java.util.HashMap;
 import java.util.List;
 
 public interface BookService {
+    /**
+     * xml文件版本的多条件动态分页查询
+     *
+     * @param conditions 封装查询条件
+     * @return 图书集合
+     */
+    ServerResponse<HashMap> sjTest(HashMap conditions);
+
 
     /**
      * 多条件动态,分页查询图书总数用于分页
@@ -25,7 +34,6 @@ public interface BookService {
      * @return 查询结果集合
      */
     List<BookWithBLOBs> queryByCondition(HashMap map);
-
 
 
     /**
@@ -81,7 +89,66 @@ public interface BookService {
     /**
      * 查询出展示的书单
      *
-     * @return  书单集合
+     * @return 书单集合
      */
     List<BookOrder> queryBookOrder();
+
+    /**
+     * 从图书详情页面添加图书到购物车
+     *
+     * @param custId    用户ID
+     * @param bookId    图书ID
+     * @param bookCount 图书数量
+     * @return 添加结果(受影响行数)
+     */
+    ServerResponse<Integer> add2Cart(Integer custId, Integer bookId, Integer bookCount);
+
+    /**
+     * 根据作者id查询书籍
+     *
+     * @param authorId 作者id
+     * @return 书集合
+     */
+    public List<Book> queryBookByAuthorId(Integer authorId);
+
+    /**
+     * 根据总销量降序查书
+     *
+     * @param pageModel
+     * @return
+     */
+    public PageModel<Book> queryBookByBookSalesTotal(PageModel<Book> pageModel);
+
+    /**
+     * 根据上月销量降序查书
+     *
+     * @param pageModel
+     * @return
+     */
+    public PageModel<Book> queryBookByBookSalesLastMonth(PageModel<Book> pageModel);
+
+    /**
+     * 根据上月销量和类别降序查书
+     *
+     * @param categoryId 类别id
+     * @param pageModel
+     * @return
+     */
+    public PageModel<Book> queryBookByBookSalesLastMonthAndBookCategory(Integer categoryId, PageModel<Book> pageModel);
+
+
+    /**
+     * 计数
+     *
+     * @return
+     */
+    public Integer queryCountAll();
+
+    /**
+     * 单一类别计数
+     *
+     * @param categoryId 类别id
+     * @return
+     */
+    public Integer queryCountOne(Integer categoryId);
 }
