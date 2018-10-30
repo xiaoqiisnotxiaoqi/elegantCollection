@@ -339,5 +339,69 @@ public class BookServiceImpl implements BookService {
         }
     }
 
+    /**
+     * 根据作者id查询书籍
+     * @param authorId 作者id
+     * @return 书集合
+     */
+    @Override
+    public List<Book> queryBookByAuthorId(Integer authorId) {
+        return bookDao.selectBookByAuthorId(authorId);
+    }
 
+    /**
+     * 根据总销量降序查书
+     * @param pageModel
+     * @return
+     */
+    @Override
+    public PageModel<Book> queryBookByBookSalesTotal(PageModel<Book> pageModel) {
+        List<Book> list = bookDao.selectBookByBookSalesTotal(pageModel);
+        pageModel.setModelList(list);
+        return pageModel;
+    }
+
+    /**
+     * 根据上月销量降序查书
+     * @param pageModel
+     * @return
+     */
+    @Override
+    public PageModel<Book> queryBookByBookSalesLastMonth(PageModel<Book> pageModel) {
+        List<Book> list = this.bookDao.selectBookByBookSalesLastMonth(pageModel);
+        pageModel.setModelList(list);
+        return pageModel;
+    }
+
+    /**
+     * 根据上月销量和类别降序查书
+     * @param categoryId 类别id
+     * @param pageModel
+     * @return
+     */
+    @Override
+    public PageModel<Book> queryBookByBookSalesLastMonthAndBookCategory(Integer categoryId, PageModel<Book> pageModel) {
+        List<Book> list = this.bookDao.selectBookByBookSalesLastMonthAndBookCategory(categoryId,pageModel);
+        pageModel.setModelList(list);
+        return pageModel;
+    }
+
+    /**
+     * 计数
+     * @return
+     */
+    @Override
+    public Integer queryCountAll() {
+        return bookDao.selectCountAll();
+    }
+
+    /**
+     * 单一类别计数
+     * @param categoryId 类别id
+     * @return
+     */
+    @Override
+    public Integer queryCountOne(Integer categoryId) {
+        return bookDao.selectCountOne(categoryId);
+    }
 }

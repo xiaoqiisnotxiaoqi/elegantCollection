@@ -23,6 +23,8 @@ public interface BookOrderDetailDao {
 
     BookOrderDetail selectByPrimaryKey(BookOrderDetailKey key);
 
+    List<Integer> selectBookIdByOrderId(Integer id);
+
     int updateByExampleSelective(@Param("record") BookOrderDetail record, @Param("example") BookOrderDetailExample example);
 
     int updateByExample(@Param("record") BookOrderDetail record, @Param("example") BookOrderDetailExample example);

@@ -22,6 +22,10 @@ public interface BookCategoryDao {
 
     BookCategory selectByPrimaryKey(Integer categoryId);
 
+    List<BookCategory> selectBookCategoryByUpIdNull();
+
+    List<BookCategory> selectBookCategoryByCategoryUpId(Integer categoryUpId);
+
     int updateByExampleSelective(@Param("record") BookCategory record, @Param("example") BookCategoryExample example);
 
     int updateByExample(@Param("record") BookCategory record, @Param("example") BookCategoryExample example);

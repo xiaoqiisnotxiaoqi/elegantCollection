@@ -7,6 +7,7 @@ import com.elegantcollection.entity.BookWithBLOBs;
 import java.util.HashMap;
 import java.util.List;
 
+import com.elegantcollection.util.PageModel;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
@@ -32,6 +33,18 @@ public interface BookDao {
     List<Book> selectByExample(BookExample example);
 
     BookWithBLOBs selectByPrimaryKey(Integer bookId);
+
+    List<Book> selectBookByAuthorId(Integer authorId);
+
+    List<Book> selectBookByBookSalesTotal(PageModel<Book> pageModel);
+
+    List<Book> selectBookByBookSalesLastMonth(PageModel<Book> pageModel);
+
+    List<Book> selectBookByBookSalesLastMonthAndBookCategory(Integer categoryId,PageModel<Book> pageModel);
+
+    Integer selectCountAll();
+
+    Integer selectCountOne(Integer categoryId);
 
     int updateByExampleSelective(@Param("record") BookWithBLOBs record, @Param("example") BookExample example);
 

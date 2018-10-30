@@ -1,0 +1,65 @@
+a{
+    text-decoration: none;
+}
+.all{
+    width: 85%;
+    margin: 0 auto;
+}
+.toutu{
+    width: 100%;
+    height: 300px;
+    background-image: url(../images/beijing.jpg);
+    background-size: cover;
+    padding-top: 25px;
+}
+.neid{
+    width: 75%;
+    height: 275px;
+    margin: 0 auto;
+    background: rgba(0,0,0,0.5);
+}
+.oi{
+    width: 40%;
+    text-align: center;
+    float: left;
+}
+.oi img{
+    width: 70%;
+    margin-top: 15px;
+}
+.xiang{
+    width: 60%;
+    float: left;
+}
+.dati{
+    display: block;
+    font-size: 40px;
+    font-weight: bold;
+    margin-top: 65px;
+}
+.jieshao{
+    font-size: 20px;
+}
+.shen{
+    width: 100%;
+    margin-top: 30px;
+}
+.danshu{
+    width: 20%;
+    float: left;
+    text-align: center;
+    margin-top: 20px;
+}
+.danshu img{
+    width: 80%;
+}
+.shuzi{
+    display: block;
+    line-height: 30px;
+    color: black;
+}
+.jia{
+    display: inline-block;
+    color: red;
+    font-weight: bold;
+}
