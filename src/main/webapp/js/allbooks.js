@@ -2,8 +2,19 @@ onload = refresh();
 
 
 function refresh() {
-    var xhr = null;
     //获取所有参数
+
+    if (sessionStorage.getItem("keyWord") != null)
+        document.getElementById("keyword").name = sessionStorage.getItem("keyWord");
+    else
+        document.getElementById("keyword").name = '';
+    if (sessionStorage.getItem("categoryId") != null)
+        document.getElementById("current-category").name = sessionStorage.getItem("categoryId");
+    else
+        document.getElementById("current-category").name = '';
+
+    // sessionStorage.clear();
+
     var categoryId = document.getElementById("current-category").name;
     var keyWord = document.getElementById("keyword").name;
     var minPrice = document.getElementById("minPrice").name;
@@ -13,7 +24,10 @@ function refresh() {
     var orderBy = document.getElementById("orderBy").value;
     var pageCode = document.getElementById("currentPageCode").name;
     var isDiscount = document.getElementById("isDiscount").name;
+    var zhekou = document.getElementById("zhekou").name;
 
+
+    var xhr = null;
     if (window.XMLHttpRequest) {
         xhr = new XMLHttpRequest(); //for ie7+,FireFox,Chorme,Opera,Safai...
     }
@@ -21,9 +35,9 @@ function refresh() {
         xhr = new ActiveXObject('Microsoft.XMLHTTP');//for ie6
     }
     if (xhr != null) {
-        var url = "categoryId=" + categoryId + "&keyWord=" + keyWord + "&minPrice=" + minPrice + "&maxPrice=" + maxPrice + "&bookLanguage=" + bookLanguage + "&bookStatus=" + bookStatus + "&orderBy=" + orderBy + "&isDiscount=" + isDiscount + "&pageCode=" + pageCode;
+        var url = "categoryId=" + categoryId + "&keyWord=" + keyWord + "&minPrice=" + minPrice + "&maxPrice=" + maxPrice + "&bookLanguage=" + bookLanguage + "&bookStatus=" + bookStatus + "&orderBy=" + orderBy + "&isDiscount=" + isDiscount + "&zhekou=" + zhekou + "&pageCode=" + pageCode;
         console.log(url)
-        xhr.open("GET", "book/search?" + url, true);
+        xhr.open("GET", "book/test?" + url, true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;");
         xhr.onreadystatechange = callFun;
         xhr.send();
@@ -36,7 +50,7 @@ function refresh() {
             console.log(xhr.responseText);
             var jsObj = JSON.parse(xhr.responseText);
             //渲染子分类列表
-            var childCategories = jsObj.childCategories;
+            var childCategories = jsObj.data.childCategoryList;
             if (childCategories != null && childCategories.length != 0) {
                 document.getElementById("zifenlei").innerHTML = "<span class=\"li-title\">子分类</span>";
                 for (var i = 0; i < childCategories.length; i++) {
@@ -50,7 +64,7 @@ function refresh() {
             //渲染图书列表以及分页信息
             var bookUl = document.getElementById("books-box")
             bookUl.innerHTML = "";
-            var pageModel = jsObj.pageModel;
+            var pageModel = jsObj.data.pageModel;
             var bookList = pageModel.modelList;
             //渲染图书列表
             for (var i = 0; i < bookList.length; i++) {
@@ -115,10 +129,16 @@ function toDetail(ele) {
     window.location = "bookdetail/?bookId=" + ele.name;
 }
 
+
 //点击子分类
 function clickCategory(category) {
-    document.getElementById("current-category").name = "" + category.name + "";
-    document.getElementById("categoryname").innerText = "当前分类>" + category.innerText + "";
+    if (category.id == "categoryname") {
+
+        sessionStorage.setItem("categoryId", 10034);
+    } else {
+        sessionStorage.setItem("categoryId", category.name);
+        document.getElementById("categoryname").innerText = "当前分类>" + category.innerText + "";
+    }
     refresh();
 }
 
@@ -181,7 +201,7 @@ function page(ele) {
 //点击排序
 function clickOrderBy(ele) {
     if (ele.value == '1')
-        document.getElementById("orderBy").value = "";
+        document.getElementById("orderBy").value = "book_id";
     else if (ele.value == '2')
         if (document.getElementById("orderBy").value == "book_sales_total")
             document.getElementById("orderBy").value = "book_sales_total desc";
@@ -207,5 +227,11 @@ function clickIsDiscount(ele) {
     } else {
         document.getElementById("isDiscount").name = '1';
     }
+    refresh();
+}
+
+//点击折扣
+function clickZhekou(ele) {
+    document.getElementById("zhekou").name = ele.name;
     refresh();
 }

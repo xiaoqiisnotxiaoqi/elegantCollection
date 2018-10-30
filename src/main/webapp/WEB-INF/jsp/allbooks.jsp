@@ -24,11 +24,12 @@
 <input id="bookStatus" name="" type="hidden"/>
 <input id="isDiscount" name="" type="hidden"/>
 <input id="currentPageCode" name="1" type="hidden"/>
+<input id="zhekou" name="" type="hidden"/>
 
 
 <div id="main-area">
     <div id="fenji-nav-box">
-        <a href="" class="a" id="categoryname">当前分类>所有图书</a>
+        <a href="" class="a" id="categoryname" onclick="clickCategory(this)">当前分类>所有图书</a>
 
     </div>
     <div id="filtrate-box">
@@ -57,10 +58,10 @@
             </li>
             <li class="li">
                 <span class="li-title">折扣</span>
-                <a class="li-options">3折以下</a>
-                <a class="li-options">5折以下</a>
-                <a class="li-options">7折以下</a>
-                <a class="li-options">9折以下</a>
+                <a class="li-options" name="0.3" onclick="clickZhekou(this)">3折以下</a>
+                <a class="li-options" name="0.5" onclick="clickZhekou(this)">5折以下</a>
+                <a class="li-options" name="0.7" onclick="clickZhekou(this)">7折以下</a>
+                <a class="li-options" name="0.9" onclick="clickZhekou(this)">9折以下</a>
 
             </li>
 
@@ -70,8 +71,7 @@
     </div>
     <div id="orderby-box">
         <ul class="orderby-ul">
-            <li class="orderby-li" value="1" onclick="clickOrderBy(this)"><a href=" " class="sort-box-a">综合排序<span
-                    class="icon"></span></a></li>
+            <li class="orderby-li" value="1" onclick="clickOrderBy(this)">综合排序</li>
             <li class="orderby-li" value="2" onclick="clickOrderBy(this)">销量</li>
             <li class="orderby-li" value="3" onclick="clickOrderBy(this)">价格</li>
             <li class="orderby-li" value="4" onclick="clickOrderBy(this)">出版时间</li>
@@ -117,6 +117,6 @@
 
 <%--加载js--%>
 <script src="${pageContext.request.contextPath}/js/allbooks.js"></script>
-<script src="${pageContext.request.contextPath}/js/utilsnotoken.js"></script>
+<%--<script src="${pageContext.request.contextPath}/js/utilsnotoken.js"></script>--%>
 </body>
 </html>

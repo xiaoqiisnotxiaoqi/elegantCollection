@@ -4,6 +4,7 @@ import com.elegantcollection.entity.Book;
 import com.elegantcollection.entity.BookExample;
 import com.elegantcollection.entity.BookWithBLOBs;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -12,6 +13,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public interface BookDao {
+    int testCount(HashMap map);
+
+    List<BookWithBLOBs> test(HashMap map);
+
     long countByExample(BookExample example);
 
     int deleteByExample(BookExample example);

@@ -16,6 +16,7 @@
 <body>
 <jsp:include page="top.jsp"/>
 
+<input type="hidden" value="" id="bookId">
 <div id="main-box">
     <!--分类导航1-->
     <div id="category-nav">
@@ -30,7 +31,7 @@
         <!--商品图片区域-->
         <div id="pic-area">
             <div id="main-pic-box">
-                <img src="11"/>
+                <img src=""/>
             </div>
             <div id="book-imgs-box">
 
@@ -105,25 +106,25 @@
             </div>
             <div id="send-to">
                 <span class="info-title">配送至</span>
-                <span class="towhere">xx省xx市xx县xx镇</span>
+                <span class="towhere">江苏省苏州市</span>
                 <span>有货</span>
             </div>
             <div id="service">
                 <span class="info-title">服务</span>
                 <span class="">
-由雅致藏书发货，并提供售后服务。 今日17:00前完成下单，预计10月10日（周三）可送达</span>
+由雅致藏书发货，并提供售后服务。 今日17:00前完成下单，预计11月20日（周二）可送达</span>
             </div>
             <!--添加按钮等-->
             <div id="num-box">
                 <div id="num-botton">
-                    <input id="booknum" type="text" value="1">
+                    <input id="booknum" type="number" value="1">
                     <button class="num-buttons" onclick=add()>+
                     </button>
                     <button class="num-buttons" onclick=minus()>-
                     </button>
                 </div>
-                <button id="addtocart">加入购物车</button>
-                <button id="buynow">立即购买</button>
+                <button id="addtocart" onclick="add2Cart(this)">加入购物车</button>
+                <button id="buynow" onclick="add2Cart(this)">立即购买</button>
             </div>
             <!--加入购物车按钮-->
 
