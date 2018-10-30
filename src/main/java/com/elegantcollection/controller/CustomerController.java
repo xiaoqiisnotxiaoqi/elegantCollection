@@ -15,9 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
+@SuppressWarnings("all")
 @RestController
 public class CustomerController {
     private final Producer captchaProducer;
@@ -29,9 +29,8 @@ public class CustomerController {
         this.captchaProducer = captchaProducer;
     }
 
-
     /**
-     * 用户登录
+     * 用户登录(用户名登录)
      *
      * @param custName 用户输入的用户名
      * @param pwd      用户输入的密码
@@ -51,13 +50,71 @@ public class CustomerController {
         }
 
         if (customerList.size() == 0){
-            return "fail";
+            return "用户名或密码错误";
         }else {
             request.getSession().setAttribute("customer",customerList.get(0));
-            //返回用户昵称
-            return  customerList.get(0).getCustName();
+            return  "success";
         }
     }
+
+
+    /**
+     * 用户登录(手机短信登录)
+     * @param phone 用户手机号
+     * @param securityCode 手机验证码
+     * @param request 用户请求信息
+     * @return 是否登录成功
+     */
+    @PostMapping("/textLogin")
+    public String textLogin(String phone,Integer securityCode, HttpServletRequest request){
+        int cellPhoneVerificatioCode = (Integer) request.getSession().getAttribute("cellPhoneVerificatioCode");
+        if (cellPhoneVerificatioCode == securityCode){
+            List<Customer> list = customerService.queryCustomerByPhone(phone);
+            if (list.size() == 0) {
+                return "该手机号未注册";
+            }
+            request.getSession().setAttribute("customer",list.get(0));
+        }
+        return "success";
+    }
+
+    /**
+     * 向用户发送手机号
+     * @param phone 用户手机号码
+     * @param num 当前业务 (登录:1 ; 注册 : 2  找回密码 : 3)
+     * @return 短信发送是否成功
+     */
+    @PostMapping("/sendText")
+    public Map<String,String> SendText(String phone,Integer num,HttpServletRequest request){
+        Map<String,String> map = new HashMap<>();
+        int tplId;
+        if (num == 1){
+            //登录
+            tplId = 110405;
+        }else if(num == 2){
+            //注册时 发送的短信模板
+            tplId = 110406;
+        }else if (num == 3){
+            //修改密码是,所用的模板id
+            tplId = 110407;
+        }else{
+            return null;
+        }
+        //生成由四位数字组成的随机数 并存入session 中
+        int a = RandomNumberGeneration.randomNumber();
+        request.getSession().setAttribute("cellPhoneVerificatioCode",a);
+        //十五分钟后 删除 该 验证码
+        removeAttrbute(request.getSession(),"cellPhoneVerificatioCode");
+
+
+        String tplValue = "#code#=" + a;
+        //发送验证码
+       // SmsVerification.getRequest2(phone,tplId,tplValue);
+
+        map.put("result","success");
+        return map;
+    }
+
 
     /**
      * 用户注册
@@ -68,13 +125,13 @@ public class CustomerController {
      * @return 用户信息填写成功,返回""success" ,否则返回"fail"
      */
     @PostMapping("/singIn")
-    public String customerRegister(String phone,String password,String imgCode,String phoneCode,HttpServletRequest request){
+    public String customerRegister(String phone,String password,String imgCode,Integer phoneCode,HttpServletRequest request){
         //验证图片验证码是否正确
         if(!CodeUtil.checkVerifyCode(request,imgCode)){
             return "图片验证码错误";
+        }else if (phoneCode != (int) request.getSession().getAttribute("cellPhoneVerificatioCode")){
+            return "短信验证码错误";
         }
-
-
         Customer customer = new Customer();
         //用户密码
         customer.setCustPassword(password);
@@ -152,7 +209,11 @@ public class CustomerController {
     }
 
 
-
+    /**
+     * 检查手机号是否被注册过
+     * @param phone 要注册的手机号
+     * @return 检查结果(未被注册:success  已注册:"该手机号已被注册")
+     */
     @GetMapping("/phoneIsRegistered")
     public String phoneNumberIsRegistered(String phone){
         List list = customerService.queryCustomerByPhone(phone);
@@ -164,9 +225,20 @@ public class CustomerController {
     }
 
 
-
-
-
-
-
+    /**
+     * 设置15分钟后删除session中的验证码
+     * @param session session对象
+     * @param attrName 要删除的验证码的key值
+     */
+    private void removeAttrbute(HttpSession session,String attrName) {
+        final Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                // 删除session中存的验证码
+                session.removeAttribute(attrName);
+                timer.cancel();
+            }
+        }, 15 * 60 * 1000);
+    }
 }

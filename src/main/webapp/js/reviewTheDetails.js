@@ -781,6 +781,7 @@ function replyTheResults() {
 
             }
         }else {
+            document.getElementById("edui").value = "";
             document.getElementById("review-success").style.display = "";
             setTimeout(function() {
                 document.getElementById("review-success").style.display = "none";
@@ -806,6 +807,11 @@ function replyTheResults() {
 
 
     }
+}
+
+
+function f() {
+
 }
 
 

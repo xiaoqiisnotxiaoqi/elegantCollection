@@ -73,7 +73,6 @@ function registerPost(){
     var formData = "phone="+phone+"&password="+password+"&imgCode="+imgCode+"&phoneCode="+phoneCode;
     // 提交表单地址
     var url  = "/singIn";
-    alert(formData);
     xhr.open("POST", url , true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
     xhr.onreadystatechange = responseRegister;
@@ -90,8 +89,8 @@ function responseRegister() {
         }else if(xhr.responseText === "短信验证码错误"){
             document.getElementById("message-span").innerText = "短信验证码错误";
         }else {
-            window.location = "${pageContext.request.contextPath}/user";
             custLodin = true;
+            window.location = "/top";
         }
 
     }
@@ -102,16 +101,27 @@ function responseRegister() {
  * 用户登录
  */
 function login() {
+    var url;
+    var formData;
+    if (document.getElementById("note-login").style.display == "none"){
+        url = "/login";
+        var custName = document.getElementById("id_account_l").value;
+        var pwd = document.getElementById("id_password_l").value;
+        formData = "custName="+custName+"&pwd="+pwd;
+    } else {
+        url = "textLogin";
+        var phone = document.getElementById("id_account_2").value;
+        var securityCode = document.getElementById("id_password_2").value;
+        formData = "phone=" + phone + "&securityCode=" + securityCode;
+    }
     if (window.XMLHttpRequest) {
         xhr = new XMLHttpRequest();
     } else {
         xhr = new ActiveXObject('Microsoft.XMLHTTP');
     }
-    var custName = document.getElementById("id_account_l").value;
-    var pwd = document.getElementById("id_password_l").value;
-    var formData = "custName="+custName+"&pwd="+pwd;
 
-    xhr.open("POST", "/login" , true);
+
+    xhr.open("POST", url , true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
     xhr.onreadystatechange = responselogin;
     xhr.send(formData);
@@ -122,10 +132,10 @@ function login() {
  */
 function responselogin() {
     if (xhr.readyState === 4 && xhr.status === 200){
-        if(xhr.responseText === "fail"){
-            document.getElementById("loginModalLabel").innerText +="              用户名或密码错误"
+        if(xhr.responseText != "success"){
+            document.getElementById("loginModalLabel").innerText +="              " + xhr.responseText;
         }else {
-            document.getElementById("loginModalLabel").innerText = "登录"
+            document.getElementById("loginModalLabel").innerText = "登录";
             window.location = "/top";
         }
     }

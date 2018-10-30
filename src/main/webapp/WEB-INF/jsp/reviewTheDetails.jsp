@@ -13,6 +13,42 @@
 
 </head>
 <body>
+<%--顶端导航--%>
+<div class="review-div">
+    <div class="review-nav-div">
+        <ul class="review-nav-ul">
+            <%
+                if (request.getSession().getAttribute("customer") != null){
+            %>
+            <li>欢迎您:</li>
+            <li>${customer.custName}</li>
+            <li onclick="loginOut()">退出</li>
+            <%
+                }
+            %>
+            <%
+                if (request.getSession().getAttribute("customer") == null){
+            %>
+            <li>欢迎进入雅致藏书</li>
+            <li onclick="showDiv()">登录</li>
+            <li onclick="showRegister()">加入雅致</li>
+            <%
+                }
+            %>
+            <li>进入商城首页</li>
+            <li>书评区主页</li>
+            <li><a style="color: black" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=954566097&site=qq&menu=yes">联系客服</a></li>
+        </ul>
+    </div>
+
+
+</div>
+
+
+
+
+
+
 <div class="search">
     <img src="${pageContext.request.contextPath}/images/review.png">
     <div>

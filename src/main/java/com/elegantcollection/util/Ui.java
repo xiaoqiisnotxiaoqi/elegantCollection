@@ -1,11 +1,9 @@
 package com.elegantcollection.util;
 
 import com.elegantcollection.entity.Customer;
-import com.elegantcollection.entity.Customer;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
@@ -98,6 +96,12 @@ public class Ui {
     public  String butNow(@RequestParam Map<String,String> map,HttpServletRequest request){
         request.getSession().setAttribute("buyThis",map);
         return "pay";
+    }
+
+
+    @RequestMapping("socket")
+    public String scoket(){
+        return "socket";
     }
 
 

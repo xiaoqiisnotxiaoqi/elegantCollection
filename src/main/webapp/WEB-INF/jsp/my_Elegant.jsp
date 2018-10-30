@@ -10,8 +10,9 @@
 <head>
     <meta charset="UTF-8">
     <title>我的雅志</title>
-    <link rel="icon" href="../images/logo.ico" type="img/x-ico"/>
-    <link rel="stylesheet" href="../css/my_Elegant.css">
+    <link rel="icon" href="${pageContext.request.contextPath}/images/logo.ico" type="img/x-ico"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/my_Elegant.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/personalCenter_messageView.css">
 
 </head>
 <body>
@@ -41,7 +42,7 @@
                 <li><a href="#">邮箱验证</a></li>
                 <li><a href="#">手机绑定</a></li>
                 <ul>我的消息</ul>
-                <li><a href="#">消息查看</a></li>
+                <li><a href="javaScript:void(0);" onclick="goToMessage()">消息查看</a></li>
                 <!--<li><a href="#">发帖记录</a></li>-->
                 <li><a href="#">评论/晒单</a></li>
                 <li><a href="#">提问/回答</a></li>
@@ -58,7 +59,7 @@
                     <div class="user_phone">
 
                         <a href="#" target="blank">
-                            <img src="../images/header_o.jpg" alt="">
+                            <img src="${pageContext.request.contextPath}/images/header_o.jpg" alt="">
 
                             <div class="edit_box">
                                 <span class="edit">&nbsp</span>
@@ -144,6 +145,12 @@
         </div>
         <!--J_userInfo 结束-->
 
+
+        <%--页面渲染专用div--%>
+        <div id="input-text">
+
+        </div>
+
     </div>
     <!--my_main结束-->
 </div>
@@ -170,7 +177,24 @@
         </div>
     </div>
 </div>
-<script src="../js/jquery.min.js"></script>
+
+
+
+
+
+
+
+
+
+<!- 黑色遮罩层 z 999 ->
+<section class="cust-black" id="cust-black-ded"></section>
+<section class="cust-deleve" id="cust-deleve">
+    <p class="title">删除宝贝<span class="closeModel" onclick="closeDed()">X</span></p>
+    <p>您确认要删除该宝贝吗？</p>
+    <div class="opBtn"><a href="javascript:void(0);" onclick="deleteTheMessage()" class="dialog-sure">确定</a><a href="javascript:void(0);" onclick="closeDed()" class="dialog-close">关闭</a></div>
+</section>
+<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/personalCenter_messageView.js"></script>
 <script>
     $(function () {
         $('.back_top').click(function () {
