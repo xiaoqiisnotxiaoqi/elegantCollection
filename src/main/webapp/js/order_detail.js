@@ -1,14 +1,37 @@
 var xhr = null;
+var xhr0=null;
 var allUrl = null;
 onload = function getFirstPage() {
+
     refresh();
+}
+alterOrder();
+function alterOrder() {
+    var url="/order/alterOrder"
+    if (window.XMLHttpRequest) {
+        xhr0 = new XMLHttpRequest(); //for ie7+,FireFox,Chorme,Opera,Safai...
+    } else {
+        xhr0 = new ActiveXObject('Microsoft.XMLHTTP');//for ie6
+    }
+
+    if (xhr0 != null) {
+        xhr0.open("GET", url, false);
+        xhr0.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;");
+        xhr0.onreadystatechange;
+        xhr0.send();
+    } else {
+        alert("不能创建XMLHttpRequest对象实例");
+    }
 }
 
 function refresh() {
     allUrl = "/order/showOrderDetail";
     refreshData(allUrl);
 }
-
+/**
+ * 请求订单信息
+ * @param url
+ */
 function refreshData(url) {
     if (window.XMLHttpRequest) {
         xhr = new XMLHttpRequest(); //for ie7+,FireFox,Chorme,Opera,Safai...
@@ -26,7 +49,9 @@ function refreshData(url) {
         alert("不能创建XMLHttpRequest对象实例");
     }
 };
-
+/**
+ * 页面渲染
+ */
 function getDate() {
     if (xhr.readyState === 4 && xhr.status === 200) {
         var orderNumber = document.getElementById("order-number");
@@ -74,10 +99,12 @@ function getDate() {
         discountAmount.innerHTML = shopOrder.discountAmount;
 
         for (var i = 0; i < shopOrderDetailList.length; i++) {
-            bookAllInfo.innerHTML += " <div class=\"book-tip\"><a href=\"#\"><img src=" + shopOrderDetailList[i].bookImg + "></a></div>\n" +
-                "        <div class=\"book-information\">" + shopOrderDetailList[i].bookId + "</div>\n" +
-                "        <div class=\"book-information\">" + shopOrderDetailList[i].bookSellingPrice + "</div>\n" +
-                "        <div class=\"book-information\">" + shopOrderDetailList[i].quality + "</div>"
+            bookAllInfo.innerHTML += "<div class=\"book-all-info\">\n" +
+                "                <div class=\"book-tip\"><a href=\"#\" onclick='javascript:toDetail("+shopOrderDetailList[i].bookId+")'><img src=" + shopOrderDetailList[i].bookImg + "></a></div>\n" +
+                "                <div class=\"book-information\">" + shopOrderDetailList[i].bookId + "</div>\n" +
+                "                <div class=\"book-information\">" + shopOrderDetailList[i].bookSellingPrice + "</div>\n" +
+                "                <div class=\"book-information\">" + shopOrderDetailList[i].quality + "</div>\n" +
+                "            </div>"
         }
 
 
@@ -93,6 +120,10 @@ function getDate() {
     }
 }
 
+/**
+ * 物流信息获取
+ * @param url
+ */
 function refreshTransport(url) {
     if (window.XMLHttpRequest) {
         xhr = new XMLHttpRequest(); //for ie7+,FireFox,Chorme,Opera,Safai...
@@ -129,6 +160,16 @@ function getTranport() {
     }
 }
 
+//查询图书详情
+function toDetail(bookId) {
+    window.location = "bookdetail/?bookId=" + bookId;
+}
+/**
+ * 状态判断
+ * @param statusCode 状态码
+ * @returns {*} 状态信息
+ * @constructor
+ */
 function StatusJudge(statusCode) {
     var statusMsg;
     if (statusCode == 0)
@@ -143,7 +184,11 @@ function StatusJudge(statusCode) {
         statusMsg = '已删除'
     return statusMsg;
 }
-
+/**
+ * 时间转换
+ * @param time
+ * @returns {*}
+ */
 function dataConversion(time) {
     var date = new Date(time);
     Y = date.getFullYear() + '-';

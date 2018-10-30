@@ -101,7 +101,7 @@ public interface PostService {
      * @param post 帖子
      * @return 添加结果
      */
-    Integer add(Post post);
+    Integer add(Post post, HttpServletRequest request);
     /**
      * 置顶帖查询（前五条）
      *
