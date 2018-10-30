@@ -6,14 +6,12 @@ import com.elegantcollection.entity.*;
 import com.elegantcollection.service.BookService;
 import com.elegantcollection.util.PageModel;
 import com.elegantcollection.util.ServerResponse;
-import org.mybatis.generator.codegen.ibatis2.model.ExampleGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -341,6 +339,7 @@ public class BookServiceImpl implements BookService {
 
     /**
      * 根据作者id查询书籍
+     *
      * @param authorId 作者id
      * @return 书集合
      */
@@ -351,6 +350,7 @@ public class BookServiceImpl implements BookService {
 
     /**
      * 根据总销量降序查书
+     *
      * @param pageModel
      * @return
      */
@@ -363,6 +363,7 @@ public class BookServiceImpl implements BookService {
 
     /**
      * 根据上月销量降序查书
+     *
      * @param pageModel
      * @return
      */
@@ -375,19 +376,21 @@ public class BookServiceImpl implements BookService {
 
     /**
      * 根据上月销量和类别降序查书
+     *
      * @param categoryId 类别id
      * @param pageModel
      * @return
      */
     @Override
     public PageModel<Book> queryBookByBookSalesLastMonthAndBookCategory(Integer categoryId, PageModel<Book> pageModel) {
-        List<Book> list = this.bookDao.selectBookByBookSalesLastMonthAndBookCategory(categoryId,pageModel);
+        List<Book> list = this.bookDao.selectBookByBookSalesLastMonthAndBookCategory(categoryId, pageModel);
         pageModel.setModelList(list);
         return pageModel;
     }
 
     /**
      * 计数
+     *
      * @return
      */
     @Override
@@ -397,6 +400,7 @@ public class BookServiceImpl implements BookService {
 
     /**
      * 单一类别计数
+     *
      * @param categoryId 类别id
      * @return
      */

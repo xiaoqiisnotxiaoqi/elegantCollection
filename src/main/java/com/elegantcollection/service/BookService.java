@@ -102,4 +102,53 @@ public interface BookService {
      * @return 添加结果(受影响行数)
      */
     ServerResponse<Integer> add2Cart(Integer custId, Integer bookId, Integer bookCount);
+
+    /**
+     * 根据作者id查询书籍
+     *
+     * @param authorId 作者id
+     * @return 书集合
+     */
+    public List<Book> queryBookByAuthorId(Integer authorId);
+
+    /**
+     * 根据总销量降序查书
+     *
+     * @param pageModel
+     * @return
+     */
+    public PageModel<Book> queryBookByBookSalesTotal(PageModel<Book> pageModel);
+
+    /**
+     * 根据上月销量降序查书
+     *
+     * @param pageModel
+     * @return
+     */
+    public PageModel<Book> queryBookByBookSalesLastMonth(PageModel<Book> pageModel);
+
+    /**
+     * 根据上月销量和类别降序查书
+     *
+     * @param categoryId 类别id
+     * @param pageModel
+     * @return
+     */
+    public PageModel<Book> queryBookByBookSalesLastMonthAndBookCategory(Integer categoryId, PageModel<Book> pageModel);
+
+
+    /**
+     * 计数
+     *
+     * @return
+     */
+    public Integer queryCountAll();
+
+    /**
+     * 单一类别计数
+     *
+     * @param categoryId 类别id
+     * @return
+     */
+    public Integer queryCountOne(Integer categoryId);
 }
