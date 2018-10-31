@@ -38,9 +38,9 @@
 
                 <li><a href="#">收货地址</a></li>
                 <ul>安全中心</ul>
-                <li><a href="#">登录密码</a></li>
-                <li><a href="#">邮箱验证</a></li>
-                <li><a href="#">手机绑定</a></li>
+                <li><a href="JavaScript:void(0);" onclick="goToChangePassword()">登录密码</a></li>
+                <li><a href="JavaScript:void(0);" onclick="goToChangeEmail()">邮箱验证</a></li>
+                <li><a href="JavaScript:void(0);" onclick="goToChangePhone()">手机绑定</a></li>
                 <ul>我的消息</ul>
                 <li><a href="javaScript:void(0);" onclick="goToMessage()">消息查看</a></li>
                 <!--<li><a href="#">发帖记录</a></li>-->
@@ -147,8 +147,22 @@
 
 
         <%--页面渲染专用div--%>
-        <div id="input-text">
+        <div id="input-text" style="display: none">
 
+        </div>
+
+        <%--修改密码--%>
+        <div id="changeEmail" style="width: 500px;height: 300px;margin: 0 auto;display: none">
+            <span style="position: relative;left: 190px;top: 50px;font-size: 14px;line-height: 22px;">原密码:</span>
+            <input type="text" value="" style="width: 100px;height: 24px;position: relative;top: 46px;left: 220px;"/>
+            <span>密码不正确</span>
+            <span style="position: relative;left: 40px;top: 100px;font-size: 14px;line-height: 22px;">新密码:</span>
+            <input type="text" value="" style="width: 100px;position: relative;top: 100px;left: 70px;font-size: 14px;line-height: 22px;height: 24px;"/>
+            <span>密码必须由大小写字母和数字组成</span>
+            <span style="width: 80px;display: block;position: relative;left: 165px;top: 135px;font-size: 14px;line-height: 22px;">确认新密码:</span>
+            <input type="text" value="" style="width: 100px;height: 24px;position: relative;left: 265px;top: 106px;" />
+            <span>两次密码不一致</span>
+            <button style="width: 100px;height: 36px;border: 1px solid orange;color:white;font-size:16px;position:relative;top:200px;left:100px;border-radius:5px;background-color:red;" onclick="changePsw(ele)">修改</button>
         </div>
 
     </div>

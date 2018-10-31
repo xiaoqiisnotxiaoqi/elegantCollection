@@ -58,7 +58,6 @@ function postPut(ele){
             xhr = new ActiveXObject('Microsoft.XMLHTTP');
         }
         var transmitData = "text=" + text + "&replyId=" + replyId;
-        alert(transmitData);
         xhr.open("POST", "/writeBack", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
         xhr.onreadystatechange = postPutRequest;
@@ -74,7 +73,6 @@ function postPut(ele){
 function postPutRequest(){
     if(xhr.readyState === 4 && xhr.status === 200){
         var resolve = JSON.parse(xhr.responseText);
-        alert(resolve);
         var modelList = resolve.modelList;
         var textNode = document.getElementById("input-text");
         textNode.innerHTML = "";
@@ -167,6 +165,9 @@ function closeDed(){
     //遮罩层 节点
     var Bdiv = document.getElementById("cust-black-ded");
 
+    Idiv.style.position = "absolute";
+    Idiv.style.top = "45%";
+    Idiv.style.left = "45*";
     Bdiv.style.display = "none";
     Idiv.style.display = "none";
 }

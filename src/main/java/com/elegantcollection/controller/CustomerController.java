@@ -4,6 +4,7 @@ import com.elegantcollection.entity.Customer;
 import com.elegantcollection.service.CustomerService;
 import com.elegantcollection.util.CodeUtil;
 import com.elegantcollection.util.RandomNumberGeneration;
+import com.elegantcollection.util.SmsVerification;
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,7 +110,7 @@ public class CustomerController {
 
         String tplValue = "#code#=" + a;
         //发送验证码
-       // SmsVerification.getRequest2(phone,tplId,tplValue);
+        SmsVerification.getRequest2(phone,tplId,tplValue);
 
         map.put("result","success");
         return map;

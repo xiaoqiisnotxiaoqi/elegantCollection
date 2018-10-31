@@ -52,11 +52,6 @@ function verificationResultsOfPhone(){
 }
 
 
-
-//验证码
-
-
-
 /**
  * 提交注册信息
  */

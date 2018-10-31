@@ -91,11 +91,16 @@ function replyContentReoue() {
             var page2 = document.getElementById("first-page2");
             page1.innerHTML = "";
             page2.innerHTML = "";
-            //总页数小于或等于 10  大于 1 当前页 为1
-            if (status.totalPages <= 10 && status.totalPages >1 && status.currentPageCode === 1){
-                var h = ('<ul><li><a href="javaScript:void(0);" id="this-page">1</a>');
-                for (var i = 2; i < status.totalPages ; i++ ){
-                    h += '<a href="javaScript:void(0);" onclick="toPage(this)">'+ i +'</a>';
+            //总页数小于等于10 大于1
+            var h = "";
+            if (status.totalPages <= 10 && status.totalPages > 1){
+                h += '<ul><li>';
+                for (var i = 1; i <= status.totalPages ; i++ ){
+                    if (status.totalPages == status.currentPageCode) {
+                        h = ('<a href="javaScript:void(0);" id="this-page">1</a>');
+                    }else {
+                        h += '<a href="javaScript:void(0);" onclick="toPage(this)">' + i + '</a>';
+                    }
                 }
                 h += '</li>' +
                     '<li>' +
@@ -103,7 +108,7 @@ function replyContentReoue() {
                     '</li>' +
                     '<li>' +
                     '<span>跳到</span><input type="text" name=""><span> 页 </span>' +
-                    '<button>确定</button>' +
+                    '<button onclick="toPageButton(this)">确定</button>' +
                     '</li></ul>';
                 page1.innerHTML = h;
                 page2.innerHTML = h;
@@ -111,10 +116,10 @@ function replyContentReoue() {
             //总页数为1 时
             else if (status.totalPages === 1){
                 var h = ('<ul><li>' +
-                        '<span>'+ status.totalRecord +'</span><span>条回复贴, 共</span><span> '+ status.totalPages +' </span><span>页 </span>' +
-                        '</li>' +
-                        '<li>' +
-                        '</li></ul>'
+                    '<span>'+ status.totalRecord +'</span><span>条回复贴, 共</span><span> '+ status.totalPages +' </span><span>页 </span>' +
+                    '</li>' +
+                    '<li>' +
+                    '</li></ul>'
                 );
                 page1.innerHTML = h;
                 page2.innerHTML = h;
@@ -132,7 +137,7 @@ function replyContentReoue() {
                     '</li>' +
                     '<li>' +
                     '<span>跳到</span><input type="text" name=""><span> 页 </span>' +
-                    '<button>确定</button>' +
+                    '<button onclick="toPageButton(this)">确定</button>' +
                     '</li></ul>';
                 page1.innerHTML = h;
                 page2.innerHTML = h;
@@ -153,13 +158,13 @@ function replyContentReoue() {
                     '</li>' +
                     '<li>' +
                     '<span>跳到</span><input type="text" name=""><span> 页 </span>' +
-                    '<button>确定</button>' +
+                    '<button onclick="toPageButton(this)">确定</button>' +
                     '</li></ul>';
                 page1.innerHTML = h;
                 page2.innerHTML = h;
             }
             //总页数 大于10 当前页 不为1 且大于5
-            else if (status.totalPages >= 10 && status.currentPageCode > 5) {
+            else {
                 var h = '<ul><li><a href="javaScript:void(0);">首页</a><a href="javaScript:void(0);" onclick="bookReviewLastPage('+status.currentPageCode+')">上一页</a>';
                 if (status.totalPages - status.currentPageCode >= 5){
                     for (var i = status.currentPageCode - 4; i < status.currentPageCode; i++){
@@ -185,32 +190,12 @@ function replyContentReoue() {
                     '</li>' +
                     '<li>' +
                     '<span>跳到</span><input type="text" name=""><span> 页 </span>' +
-                    '<button>确定</button>' +
+                    '<button onclick="toPageButton(this)">确定</button>' +
                     '</li></ul>';
                 page1.innerHTML = h;
                 page2.innerHTML = h;
             }
-            //总页数 小于10 且当前页不等于1
-            else {
-                var h = '<ul><li><a href="javaScript:void(0);">首页</a><a href="javaScript:void(0);" onclick="bookReviewLastPage('+status.currentPageCode+')">上一页</a>';
-                for (var i = 1; i < status.currentPageCode ;i++){
-                    h += '<a href="javaScript:void(0);" onclick="toPage(this)">'+ i +'</a>'
-                }
-                h += '<a href="javaScript:void(0);" id="this-page">'+ status.currentPageCode +'</a>';
-                for (var i = status.currentPageCode + 1;i <= status.totalPages ;i++){
-                    h += '<a href="javaScript:void(0);" onclick="toPage(this)">'+ i +'</a>'
-                }
-                h += '</li>' +
-                    '<li>' +
-                    '<span>'+ status.totalRecord +'</span><span>条回复贴, 共</span><span> '+ status.totalPages +' </span><span>页 ,</span>' +
-                    '</li>' +
-                    '<li>' +
-                    '<span>跳到</span><input type="text" name=""><span> 页 </span>' +
-                    '<button>确定</button>' +
-                    '</li></ul>';
-                page1.innerHTML = h;
-                page2.innerHTML = h;
-            }
+
 
             
             //像页面写入 帖子回复信息
@@ -594,7 +579,7 @@ function  toPage(ele) {
     } else {
         xhr = new ActiveXObject('Microsoft.XMLHTTP');
     }
-    xhr.open("GET", "/reviewTheDetails?postId=" + pagePostId + "&currentPageCode=" + page, true);
+    xhr.open("GET", "/reviewTheDetails?postId=" + pagePostId + "&currentPage=" + page, true);
     xhr.setRequestHeader("Content-Type", "application/json;charset=utf-8");
     xhr.onreadystatechange = replyContentReoue;
     xhr.send();
@@ -814,6 +799,21 @@ function f() {
 
 }
 
-
+/**
+ * 文本框 输入页码 跳转页面
+ * @param ele
+ */
+function toPageButton(ele){
+    var page = ele.previousSibling.previousSibling.value;
+    if (window.XMLHttpRequest) {
+        xhr = new XMLHttpRequest();
+    } else {
+        xhr = new ActiveXObject('Microsoft.XMLHTTP');
+    }
+    xhr.open("GET", "/reviewTheDetails?postId=" + pagePostId + "&currentPage=" + page, true);
+    xhr.setRequestHeader("Content-Type", "application/json;charset=utf-8");
+    xhr.onreadystatechange = replyContentReoue;
+    xhr.send();
+}
 
 

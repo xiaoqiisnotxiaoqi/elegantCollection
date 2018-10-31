@@ -75,7 +75,6 @@ public class BookReview {
     @GetMapping("/reviewTheDetails")
     public PageModel<Map<String, Object>> reviewTheDetails(Integer postId, String currentPage, HttpServletRequest request) {
         if (postId == null) {
-            request.getSession().setAttribute("postId", 10004);
             postId = (Integer) request.getSession().getAttribute("postId");
         }
         //确定 用户请求的页数
