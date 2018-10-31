@@ -4,12 +4,10 @@ onload = function getFirstPage() {
     refreshByPage(1);
 }
 
-function refreshByPage(currentPageCode) {
-    allUrl = null;
-    allUrl = "/order/queryAll?currentPageCode=" + currentPageCode;
-    refreshData(allUrl)
-}
-
+/**
+ * 基本刷新
+ * @param url
+ */
 function refresh(url) {
     if (window.XMLHttpRequest) {
         xhr = new XMLHttpRequest(); //for ie7+,FireFox,Chorme,Opera,Safai...
@@ -21,7 +19,6 @@ function refresh(url) {
         xhr.open("GET", url, true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;");
         xhr.onreadystatechange = function () {
-
         };
         xhr.send();
     } else {
@@ -29,6 +26,20 @@ function refresh(url) {
     }
 };
 
+/**
+ * 基本查询
+ * @param currentPageCode
+ */
+function refreshByPage(currentPageCode) {
+    allUrl = null;
+    allUrl = "/order/queryAll?currentPageCode=" + currentPageCode;
+    refreshData(allUrl)
+}
+
+/**
+ * 请求
+ * @param url
+ */
 function refreshData(url) {
     if (window.XMLHttpRequest) {
         xhr = new XMLHttpRequest(); //for ie7+,FireFox,Chorme,Opera,Safai...
@@ -46,6 +57,9 @@ function refreshData(url) {
     }
 };
 
+/**
+ * 页面渲染
+ */
 function getDate() {
     if (xhr.readyState === 4 && xhr.status === 200) {
         var orderDate = document.getElementById("order-date");
@@ -80,9 +94,7 @@ function getDate() {
                 orderDate.innerHTML +=
                     "<tr class=\"order-item\">\n" +
                     "    <td>\n" +
-                    "        <div class=\"book-img\">\n" +
-                    "            <img src=\"" + orderDetailList[j].bookImg + "\">\n" +
-                    "        </div>\n" +
+                    "        <div class=\"book-img\"><a href=\"#\" onclick='javascript:toDetail(" + orderDetailList[j].bookId + ")'><img src=" + orderDetailList[j].bookImg + "></a></div>\n" +
                     "    </td>\n" +
                     "\n" +
                     "    <td>\n" +
@@ -131,13 +143,22 @@ function getDate() {
     }
 }
 
-
+/**
+ * 状态查询 url组合
+ * @param orderStatus 订单状态
+ * @param timeState 订单时间状态
+ * @param currentPageCode 当前页码
+ */
 function refreshByState(orderStatus, timeState, currentPageCode) {
     allUrl = null;
     allUrl = "/order/queryByState?orderStatus=" + orderStatus + "&timeState=" + timeState + "&currentPageCode=" + currentPageCode;
     refreshData4State(allUrl)
 }
 
+/**
+ * 请求
+ * @param url
+ */
 function refreshData4State(url) {
     if (window.XMLHttpRequest) {
         xhr = new XMLHttpRequest(); //for ie7+,FireFox,Chorme,Opera,Safai...
@@ -155,6 +176,9 @@ function refreshData4State(url) {
     }
 }
 
+/**
+ * 页面渲染
+ */
 function getDate4State() {
     if (xhr.readyState == 4 && xhr.status == 200) {
         var orderDate = document.getElementById("order-date");
@@ -188,9 +212,7 @@ function getDate4State() {
                 orderDate.innerHTML +=
                     "<tr class=\"order-item\">\n" +
                     "    <td>\n" +
-                    "        <div class=\"book-img\">\n" +
-                    "            <img src=\"" + orderDetailList[j].bookImg + "\">\n" +
-                    "        </div>\n" +
+                    "        <div class=\"book-img\"><a href=\"#\" onclick='javascript:toDetail(" + orderDetailList[j].bookId + ")'><img src=" + orderDetailList[j].bookImg + "></a></div>\n" +
                     "    </td>\n" +
                     "\n" +
                     "    <td>\n" +
@@ -242,20 +264,27 @@ function getDate4State() {
     }
 }
 
-
+/**
+ * 条件查询
+ * @param condition 查询条件：订单编号，图书名
+ * @param currentPageCode 当前页码
+ */
 function refreshByCondition(condition, currentPageCode) {
     allUrl = null;
     allUrl = "/order/queryByCondition?condition=" + condition + "&currentPageCode=" + currentPageCode;
     refreshData4Condition(allUrl)
 }
 
+/**
+ * 请求
+ * @param url
+ */
 function refreshData4Condition(url) {
     if (window.XMLHttpRequest) {
         xhr = new XMLHttpRequest(); //for ie7+,FireFox,Chorme,Opera,Safai...
     } else {
         xhr = new ActiveXObject('Microsoft.XMLHTTP');//for ie6
     }
-
     if (xhr != null) {
         xhr.open("GET", url, true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;");
@@ -266,6 +295,9 @@ function refreshData4Condition(url) {
     }
 }
 
+/**
+ * 页面渲染
+ */
 function getDate4Condition() {
     if (xhr.readyState == 4 && xhr.status == 200) {
         var orderDate = document.getElementById("order-date");
@@ -299,9 +331,7 @@ function getDate4Condition() {
                 orderDate.innerHTML +=
                     "<tr class=\"order-item\">\n" +
                     "    <td>\n" +
-                    "        <div class=\"book-img\">\n" +
-                    "            <img src=\"" + orderDetailList[j].bookImg + "\">\n" +
-                    "        </div>\n" +
+                    "        <div class=\"book-img\"><a href=\"#\" onclick='javascript:toDetail(" + orderDetailList[j].bookId + ")'><img src=" + orderDetailList[j].bookImg + "></a></div>\n" +
                     "    </td>\n" +
                     "\n" +
                     "    <td>\n" +
@@ -352,21 +382,38 @@ function getDate4Condition() {
     }
 }
 
-
+/**
+ * 订单删除
+ * @param orderId
+ */
 function remove(orderId) {
     allUrl = null;
     allUrl = "order/removeByOrderId?orderId=" + orderId;
     refresh(allUrl);
-    refreshByState(4,0,1)
+    refreshByState(4, 0, 1)
 }
 
+/**
+ * 订单完全删除
+ * @param orderId
+ */
 function del(orderId) {
     allUrl = null;
     allUrl = "order/delByOrderId?orderId=" + orderId;
     refresh(allUrl);
-    refreshByState(4,0,1)
+    refreshByState(4, 0, 1)
 }
 
+//查询图书详情
+function toDetail(bookId) {
+    window.location = "bookdetail/?bookId=" + bookId;
+}
+
+/**
+ * 时间转换
+ * @param time
+ * @returns {*}
+ */
 function dataConversion(time) {
     var date = new Date(time);
     Y = date.getFullYear() + '-';
@@ -378,6 +425,12 @@ function dataConversion(time) {
     return (Y + M + D + h + m + s);
 }
 
+/**
+ * 状态判断
+ * @param statusCode 状态码
+ * @returns {*} 状态信息
+ * @constructor
+ */
 function StatusJudge(statusCode) {
     var statusMsg;
     if (statusCode == 0)
@@ -393,20 +446,25 @@ function StatusJudge(statusCode) {
     return statusMsg;
 }
 
+//时间下拉列表
 var timeFilter = document.getElementById("order-time-filter");
-
+//时间下拉列表Listener
 timeFilter.addEventListener("change", function () {
     var opt = timeFilter.value;
     refreshByState(6, opt, 1);
 });
-
+//搜索按钮
 var searchButton = document.getElementById("search-button");
+//搜索框
 var searchTxt = document.getElementById("search-txt");
+//搜索按钮Listener
 searchButton.addEventListener("click", function () {
     refreshByCondition(searchTxt.value, 1)
 })
 
-
+/**
+ * 转换，获取订单时间
+ */
 function getTime() {
     var date = new Date();
     var Year1 = date.getFullYear() - 1;
@@ -421,7 +479,10 @@ function getTime() {
         "                    <option value='" + 4 + "'>" + Year4 + "年及之前的订单</option>";
 }
 
-
+/**
+ * 跳转订单详情
+ * @param orderId
+ */
 function orderDetail(orderId) {
     window.location = "showOrderDetail?orderId=" + orderId;
 }

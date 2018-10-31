@@ -154,7 +154,7 @@
       #{postStatus,jdbcType=INTEGER}, #{postPetname,jdbcType=VARCHAR}, #{postIsreply,jdbcType=INTEGER}, 
       #{postText,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.elegantcollection.entity.Post">
+  <insert id="insertSelective" parameterType="com.elegantcollection.entity.Post" useGeneratedKeys="true" keyProperty="postId">
     insert into post
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="postId != null">

@@ -1,5 +1,6 @@
 package com.elegantcollection.util;
 
+import com.alipay.api.AlipayApiException;
 import com.elegantcollection.entity.Customer;
 import com.elegantcollection.entity.Customer;
 import org.springframework.stereotype.Controller;
@@ -41,7 +42,6 @@ public class Ui {
 
     @RequestMapping("userinfo")
     public String ui3() {
-
         return "user_info";
     }
 
@@ -77,10 +77,12 @@ public class Ui {
         return "order_detail";
     }
 
-    @RequestMapping("pay")
-    public String pay() {
-        return "pay";
+    @RequestMapping("showOrderDetail0")
+    public String ui2OrderDetail0(Integer out_trade_no, String trade_no, HttpServletRequest request) throws AlipayApiException {
+        request.getSession().setAttribute("orderId", out_trade_no);
+        return "order_detail";
     }
+
 
     @RequestMapping("post")
     public String post() {
@@ -107,7 +109,8 @@ public class Ui {
     }
 
     @RequestMapping("review")
-    public String review() {
+    public String review(HttpServletRequest request, Integer postId) {
+        request.getSession().setAttribute("postId", postId);
         return "reviewTheDetails";
     }
 

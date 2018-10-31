@@ -1,18 +1,31 @@
 package com.elegantcollection.controller;
 
 
+import com.alipay.api.AlipayApiException;
+import com.alipay.api.AlipayClient;
+import com.alipay.api.DefaultAlipayClient;
+import com.alipay.api.request.AlipayTradePagePayRequest;
+import com.alipay.api.request.AlipayTradeQueryRequest;
+import com.alipay.api.response.AlipayTradeQueryResponse;
 import com.elegantcollection.entity.*;
 import com.elegantcollection.service.AddressService;
 import com.elegantcollection.service.BookService;
 import com.elegantcollection.service.ShopOrderDetailService;
 import com.elegantcollection.service.ShopOrderService;
+import com.elegantcollection.util.AlipayConfig;
 import com.elegantcollection.util.JuheDemo;
 import com.elegantcollection.util.PageModel;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Pattern;
 
@@ -81,26 +94,27 @@ public class ShopOrderController {
 
 
         HashMap<String, Object> objectHashMap = new HashMap<>();
+        Long orderNumber = orderNumberGenerate(custId);
         objectHashMap.put("bookList", booklist);
         objectHashMap.put("allprice", allprice);
         objectHashMap.put("groupPrice", groupPrice);
         objectHashMap.put("fullReductionDiscount", fullReductionDiscount);
-        Long orderNumber = orderNumberGenerate(custId);
+        objectHashMap.put("orderNumber", orderNumber);
         ShopOrder shopOrder = new ShopOrder();
         shopOrder.setCustId(custId);
         shopOrder.setOrderNumber(orderNumber);
         shopOrder.setOrderPrice(allprice - groupPrice - fullReductionDiscount);
         shopOrder.setOrderCreateTime(new Date());
         if (shopOrderService.add(shopOrder) == 1) {//添加订单
-            Integer orderId = shopOrderService.queryByOrderNumber(orderNumber);
             ShopOrderDetail shopOrderDetail = new ShopOrderDetail();
             for (HashMap<String, Object> b : booklist) {//添加订单详情条目
-                shopOrderDetail.setOrderId(orderId);
+                shopOrderDetail.setOrderId(shopOrder.getOrderId());System.out.println(shopOrder.getOrderId());
                 shopOrderDetail.setBookId(((Book) b.get("book")).getBookId());
                 shopOrderDetail.setQuality((Integer) b.get("bookNumber"));
                 shopOrderDetailService.add(shopOrderDetail);
             }
         }
+        objectHashMap.put("orderId", shopOrder.getOrderId());
         return objectHashMap;
     }
 
@@ -148,25 +162,88 @@ public class ShopOrderController {
     }
 
     /**
-     * 完善订单
+     * 订单支付
      *
-     * @param request         request请求
-     * @param orderId         订单id
-     * @param addressId       地址id
-     * @param expectationTime 期望配送时间
-     * @return
+     * @param httpRequest
+     * @param httpResponse
+     * @param orderNumber
+     * @param payPriceValue
+     * @param bookQuantity
+     * @param bookName
+     * @param orderId
+     * @param addressId
+     * @param expectationTime
+     * @param discountPriceValue
+     * @throws ServletException
+     * @throws IOException
+     * @throws ParseException
+     * @throws AlipayApiException
      */
-    @PostMapping("alter")
-    public String prefectOrder(HttpServletRequest request, Integer orderId, Integer addressId, Date expectationTime) {
+    @GetMapping("pay")
+    public void pay(HttpServletRequest httpRequest, HttpServletResponse httpResponse, String orderNumber, Integer payPriceValue, Integer bookQuantity, String bookName, String orderId, String addressId, String expectationTime, String discountPriceValue) throws ServletException, IOException, ParseException, AlipayApiException {
+        //订单完善
         ShopOrder shopOrder = new ShopOrder();
-        shopOrder.setOrderId(orderId);
-        shopOrder.setAddressId(addressId);
-        shopOrder.setExpectationTime(expectationTime);
-        if (shopOrderService.alter(shopOrder) == 1)
-            return "success";
-        else
-            return "fail";
+        shopOrder.setOrderId(Integer.valueOf(orderId));
+        shopOrder.setAddressId(Integer.valueOf(addressId));
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date expectationDate = format.parse(expectationTime);
+        shopOrder.setExpectationTime(expectationDate);
+        shopOrder.setPaymentTime(new Date());
+        shopOrder.setDiscountAmount(discountPriceValue);
+        shopOrderService.alter(shopOrder);
+        httpRequest.getSession().setAttribute("orderId", orderId);
+
+        //支付接口
+        AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.URL, AlipayConfig.APPID, AlipayConfig.RSA_PRIVATE_KEY, AlipayConfig.FORMAT, AlipayConfig.CHARSET, AlipayConfig.ALIPAY_PUBLIC_KEY, AlipayConfig.SIGNTYPE);
+        AlipayTradePagePayRequest alipayRequest = new AlipayTradePagePayRequest();//创建API对应的request
+        alipayRequest.setReturnUrl("http://localhost:8080/showOrderDetail0");
+        //alipayRequest.setNotifyUrl("http://localhost:8080/notify");//在公共参数中设置回跳和通知地址
+        alipayRequest.setBizContent("{" +
+                "    \"out_trade_no\":\"" + orderId + "\"," +
+                "    \"product_code\":\"FAST_INSTANT_TRADE_PAY\"," +
+                "    \"total_amount\":" + payPriceValue + "," +
+                "    \"subject\":\"雅致图书 x" + bookQuantity + "\"," +
+                "    \"body\":\"" + bookName + "\"," +
+                "    \"passback_params\":\"merchantBizType%3d3C%26merchantBizNo%3d2016010101111\"," +
+                "    \"extend_params\":{" +
+                "    \"sys_service_provider_id\":\"2088511833207846\"" +
+                "    }" +
+                "  }");//填充业务参数
+        // System.out.println(alipayRequest.getBizContent());
+        String form = "";
+        try {
+            form = alipayClient.pageExecute(alipayRequest).getBody(); //调用SDK生成表单
+        } catch (AlipayApiException e) {
+            e.printStackTrace();
+        }
+        System.out.println(form);
+        httpResponse.setContentType("text/html;charset=" + "utf-8");
+        httpResponse.getWriter().write(form);//直接将完整的表单html输出到页面
+        httpResponse.getWriter().flush();
+        httpResponse.getWriter().close();
     }
+
+    @GetMapping("alterOrder")
+    public void alterOrder(HttpServletRequest httpServletRequest) throws AlipayApiException {
+        Integer orderId = (Integer) httpServletRequest.getSession().getAttribute("orderId");
+        String payJudge= (String) httpServletRequest.getSession().getAttribute("payJudge");
+        AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.URL, AlipayConfig.APPID, AlipayConfig.RSA_PRIVATE_KEY, AlipayConfig.FORMAT, AlipayConfig.CHARSET, AlipayConfig.ALIPAY_PUBLIC_KEY, AlipayConfig.SIGNTYPE);
+        AlipayTradeQueryRequest request = new AlipayTradeQueryRequest();//创建API对应的request类
+        request.setBizContent("{" +
+                " \"out_trade_no\":\"" + orderId + "\"" +
+                " }");//设置业务参数
+        //System.out.println(request.getBizContent());
+        AlipayTradeQueryResponse response = alipayClient.execute(request);//通过alipayClient调用API，获得对应的response类
+        System.out.print(response.getBody());
+        //根据response中的结果继续业务逻辑处理
+        if (payJudge==null&&response.getTradeStatus().equals("TRADE_SUCCESS")) {
+             httpServletRequest.getSession().setAttribute("payJudge","Y");
+            shopOrderService.alterStatus(Integer.valueOf(orderId));
+        } else {
+            System.out.println("支付失败");
+        }
+    }
+
 
     /**
      * 修改订单状态（后台）
@@ -192,7 +269,7 @@ public class ShopOrderController {
      */
     @GetMapping("queryAll")
     public PageModel<Object> queryAll(HttpServletRequest request, Integer currentPageCode) {
-        Integer custId = 10001; //(Integer) request.getSession().getAttribute("custId");
+        Integer custId = 10001;//(Integer) request.getSession().getAttribute("custId");
         //初始化pageModel
         initializePageModel(currentPageCode);
         pageModel.setPageSize(4);
@@ -216,7 +293,7 @@ public class ShopOrderController {
      */
     @GetMapping("queryByState")
     public PageModel<Object> queryByState(HttpServletRequest request, Integer orderStatus, String timeState, Integer currentPageCode) {
-        Integer custId = 10001; //(Integer) request.getSession().getAttribute("custId");
+        Integer custId = (Integer) request.getSession().getAttribute("custId");
         initializePageModel(currentPageCode);
         pageModel.setPageSize(4);
         Integer size = shopOrderService.queryByState4Size(custId, orderStatus, timeState);
@@ -253,7 +330,7 @@ public class ShopOrderController {
      * @return 订单列表的PageModel对象
      */
     public PageModel<Object> queryByOrderNumber(HttpServletRequest request, String orderNumber, Integer currentPageCode) {
-        Integer custId = 10001; //(Integer) request.getSession().getAttribute("custId");
+        Integer custId = (Integer) request.getSession().getAttribute("custId");
         initializePageModel(currentPageCode);
         pageModel.setPageSize(4);
         pageModel.setTotalPages(1);
@@ -271,7 +348,7 @@ public class ShopOrderController {
      * @return 订单列表的PageModel对象
      */
     public PageModel<Object> queryByBookName(HttpServletRequest request, String bookName, Integer currentPageCode) {
-        Integer custId = 10001; //(Integer) request.getSession().getAttribute("custId");
+        Integer custId = (Integer) request.getSession().getAttribute("custId");
         initializePageModel(currentPageCode);
         Integer size = shopOrderService.queryByBookName4Size(custId, bookName);
         pageModel.setTotalRecord(size);
@@ -374,7 +451,7 @@ public class ShopOrderController {
      */
     @GetMapping("showOrderDetail")
     public HashMap showOrderDetail(HttpServletRequest request) {
-        Integer orderId= (Integer) request.getSession().getAttribute("orderId");
+        Integer orderId = (Integer) request.getSession().getAttribute("orderId");
         ShopOrder shopOrder = shopOrderService.queryByOrderId(orderId);
         List<HashMap<String, Object>> shopOrderDetailList = shopOrderDetailService.queryByOrderId(orderId);
         Address address = addressService.queryByAddressId(shopOrder.getAddressId());

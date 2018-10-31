@@ -1,24 +1,61 @@
-var xhr=null;
-var xhr0=null;
-var addressId = null;
+var xhr = null;
+var xhr0 = null;
+//订单id
+var orderId;
+//地址id
+var addressId;
+//期望到达时间
+var expectationTime;
+//总价
+var allprice;
+//满减优惠
+var fullReductionDiscount;
+//组合优惠
+var groupPrice;
+//总折扣=满减优惠+组合优惠
+var discountPriceValue;
+//应支付价格
+var payPriceValue;
+//订单编号
+var orderNumber;
+//图书数量
+var bookQuantity = 0;
+//图书名称
+var bookName = "";
+//地址信息
 var addressOptions = document.getElementById("address-options");
-
+//期待到达时间
+var transportDate = document.getElementById("transport-date");
+//物流信息框
 var transport = document.getElementById("transport");
+//订单简略信息
 var orderSimpleInfo = document.getElementById("order-simple-info");
+//总价
 var totalPrice = document.getElementById("total-price");
+//折扣
 var discountPrice = document.getElementById("discount-price");
+//实际支付价格
 var payPrice = document.getElementById("pay-price");
+//图书重量
 var bookWeight = document.getElementById("book-weight");
+//支付按钮
 var payButton = document.getElementById("pay-button");
+//支付方式
+var paymentOption = document.getElementById("payment-option");
+paymentOption.addEventListener("click", function () {
+    this.style.color = "red";
+})
 onload = function () {
     refreshAddress();
-    setTimeout(refreshOther(),500);
+    refreshOther();
 //获取并复制动态页面高度
     var style = window.getComputedStyle(orderSimpleInfo, null);
     transport.style.height = style.height;
 }
 
-
+/**
+ * 刷新地址
+ */
 function refreshAddress() {
     allUrl = "/order/getAddress";
     refreshAddressData(allUrl);
@@ -74,6 +111,9 @@ function getAddressDate() {
 
 }
 
+/**
+ * 订单提交
+ */
 function refreshOther() {
     allUrl = "/order/add";
     refreshOtherData(allUrl);
@@ -102,19 +142,24 @@ function getOtherData() {
         var bookList = jsonText.bookList;
         for (var i = 0; i < bookList.length; i++) {
             var theBook = bookList[i];
+            bookQuantity += theBook.bookNumber;
+            bookName += theBook.book.bookName + "    ";
             orderSimpleInfo.innerHTML += "<div class=\"block-segmentation2\"></div>\n" +
                 "            <div class=\"book-info\">\n" +
-                "                <a class=\"book_img\" href=\"#\"><img src=" + theBook.book.bookImg + "></a>\n" +
-                "                <a class=\"book-name\" href=\"#\" id=\"book-name\">" + theBook.book.bookName + "</a>\n" +
-                "                <span class=\"book-price\">￥ " + theBook.book.bookSellingPrice + "</span>\n" +
-                "                <span class=\"book-number\">x " + theBook.bookNumber + "</span>\n" +
+                "                <a class=\"book_img\" href=\"#\" onclick=\"javascript:toDetail(" + theBook.book.bookId + ")\"><img src=" + theBook.book.bookImg + "></a>\n" +
+                "                <a class=\"book-name\" href=\"#\">" + theBook.book.bookName + "</a>\n" +
+                "                <span class=\"book-price\">￥" + theBook.book.bookSellingPrice + "</span>\n" +
+                "                <span class=\"book-number\">x" + theBook.bookNumber + "</span>\n" +
                 "            </div>";
         }
-        var allprice = jsonText.allprice;
-        var fullReductionDiscount = jsonText.fullReductionDiscount;
-        var groupPrice = jsonText.groupPrice;
-        var discountPriceValue = fullReductionDiscount + groupPrice;
-        var payPriceValue = allprice - discountPriceValue;
+        orderId = jsonText.orderId;
+        allprice = jsonText.allprice;
+        fullReductionDiscount = jsonText.fullReductionDiscount;
+        groupPrice = jsonText.groupPrice;
+        orderNumber = jsonText.orderNumber;
+
+        discountPriceValue = fullReductionDiscount + groupPrice;
+        payPriceValue = allprice - discountPriceValue;
         totalPrice.innerHTML += "￥ " + allprice;
         discountPrice.innerHTML += "￥ " + discountPriceValue;
         payPrice.innerHTML += "￥ " + payPriceValue;
@@ -123,7 +168,24 @@ function getOtherData() {
     }
 }
 
+transportDate.addEventListener("change", function () {
+        expectationTime = this.value;
+    }
+)
 
-payButton.addEventListener("click", function () {
-    //完成订单
-})
+//完成订单
+payButton.addEventListener("click", toPay);
+
+/**
+ * 订单完善
+ */
+function toPay() {
+    window.location = "/order/pay?orderNumber=" + orderNumber + "&payPriceValue=" + payPriceValue + "&bookQuantity=" + bookQuantity + "&bookName=" + bookName + "&orderId=" + orderId + "&addressId=" + addressId + "&expectationTime=" + expectationTime + "&discountPriceValue=" + discountPriceValue;
+
+}
+
+
+//查询图书详情
+function toDetail(bookId) {
+    window.location = "bookdetail/?bookId=" + bookId;
+}
