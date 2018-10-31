@@ -202,6 +202,25 @@
             limit #{pageModel.startRecord},#{pageModel.pageSize}
         </if>
     </select>
+    <!--查询首页数据-->
+    <select id="selectIndexData" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+        select distinct
+        <include refid="Base_Column_List"/>
+        from book
+        <where>
+            <if test="categoryId != null and categoryId != ''and categoryId!=10034">
+                and (
+                book_main_category = #{categoryId}
+                or book_first_category = #{categoryId}
+                or book_second_category = #{categoryId}
+                )
+            </if>
+        </where>
+        <if test="orderBy!=null and orderBy != ''">
+            order by ${orderBy}
+        </if>
+        limit 0 ,10
+    </select>
     <select id="selectByExampleWithBLOBs" parameterType="com.elegantcollection.entity.BookExample"
             resultMap="ResultMapWithBLOBs">
         select

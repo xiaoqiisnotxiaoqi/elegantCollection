@@ -13,11 +13,12 @@
     <title>Title</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/top.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/index.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/register.css">
     <script src="${pageContext.request.contextPath}/js/top.js"></script>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/index.css">
 </head>
 <body>
+
 <!--顶端导航入口-->
 <div class="top-nav">
 
@@ -74,7 +75,8 @@
                                         <ul id="password-login">
                                             <li class="form-group"><input class="form-control" id="id_account_l"
                                                                           maxlength="50" name="account_l"
-                                                                          placeholder="请输入邮箱账号/手机号" type="text"></li>
+                                                                          placeholder="请输入邮箱账号/手机号" type="text">
+                                            </li>
                                             <li class="form-group"><input class="form-control" id="id_password_l"
                                                                           name="password_l" placeholder="请输入密码"
                                                                           type="password"></li>
@@ -86,7 +88,8 @@
                                             <li class="form-group">
                                                 <input class="form-control" id="id_password_2" name="password_l"
                                                        placeholder="请输入验证码" type="password">
-                                                <input id="getVCode" type="button" class="send-again" value="点击发送验证码"
+                                                <input id="getVCode" type="button" class="send-again"
+                                                       value="点击发送验证码"
                                                        onclick="sendCode(this)"/>
                                             </li>
 
@@ -99,7 +102,8 @@
                                            onclick="login2Register()">立即注册</a>
                                     </p>
                                     <div class="login-box marginB10">
-                                        <span id="login_btn" class="btn btn-micv5 btn-block" onclick="login()">登录</span>
+                                            <span id="login_btn" class="btn btn-micv5 btn-block"
+                                                  onclick="login()">登录</span>
                                     </div>
 
 
@@ -122,7 +126,8 @@
     </div>
 
     <div id="register" style="display: none;">
-        <img src="${pageContext.request.contentType}/images/cross.png" id="register-cross" onclick="stopRegisterDiv()"/>
+        <img src="${pageContext.request.contentType}/images/cross.png" id="register-cross"
+             onclick="stopRegisterDiv()"/>
         <div>
             <span id="register-title">会员注册</span>
             <span id="register-having">已有账号</span>
@@ -207,6 +212,7 @@
 
 
 <div style="width: 100%;height: 2px;background-color: red; margin-top: 20px"></div>
+
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/common.js"></script>

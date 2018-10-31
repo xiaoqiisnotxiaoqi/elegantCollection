@@ -31,64 +31,9 @@ public class BookController {
      * @return 结果
      */
     @GetMapping("index")
-    public HashMap index() {
+    public ServerResponse<HashMap> index() {
         System.out.println("!!!!!!!!!!!!!!!!!!!!查询首页数据!!!!!!!!!!!!!!!!!!!");
-//        用来设置查询前十条
-        PageModel pageModel = new PageModel();
-        pageModel.setPageSize(16);
-        pageModel.setCurrentPageCode(1);
-        pageModel.setStartRecord(0);
-        //获取新书上架(上架时间排序,前16本)
-        HashMap condition0 = new HashMap();
-        condition0.put("orderBy", "book_sales_total desc");
-        condition0.put("pageModel", pageModel);
-        List<BookWithBLOBs> bookList0 = bookService.queryByCondition(condition0);
-
-//        获取排行
-//        获取总排行
-        HashMap condition1 = new HashMap();
-        condition1.put("orderBy", "book_sales_total desc");
-        condition1.put("pageModel", pageModel);
-        List<BookWithBLOBs> bookList1 = bookService.queryByCondition(condition1);
-//        获取文艺分类排行
-        HashMap condition2 = new HashMap();
-        condition2.put("categortId", 10008);
-        condition2.put("orderBy", "book_sales_total desc");
-        condition2.put("pageModel", pageModel);
-        List<BookWithBLOBs> bookList2 = bookService.queryByCondition(condition2);
-//      获取人文社科排行
-        HashMap condition3 = new HashMap();
-        condition3.put("categortId", 10013);
-        condition3.put("orderBy", "book_sales_total desc");
-        condition3.put("pageModel", pageModel);
-        List<BookWithBLOBs> bookList3 = bookService.queryByCondition(condition3);
-//      获取生活排行
-        HashMap condition4 = new HashMap();
-        condition4.put("categortId", 10022);
-        condition4.put("orderBy", "book_sales_total desc");
-        condition4.put("pageModel", pageModel);
-        List<BookWithBLOBs> bookList4 = bookService.queryByCondition(condition4);
-//      获取科技排行
-        HashMap condition5 = new HashMap();
-        condition5.put("categortId", 10028);
-        condition5.put("orderBy", "book_sales_total desc");
-        condition5.put("pageModel", pageModel);
-        List<BookWithBLOBs> bookList5 = bookService.queryByCondition(condition5);
-//      获取前三个书单
-        List<BookOrder> bookOrders = bookService.queryBookOrder();
-
-        //获取推荐作家
-
-
-        HashMap result = new HashMap();
-        result.put("bookList0", bookList1);
-        result.put("bookList1", bookList1);
-        result.put("bookList2", bookList1);
-        result.put("bookList3", bookList1);
-        result.put("bookList4", bookList1);
-        result.put("bookList5", bookList1);
-        result.put("bookOrders", bookOrders);
-        return result;
+        return bookService.queryIndexData();
     }
 
 
