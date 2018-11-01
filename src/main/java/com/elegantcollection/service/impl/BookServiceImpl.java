@@ -78,6 +78,19 @@ public class BookServiceImpl implements BookService {
 //        获取三个书单
         List<BookOrder> bookOrders = queryBookOrder();
 
+
+//        获取前十的作者
+        AuthorExample authorExample = new AuthorExample();
+        authorExample.setOffset(0l);
+        authorExample.setLimit(10);
+        List<Author> authorList = authorDao.selectByExampleWithBLOBs(authorExample);
+//        获取排行第一的作者的(前四本)作品
+        BookExample bookExample1 = new BookExample();
+        bookExample1.createCriteria().andAuthorIdEqualTo(authorList.get(0).getAuthorId());
+        bookExample1.setOffset(0l);
+        bookExample1.setLimit(4);
+        List<Book> anthorBookList = bookDao.selectByExample(bookExample1);
+
         HashMap result = new HashMap();
         result.put("bookList0", bookList0);
         result.put("bookList1", bookList1);
@@ -86,13 +99,8 @@ public class BookServiceImpl implements BookService {
         result.put("bookList4", bookList4);
         result.put("bookList5", bookList5);
         result.put("bookOrders", bookOrders);
-
-//        获取前十的作者
-        AuthorExample authorExample = new AuthorExample();
-        authorExample.setOffset(0l);
-        authorExample.setLimit(10);
-        List<Author> authorList = authorDao.selectByExampleWithBLOBs(authorExample);
-
+        result.put("authorList", authorList);
+        result.put("anthorBookList", anthorBookList);
         return ServerResponse.createBySuccess("查询首页数据成功", result);
     }
 

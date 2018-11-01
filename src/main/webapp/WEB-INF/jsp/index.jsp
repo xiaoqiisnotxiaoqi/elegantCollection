@@ -33,7 +33,8 @@
             <div class="panel-body classify-content">
 
                 <div class="row">
-                    <div class="col-md-10 classify-content-title" onclick="clickCate(this)"><input type="hidden" name="10003">教育
+                    <div class="col-md-10 classify-content-title" onclick="clickCate(this)"><input type="hidden"
+                                                                                                   name="10003">教育
                     </div>
                 </div>
                 <div class="row classify-content-all">
@@ -58,7 +59,8 @@
             <div class="panel-body classify-content">
                 <div class="classify-bottom-xian"></div>
                 <div class="row">
-                    <div class="col-md-10 classify-content-title" onclick="clickCate(this)"><input type="hidden" name="10008">文艺
+                    <div class="col-md-10 classify-content-title" onclick="clickCate(this)"><input type="hidden"
+                                                                                                   name="10008">文艺
                     </div>
                 </div>
                 <div class="row classify-content-all">
@@ -82,7 +84,8 @@
             <div class="panel-body classify-content">
                 <div class="classify-bottom-xian"></div>
                 <div class="row">
-                    <div class="col-md-10 classify-content-title" onclick="clickCate(this)"><input type="hidden" name="10013">人文社科
+                    <div class="col-md-10 classify-content-title" onclick="clickCate(this)"><input type="hidden"
+                                                                                                   name="10013">人文社科
                     </div>
                 </div>
                 <div class="row classify-content-all">
@@ -127,7 +130,8 @@
             <div class="panel-body classify-content">
                 <div class="classify-bottom-xian"></div>
                 <div class="row">
-                    <div class="col-md-10 classify-content-title" onclick="clickCate(this)"><input type="hidden" name="10022">生活
+                    <div class="col-md-10 classify-content-title" onclick="clickCate(this)"><input type="hidden"
+                                                                                                   name="10022">生活
                     </div>
                 </div>
                 <div class="row classify-content-all">
@@ -161,7 +165,8 @@
             <div class="panel-body classify-content">
                 <div class="classify-bottom-xian"></div>
                 <div class="row">
-                    <div class="col-md-10 classify-content-title" onclick="clickCate(this)"><input type="hidden" name="10028">科技
+                    <div class="col-md-10 classify-content-title" onclick="clickCate(this)"><input type="hidden"
+                                                                                                   name="10028">科技
                     </div>
                 </div>
                 <div class="row classify-content-all">
@@ -300,159 +305,31 @@
         <%--第一页--%>
         <div class="item active new-active">
             <div class="row">
-                <div class="col-md-3">
-                    <img src="${pageContext.request.contextPath}/images/n1.jpg">
-                    <div class="new-title-word">每日读诗日历2019</div>
-                    <div class="new-author">廉萍 著，新经典 出</div>
-                    <div class="cost-price-icon">¥</div>
-                    <div class="cost-price">44.00</div>
-                    <div class="original-price-icon">¥</div>
-                    <div class="original-price">88.00</div>
-                </div>
-                <div class="col-md-3">
-                    <img src="${pageContext.request.contextPath}/images/n2.jpg">
-                    <div class="new-title-word">曼食慢语（Amanda</div>
-                    <div class="new-author">曼达（Amanda）</div>
-                    <div class="cost-price-icon">¥</div>
-                    <div class="cost-price">48.90</div>
-                    <div class="original-price-icon">¥</div>
-                    <div class="original-price">68.00</div>
-                </div>
-                <div class="col-md-3">
-                    <img src="${pageContext.request.contextPath}/images/n3.jpg">
-                    <div class="new-title-word">楚辞·观</div>
-                    <div class="new-author">陈丝雨 绘</div>
-                    <div class="cost-price-icon">¥</div>
-                    <div class="cost-price">129.60</div>
-                    <div class="original-price-icon">¥</div>
-                    <div class="original-price">180.00</div>
-                </div>
-                <div class="col-md-3">
-                    <img src="${pageContext.request.contextPath}/images/n4.jpg">
-                    <div class="new-title-word">别做那只迷途的候鸟</div>
-                    <div class="new-author">刘同 著</div>
-                    <div class="cost-price-icon">¥</div>
-                    <div class="cost-price">31.10</div>
-                    <div class="original-price-icon">¥</div>
-                    <div class="original-price">45.00</div>
-                </div>
+                <div class="col-md-3"></div>
+                <div class="col-md-3"></div>
+                <div class="col-md-3"></div>
+                <div class="col-md-3"></div>
             </div>
             <div class="row">
-                <div class="col-md-3">
-                    <img src="${pageContext.request.contextPath}/images/n5.jpg">
-                    <div class="new-title-word">曼食慢语（Amanda</div>
-                    <div class="new-author">曼达（Amanda）</div>
-                    <div class="cost-price-icon">¥</div>
-                    <div class="cost-price">129.60</div>
-                    <div class="original-price-icon">¥</div>
-                    <div class="original-price">180.00</div>
-                </div>
-                <div class="col-md-3">
-                    <img src="${pageContext.request.contextPath}/images/n6.jpg">
-                    <div class="new-title-word">曼食慢语（Amanda</div>
-                    <div class="new-author">曼达（Amanda）</div>
-                    <div class="cost-price-icon">¥</div>
-                    <div class="cost-price">129.60</div>
-                    <div class="original-price-icon">¥</div>
-                    <div class="original-price">180.00</div>
-                </div>
-                <div class="col-md-3">
-                    <img src="${pageContext.request.contextPath}/images/n7.jpg">
-                    <div class="new-title-word">曼食慢语（Amanda</div>
-                    <div class="new-author">曼达（Amanda）</div>
-                    <div class="cost-price-icon">¥</div>
-                    <div class="cost-price">129.60</div>
-                    <div class="original-price-icon">¥</div>
-                    <div class="original-price">180.00</div>
-                </div>
-                <div class="col-md-3">
-                    <img src="${pageContext.request.contextPath}/images/n8.jpg">
-                    <div class="new-title-word">曼食慢语（Amanda</div>
-                    <div class="new-author">曼达（Amanda）</div>
-                    <div class="cost-price-icon">¥</div>
-                    <div class="cost-price">129.60</div>
-                    <div class="original-price-icon">¥</div>
-                    <div class="original-price">180.00</div>
-                </div>
+                <div class="col-md-3"></div>
+                <div class="col-md-3"></div>
+                <div class="col-md-3"></div>
+                <div class="col-md-3"></div>
             </div>
         </div>
         <%--第二页--%>
         <div class="item  new-active" name="page2">
             <div class="row">
-                <div class="col-md-3">
-                    <img src="${pageContext.request.contextPath}/images/n9.jpg">
-                    <div class="new-title-word">曼食慢语（Amanda</div>
-                    <div class="new-author">曼达（Amanda）</div>
-                    <div class="cost-price-icon">¥</div>
-                    <div class="cost-price">129.60</div>
-                    <div class="original-price-icon">¥</div>
-                    <div class="original-price">180.00</div>
-                </div>
-                <div class="col-md-3">
-                    <img src="${pageContext.request.contextPath}/images/n10.jpg">
-                    <div class="new-title-word">曼食慢语（Amanda</div>
-                    <div class="new-author">曼达（Amanda）</div>
-                    <div class="cost-price-icon">¥</div>
-                    <div class="cost-price">129.60</div>
-                    <div class="original-price-icon">¥</div>
-                    <div class="original-price">180.00</div>
-                </div>
-                <div class="col-md-3">
-                    <img src="${pageContext.request.contextPath}/images/n11.jpg">
-                    <div class="new-title-word">曼食慢语（Amanda</div>
-                    <div class="new-author">曼达（Amanda）</div>
-                    <div class="cost-price-icon">¥</div>
-                    <div class="cost-price">129.60</div>
-                    <div class="original-price-icon">¥</div>
-                    <div class="original-price">180.00</div>
-                </div>
-                <div class="col-md-3">
-                    <img src="${pageContext.request.contextPath}/images/n12.jpg">
-                    <div class="new-title-word">曼食慢语（Amanda</div>
-                    <div class="new-author">曼达（Amanda）</div>
-                    <div class="cost-price-icon">¥</div>
-                    <div class="cost-price">129.60</div>
-                    <div class="original-price-icon">¥</div>
-                    <div class="original-price">180.00</div>
-                </div>
+                <div class="col-md-3"></div>
+                <div class="col-md-3"></div>
+                <div class="col-md-3"></div>
+                <div class="col-md-3"></div>
             </div>
             <div class="row">
-                <div class="col-md-3">
-                    <img src="${pageContext.request.contextPath}/images/n9.jpg">
-                    <div class="new-title-word">曼食慢语（Amanda</div>
-                    <div class="new-author">曼达（Amanda）</div>
-                    <div class="cost-price-icon">¥</div>
-                    <div class="cost-price">129.60</div>
-                    <div class="original-price-icon">¥</div>
-                    <div class="original-price">180.00</div>
-                </div>
-                <div class="col-md-3">
-                    <img src="${pageContext.request.contextPath}/images/n10.jpg">
-                    <div class="new-title-word">曼食慢语（Amanda</div>
-                    <div class="new-author">曼达（Amanda）</div>
-                    <div class="cost-price-icon">¥</div>
-                    <div class="cost-price">129.60</div>
-                    <div class="original-price-icon">¥</div>
-                    <div class="original-price">180.00</div>
-                </div>
-                <div class="col-md-3">
-                    <img src="${pageContext.request.contextPath}/images/n11.jpg">
-                    <div class="new-title-word">曼食慢语（Amanda</div>
-                    <div class="new-author">曼达（Amanda）</div>
-                    <div class="cost-price-icon">¥</div>
-                    <div class="cost-price">129.60</div>
-                    <div class="original-price-icon">¥</div>
-                    <div class="original-price">180.00</div>
-                </div>
-                <div class="col-md-3">
-                    <img src="${pageContext.request.contextPath}/images/n12.jpg">
-                    <div class="new-title-word">曼食慢语（Amanda</div>
-                    <div class="new-author">曼达（Amanda）</div>
-                    <div class="cost-price-icon">¥</div>
-                    <div class="cost-price">129.60</div>
-                    <div class="original-price-icon">¥</div>
-                    <div class="original-price">180.00</div>
-                </div>
+                <div class="col-md-3"></div>
+                <div class="col-md-3"></div>
+                <div class="col-md-3"></div>
+                <div class="col-md-3"></div>
             </div>
         </div>
 
@@ -487,370 +364,11 @@
 
         <div id="myTabContent" class="tab-content">
             <!--总榜-->
-            <div class="tab-pane fade in active" id="all">
-                <!--总榜内容:前一个有照片-->
-                <div class="row hot-infor">
-                    <div class="col-md-1 hot-num">
-                        1
-                    </div>
-                    <div class="col-md-5 hot-img">
-                        <img src="/images/hot1.jpg" alt="">
-                    </div>
-                    <div class="col-md-4">
-                        <div class="hot-book-name"><a href="">健康日历2019：丁香医</a></div>
-                        <div class="hot-cost-price-icon">￥</div>
-                        <div class="hot-cost-price">89.00</div>
-                        <div class="hot-original-price-icon">￥</div>
-                        <div class="hot-original-price">129.00</div>
-                        <div class="hot-comment">
-                            <a href="">10</a>
-                            <div>条评论</div>
-                        </div>
-                    </div>
-                    <div class="hot-xian"></div>
-                </div>
-                <!--总榜内容：无照片-->
-                <div class="row hot-normal">
-                    <div class=" col-md-1 hot-normal-num">2</div>
-                    <a href="">张大小姐（著名媒体人、出版人</a>
-                    <div class="hot-normal-xian"></div>
-                </div>
-                <div class="row hot-normal">
-                    <div class=" col-md-1 hot-normal-num">3</div>
-                    <a href="" class="order-book-name">张大小姐（著名媒体人、出版人</a>
-                    <div class="hot-normal-xian"></div>
-                </div>
-                <div class="row hot-normal">
-                    <div class=" col-md-1 hot-normal-num">4</div>
-                    <a href="">张大小姐（著名媒体人、出版人</a>
-                    <div class="hot-normal-xian"></div>
-                </div>
-                <div class="row hot-normal">
-                    <div class=" col-md-1 hot-normal-num">5</div>
-                    <a href="">张大小姐（著名媒体人、出版人</a>
-                    <div class="hot-normal-xian"></div>
-                </div>
-                <div class="row hot-normal">
-                    <div class=" col-md-1 hot-normal-num">6</div>
-                    <a href="">张大小姐（著名媒体人、出版人</a>
-                    <div class="hot-normal-xian"></div>
-                </div>
-                <div class="row hot-normal">
-                    <div class=" col-md-1 hot-normal-num">7</div>
-                    <a href="">张大小姐（著名媒体人、出版人</a>
-                    <div class="hot-normal-xian"></div>
-                </div>
-                <div class="row hot-normal">
-                    <div class=" col-md-1 hot-normal-num">8</div>
-                    <a href="">张大小姐（著名媒体人、出版人</a>
-                    <div class="hot-normal-xian"></div>
-                </div>
-                <div class="row hot-normal">
-                    <div class=" col-md-1 hot-normal-num">9</div>
-                    <a href="">张大小姐（著名媒体人、出版人</a>
-                    <div class="hot-normal-xian"></div>
-                </div>
-                <div class="row hot-normal">
-                    <div class=" col-md-1 hot-normal-num">10</div>
-                    <a href="">张大小姐（著名媒体人、出版人</a>
-                </div>
-            </div>
-
-
-            <div class="tab-pane fade" id="childbook1">
-                <!--总榜内容:前一个有照片-->
-                <div class="row hot-infor">
-                    <div class="col-md-1 hot-num">
-                        1
-                    </div>
-                    <div class="col-md-5 hot-img">
-                        <img src="images/hot1.jpg" alt="">
-                    </div>
-                    <div class="col-md-4">
-                        <div class="hot-book-name"><a href="">健康日历2019：丁香医</a></div>
-                        <div class="hot-cost-price-icon">￥</div>
-                        <div class="hot-cost-price">89.00</div>
-                        <div class="hot-original-price-icon">￥</div>
-                        <div class="hot-original-price">129.00</div>
-
-
-                        <div class="hot-comment">
-                            <a href="">10</a>
-                            <div>条评论</div>
-                        </div>
-                    </div>
-                    <div class="hot-xian"></div>
-                </div>
-                <div class="row hot-infor">
-                    <div class="col-md-1 hot-num">
-                        1
-                    </div>
-                    <div class="col-md-5 hot-img">
-                        <img src="images/hot1.jpg" alt="">
-                    </div>
-                    <div class="col-md-4">
-                        <div class="hot-book-name"><a href="">健康日历2019：丁香医</a></div>
-                        <div class="hot-cost-price-icon">￥</div>
-                        <div class="hot-cost-price">89.00</div>
-                        <div class="hot-original-price-icon">￥</div>
-                        <div class="hot-original-price">129.00</div>
-                        <div class="hot-comment">
-                            <a href="">10</a>
-                            <div>条评论</div>
-                        </div>
-                    </div>
-                    <div class="hot-xian"></div>
-                </div>
-                <!--总榜内容：无照片-->
-                <div class="row hot-normal">
-                    <div class=" col-md-1 hot-normal-num">2</div>
-                    <a href="">张大小姐（著名媒体人、出版人</a>
-                    <div class="hot-normal-xian"></div>
-                </div>
-                <div class="row hot-normal">
-                    <div class=" col-md-1 hot-normal-num">2</div>
-                    <a href="">张大小姐（著名媒体人、出版人</a>
-                    <div class="hot-normal-xian"></div>
-                </div>
-                <div class="row hot-normal">
-                    <div class=" col-md-1 hot-normal-num">2</div>
-                    <a href="">张大小姐（著名媒体人、出版人</a>
-                    <div class="hot-normal-xian"></div>
-                </div>
-                <div class="row hot-normal">
-                    <div class=" col-md-1 hot-normal-num">2</div>
-                    <a href="">张大小姐（著名媒体人、出版人</a>
-                    <div class="hot-normal-xian"></div>
-                </div>
-                <div class="row hot-normal">
-                    <div class=" col-md-1 hot-normal-num">2</div>
-                    <a href="">张大小姐（著名媒体人、出版人</a>
-                    <div class="hot-normal-xian"></div>
-                </div>
-                <div class="row hot-normal">
-                    <div class=" col-md-1 hot-normal-num">2</div>
-                    <a href="">张大小姐（著名媒体人、出版人</a>
-                </div>
-            </div>
-            <div class="tab-pane fade" id="childbook2">
-                <!--总榜内容:前一个有照片-->
-                <div class="row hot-infor">
-                    <div class="col-md-1 hot-num">
-                        1
-                    </div>
-                    <div class="col-md-5 hot-img">
-                        <img src="images/hot1.jpg" alt="">
-                    </div>
-                    <div class="col-md-4">
-                        <div class="hot-book-name"><a href="">健康日历2019：丁香医</a></div>
-                        <div class="hot-cost-price-icon">￥</div>
-                        <div class="hot-cost-price">89.00</div>
-                        <div class="hot-original-price-icon">￥</div>
-                        <div class="hot-original-price">129.00</div>
-                        <div class="hot-comment">
-                            <a href="">10</a>
-                            <div>条评论</div>
-                        </div>
-                    </div>
-                    <div class="hot-xian"></div>
-                </div>
-                <div class="row hot-infor">
-                    <div class="col-md-1 hot-num">
-                        1
-                    </div>
-                    <div class="col-md-5 hot-img">
-                        <img src="images/hot1.jpg" alt="">
-                    </div>
-                    <div class="col-md-4">
-                        <div class="hot-book-name"><a href="">健康日历2019：丁香医</a></div>
-                        <div class="hot-cost-price-icon">￥</div>
-                        <div class="hot-cost-price">89.00</div>
-                        <div class="hot-original-price-icon">￥</div>
-                        <div class="hot-original-price">129.00</div>
-                        <div class="hot-comment">
-                            <a href="">10</a>
-                            <div>条评论</div>
-                        </div>
-                    </div>
-                    <div class="hot-xian"></div>
-                </div>
-                <!--总榜内容：无照片-->
-                <div class="row hot-normal">
-                    <div class=" col-md-1 hot-normal-num">2</div>
-                    <a href="">张大小姐（著名媒体人、出版人</a>
-                    <div class="hot-normal-xian"></div>
-                </div>
-                <div class="row hot-normal">
-                    <div class=" col-md-1 hot-normal-num">2</div>
-                    <a href="">张大小姐（著名媒体人、出版人</a>
-                    <div class="hot-normal-xian"></div>
-                </div>
-                <div class="row hot-normal">
-                    <div class=" col-md-1 hot-normal-num">2</div>
-                    <a href="">张大小姐（著名媒体人、出版人</a>
-                    <div class="hot-normal-xian"></div>
-                </div>
-                <div class="row hot-normal">
-                    <div class=" col-md-1 hot-normal-num">2</div>
-                    <a href="">张大小姐（著名媒体人、出版人</a>
-                    <div class="hot-normal-xian"></div>
-                </div>
-                <div class="row hot-normal">
-                    <div class=" col-md-1 hot-normal-num">2</div>
-                    <a href="">张大小姐（著名媒体人、出版人</a>
-                    <div class="hot-normal-xian"></div>
-                </div>
-                <div class="row hot-normal">
-                    <div class=" col-md-1 hot-normal-num">2</div>
-                    <a href="">张大小姐（著名媒体人、出版人</a>
-                </div>
-            </div>
-            <div class="tab-pane fade" id="childbook3">
-                <!--总榜内容:前一个有照片-->
-                <div class="row hot-infor">
-                    <div class="col-md-1 hot-num">
-                        1
-                    </div>
-                    <div class="col-md-5 hot-img">
-                        <img src="images/hot1.jpg" alt="">
-                    </div>
-                    <div class="col-md-4">
-                        <div class="hot-book-name"><a href="">健康日历2019：丁香医</a></div>
-                        <div class="hot-cost-price-icon">￥</div>
-                        <div class="hot-cost-price">89.00</div>
-                        <div class="hot-original-price-icon">￥</div>
-                        <div class="hot-original-price">129.00</div>
-                        <div class="hot-comment">
-                            <a href="">10</a>
-                            <div>条评论</div>
-                        </div>
-                    </div>
-                    <div class="hot-xian"></div>
-                </div>
-                <div class="row hot-infor">
-                    <div class="col-md-1 hot-num">
-                        1
-                    </div>
-                    <div class="col-md-5 hot-img">
-                        <img src="images/hot1.jpg" alt="">
-                    </div>
-                    <div class="col-md-4">
-                        <div class="hot-book-name"><a href="">健康日历2019：丁香医</a></div>
-                        <div class="hot-cost-price-icon">￥</div>
-                        <div class="hot-cost-price">89.00</div>
-                        <div class="hot-original-price-icon">￥</div>
-                        <div class="hot-original-price">129.00</div>
-                        <div class="hot-comment">
-                            <a href="">10</a>
-                            <div>条评论</div>
-                        </div>
-                    </div>
-                    <div class="hot-xian"></div>
-                </div>
-                <!--总榜内容：无照片-->
-                <div class="row hot-normal">
-                    <div class=" col-md-1 hot-normal-num">2</div>
-                    <a href="">张大小姐（著名媒体人、出版人</a>
-                    <div class="hot-normal-xian"></div>
-                </div>
-                <div class="row hot-normal">
-                    <div class=" col-md-1 hot-normal-num">2</div>
-                    <a href="">张大小姐（著名媒体人、出版人</a>
-                    <div class="hot-normal-xian"></div>
-                </div>
-                <div class="row hot-normal">
-                    <div class=" col-md-1 hot-normal-num">2</div>
-                    <a href="">张大小姐（著名媒体人、出版人</a>
-                    <div class="hot-normal-xian"></div>
-                </div>
-                <div class="row hot-normal">
-                    <div class=" col-md-1 hot-normal-num">2</div>
-                    <a href="">张大小姐（著名媒体人、出版人</a>
-                    <div class="hot-normal-xian"></div>
-                </div>
-                <div class="row hot-normal">
-                    <div class=" col-md-1 hot-normal-num">2</div>
-                    <a href="">张大小姐（著名媒体人、出版人</a>
-                    <div class="hot-normal-xian"></div>
-                </div>
-                <div class="row hot-normal">
-                    <div class=" col-md-1 hot-normal-num">2</div>
-                    <a href="">张大小姐（著名媒体人、出版人</a>
-                </div>
-            </div>
-            <div class="tab-pane fade" id="childbook4">
-                <!--总榜内容:前一个有照片-->
-                <div class="row hot-infor">
-                    <div class="col-md-1 hot-num">
-                        1
-                    </div>
-                    <div class="col-md-5 hot-img">
-                        <img src="images/hot1.jpg" alt="">
-                    </div>
-                    <div class="col-md-4">
-                        <div class="hot-book-name"><a href="">健康日历2019：丁香医</a></div>
-                        <div class="hot-cost-price-icon">￥</div>
-                        <div class="hot-cost-price">89.00</div>
-                        <div class="hot-original-price-icon">￥</div>
-                        <div class="hot-original-price">129.00</div>
-                        <div class="hot-comment">
-                            <a href="">10</a>
-                            <div>条评论</div>
-                        </div>
-                    </div>
-                    <div class="hot-xian"></div>
-                </div>
-                <div class="row hot-infor">
-                    <div class="col-md-1 hot-num">
-                        1
-                    </div>
-                    <div class="col-md-5 hot-img">
-                        <img src="images/hot1.jpg" alt="">
-                    </div>
-                    <div class="col-md-4">
-                        <div class="hot-book-name"><a href="">健康日历2019：丁香医</a></div>
-                        <div class="hot-cost-price-icon">￥</div>
-                        <div class="hot-cost-price">89.00</div>
-                        <div class="hot-original-price-icon">￥</div>
-                        <div class="hot-original-price">129.00</div>
-                        <div class="hot-comment">
-                            <a href="">10</a>
-                            <div>条评论</div>
-                        </div>
-                    </div>
-                    <div class="hot-xian"></div>
-                </div>
-                <!--总榜内容：无照片-->
-                <div class="row hot-normal">
-                    <div class=" col-md-1 hot-normal-num">2</div>
-                    <a href="">张大小姐（著名媒体人、出版人</a>
-                    <div class="hot-normal-xian"></div>
-                </div>
-                <div class="row hot-normal">
-                    <div class=" col-md-1 hot-normal-num">2</div>
-                    <a href="">张大小姐（著名媒体人、出版人</a>
-                    <div class="hot-normal-xian"></div>
-                </div>
-                <div class="row hot-normal">
-                    <div class=" col-md-1 hot-normal-num">2</div>
-                    <a href="">张大小姐（著名媒体人、出版人</a>
-                    <div class="hot-normal-xian"></div>
-                </div>
-                <div class="row hot-normal">
-                    <div class=" col-md-1 hot-normal-num">2</div>
-                    <a href="">张大小姐（著名媒体人、出版人</a>
-                    <div class="hot-normal-xian"></div>
-                </div>
-                <div class="row hot-normal">
-                    <div class=" col-md-1 hot-normal-num">2</div>
-                    <a href="">张大小姐（著名媒体人、出版人</a>
-                    <div class="hot-normal-xian"></div>
-                </div>
-                <div class="row hot-normal">
-                    <div class=" col-md-1 hot-normal-num">2</div>
-                    <a href="">张大小姐（著名媒体人、出版人</a>
-                </div>
-            </div>
+            <div class="tab-pane fade in active" id="all"></div>
+            <div class="tab-pane fade" id="childbook1"></div>
+            <div class="tab-pane fade" id="childbook2"></div>
+            <div class="tab-pane fade" id="childbook3"></div>
+            <div class="tab-pane fade" id="childbook4"></div>
         </div>
         <script>
             $(function () {
@@ -871,7 +389,7 @@
         <div class="col-lg-10 hot-author-other"></div>
     </div>
     <!--作者照片和简介-->
-    <div class="row hot-author-information">
+    <div class="row hot-author-information" id="first-author">
         <div class="col-md-1">
             <div class="num-1">1</div>
             <div class="num-st">st</div>
@@ -893,8 +411,6 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
     </div>
 
@@ -906,87 +422,17 @@
     <div class="information-work-xian"></div>
 </div>
 <!--作者作品介绍-->
-<div class="row hot-author-work">
-    <div class="col-lg-3">
-        <img src="images/work1.jpg" alt="">
-        <div class="work-title">天才在左 疯子在右</div>
-        <div class="work-cost-icon">￥</div>
-        <div class="work-cost-price">40.40</div>
-        <div class="work-original-icon">￥</div>
-        <div class="work-original-price">49.80</div>
-    </div>
-    <div class="col-lg-3">
-        <img src="images/work1.jpg" alt="">
-        <div class="work-title">天才在左 疯子在右</div>
-        <div class="work-cost-icon">￥</div>
-        <div class="work-cost-price">40.40</div>
-        <div class="work-original-icon">￥</div>
-        <div class="work-original-price">49.80</div>
-    </div>
-    <div class="col-lg-3">
-        <img src="images/work1.jpg" alt="">
-        <div class="work-title">天才在左 疯子在右</div>
-        <div class="work-cost-icon">￥</div>
-        <div class="work-cost-price">40.40</div>
-        <div class="work-original-icon">￥</div>
-        <div class="work-original-price">49.80</div>
-    </div>
-    <div class="col-lg-3">
-        <img src="images/work1.jpg" alt="">
-        <div class="work-title">天才在左 疯子在右</div>
-        <div class="work-cost-icon">￥</div>
-        <div class="work-cost-price">40.40</div>
-        <div class="work-original-icon">￥</div>
-        <div class="work-original-price">49.80</div>
-    </div>
+<div class="row hot-author-work" id="first-author-books">
+
 </div>
 <!--作者排行榜-->
-<div class="row author-sort">
-    <div class="col-md-12 author-sort-content">
-        <div class="author-sort-num">1</div>
-        <div class="author-sort-name">林夕</div>
-    </div>
-    <div class="col-md-12 author-sort-content">
-        <div class="author-sort-num">2</div>
-        <div class="author-sort-name">严歌苓</div>
-    </div>
-    <div class="col-md-12 author-sort-content">
-        <div class="author-sort-num">3</div>
-        <div class="author-sort-name">桐华</div>
-    </div>
-    <div class="col-md-12 author-sort-content">
-        <div class="author-sort-num">4</div>
-        <div class="author-sort-name">唐七</div>
-    </div>
-    <div class="col-md-12 author-sort-content">
-        <div class="author-sort-num">5</div>
-        <div class="author-sort-name">辛夷坞</div>
-    </div>
-    <div class="col-md-12 author-sort-content">
-        <div class="author-sort-num">6</div>
-        <div class="author-sort-name">张悦然</div>
-    </div>
-    <div class="col-md-12 author-sort-content">
-        <div class="author-sort-num">7</div>
-        <div class="author-sort-name">张嘉佳</div>
-    </div>
-    <div class="col-md-12 author-sort-content">
-        <div class="author-sort-num">8</div>
-        <div class="author-sort-name">安妮宝贝</div>
-    </div>
-    <div class="col-md-12 author-sort-content">
-        <div class="author-sort-num">9</div>
-        <div class="author-sort-name">沈石溪</div>
-    </div>
-    <div class="col-md-12 author-sort-content">
-        <div class="author-sort-num">10</div>
-        <div class="author-sort-name">幾米</div>
-    </div>
+<div class="row author-sort" id="author-sort">
+
 </div>
 
 
 <%--仨书单--%>
-<div class="row books-order">
+<div class="row books-order" id="orders">
     <div class="col-lg-4 book-order-content">
         <img src="images/book_order.jpg" alt="">
     </div>
