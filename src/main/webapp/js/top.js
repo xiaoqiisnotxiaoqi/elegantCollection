@@ -351,19 +351,19 @@ function homePage() {
  * 忘记密码
  */
 function forgetPassword() {
-    window.top.location = "";
+    window.top.location = "/findpwd";
 }
 
 /**
  * 跳转到榜单页面
  */
 function rankingList() {
-    window.top.location = "";
+    window.top.location = "/ranking";
 }
 
 /**
  * 跳转到书单页面
  */
 function bookList() {
-    window.top.location = "";
+    window.top.location = "booklist";
 }

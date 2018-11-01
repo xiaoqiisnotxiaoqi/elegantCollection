@@ -339,4 +339,22 @@ public class CartController {
         }
     }
 
+
+    @PostMapping("butNow")
+    public String  butNow(@RequestParam Map<String, String> map, HttpServletRequest request) {
+        request.getSession().setAttribute("buyThis", map);
+        int a = map.size() - 3;
+        int i = 0;
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            String key = entry.getKey();
+            String value = entry.getValue();
+            System.out.println("key=" + key + " value=" + value);
+            if ( i < a - 3){
+                cartService.removeByBookId(((Customer) request.getSession().getAttribute("customer")).getCustId().toString(),Integer.valueOf(key));
+            }
+        }
+        System.out.println(map);
+        return "success";
+    }
+
 }
