@@ -19,9 +19,10 @@
     <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 
 </head>
-<body>
+<body style="padding:0;">
 <%--引入头部--%>
-<%--<jsp:include page="top.jsp"/>--%>
+<jsp:include page="topIndex.jsp"/>
+<%--<iframe src="/top" style="width: 100%; height: 220px;border: none;frameborder:0;"></iframe>--%>
 
 <!--左侧图书分类-->
 <div class="container">

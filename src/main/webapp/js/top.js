@@ -28,7 +28,7 @@ function loginModeConversion(loginMode){
 }
 
 function topCustEle() {
-    window.location = "/userinfo"
+    window.top.location = "/userinfo"
 }
 
 
@@ -81,9 +81,10 @@ function showDiv(){
         var Idiv     = document.getElementById("loginModal");
         Idiv.className = "modal";
         Idiv.style.display = "block";
+        Idiv.style.position = "absolute";
         //以下部分要将弹出层居中显示
-        Idiv.style.left= "0px";
-        Idiv.style.top =(document.body.clientHeight - 320)/2 - 100 +"px";
+        Idiv.style.left=(window.screen.availWidth - 540)/2 + 100 +"px";
+        Idiv.style.top =(window.screen.availHeight - 320)/2 - 100 +"px";
                          
         //以下部分使整个页面至灰不可点击
         var procbg = document.createElement("div"); //首先创建一个div
@@ -91,7 +92,7 @@ function showDiv(){
         procbg.style.background = "#000000";
         procbg.style.width = "100%";
         procbg.style.height = "100%";
-        procbg.style.position = "fixed";
+        procbg.style.position = "absolute";
         procbg.style.top = "0";
         procbg.style.left = "0";
         procbg.style.zIndex = "500";
@@ -103,6 +104,41 @@ function showDiv(){
         isLogin = true;
 
 }
+
+
+/**
+ * 弹出首页 登录界面
+ */
+function showDiv2(){
+    var Idiv     = document.getElementById("loginModal");
+    Idiv.className = "modal";
+    Idiv.style.display = "block";
+    Idiv.style.position = "absolute";
+    //以下部分要将弹出层居中显示
+    Idiv.style.left="0";
+    Idiv.style.top =(window.screen.availHeight - 320)/2 - 100 +"px";
+
+    //以下部分使整个页面至灰不可点击
+    var procbg = document.createElement("div"); //首先创建一个div
+    procbg.setAttribute("id","mybg"); //定义该div的id
+    procbg.style.background = "#000000";
+    procbg.style.width = "100%";
+    procbg.style.height = "100%";
+    procbg.style.position = "absolute";
+    procbg.style.top = "0";
+    procbg.style.left = "0";
+    procbg.style.zIndex = "500";
+    procbg.style.opacity = "0.6";
+    procbg.style.filter = 0.9;
+    //背景层加入页面
+    document.body.appendChild(procbg);
+    document.body.style.overflow = "hidden"; //取消滚动条
+    isLogin = true;
+
+}
+
+
+
 
 /**
  * 点击 关闭登录事件
@@ -290,7 +326,7 @@ function myOrder() {
     var name = document.getElementsByClassName("DetermineWhetherLog");
     alert(name[0].innerText);
     if (name[0].innerText == 1){
-        window.location = "order_all";
+        window.top.location = "/order_all";
     } else {
         showDiv();
     }
@@ -300,14 +336,14 @@ function myOrder() {
  * 跳转到讨论区
  */
 function  topDiscuss() {
-    window.location = "post";
+    window.top.location = "/post";
 }
 
 /**
  * 跳转至首页
  */
 function homePage() {
-    window.location = ""
+    window.top.location = "/index"
 }
 
 
@@ -315,28 +351,19 @@ function homePage() {
  * 忘记密码
  */
 function forgetPassword() {
-    window.location = "";
+    window.top.location = "";
 }
 
 /**
  * 跳转到榜单页面
  */
 function rankingList() {
-    window.location = "";
+    window.top.location = "";
 }
 
 /**
  * 跳转到书单页面
  */
 function bookList() {
-
-}
-
-
-/**
- * 跳转到某个图书分类
- * @param ele
- */
-function goToBook(ele) {
-
+    window.top.location = "";
 }
