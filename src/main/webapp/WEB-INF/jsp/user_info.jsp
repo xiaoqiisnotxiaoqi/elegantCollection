@@ -10,8 +10,11 @@
     <script src="${pageContext.request.contextPath}/js/user_info.js"></script>
 </head>
 <body>
-<iframe src="${pageContext.request.contextPath}/top" style="width: 100%; border: none;
-frameborder:0;"></iframe>
+<jsp:include page="top.jsp" flush="true"/>
+<%--<iframe src="${pageContext.request.contextPath}/top" style="width: 100%; border: none;--%>
+<%--frameborder:0;"></iframe>--%>
+
+
 
 
 
@@ -448,6 +451,7 @@ frameborder:0;"></iframe>
             </div>
         </div>
     </div>
+<%--<jsp:include page="bottom.jsp" flush="true"/>--%>
 </body>
 
 
@@ -486,8 +490,11 @@ frameborder:0;"></iframe>
                 if (result != "") {
                     document.getElementById("img_head_select").src =result;
                 } else {
+
                     alert("请先登录,才能更改信息");
-                    window.location = "top";
+                    window.location = "index";
+
+
                 }
             }
     }
@@ -534,7 +541,7 @@ frameborder:0;"></iframe>
             }else{
 
                 alert("请先登录,才能更改信息");
-                window.location = "top";
+                window.location = "index";
             }
         }
 
