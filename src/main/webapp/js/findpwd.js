@@ -55,7 +55,7 @@ function loadPhone() {
                 var bianhuan = document.getElementById("bianhuan");
                 bianhuan.innerHTML = ('<li class="xazi">手机号 :</li><li class="xazi">' + hao + '</li>' +
                     '<li class="xazi">短信验证码 :</li><li><input id="duanma" type="text" ' +
-                    'placeholder="请输入短信验证码"><input class="mab" type="button" value="获取验证码" ' +
+                    'placeholder="请输入短信验证码"><input id="quma" class="mab" type="button" value="获取验证码" ' +
                     'onclick="fasong(this)"></li><li><span class="xiabu"><a class="bua" href="#" onclick="yanzheng()">' +
                     '下一步</a></span></li>');
             }
@@ -121,7 +121,7 @@ function loadmima() {
         var result = JSON.parse(xxx.responseText);
         if(result = true){
             var bianhuan = document.getElementById("bianhuan");
-            bianhuan.innerHTML = ('<li class="xazi">新密码 :</li><li><input type="password" placeholder=""></li>' +
+            bianhuan.innerHTML = ('<li class="xazi">新密码 :</li><li><input id="npwd" type="password" placeholder=""></li>' +
                 '<li class="xazi">确认密码 :</li><li><input id="newpwd" type="password" placeholder="请再次输入密码"></li>' +
                 '<li><span class="xiabu"><a class="bua" href="#" onclick="uppassd()">下一步</a> </span> </li>');
         }

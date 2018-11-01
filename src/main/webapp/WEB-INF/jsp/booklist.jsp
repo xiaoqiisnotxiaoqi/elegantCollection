@@ -13,7 +13,8 @@
     <link rel="stylesheet" href="../../css/booklist.css">
 </head>
 <body>
-<div class="all">
+<jsp:include page="top.jsp"/>
+<div id="all" class="all">
     <div class="toutu">
         <div id="neid" class="neid">
 
@@ -24,5 +25,6 @@
     </div>
 </div>
 <script src="../../js/booklist.js"></script>
+<jsp:include page="bottom.jsp"/>
 </body>
 </html>

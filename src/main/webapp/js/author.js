@@ -48,6 +48,10 @@ function loadBook() {
                 'getDetail(this)"><span class="shuzi">' + result[i].bookName + '</span></a><label class="jia">¥' +
                 '</label><span class="jia">' + result[i].bookSellingPrice + '</span></div>');
         }
+        var style = window.getComputedStyle(zuo, null);
+        var style1= window.getComputedStyle(all, null);
+        var height=parseInt(style.height)+250+parseInt(style1.height);
+        all.style.height=height+'px';
     }
 }
 function getDetail(pro) {

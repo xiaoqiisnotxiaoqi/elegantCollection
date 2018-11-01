@@ -13,7 +13,8 @@
     <link rel="stylesheet" href="../../css/author.css">
 </head>
 <body>
-<div class="all">
+<jsp:include page="top.jsp"/>
+<div id="all" class="all">
     <div id="jian" class="jian">
 
     </div>
@@ -26,5 +27,6 @@
     </div>
 </div>
 <script src="../../js/author.js"></script>
+<jsp:include page="bottom.jsp"/>
 </body>
 </html>
