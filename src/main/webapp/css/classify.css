@@ -63,14 +63,14 @@
 
 .trun_img {
     position: relative;
-    top: -610px;
+    top: -595px;
     left: 370px;
 }
 
 .new-trends {
     width: 240px;
     position: relative;
-    top: -920px;
+    top: -905px;
     left: 1150px;
     border: solid 1px #d6d6d6;
     border-radius: 2%;
@@ -108,7 +108,7 @@
     width: 240px;
     height: 180px;
     position: relative;
-    top: -910px;
+    top: -895px;
     left: 1150px;
     border: solid 1px #d6d6d6;
     border-radius: 2%;
@@ -169,7 +169,7 @@
 
 .new-all {
     position: relative;
-    top: -925px;
+    top: -900px;
     left: 200px;
 }
 
@@ -200,7 +200,7 @@
     height: 1px;
     background: #ff2832;
     position: relative;
-    top: -930px;
+    top: -905px;
     left: 270px;
 }
 
@@ -227,7 +227,7 @@
     width: 750px;
     height: 545px;
     position: relative;
-    top: -905px;
+    top: -890px;
     left: 370px;
 }
 
@@ -303,7 +303,7 @@
     width: 240px;
     height: 540px;
     position: relative;
-    top: -1523px;
+    top: -1500px;
     left: 1150px;
 }
 
@@ -536,7 +536,7 @@
     border: solid 1px #d6d6d6;
     position: relative;
     left: 173px;
-    top: -1460px;
+    top: -1440px;
 }
 .hot-author-title{
     width: 1215px;
@@ -682,7 +682,7 @@
     width: 230px;
     border: solid 1px #d6d6d6;
     position: relative;
-    top: -2170px;
+    top: -2150px;
     left: 1120px;
 }
 .author-sort-content{
@@ -708,7 +708,7 @@
     width: 1225px;
     /*background: #D45328;*/
     position: relative;
-    top: -2150px;
+    top: -2130px;
     left: 160px;
 }
 .book-order-content img{

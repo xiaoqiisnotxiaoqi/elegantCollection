@@ -84,7 +84,7 @@
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
-			<scope>provided</scope>
+			<scope>4.1.0</scope>
 		</dependency>
 		<!-- JSTL (JSP standard Tag Library) JSP 标准标签库 -->
 		<dependency>
