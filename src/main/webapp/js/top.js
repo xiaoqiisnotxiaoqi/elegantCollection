@@ -79,7 +79,6 @@ function outli(ele){
  */
 function showDiv(){
         var Idiv     = document.getElementById("loginModal");
-        var mou_head = document.getElementById('mou_head');
         Idiv.className = "modal";
         Idiv.style.display = "block";
         //以下部分要将弹出层居中显示
@@ -129,6 +128,34 @@ function sendCode(thisBtn) {
     btn.disabled = true; //将按钮置为不可点击
     btn.value = '重新获取（'+nums+'）';
     clock = setInterval(doLoop, 1000); //一秒执行一次
+    //判断是 登录发送验证码  还是 注册发送验证码
+    var formData;
+    var phone;
+    if (btn.className == "sms"){
+        phone = document.getElementById("phone").value;
+        formData = "phone=" + phone + "&num=2";
+    } else{
+        phone = document.getElementById("id_account_2").value;
+        formData = "phone=" + phone + "&num=1";
+    }
+    //将手机号传置后台 发送验证码
+    /*if (window.XMLHttpRequest) {
+        xhr = new XMLHttpRequest();
+    } else {
+        xhr = new ActiveXObject('Microsoft.XMLHTTP');
+    }
+    xhr.open("POST", "/sendText" , true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+    xhr.onreadystatechange = reult;
+    xhr.send(formData);*/
+    alert("短信功能占时关闭")
+}
+
+/**
+ * 解析 发送短信后的数据(省事,为空)
+ */
+function reult() {
+
 }
 /**
  *从新发送计时器
@@ -150,7 +177,6 @@ function doLoop() {
  */
 function showRegister(){
     var Idiv     = document.getElementById("register");
-    var mou_head = document.getElementById('mou_head');
     Idiv.className = "modal";
     Idiv.style.display = "block";
     Idiv.style.zIndex = "1000";
@@ -241,14 +267,76 @@ function register2Login(){
     showDiv();
 }
 
+
+
 /**
- * 跳转到高级注册页面
+ * 跳转到购物车
  */
-function advancedSearch(){
-    //高级搜索页面地址
-    window.location="${pageContext.request.contextPath}/";
+function loginOrCart() {
+    var name = document.getElementsByClassName("DetermineWhetherLog");
+    alert(name[0].innerText);
+    if (name[0].innerText == 1){
+        window.location = "custCart";
+    } else {
+        showDiv();
+    }
 }
 
-function loginOrCart() {
-    window.location="/custCart";
+
+/**
+ * 跳转到我的订单
+ */
+function myOrder() {
+    var name = document.getElementsByClassName("DetermineWhetherLog");
+    alert(name[0].innerText);
+    if (name[0].innerText == 1){
+        window.location = "order_all";
+    } else {
+        showDiv();
+    }
+}
+
+/**
+ * 跳转到讨论区
+ */
+function  topDiscuss() {
+    window.location = "post";
+}
+
+/**
+ * 跳转至首页
+ */
+function homePage() {
+    window.location = ""
+}
+
+
+/**
+ * 忘记密码
+ */
+function forgetPassword() {
+    window.location = "";
+}
+
+/**
+ * 跳转到榜单页面
+ */
+function rankingList() {
+    window.location = "";
+}
+
+/**
+ * 跳转到书单页面
+ */
+function bookList() {
+
+}
+
+
+/**
+ * 跳转到某个图书分类
+ * @param ele
+ */
+function goToBook(ele) {
+
 }

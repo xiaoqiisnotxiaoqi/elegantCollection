@@ -11,7 +11,7 @@
     <title>Title</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/my_Elegant.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/pageReply.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/personalCenter_messageView.css">
 </head>
 <body>
 <div class="mydang" id="J_muneAndContentWrap">
@@ -171,6 +171,6 @@
         });
     });
 </script>
-<script src="${pageContext.request.contextPath}/js/my_elegant.js"></script>
+<script src="${pageContext.request.contextPath}/js/personalCenter_messageView.js"></script>
 </body>
 </html>

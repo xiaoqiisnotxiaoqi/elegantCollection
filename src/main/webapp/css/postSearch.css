@@ -1,0 +1,202 @@
+*{
+    margin: 0;
+    padding:0;
+}
+
+
+.review-div{
+    width: 100%;
+    height: 32px;
+    background-color: #f9f9f9;
+}
+
+.review-nav-div{
+    width: 1150px;
+    height: 34px;
+}
+
+.review-nav-ul{
+    float: right;
+}
+
+.review-nav-ul li{
+    float: left;
+    font-size: 14px;
+    margin-left: 12px;
+    margin-right: 12px;
+    list-style-type: none;
+    line-height: 32px;
+    cursor: pointer;
+}
+
+.review-nav-ul li:hover{
+    color: red;
+}
+
+
+.review-nav-ul li:nth-child(1):hover{
+    color: black;
+    cursor: default;
+}
+
+.review-nav-ul li a{
+    text-decoration: none;
+}
+/*导航部分结束*/
+
+
+
+
+.search{
+    width: 950px;
+    height: 100px;
+    margin: 30px auto 0;
+}
+
+.search img{
+    width: 100px;
+    height: 30px;
+    position: relative;
+    top: 20px;
+    left: 40px;
+}
+
+.search form input:nth-child(1){
+    position: relative;
+    width: 500px;
+    height: 30px;
+    top: -15px;
+    left: 155px;
+    font-size: 14px;
+    border: 1px solid #317EF3;
+}
+
+
+.search form input:nth-child(2){
+    position: relative;
+    width: 100px;
+    height: 32px;
+    top: -14px;
+    left: 151px;
+    border: none;
+    background-color: #317EF3;
+    color: #ffffff;
+}
+
+.search form input:nth-child(3){
+    position: relative;
+    width: 100px;
+    height: 32px;
+    top: -14px;
+    left: 165px;
+    border: 1px solid #317EF3;
+    color: #317EF3;
+    background-color: #ffffff;
+}
+
+.search form span{
+    position: relative;
+    font-size: 12px;
+    width: 100px;
+    height: 32px;
+    top: -37px;
+    left: 148px;
+}
+
+
+
+.back-img{
+    display: block;
+    width: 50px;
+    height: 30px;
+    margin: 10px 20px 0 20px;
+    font-size: 12px;
+    line-height: 26px;
+    vertical-align: middle;
+    text-align: center;
+    background: url(//tb2.bdstatic.com/tb/img/f_reply_bg_89030dc.png) no-repeat;
+
+}
+
+.this-title{
+    display: block;
+    width: 600px;
+    height: 20px;
+    line-height: 20px;
+    color: #2d64b3;
+    position: relative;
+    top: -28px;
+    left: 90px;
+    font-size: 14px;
+}
+
+.cust-img{
+    display: block;
+    width: 20px;
+    height: 20px;
+    background: url(//tb2.bdstatic.com/tb/img/interview_z_ca7e018.png) -30px -60px;
+    position: relative;
+    top: -46px;
+    left: 800px;
+    font-size: 14px;
+}
+
+.cust-name{
+    position: relative;
+    top: -68px;
+    font-size: 13px;
+    left: 830px;
+    color: #999999;
+}
+
+.one-text{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    width: 680px;
+    height: 48px;
+    font-size: 12px;
+    position: relative;
+    top: -60px;
+    left: 80px;
+    line-height: 24px;
+}
+
+.huifu{
+    margin-top: 20px;
+    border-bottom: 1px dashed #000000;
+    width: 980px;
+    background-color: #ffffff;
+}
+
+.page{
+    width:-moz-fit-content;
+    margin: 0 auto;
+}
+
+
+
+.page span{
+    display: inline-block;
+    font-size: 12px;
+    line-height: 22px;
+    text-align: center;
+    margin-left: 10px;
+    width: 24px;
+    height: 24px;
+    border: 1px solid #000000;
+}
+
+#all-page{
+    width: 70px;
+}
+
+#this-page{
+    width: 70px;
+}
+
+.page-li{
+    margin:10px 0;
+    padding-bottom: 10px;
+}

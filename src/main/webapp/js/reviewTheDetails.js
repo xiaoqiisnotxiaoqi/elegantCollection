@@ -91,11 +91,16 @@ function replyContentReoue() {
             var page2 = document.getElementById("first-page2");
             page1.innerHTML = "";
             page2.innerHTML = "";
-            //总页数小于或等于 10  大于 1 当前页 为1
-            if (status.totalPages <= 10 && status.totalPages >1 && status.currentPageCode === 1){
-                var h = ('<ul><li><a href="javaScript:void(0);" id="this-page">1</a>');
-                for (var i = 2; i < status.totalPages ; i++ ){
-                    h += '<a href="javaScript:void(0);" onclick="toPage(this)">'+ i +'</a>';
+            //总页数小于等于10 大于1
+            var h = "";
+            if (status.totalPages <= 10 && status.totalPages > 1){
+                h += '<ul><li>';
+                for (var i = 1; i <= status.totalPages ; i++ ){
+                    if (status.totalPages == status.currentPageCode) {
+                        h = ('<a href="javaScript:void(0);" id="this-page">1</a>');
+                    }else {
+                        h += '<a href="javaScript:void(0);" onclick="toPage(this)">' + i + '</a>';
+                    }
                 }
                 h += '</li>' +
                     '<li>' +
@@ -103,7 +108,7 @@ function replyContentReoue() {
                     '</li>' +
                     '<li>' +
                     '<span>跳到</span><input type="text" name=""><span> 页 </span>' +
-                    '<button>确定</button>' +
+                    '<button onclick="toPageButton(this)">确定</button>' +
                     '</li></ul>';
                 page1.innerHTML = h;
                 page2.innerHTML = h;
@@ -111,10 +116,10 @@ function replyContentReoue() {
             //总页数为1 时
             else if (status.totalPages === 1){
                 var h = ('<ul><li>' +
-                        '<span>'+ status.totalRecord +'</span><span>条回复贴, 共</span><span> '+ status.totalPages +' </span><span>页 </span>' +
-                        '</li>' +
-                        '<li>' +
-                        '</li></ul>'
+                    '<span>'+ status.totalRecord +'</span><span>条回复贴, 共</span><span> '+ status.totalPages +' </span><span>页 </span>' +
+                    '</li>' +
+                    '<li>' +
+                    '</li></ul>'
                 );
                 page1.innerHTML = h;
                 page2.innerHTML = h;
@@ -132,7 +137,7 @@ function replyContentReoue() {
                     '</li>' +
                     '<li>' +
                     '<span>跳到</span><input type="text" name=""><span> 页 </span>' +
-                    '<button>确定</button>' +
+                    '<button onclick="toPageButton(this)">确定</button>' +
                     '</li></ul>';
                 page1.innerHTML = h;
                 page2.innerHTML = h;
@@ -153,13 +158,13 @@ function replyContentReoue() {
                     '</li>' +
                     '<li>' +
                     '<span>跳到</span><input type="text" name=""><span> 页 </span>' +
-                    '<button>确定</button>' +
+                    '<button onclick="toPageButton(this)">确定</button>' +
                     '</li></ul>';
                 page1.innerHTML = h;
                 page2.innerHTML = h;
             }
             //总页数 大于10 当前页 不为1 且大于5
-            else if (status.totalPages >= 10 && status.currentPageCode > 5) {
+            else {
                 var h = '<ul><li><a href="javaScript:void(0);">首页</a><a href="javaScript:void(0);" onclick="bookReviewLastPage('+status.currentPageCode+')">上一页</a>';
                 if (status.totalPages - status.currentPageCode >= 5){
                     for (var i = status.currentPageCode - 4; i < status.currentPageCode; i++){
@@ -185,32 +190,12 @@ function replyContentReoue() {
                     '</li>' +
                     '<li>' +
                     '<span>跳到</span><input type="text" name=""><span> 页 </span>' +
-                    '<button>确定</button>' +
+                    '<button onclick="toPageButton(this)">确定</button>' +
                     '</li></ul>';
                 page1.innerHTML = h;
                 page2.innerHTML = h;
             }
-            //总页数 小于10 且当前页不等于1
-            else {
-                var h = '<ul><li><a href="javaScript:void(0);">首页</a><a href="javaScript:void(0);" onclick="bookReviewLastPage('+status.currentPageCode+')">上一页</a>';
-                for (var i = 1; i < status.currentPageCode ;i++){
-                    h += '<a href="javaScript:void(0);" onclick="toPage(this)">'+ i +'</a>'
-                }
-                h += '<a href="javaScript:void(0);" id="this-page">'+ status.currentPageCode +'</a>';
-                for (var i = status.currentPageCode + 1;i <= status.totalPages ;i++){
-                    h += '<a href="javaScript:void(0);" onclick="toPage(this)">'+ i +'</a>'
-                }
-                h += '</li>' +
-                    '<li>' +
-                    '<span>'+ status.totalRecord +'</span><span>条回复贴, 共</span><span> '+ status.totalPages +' </span><span>页 ,</span>' +
-                    '</li>' +
-                    '<li>' +
-                    '<span>跳到</span><input type="text" name=""><span> 页 </span>' +
-                    '<button>确定</button>' +
-                    '</li></ul>';
-                page1.innerHTML = h;
-                page2.innerHTML = h;
-            }
+
 
             
             //像页面写入 帖子回复信息
@@ -389,7 +374,6 @@ function topPortRedus(){
         }
         reviewOfTheBeginning();
     }
-
 }
 
 /**
@@ -398,14 +382,6 @@ function topPortRedus(){
 function toButtonOfPage(){
     window.location.hash = "#reply-to-post";
 }
-
-
-
-/**
- * 文档加载完成后 触发事件
- */
-window.onload = function () {topPort();};
-
 
 
 /**
@@ -594,7 +570,7 @@ function  toPage(ele) {
     } else {
         xhr = new ActiveXObject('Microsoft.XMLHTTP');
     }
-    xhr.open("GET", "/reviewTheDetails?postId=" + pagePostId + "&currentPageCode=" + page, true);
+    xhr.open("GET", "/reviewTheDetails?postId=" + pagePostId + "&currentPage=" + page, true);
     xhr.setRequestHeader("Content-Type", "application/json;charset=utf-8");
     xhr.onreadystatechange = replyContentReoue;
     xhr.send();
@@ -781,6 +757,7 @@ function replyTheResults() {
 
             }
         }else {
+            document.getElementById("edui").value = "";
             document.getElementById("review-success").style.display = "";
             setTimeout(function() {
                 document.getElementById("review-success").style.display = "none";
@@ -802,11 +779,195 @@ function replyTheResults() {
             }, 30);
 
         }
-
-
-
     }
 }
+
+
+function f() {
+
+}
+
+/**
+ * 文本框 输入页码 跳转页面
+ * @param ele
+ */
+function toPageButton(ele){
+    var page = ele.previousSibling.previousSibling.value;
+    if (window.XMLHttpRequest) {
+        xhr = new XMLHttpRequest();
+    } else {
+        xhr = new ActiveXObject('Microsoft.XMLHTTP');
+    }
+    xhr.open("GET", "/reviewTheDetails?postId=" + pagePostId + "&currentPage=" + page, true);
+    xhr.setRequestHeader("Content-Type", "application/json;charset=utf-8");
+    xhr.onreadystatechange = replyContentReoue;
+    xhr.send();
+}
+
+/**
+ * 点击 搜索书评区 触发事件
+ * @param ele 搜索书评区按钮节点
+ */
+function blockSearch(ele){
+    if (window.XMLHttpRequest) {
+        xhr = new XMLHttpRequest();
+    } else {
+        xhr = new ActiveXObject('Microsoft.XMLHTTP');
+    }
+    //得到用户要搜索的内容
+    var queries =  ele.previousSibling.previousSibling.value;
+    xhr.open("GET", "/blockSearch?queries=" + queries + "&currentPage=" + page, true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+    xhr.onreadystatechange = blockSearchSearch;
+    xhr.send();
+}
+
+/**
+ * 解析 搜索书评区 从后台 返回的数据
+ */
+function blockSearchSearch() {
+    if (xhr.readyState == 4 && xhr.status == 200){
+        var resouse = JSON.parse(xhr.responseText);
+        if (resouse == "success"){
+            window.location = "/"
+        }else{
+            alert("没有您想找的内容!")
+        }
+
+    }
+
+}
+
+/**
+ * 点击搜索书评帖 触发事件
+ * @param ele 搜索书评帖按钮 节点
+ * @constructor
+ */
+function TotalStationSearch(ele) {
+    var queries = ele.previousSibling.previousSibling.previousSibling.previousSibling.value;
+    if (window.XMLHttpRequest) {
+        xhr = new XMLHttpRequest();
+    } else {
+        xhr = new ActiveXObject('Microsoft.XMLHTTP');
+    }
+    //得到用户要搜索的内容
+    xhr.open("GET", "/postSearch?queries=" + queries, true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
+    xhr.onreadystatechange = postSearchSearch;
+    xhr.send();
+}
+
+
+/**
+ * 搜索书评帖 后解析 返回的 json数据
+ */
+function postSearchSearch() {
+    if (xhr.readyState == 4 && xhr.status == 200){
+        var resouse = xhr.responseText;
+        if (resouse == "success"){
+            window.location = "/searchThrough"
+        }else{
+            alert("没有您想找的内容!")
+        }
+    }
+}
+
+
+function postSearchDetial(ele) {
+    if (window.XMLHttpRequest) {
+        xhr = new XMLHttpRequest();
+    } else {
+        xhr = new ActiveXObject('Microsoft.XMLHTTP');
+    }
+    var url;
+    //得到用户要搜索的内容
+    if (ele != null){
+        url = "/postSearchPage?pageNum=" + ele;
+    } else {
+        url = "/postSearchPage";
+    }
+    xhr.open("GET", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json;charset=utf-8");
+    xhr.onreadystatechange = postSearchDetialSearch;
+    xhr.send();
+}
+
+
+
+/**
+ * 页面渲染 --- 帖子搜索结果页
+ */
+function postSearchDetialSearch() {
+    if(xhr.readyState == 4 && xhr.status == 200){
+        var text = JSON.parse(xhr.responseText);
+        var resous = document.getElementById("resoule");
+        resous.innerHTML = "";
+        var centent = text.modelList;
+        alert(centent);
+        var a = "";
+        for (var i = 0; i < centent.length ; i++){
+            a += ('<li class="huifu">' +
+                '<div style="width: 980px;height: 100px;">' +
+                '<span class="back-img">'+centent[i].num+'</span>' +
+                '<span class="this-title" id="'+ centent[i].postId +'" onclick="goToPost(this)">'+ centent[i].postTitle +'</span>' +
+                '<span class="cust-img"></span>' +
+                '<span class="cust-name">' + centent[i].custName + '</span>' +
+                '<span class="one-text">'+ centent[i].text +'</span>' +
+                '</div>' +
+                '</li>');
+        }
+
+        a += '<li class="page-li">' +
+            '<div class="page">';
+
+        for (var j = 1; j <= text.totalPages; j++){
+            if (i != text.currentPageCode) {
+                a += '<span onclick="postSearchPage(ele)">'+j+'</span>';
+            }else {
+                a +='<span>'+j+'</span>';
+            }
+        }
+
+        a += (' <span id="all-page">共 '+text.totalPages+' 页</span><span id="this-page">当前第 '+ text.currentPageCode +' 页</span></div></li>');
+
+        resous.innerHTML = a;
+    }
+}
+
+
+/**
+ * 帖子搜索结果页 页面跳转
+ * @param ele
+ */
+function goToPost(ele){
+    var id = ele.getAttribute("id");
+    if (window.XMLHttpRequest) {
+        xhr = new XMLHttpRequest();
+    } else {
+        xhr = new ActiveXObject('Microsoft.XMLHTTP');
+    }
+    var url;
+    //得到用户要搜索的内容
+    xhr.open("GET", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json;charset=utf-8");
+    xhr.onreadystatechange = postSearchDetialSearch;
+    xhr.send();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,14 +1,12 @@
 package com.elegantcollection.controller;
 
-import com.elegantcollection.entity.Book;
 import com.elegantcollection.entity.Customer;
-import com.elegantcollection.entity.Evaluate;
 import com.elegantcollection.service.BookService;
 import com.elegantcollection.service.CustomerService;
 import com.elegantcollection.service.EvaluateService;
 import com.elegantcollection.util.CodeUtil;
-import com.elegantcollection.util.PageModel;
 import com.elegantcollection.util.RandomNumberGeneration;
+import com.elegantcollection.util.SmsVerification;
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +18,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
+@SuppressWarnings("all")
 @RestController
 public class CustomerController {
     private final Producer captchaProducer;
@@ -43,7 +39,7 @@ public class CustomerController {
 
 
     /**
-     * 用户登录
+     * 用户登录(用户名登录)
      *
      * @param custName 用户输入的用户名
      * @param pwd      用户输入的密码
@@ -62,32 +58,89 @@ public class CustomerController {
             customerList = customerService.quaryCustomerByPhone(custName, pwd);
         }
 
-        if (customerList.size() == 0) {
-            return "fail";
-        } else {
-            request.getSession().setAttribute("customer", customerList.get(0));
-            //返回用户昵称
-            return customerList.get(0).getCustName();
+        if (customerList.size() == 0){
+            return "用户名或密码错误";
+        }else {
+            request.getSession().setAttribute("customer",customerList.get(0));
+            return  "success";
         }
     }
 
+
+    /**
+     * 用户登录(手机短信登录)
+     * @param phone 用户手机号
+     * @param securityCode 手机验证码
+     * @param request 用户请求信息
+     * @return 是否登录成功
+     */
+    @PostMapping("/textLogin")
+    public String textLogin(String phone,Integer securityCode, HttpServletRequest request){
+        int cellPhoneVerificatioCode = (Integer) request.getSession().getAttribute("cellPhoneVerificatioCode");
+        if (cellPhoneVerificatioCode == securityCode){
+            List<Customer> list = customerService.queryCustomerByPhone(phone);
+            if (list.size() == 0) {
+                return "该手机号未注册";
+            }
+            request.getSession().setAttribute("customer",list.get(0));
+        }
+        return "success";
+    }
+
+    /**
+     * 向用户发送手机号
+     * @param phone 用户手机号码
+     * @param num 当前业务 (登录:1 ; 注册 : 2  找回密码 : 3)
+     * @return 短信发送是否成功
+     */
+    @PostMapping("/sendText")
+    public Map<String,String> SendText(String phone,Integer num,HttpServletRequest request){
+        Map<String,String> map = new HashMap<>();
+        int tplId;
+        if (num == 1){
+            //登录
+            tplId = 110405;
+        }else if(num == 2){
+            //注册时 发送的短信模板
+            tplId = 110406;
+        }else if (num == 3){
+            //修改密码是,所用的模板id
+            tplId = 110407;
+        }else{
+            return null;
+        }
+        //生成由四位数字组成的随机数 并存入session 中
+        int a = RandomNumberGeneration.randomNumber();
+        request.getSession().setAttribute("cellPhoneVerificatioCode",a);
+        //十五分钟后 删除 该 验证码
+        removeAttrbute(request.getSession(),"cellPhoneVerificatioCode");
+
+
+        String tplValue = "#code#=" + a;
+        //发送验证码
+        SmsVerification.getRequest2(phone,tplId,tplValue);
+
+        map.put("result","success");
+        return map;
+    }
+
+
     /**
      * 用户注册
-     *
-     * @param phone     用户填写的手机号
-     * @param password  用户填写的密码
-     * @param imgCode   用户输入的图片验证码
+     * @param phone 用户填写的手机号
+     * @param password 用户填写的密码
+     * @param imgCode 用户输入的图片验证码
      * @param phoneCode 用户输入的图片验证码
-     * @return 用户信息填写成功, 返回""success" ,否则返回"fail"
+     * @return 用户信息填写成功,返回""success" ,否则返回"fail"
      */
     @PostMapping("/singIn")
-    public String customerRegister(String phone, String password, String imgCode, String phoneCode, HttpServletRequest request) {
+    public String customerRegister(String phone,String password,String imgCode,Integer phoneCode,HttpServletRequest request){
         //验证图片验证码是否正确
-        if (!CodeUtil.checkVerifyCode(request, imgCode)) {
+        if(!CodeUtil.checkVerifyCode(request,imgCode)){
             return "图片验证码错误";
+        }else if (phoneCode != (int) request.getSession().getAttribute("cellPhoneVerificatioCode")){
+            return "短信验证码错误";
         }
-
-
         Customer customer = new Customer();
         //用户密码
         customer.setCustPassword(password);
@@ -104,11 +157,11 @@ public class CustomerController {
         //用户的积分
         customer.setCustPoints(0);
         //生成用户昵称
-        String name;
-        do {
+        String name ;
+        do{
             name = RandomNumberGeneration.getRandomString(10);
             System.out.println(name);
-        } while (customerService.queryNumByCustName(name) != 0);
+        }while (customerService.queryNumByCustName(name) != 0);
 
         //添加用户昵称
         customer.setCustName(name);
@@ -119,18 +172,17 @@ public class CustomerController {
         Customer newCustomer = customerService.quaryCustomerByCustName(name);
         newCustomer.setCustName("");
         //将用户对象存入session中
-        request.getSession().setAttribute("customer", newCustomer);
+        request.getSession().setAttribute("customer",newCustomer);
         return "success";
     }
 
     /**
      * 用户注销(退出登录)
-     *
      * @param request 用户的请求信息
      * @return success(退出成功)
      */
     @DeleteMapping("loginOut")
-    public String loginOut(HttpServletRequest request) {
+    public String loginOut(HttpServletRequest request){
         System.out.println("用户退出中");
         HttpSession session = request.getSession();
         session.removeAttribute("customer");
@@ -139,8 +191,7 @@ public class CustomerController {
 
     /**
      * 用于生成 验证码图片 并以字节流返回
-     *
-     * @param request  请求信息
+     * @param request 请求信息
      * @param response 返回的信息
      * @throws Exception 抛出的异常
      */
@@ -167,54 +218,38 @@ public class CustomerController {
     }
 
 
+    /**
+     * 检查手机号是否被注册过
+     * @param phone 要注册的手机号
+     * @return 检查结果(未被注册:success  已注册:"该手机号已被注册")
+     */
     @GetMapping("/phoneIsRegistered")
-    public String phoneNumberIsRegistered(String phone) {
+    public String phoneNumberIsRegistered(String phone){
         List list = customerService.queryCustomerByPhone(phone);
-        if (list.size() == 0) {
+        if (list.size() == 0){
             return "success";
-        } else {
+        }else{
             return "手机号码已被占用";
         }
     }
 
 
+
     /**
-     * 查询我的评价
-     *
-     * @param pageCode 当前页码
-     * @param request  用来获取session
-     * @return 查询结果, 包含pagemodel booklist
+     * 设置15分钟后删除session中的验证码
+     * @param session
+     * @param attrName
      */
-    @GetMapping("getMyEvaluate")
-    public HashMap myEvaluate(Integer pageCode, HttpServletRequest request) {
-        HashMap map = new HashMap();
-        PageModel pageModel = new PageModel();
-        Customer customer = (Customer) request.getSession().getAttribute("customer");
-        if (pageCode == null) {
-            pageModel.setCurrentPageCode(1);
-        } else {
-            pageModel.setCurrentPageCode(pageCode);
-        }
-        System.out.println("当前是第" + pageModel.getCurrentPageCode() + "页");
-        pageModel.setTotalRecord(evaluateService.countByCustomerId(customer.getCustId()));
-        System.out.println("共有 " + evaluateService.countByCustomerId(customer.getCustId()) + " 条记录");
-        pageModel.setTotalPages(pageModel.getTotalRecord() % pageModel.getPageSize() == 0 ? pageModel.getTotalRecord() / pageModel.getPageSize() : pageModel.getTotalRecord() / pageModel.getPageSize() + 1);
-        pageModel.setStartRecord((pageModel.getCurrentPageCode() - 1) * pageModel.getPageSize());
-
-        List<Evaluate> evaluateList = evaluateService.queryEvaluateByPage(pageModel, customer.getCustId());
-        List<Book> bookList = new ArrayList<>();
-        for (Evaluate e : evaluateList) {
-            Book book = bookService.quaryBookByBookId(e.getBookId());
-            bookList.add(book);
-        }
-
-        pageModel.setModelList(evaluateService.queryEvaluateByPage(pageModel, customer.getCustId()));
-
-
-        map.put("pageModel", pageModel);
-        map.put("bookList", bookList);
-        return map;
+    private void removeAttrbute(final HttpSession session, final String attrName) {
+        final Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                // 删除session中存的验证码
+                session.removeAttribute(attrName);
+                timer.cancel();
+            }
+        }, 15 * 60 * 1000);
     }
-
 
 }
