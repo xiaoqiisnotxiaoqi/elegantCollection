@@ -14,10 +14,8 @@
     <title>Title</title>
 </head>
 <body>
-<div class="order-tip">
-    我的订单
-</div>
-<div>
+
+<div class="info-body">
     <div class="order-show-top">
         <ul class="order-state-list">
             <li class="order-state-filter">

@@ -97,6 +97,11 @@
     where order_id = #{orderId,jdbcType=INTEGER}
       and book_id = #{bookId,jdbcType=INTEGER}
   </select>
+  <select id="selectBookIdByOrderId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select book_id
+    from book_order_detail
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="com.elegantcollection.entity.BookOrderDetailKey">
     delete from book_order_detail
     where order_id = #{orderId,jdbcType=INTEGER}

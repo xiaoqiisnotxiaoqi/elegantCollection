@@ -1,8 +1,13 @@
 package com.elegantcollection.controller;
 
+import com.elegantcollection.entity.Book;
 import com.elegantcollection.entity.Customer;
+import com.elegantcollection.entity.Evaluate;
+import com.elegantcollection.service.BookService;
 import com.elegantcollection.service.CustomerService;
+import com.elegantcollection.service.EvaluateService;
 import com.elegantcollection.util.CodeUtil;
+import com.elegantcollection.util.PageModel;
 import com.elegantcollection.util.RandomNumberGeneration;
 import com.elegantcollection.util.SmsVerification;
 import com.google.code.kaptcha.Constants;
@@ -23,12 +28,18 @@ import java.util.*;
 public class CustomerController {
     private final Producer captchaProducer;
     private final CustomerService customerService;
+    @Autowired
+    private EvaluateService evaluateService;
+
+    @Autowired
+    private BookService bookService;
 
     @Autowired
     public CustomerController(CustomerService customerService, Producer captchaProducer) {
         this.customerService = customerService;
         this.captchaProducer = captchaProducer;
     }
+
 
     /**
      * 用户登录(用户名登录)
@@ -226,20 +237,9 @@ public class CustomerController {
     }
 
 
-    /**
-     * 设置15分钟后删除session中的验证码
-     * @param session session对象
-     * @param attrName 要删除的验证码的key值
-     */
-    private void removeAttrbute(HttpSession session,String attrName) {
-        final Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                // 删除session中存的验证码
-                session.removeAttribute(attrName);
-                timer.cancel();
-            }
-        }, 15 * 60 * 1000);
-    }
+
+
+
+
+
 }

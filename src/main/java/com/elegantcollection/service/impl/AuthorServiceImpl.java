@@ -12,10 +12,14 @@ public class AuthorServiceImpl implements AuthorService {
     @Autowired
     private AuthorDao authorDao;
 
+    /**
+     * 根据ID查询作者
+     *
+     * @param authorId 作者id
+     * @return 作者对象
+     */
     @Override
     public Author queryAuthorById(Integer authorId) {
-        AuthorExample authorExample = new AuthorExample();
-        authorExample.createCriteria().andAuthorIdEqualTo(authorId);
-        return authorDao.selectByExample(authorExample).get(0);
+        return authorDao.selectByPrimaryKey(authorId);
     }
 }

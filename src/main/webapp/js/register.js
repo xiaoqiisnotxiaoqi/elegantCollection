@@ -235,8 +235,27 @@ function loginOutResolution() {
     }
 }
 
+/**
+ * 根据关键字搜索
+ */
+function searchBox() {
+    //把keyword添加到jsSession
+    sessionStorage.clear();
+    sessionStorage.setItem("keyWord", document.getElementById("searchInput").value);
+    window.location = "allbooks";
 
+}
 
+/**
+ * 点击分类
+ * @param ele
+ */
+function clickcaterory(ele) {
+    sessionStorage.clear();
+    alert(ele.id);
+    sessionStorage.setItem("categoryId", ele.id);
+    window.location = "allbooks";
+}
 
 
 

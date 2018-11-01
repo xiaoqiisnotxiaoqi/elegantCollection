@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(245, 245, 245);
+    background-color: white;
 }
 
 * {
@@ -141,4 +141,8 @@ li {
     display: inline-block;
     float: right;
     width: 40px;
+}
+.info-body{
+    width: 85%;
+    margin: 0 auto;
 }

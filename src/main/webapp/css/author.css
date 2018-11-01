@@ -1,0 +1,77 @@
+a{
+    text-decoration: none;
+}
+.all{
+    margin: 0 auto;
+    width: 75%;
+    height: auto;
+}
+.jian{
+    width: 100%;
+    height: 200px;
+}
+.tu{
+    width: 25%;
+    height: auto;
+    float: left;
+    text-align: center;
+}
+.tu img{
+    height: 150px;
+    margin-top: 30px;
+}
+.jie{
+    width: 75%;
+    height: auto;
+    float: left;
+}
+.ming{
+    width: 100%;
+    height: auto;
+    line-height: 30px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.ming span{
+    margin-top: 55px;
+    margin-bottom: 20px;
+    display: block;
+}
+.zi{
+    width: 100%;
+    height: auto;
+    font-size: 14px;
+    color: darkgray;
+    line-height: 25px;
+}
+.xian{
+    margin-top: 30px;
+}
+.xian span{
+    font-size: 18px;
+    margin-left: 30px;
+}
+.zuo{
+    width: 100%;
+    height: auto;
+}
+.pin{
+    width: 25%;
+    float: left;
+    height: auto;
+    text-align: center;
+}
+.pin img{
+    height: 150px;
+    margin-top: 30px;
+}
+.shuzi{
+    display: block;
+    line-height: 30px;
+    color: black;
+}
+.jia{
+    display: inline-block;
+    color: red;
+    font-weight: bold;
+}

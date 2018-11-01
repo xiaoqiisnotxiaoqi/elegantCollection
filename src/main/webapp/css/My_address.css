@@ -6,6 +6,11 @@ a{
     text-decoration: none;
 
 }
+
+a:link, a:visited {
+    text-decoration: none;
+    color: #969696;
+}
 * {
     margin: 0;
     padding: 0;
@@ -69,4 +74,98 @@ a{
 
 .address_list ul {
     overflow: hidden;
+}
+.pop .btn_bar {
+    text-align: center;
+    padding: 0 0 5px;
+}
+.pop.delete {
+    margin: -90px 0 0 -195px;
+}
+
+.pop {
+    border: 1px solid #cdcdcd;
+    background-color: #fff;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    margin: -208px 0 0 -294px;
+    z-index: 10010;
+}
+.pop .delete_con {
+    width: 388px;
+    height: 180px;
+    box-sizing: border-box;
+    text-align: center;
+}
+.pop .delete_con h2 {
+    font-size: 14px;
+    color: #787878;
+    padding-top: 55px;
+
+}
+
+.pop .pop_title {
+    height: 36px;
+    line-height: 36px;
+    padding: 0 10px;
+    border-bottom: 1px solid #cdcdcd;
+    font-size: 14px;
+}
+
+.pop .pop_con {
+    padding: 15px;
+}
+
+.pop .btn_bar {
+    text-align: center;
+    padding: 0 0 5px;
+}
+.pop .delete .btn_bar .btn {
+    height: 32px;
+    line-height: 32px;
+    border: 1px solid #ff2832;
+    margin: 35px 35px 35px 0;
+    padding: 0;
+    width: 106px;
+}
+
+.pop .btn_bar .btn {
+    height: 28px;
+    line-height: 28px;
+    padding: 0 35px;
+    margin: 20px 0;
+    background-color: #ff2832;
+    text-align: center;
+    display: inline-block;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 3px;
+}
+
+.pop .delete .btn_bar .btn.cancle {
+    background-color: #fff;
+    color: #787878;
+    border-color: #bfbfbf;
+    margin-right: 0;
+}
+
+.pop {
+    border: 1px solid #cdcdcd;
+    background-color: #fff;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    margin: -208px 0 0 -294px;
+    z-index: 10010;
+}
+
+.pop .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 13px;
+    height: 13px;
+    display: block;
+    background: url(../images/icon_address.png) 0 -80px no-repeat;
 }

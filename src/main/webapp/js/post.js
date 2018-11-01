@@ -4,13 +4,9 @@ var xhr = null;
 var xhr0 = null;
 var xhr1 = null;
 var xhr2 = null;
-var xhr3 =null;
-onload = function () {
-    refreblock();
-    refreshStickPost();
-    refreshPost(1);
-    refreshBestPopularPost();
-}
+var xhr3 = null;
+var xhr4 = null;
+onload = referPage;
 //板块信息
 var blockBackground = document.getElementById("block-background");
 var blockImage = document.getElementById("block-image");
@@ -26,11 +22,39 @@ var allPopularPosts = document.getElementById("all-popular-posts");
 //页面按钮
 var paginationBtns = document.getElementById("pagination-btns");
 //发表帖子
-var postButton=document.getElementById("post-button");
-postButton.addEventListener("click",function () {
+var postButton = document.getElementById("post-button");
+//帖子标题
+var postTitle = document.getElementById("post-title");
+//帖子内容
+var postContext = document.getElementById("post-context");
+//帖子自身
+var thePost="";
+postButton.addEventListener("click", function () {
     allUrl = "/post/add";
-    refreshblockDate(allUrl);
+    if (window.XMLHttpRequest) {
+        xhr4 = new XMLHttpRequest(); //for ie7+,FireFox,Chorme,Opera,Safai...
+    } else {
+        xhr4 = new ActiveXObject('Microsoft.XMLHTTP');//for ie6
+    }
+    thePost = "postTitle=" + postTitle.value + "&postContext=" + postContext.value;
+    alert(thePost)
+    if (xhr4 != null) {
+        xhr4.open("POST", allUrl, true);
+        xhr4.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;");
+        xhr4.onreadystatechange = rePage;
+        xhr4.send(thePost);
+    } else {
+        alert("不能创建XMLHttpRequest对象实例");
+    }
 })
+
+function referPage() {
+    refreblock();
+    refreshBestPopularPost();
+    refreshStickPost();
+    refreshPost(1);
+};
+
 var columns = document.getElementById("columns");
 for (var i = 1; i < columns.childNodes.length; i = i + 2) {
     columns.childNodes[i].onclick = function () {
@@ -45,6 +69,9 @@ function removeOther() {
     }
 }
 
+/**
+ * 获取板块信息
+ */
 function refreblock() {
     allUrl = "/post/getBlock";
     refreshblockDate(allUrl);
@@ -81,6 +108,9 @@ function getblockDate() {
     }
 }
 
+/**
+ * 获取置顶帖
+ */
 function refreshStickPost() {
     allUrl = "/post/queryStickPost";
     refreshStickPostDate(allUrl);
@@ -115,6 +145,10 @@ function getStickPost() {
     }
 }
 
+/**
+ * 获取精品贴
+ * @param currentPageCode 当前页码
+ */
 function refreshBestPost(currentPageCode) {
     allUrl = "/post/queryBestPost?currentPageCode=" + currentPageCode;
     refreshBestPostDate(allUrl);
@@ -141,7 +175,7 @@ function getBestPostDate() {
     if (xhr3.readyState === 4 && xhr3.status === 200) {
         var jsonText = JSON.parse(xhr3.responseText);
         var postList = jsonText.modelList;
-        popularPosts.innerHTML=null;
+        popularPosts.innerHTML = null;
         timePosts.innerHTML = null;
         paginationBtns.innerHTML = null;
         for (i = 0; i < postList.length; i++) {
@@ -194,6 +228,10 @@ function getBestPostDate() {
     }
 }
 
+/**
+ * 获取普通贴
+ * @param currentPageCode 当前页码
+ */
 function refreshPost(currentPageCode) {
     allUrl = "/post/queryPost?currentPageCode=" + currentPageCode;
     refreshPostDate(allUrl);
@@ -272,6 +310,10 @@ function getPostDate() {
     }
 }
 
+
+/**
+ * 获取火力贴
+ */
 function refreshBestPopularPost() {
     allUrl = "/post/queryBestPopularPost";
     refreshBestPopularPostDate(allUrl);
@@ -305,4 +347,8 @@ function getBestPopularPostDate() {
     } else {
         //alert("xhr2.readyState = " + xhr2.readyState + ", xhr2.status =  " + xhr2.status)
     }
+}
+
+function rePage() {
+    window.location = "post";
 }

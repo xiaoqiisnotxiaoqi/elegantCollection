@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -179,8 +180,10 @@ public class PostServiceImpl implements PostService{
 
 
     @Override
-    public Integer add(Post post) {
-        return postDao.insert(post);
+    public Integer add(Post post, HttpServletRequest request) {
+        Integer result =postDao.insertSelective(post);
+        replyOriginalPoster(post.getPostId(),post.getPostText(),request);
+        return result;
     }
 
     @Override
@@ -189,7 +192,7 @@ public class PostServiceImpl implements PostService{
         postExample.setLimit(5);
         postExample.setOffset(0L);
         postExample.createCriteria().andIsStickEqualTo(1).andPostPetnameEqualTo(blockId.toString());
-        return postDao.selectByExample(postExample);
+        return postDao.selectByExampleWithBLOBs(postExample);
     }
 
     @Override
@@ -205,7 +208,8 @@ public class PostServiceImpl implements PostService{
         postExample.setLimit(pageModel.getPageSize());
         postExample.setOffset(Long.valueOf(pageModel.getStartRecord()));
         postExample.createCriteria().andIsStickEqualTo(0).andPostPetnameEqualTo(blockId.toString());
-        pageModel.setModelList(postDao.selectByExample(postExample));
+        postExample.setOrderByClause("post_id desc");
+        pageModel.setModelList(postDao.selectByExampleWithBLOBs(postExample));
         return pageModel;
     }
 
@@ -222,7 +226,7 @@ public class PostServiceImpl implements PostService{
         postExample.setLimit(pageModel.getPageSize());
         postExample.setOffset(Long.valueOf(pageModel.getStartRecord()));
         postExample.createCriteria().andPostStatusEqualTo(1).andPostPetnameEqualTo(blockId.toString());
-        pageModel.setModelList(postDao.selectByExample(postExample));
+        pageModel.setModelList(postDao.selectByExampleWithBLOBs(postExample));
         return pageModel;
     }
 

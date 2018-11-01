@@ -1,8 +1,6 @@
 window.onload = loadEvaluate();
 
-
 function loadEvaluate() {
-    alert("啊啊啊啊啊")
     var xhr = null;
     if (window.XMLHttpRequest) {
         xhr = new XMLHttpRequest(); //for ie7+,FireFox,Chorme,Opera,Safai...
@@ -19,10 +17,9 @@ function loadEvaluate() {
         alert("不能创建XMLHttpRequest对象实例");
     }
 
-
     function callFun() {
         if (xhr.readyState == 4 && xhr.status == 200) {
-            alert("acallfun")
+            console.log(xhr.responseText)
             var jsObj = JSON.parse(xhr.responseText);
             //    渲染页面
             var evaluateul = document.getElementById("evaluateul");
@@ -62,6 +59,21 @@ function loadEvaluate() {
 
 
             }
+
+
+
+            //    渲染分页信息
+            document.getElementById("last").value = pageModel.totalPages;
+            document.getElementById("currentPage").innerText = pageModel.currentPageCode;
+            document.getElementById("shangye").value = pageModel.currentPageCode - 1;
+            if (pageModel.currentPageCode != pageModel.totalPages)
+                document.getElementById("xiaye").value = pageModel.currentPageCode + 1;
+            else
+                document.getElementById("xiaye").value = pageModel.currentPageCode;
+            document.getElementById("totalPages").innerText = pageModel.totalPages;
+            document.getElementById("totalRecord").innerText = pageModel.totalRecord;
+            document.getElementById("pageSize").innerText = pageModel.pageSize;
+
 
         }
     }

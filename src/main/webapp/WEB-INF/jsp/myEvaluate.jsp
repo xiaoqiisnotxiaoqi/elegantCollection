@@ -15,6 +15,8 @@
     <script src="${pageContext.request.contextPath}/js/user_info.js"></script>
 </head>
 <body>
+<%--<jsp:include page="top.jsp"/>--%>
+
 <div class="mydnew_break">
     您现在的位置：
     <a href="#">雅志</a> &gt;
@@ -122,8 +124,6 @@
                 </div>
                 <div class="inner-div">
                     <button class="btn">订单详情</button>
-                    <button class="btn">修改</button>
-                    <button class="btn">删除</button>
                 </div>
             </li>
             <li class="eval-li"></li>
@@ -132,6 +132,22 @@
             <li class="eval-li"></li>
 
         </ul>
+        <%--分页--%>
+        <div id="pagination" class="pagination">
+            <ul>
+                <li value="1" onclick="page(this)">首页</li>
+                <li value="" id="shangye" onclick="page(this)">&lt;</li>
+                <li value="" class="active" id="currentPage"></li>
+                <li value="" id="xiaye" onclick="page(this)">&gt;</li>
+                <li value="" id="last" onclick="page(this)">尾页</li>
+                <li class="totalPage"><span>跳转到</span><input type="number" value="1" id="pageinput"/><span>页</span></li>
+                <li onclick="page(this)" id="pageBtn">跳转</li>
+                <li class="totalPage">共&nbsp;<span id="totalPages"></span>&nbsp;页</li>
+
+                <li class="totalPage">每页&nbsp;<span id="pageSize"></span>&nbsp;条</li>
+                <li class="totalPage">合计&nbsp;<span id="totalRecord"></span>&nbsp;条记录</li>
+            </ul>
+        </div>
     </div>
 
 

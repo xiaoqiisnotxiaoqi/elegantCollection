@@ -22,14 +22,13 @@ public class DiscountServiceImpl implements DiscountService {
     }
 
 
-
     @Override
     public Discount quertDiscountByDiscountId(Integer discountId) {
         DiscountExample discountExample = new DiscountExample();
         discountExample.createCriteria().andDiscountIdEqualTo(discountId);
-        if(discountDao.selectByExample(discountExample).size() != 0){
+        if (discountDao.selectByExample(discountExample).size() != 0) {
             return discountDao.selectByExample(discountExample).get(0);
-        }else {
+        } else {
             return null;
         }
 
@@ -39,6 +38,20 @@ public class DiscountServiceImpl implements DiscountService {
     public DiscountDetail quereDiscountDetailByDiscountId(Integer discountId) {
         DiscountDetailExample discountDetailExample = new DiscountDetailExample();
         discountDetailExample.createCriteria().andDiscountIdEqualTo(discountId);
-        return  discountDetailDao.selectByExample(discountDetailExample).get(0);
+        return discountDetailDao.selectByExample(discountDetailExample).get(0);
     }
+
+    /**
+     * @param discountId 优惠ID
+     * @return 查询满减优惠
+     */
+    @Override
+    public Discount queryManjianByDiscountId(Integer discountId) {
+        DiscountExample discountExample = new DiscountExample();
+        DiscountExample.Criteria criteria = discountExample.createCriteria();
+        criteria.andDiscountIdEqualTo(discountId);
+
+        return discountDao.selectByExample(discountExample).size() == 0 ? null : discountDao.selectByExample(discountExample).get(0);
+    }
+
 }

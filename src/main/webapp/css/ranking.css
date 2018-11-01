@@ -1,0 +1,173 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+a{
+    text-decoration: none;
+}
+.all{
+    width: 90%;
+    margin: 0 auto;
+}
+.danming{
+    width: 100%;
+    height: 50px;
+    background-color: ghostwhite;
+    border-top: 1px solid grey;
+}
+.tou{
+    font-size: 20px;
+    line-height: 50px;
+    display: inline-block;
+    margin-left: 50px;
+}
+.saner{
+    font-size: 24px;
+    line-height: 50px;
+    display: inline-block;
+    float: right;
+    width: 220px;
+}
+.saner a{
+    color: black;
+}
+.saner a:hover{
+    color: red;
+    font-size: 26px;
+}
+.danshen{
+    width: 100%;
+}
+.danxiang{
+    width: 29%;
+    height: 100%;
+    float: left;
+    margin-right: 1%;
+}
+.danxiang span{
+    background-color: ghostwhite;
+    height: 40px;
+    line-height: 40px;
+}
+.xiangtou{
+    width: 100%;
+    display: block;
+    text-align: center;
+    color: gray;
+    margin-top: 5px;
+}
+.lei{
+    width: 100%;
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    border-top: 1px dashed gainsboro;
+}
+.lei a{
+    color: grey;
+    margin-left: 100px;
+}
+.lei a:hover{
+    color: black;
+}
+.shulie{
+    width: 70%;
+    float: left;
+    margin-top: 5px;
+}
+.shu{
+    width: 50%;
+    border-top: 1px solid gainsboro;
+    height: 300px;
+    float: left;
+}
+.shu:hover{
+    background-color: ghostwhite;
+}
+.zuo{
+    width: 40%;
+    height: 100%;
+    float: left;
+    padding-top: 70px;
+}
+.zuo img{
+    width: 95%;
+    display: block;
+    margin: 0 auto;
+}
+.you{
+    width: 60%;
+    height: 100%;
+    float: left;
+    padding-top: 70px;
+    text-align: center;
+}
+.sqone{
+    display: block;
+    font-size: 20px;
+}
+.sqone a{
+    color: black;
+}
+.sqtwo {
+    display: block;
+    font-size: 14px;
+    line-height: 30px;
+}
+.sqthree{
+    display: block;
+    font-size: 14px;
+    line-height: 20px;
+    color: grey;
+}
+.jia{
+    color: red;
+    line-height: 20px;
+    font-weight: bold;
+    display: inline-block;
+}
+.jiaxian{
+    color: gray;
+    font-size: 14px;
+    line-height: 20px;
+    text-decoration: line-through;
+}
+.che{
+    display: block;
+    margin: 30px auto 0 auto;
+    background-color: orangered;
+    width: 80px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 5px;
+}
+.che a{
+    color: white;
+    font-size: 14px;
+}
+.fenye{
+    width: 71%;
+    height: 50px;
+    float: right;
+}
+.fenye span{
+    width: 60px;
+    height: 50px;
+    text-align: center;
+    display: inline-block;
+    line-height: 50px;
+    float: right;
+}
+.fenye a{
+    width: 60px;
+    height: 50px;
+    display: inline-block;
+    color: red;
+    font-size: 18px;
+    font-weight: bold;
+}
+.ye :hover{
+    background-color: red;
+    color: white;
+}
