@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -304,7 +305,11 @@ public class BookServiceImpl implements BookService {
      */
     @Override
     public PageModel<Book> queryBookByBookSalesLastMonthAndBookCategory(Integer categoryId, PageModel<Book> pageModel) {
-        List<Book> list = this.bookDao.selectBookByBookSalesLastMonthAndBookCategory(categoryId,pageModel);
+        Map<String ,Object> args = new HashMap<>();
+        args.put("categoryId",categoryId);
+        args.put("startRecord",pageModel.getStartRecord());
+        args.put("pageSize",pageModel.getPageSize());
+        List<Book> list = this.bookDao.selectBookByBookSalesLastMonthAndBookCategory(args);
         pageModel.setModelList(list);
         return pageModel;
     }

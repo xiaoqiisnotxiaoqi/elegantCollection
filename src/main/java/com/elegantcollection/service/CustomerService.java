@@ -68,4 +68,17 @@ public interface CustomerService {
     int  updataCustProfile(Customer customer);
     int  updataCustNameAndCustGender(Customer customer);
 
+    /**
+     * 根据电话号查找用户
+     * @param custPhone 电话号
+     * @return 用户对象
+     */
+    Customer queryByPhone(String custPhone);
+
+    /**
+     * 根据电话号码修改密码
+     * @param custPassword 密码
+     * @return
+     */
+    int alterByPhone(String custPhone,String custPassword);
 }

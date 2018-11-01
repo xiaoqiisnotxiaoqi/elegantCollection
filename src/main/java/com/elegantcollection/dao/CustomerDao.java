@@ -3,6 +3,8 @@ package com.elegantcollection.dao;
 import com.elegantcollection.entity.Customer;
 import com.elegantcollection.entity.CustomerExample;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
@@ -21,6 +23,10 @@ public interface CustomerDao {
     List<Customer> selectByExample(CustomerExample example);
 
     Customer selectByPrimaryKey(Integer custId);
+
+    Customer selectByPhone(String custPhone);
+
+    int updateByPhone(Map<String,Object> map);
 
     int updateByExampleSelective(@Param("record") Customer record, @Param("example") CustomerExample example);
 

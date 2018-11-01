@@ -123,4 +123,9 @@ public class Ui {
     public String uio(){
         return "ranking";
     }
+
+    @RequestMapping("findpwd")
+    public String uiu(){
+        return "findpwd";
+    }
 }

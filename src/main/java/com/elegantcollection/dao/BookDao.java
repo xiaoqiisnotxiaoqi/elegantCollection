@@ -5,6 +5,7 @@ import com.elegantcollection.entity.BookExample;
 import com.elegantcollection.entity.BookWithBLOBs;
 
 import java.util.List;
+import java.util.Map;
 
 import com.elegantcollection.util.PageModel;
 import org.apache.ibatis.annotations.Param;
@@ -35,7 +36,7 @@ public interface BookDao {
 
     List<Book> selectBookByBookSalesLastMonth(PageModel<Book> pageModel);
 
-    List<Book> selectBookByBookSalesLastMonthAndBookCategory(Integer categoryId,PageModel<Book> pageModel);
+    List<Book> selectBookByBookSalesLastMonthAndBookCategory(Map<String,Object> map);
 
     Integer selectCountAll();
 

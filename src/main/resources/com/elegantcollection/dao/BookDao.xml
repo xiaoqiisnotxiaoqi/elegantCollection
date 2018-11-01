@@ -183,7 +183,7 @@
     order by book_sales_last_month desc
     limit #{startRecord},#{pageSize}
   </select>
-  <select id="selectBookByBookSalesLastMonthAndBookCategory" parameterType="com.elegantcollection.util.PageModel" resultMap="ResultMapWithBLOBs">
+  <select id="selectBookByBookSalesLastMonthAndBookCategory" parameterType="hashmap" resultMap="ResultMapWithBLOBs">
     select
     <include refid="Base_Column_List" />
     ,

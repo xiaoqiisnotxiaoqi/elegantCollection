@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 
@@ -23,8 +22,8 @@ public class BookCategoryController {
     private BookService bookService;
 
     /**
-     * 加载一级分类
-     * @return 一级类别集合
+     * 加载二级分类
+     * @return 二级类别集合
      */
     @GetMapping("getcategory")
     public List<BookCategory> getCategoryByNull(){
@@ -34,12 +33,12 @@ public class BookCategoryController {
 
     /**
      * 根据总销量降序显示书籍
-     * @param request
+     * @param 页码
      * @return
      */
     @GetMapping("getbooktotal")
-    public PageModel<Book> getBookByTotal(HttpServletRequest request){
-        Integer pagecode = (Integer) request.getSession().getAttribute("page");
+    public PageModel<Book> getBookByTotal(Integer page){
+        Integer pagecode = page;
         PageModel<Book> pageModel = new PageModel<>();
         if(pagecode == null){
             pageModel.setCurrentPageCode(1);
@@ -57,12 +56,12 @@ public class BookCategoryController {
 
     /**
      * 根据上月销量降序显示书籍
-     * @param request
+     * @param page 页码
      * @return
      */
     @GetMapping("getbooklastmonth")
-    public PageModel<Book> getBookByLastMonth(HttpServletRequest request){
-        Integer pagecode = (Integer) request.getSession().getAttribute("page");
+    public PageModel<Book> getBookByLastMonth(Integer page){
+        Integer pagecode = page;
         PageModel<Book> pageModel = new PageModel<>();
         if(pagecode == null){
             pageModel.setCurrentPageCode(1);
@@ -80,13 +79,16 @@ public class BookCategoryController {
 
     /**
      * 根据上月销量和类别降序显示书籍
-     * @param request
+     * @param categoryId 类别id
+     * @param page 页码
      * @return
      */
     @GetMapping("getbooklastmonthcategory")
-    public PageModel<Book> getBookByLastMonthCategory(HttpServletRequest request){
-        Integer id = (Integer) request.getSession().getAttribute("categoryId");
-        Integer pagecode = (Integer) request.getSession().getAttribute("page");
+    public PageModel<Book> getBookByLastMonthCategory(Integer categoryId,Integer page){
+        System.out.println("cid ="+categoryId);
+        System.out.println("page ="+page);
+        Integer id = categoryId;
+        Integer pagecode = page;
         PageModel<Book> pageModel = new PageModel<>();
         if(pagecode == null){
             pageModel.setCurrentPageCode(1);
