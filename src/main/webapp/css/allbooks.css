@@ -145,6 +145,7 @@ a {
 }
 
 .options {
+    cursor: pointer;
     padding-left: 20px;
     float: left;
 }
@@ -586,7 +587,7 @@ a {
 }
 
 .li-options {
-
+    cursor: pointer;
     float: left;
     display: block;
     margin-left: 20px;
@@ -632,7 +633,7 @@ a {
 }
 
 .orderby-li {
-
+    cursor: pointer;
     font-size: 13px;
     display: block;
     text-align: center;
