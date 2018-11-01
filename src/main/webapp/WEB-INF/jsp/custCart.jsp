@@ -261,7 +261,8 @@
     <p>您确认要删除该宝贝吗？</p>
     <div class="opBtn"><a href="javascript:void(0);" onclick="deleteBook()" class="dialog-sure">确定</a><a href="javascript:void(0);" onclick="closeThis()" class="dialog-close">关闭</a></div>
 </section>
-
+<%--引入尾部--%>
+<jsp:include page="bottom.jsp"/>
 <script src="${pageContext.request.contextPath}/js/myCarts.js"></script>
 </body>
 </html>

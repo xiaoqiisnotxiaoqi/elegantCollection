@@ -17,9 +17,10 @@ import com.elegantcollection.util.JuheDemo;
 import com.elegantcollection.util.PageModel;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -60,16 +61,16 @@ public class ShopOrderController {
      */
     @GetMapping("add")
     public HashMap<String, Object> add(HttpServletRequest request) {
-        Integer custId = 10001; //(Integer) request.getSession().getAttribute("custId");
+        Integer custId = ((Customer) request.getSession().getAttribute("customer")).getCustId();
 
-        HashMap<String, String> buyThis = new HashMap<>();
+      /*  HashMap<String, String> buyThis = new HashMap<>();
         buyThis.put("10001", "2");
         buyThis.put("10002", "5");
         buyThis.put("allprice", "223");
         buyThis.put("groupPrice", "20");
         buyThis.put("fullReductionDiscount", "100");
         request.getSession().setAttribute("buyThis", buyThis);
-
+*/
 
         //获取购物车传入session
         HashMap<String, String> map = (HashMap<String, String>) request.getSession().getAttribute("buyThis");
@@ -125,8 +126,8 @@ public class ShopOrderController {
      * @return 收货人地址
      */
     @GetMapping("getAddress")
-    public List<Address> getAddress() {
-        Integer custId = 10001; //(Integer) request.getSession().getAttribute("custId");
+    public List<Address> getAddress(HttpServletRequest request) {
+        Integer custId = ((Customer) request.getSession().getAttribute("customer")).getCustId();
         List<Address> addressList = addressService.queryByCustId(custId);
         return addressList;
     }
@@ -179,7 +180,7 @@ public class ShopOrderController {
      * @throws ParseException
      */
     @GetMapping("perfect")
-    public void perfect(HttpServletRequest httpRequest, HttpServletResponse httpResponse, String orderNumber, Integer payPriceValue, Integer bookQuantity, String bookName, String orderId, String addressId, String expectationTime, String discountPriceValue) throws IOException, ParseException {
+    public void perfect(HttpServletRequest httpRequest, HttpServletResponse httpResponse, String orderNumber, Float payPriceValue, Integer bookQuantity, String bookName, String orderId, String addressId, String expectationTime, String discountPriceValue) throws IOException, ParseException {
         //订单完善
         ShopOrder shopOrder = new ShopOrder();
         shopOrder.setOrderId(Integer.valueOf(orderId));
@@ -206,7 +207,6 @@ public class ShopOrderController {
      */
     @GetMapping("pay")
     public void pay(HttpServletResponse httpResponse, String payPriceValue, String bookQuantity, String bookName, String orderId) throws IOException {
-        System.out.println("ffffffffffff");
         //支付接口
         AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.URL, AlipayConfig.APPID, AlipayConfig.RSA_PRIVATE_KEY, AlipayConfig.FORMAT, AlipayConfig.CHARSET, AlipayConfig.ALIPAY_PUBLIC_KEY, AlipayConfig.SIGNTYPE);
         AlipayTradePagePayRequest alipayRequest = new AlipayTradePagePayRequest();//创建API对应的request
@@ -287,7 +287,7 @@ public class ShopOrderController {
      */
     @GetMapping("queryAll")
     public PageModel<Object> queryAll(HttpServletRequest request, Integer currentPageCode) {
-        Integer custId = 10001;//(Integer) request.getSession().getAttribute("custId");
+        Integer custId = ((Customer) request.getSession().getAttribute("customer")).getCustId();
         //初始化pageModel
         initializePageModel(currentPageCode);
         pageModel.setPageSize(4);
@@ -311,7 +311,7 @@ public class ShopOrderController {
      */
     @GetMapping("queryByState")
     public PageModel<Object> queryByState(HttpServletRequest request, Integer orderStatus, String timeState, Integer currentPageCode) {
-        Integer custId = (Integer) request.getSession().getAttribute("custId");
+        Integer custId = ((Customer) request.getSession().getAttribute("customer")).getCustId();
         initializePageModel(currentPageCode);
         pageModel.setPageSize(4);
         Integer size = shopOrderService.queryByState4Size(custId, orderStatus, timeState);
@@ -348,7 +348,7 @@ public class ShopOrderController {
      * @return 订单列表的PageModel对象
      */
     public PageModel<Object> queryByOrderNumber(HttpServletRequest request, String orderNumber, Integer currentPageCode) {
-        Integer custId = (Integer) request.getSession().getAttribute("custId");
+        Integer custId = ((Customer) request.getSession().getAttribute("customer")).getCustId();
         initializePageModel(currentPageCode);
         pageModel.setPageSize(4);
         pageModel.setTotalPages(1);
@@ -366,7 +366,7 @@ public class ShopOrderController {
      * @return 订单列表的PageModel对象
      */
     public PageModel<Object> queryByBookName(HttpServletRequest request, String bookName, Integer currentPageCode) {
-        Integer custId = (Integer) request.getSession().getAttribute("custId");
+        Integer custId = ((Customer) request.getSession().getAttribute("customer")).getCustId();
         initializePageModel(currentPageCode);
         Integer size = shopOrderService.queryByBookName4Size(custId, bookName);
         pageModel.setTotalRecord(size);
