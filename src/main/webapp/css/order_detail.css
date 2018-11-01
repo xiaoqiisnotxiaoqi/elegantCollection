@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(245, 245, 245);
+    background-color: white;
 }
 
 * {
@@ -29,6 +29,7 @@ li {
     height: 80%;
     width: 28%;
     text-align: center;
+    margin-top: 45px;
 }
 
 .order-number {
@@ -108,13 +109,17 @@ li {
 }
 
 .segmentation0 {
-
+    float: left;
+    display: inline-block;
+    height: 250px;
+    width: 1px;
+    background-color: rgb(225, 225, 225);
 }
 
 .segmentation1 {
     float: left;
     display: inline-block;
-    height: 250px;
+    height: 100%;
     width: 1px;
     background-color: grey;
 }
@@ -154,7 +159,8 @@ li {
     display: block;
     background-color: rgb(255, 255, 255);
     width: 100%;
-    height: 300px;
+    height: 250px;
+    border: 1px rgb(225, 225, 225) solid;
 }
 
 .order-item {
@@ -217,11 +223,23 @@ li {
     width: 20%;
     vertical-align: middle;
 }
-.book-all-info{
-    margin-top: 10px;
-    margin-bottom: 10px;
+
+.book-all-infos {
+    border: 1px rgb(225, 225, 225) solid;
 }
+
+.book-all-info {
+    margin-top: 10px;
+    border-bottom: 1px rgb(225, 225, 225) solid;
+}
+
 .info-body {
-    width: 85%;
+    width: 75%;
     margin: 0 auto;
+}
+
+.all-body {
+    width: 100%;
+    height: auto;
+    background-color: rgb(245, 245, 245)
 }

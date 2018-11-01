@@ -9,10 +9,13 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>雅致藏书--订单结算页</title>
+    <title>雅致藏书--订单结算</title>
     <link rel="stylesheet" href="../../css/pay.css">
 </head>
 <body>
+<%--引入头部--%>
+<iframe src="${pageContext.request.contextPath}/top" style="width: 100%; height: 220px;border: none;frameborder:0;"></iframe>
+<div id="all-body">
 <div class="order-preview">
     <div class="address-options">
         <span class="preview-tip">收货人选择</span>
@@ -40,7 +43,6 @@
         <div class="order-simple-info" id="order-simple-info">
             <div class="list-tip">书籍信息</div>
 
-
         </div>
 
     </div>
@@ -66,9 +68,10 @@
     <span class="total-price" id="pay-price"></span>
     <span class="total-price-info">应付总额：</span>
 </div>
-
 <input type="button" class="pay-button" id="pay-button" value="提交订单">
+</div>
 <script src="../../js/pay.js"></script>
+<jsp:include page="bottom.jsp"/>
 </body>
 </html>
 </html>

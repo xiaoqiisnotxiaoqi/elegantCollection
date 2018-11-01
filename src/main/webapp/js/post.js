@@ -138,7 +138,7 @@ function getStickPost() {
         var jsonText = JSON.parse(xhr0.responseText);
         var stickPostList = jsonText;
         for (var i = 0; i < stickPostList.length; i++) {
-            popularPosts.innerHTML += "<div class=\"popular-post\"><div class=\"reply-number\">" + stickPostList[i].replyCount + "</div><div class=\"post-all\"><a href=\"#\">" + stickPostList[i].postTitle + "</a><span class=\"post-text\">" + stickPostList[i].postText + "</span></div></div>\n"
+            popularPosts.innerHTML += "<div class=\"popular-post\"><div class=\"reply-number\">" + stickPostList[i].replyCount + "</div><div class=\"post-all\"><a href=\"#\" onclick='toDetail("+stickPostList[i].postId+")'>" + stickPostList[i].postTitle + "</a><span class=\"post-text\">" + stickPostList[i].postText + "</span></div></div>\n"
         }
     } else {
         // alert("xhr0.readyState = " + xhr0.readyState + ", xhr0.status =  " + xhr0.status)
@@ -179,7 +179,7 @@ function getBestPostDate() {
         timePosts.innerHTML = null;
         paginationBtns.innerHTML = null;
         for (i = 0; i < postList.length; i++) {
-            timePosts.innerHTML += "<div class=\"time-post\"><div class=\"reply-number\">" + postList[i].replyCount + "</div><div class=\"post-all\"><a href=\"#\">" + postList[i].postTitle + "</a><span class=\"post-text\">" + postList[i].postText + "</span></div></div>\n"
+            timePosts.innerHTML += "<div class=\"time-post\"><div class=\"reply-number\">" + postList[i].replyCount + "</div><div class=\"post-all\"><a href=\"#\"onclick='toDetail("+postList[i].postId+")'>" + postList[i].postTitle + "</a><span class=\"post-text\">" + postList[i].postText + "</span></div></div>\n"
         }
         var totalPages = jsonText.totalPages;
         var currentPageCode = jsonText.currentPageCode;
@@ -261,7 +261,7 @@ function getPostDate() {
         timePosts.innerHTML = null;
         paginationBtns.innerHTML = null;
         for (i = 0; i < postList.length; i++) {
-            timePosts.innerHTML += "<div class=\"time-post\"><div class=\"reply-number\">" + postList[i].replyCount + "</div><div class=\"post-all\"><a href=\"#\">" + postList[i].postTitle + "</a><span class=\"post-text\">" + postList[i].postText + "</span></div></div>\n"
+            timePosts.innerHTML += "<div class=\"time-post\"><div class=\"reply-number\">" + postList[i].replyCount + "</div><div class=\"post-all\"><a href=\"#\"onclick='toDetail("+postList[i].postId+")'>" + postList[i].postTitle + "</a><span class=\"post-text\">" + postList[i].postText + "</span></div></div>\n"
         }
         var totalPages = jsonText.totalPages;
         var currentPageCode = jsonText.currentPageCode;
@@ -342,7 +342,7 @@ function getBestPopularPostDate() {
         var BestPopularPostList = jsonText;
         for (var i = 0; i < BestPopularPostList.length; i++) {
             var postNo = i + 1;
-            allPopularPosts.innerHTML += "<div class=\"all-popular-post\"><a href=\"www.baidu.com\">" + "<div class='all-popular-post-tip'>" + postNo + "</div>" + BestPopularPostList[i].postTitle + "</a></div>";
+            allPopularPosts.innerHTML += "<div class=\"all-popular-post\"><a href=\"#\"onclick='toDetail("+BestPopularPostList[i].postId+")'>" + "<div class='all-popular-post-tip'>" + postNo + "</div>" + BestPopularPostList[i].postTitle + "</a></div>";
         }
     } else {
         //alert("xhr2.readyState = " + xhr2.readyState + ", xhr2.status =  " + xhr2.status)
@@ -351,4 +351,8 @@ function getBestPopularPostDate() {
 
 function rePage() {
     window.location = "post";
+}
+
+function toDetail(postId) {
+    window.location = "review?postId="+postId;
 }

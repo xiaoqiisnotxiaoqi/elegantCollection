@@ -78,11 +78,10 @@ public class Ui {
     }
 
     @RequestMapping("showOrderDetail0")
-    public String ui2OrderDetail0(Integer out_trade_no, String trade_no, HttpServletRequest request) throws AlipayApiException {
+    public String ui2OrderDetail0(Integer out_trade_no, String trade_no, HttpServletRequest request)  {
         request.getSession().setAttribute("orderId", out_trade_no);
         return "order_detail";
     }
-
 
     @RequestMapping("post")
     public String post() {
