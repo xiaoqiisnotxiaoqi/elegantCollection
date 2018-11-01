@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Title</title>
@@ -86,12 +86,12 @@
                                         </ul>
                                     </form>
                                     <p class="good-tips marginB10">
-                                        <a id="btnForgetpsw" class="fr" onclick="forgetPassword()">忘记密码？</a>
+                                        <a id="btnForgetpsw" class="fr">忘记密码？</a>
                                         还没有账号？
                                         <a href="javaScript:void(0)" target="_blank" id="btnRegister" onclick="login2Register()">立即注册</a>
                                     </p>
                                     <div class="login-box marginB10">
-                                        <span id="login_btn"  class="btn btn-micv5 btn-block" onclick="login()">登录</span>
+                                        <span id="login_btn" class="btn btn-micv5 btn-block" onclick="login()">登录</span>
                                     </div>
 
 
@@ -119,7 +119,7 @@
             <span id="register-having">已有账号</span>
             <a href="#" onclick="register2Login()" id="register-now">立即登录</a>
         </div>
-        <div class = "register-title"></div>
+        <div class="register-title"></div>
 
         <form>
             <div class="phone">
@@ -139,7 +139,7 @@
             </div>
             <div class="captcha">
                 <span>验证码</span>
-                <input type="text" onmousemove="" value="" id="captcha" />
+                <input type="text" onmousemove="" value="" id="captcha"/>
                 <img src="${pageContext.request.contextPath}/kaptcha"/>
                 <a href="#" onclick="">看不清,换一张</a>
                 <span id="captcha-span"></span>
@@ -147,8 +147,8 @@
 
             <div class="message-authentication-code">
                 <span>短信验证码</span>
-                <input type="text" onmousemove="" value="" id="message-authentication-code" />
-                <input id="sms" class="sms" type="button" value="点击发送验证码" onclick="sendCode(this)" />
+                <input type="text" onmousemove="" value="" id="message-authentication-code"/>
+                <input id="sms" class="sms" type="button" value="点击发送验证码" onclick="sendCode(this)"/>
                 <span id="message-span"></span>
             </div>
 
@@ -168,10 +168,10 @@
             <input type="text" name="seek" value="">
             <button onclick="searchBox()">搜索</button>
     </div>
-    <div class="left-nav" >
+    <div class="left-nav">
         <div id="cart" onclick="loginOrCart()" onmouseover="onCart()" onmouseout="outCart()">
             <img src="${pageContext.request.contextPath}/images/cart-white.png" id="cart-img">
-            <span id="cart-span" >购物车</span>
+            <span id="cart-span">购物车</span>
             <span id="cart-num"></span>
         </div>
         <div id="order-span" onclick="myOrder()">我的订单</div>
@@ -181,13 +181,13 @@
             <li onclick="homePage()" onmouseover="onli(this)" onmouseout="outli(this)">首页</li>
             <li onclick="rankingList()" onmouseover="onli(this)" onmouseout="outli(this)">排行</li>
             <li onclick="bookList()" onmouseover="onli(this)" onmouseout="outli(this)">书单</li>
-            <li onclick="goToBook(this)" onmouseover="onli(this)" onmouseout="outli(this)">教育</li>
-            <li onclick="goToBook(this)" onmouseover="onli(this)" onmouseout="outli(this)">小说</li>
-            <li onclick="goToBook(this)" onmouseover="onli(this)" onmouseout="outli(this)">文艺</li>
-            <li onclick="goToBook(this)" onmouseover="onli(this)" onmouseout="outli(this)">人文社会</li>
-            <li onclick="goToBook(this)" onmouseover="onli(this)" onmouseout="outli(this)">经济</li>
-            <li onclick="goToBook(this)" onmouseover="onli(this)" onmouseout="outli(this)">生活</li>
-            <li onclick="goToBook(this)" onmouseover="onli(this)" onmouseout="outli(this)">科技</li>
+            <li onclick="clickcaterory(this)" id="10003" onmouseover="onli(this)" onmouseout="outli(this)">教育</li>
+            <li onclick="clickcaterory(this)" id="10007" onmouseover="onli(this)" onmouseout="outli(this)">小说</li>
+            <li onclick="clickcaterory(this)" id="10008" onmouseover="onli(this)" onmouseout="outli(this)">文艺</li>
+            <li onclick="clickcaterory(this)" id="10013" onmouseover="onli(this)" onmouseout="outli(this)">人文社会</li>
+            <li onclick="clickcaterory(this)" id="10021" onmouseover="onli(this)" onmouseout="outli(this)">经济</li>
+            <li onclick="clickcaterory(this)" id="10022" onmouseover="onli(this)" onmouseout="outli(this)">生活</li>
+            <li onclick="clickcaterory(this)" id="10028" onmouseover="onli(this)" onmouseout="outli(this)">科技</li>
             <li onclick="topDiscuss()" onmouseover="onli(this)" onmouseout="outli(this)">讨论区</li>
         </ul>
     </div>

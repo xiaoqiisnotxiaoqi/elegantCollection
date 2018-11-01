@@ -14,8 +14,29 @@ import org.springframework.stereotype.Component;
 
 @Component
 public interface BookDao {
+
+    /**
+     * 自定义查询首页数据
+     *
+     * @param map 查询条件(包含排序依据,分类ID)
+     * @return 图书集合
+     */
+    List<Book> selectIndexData(HashMap map);
+
+    /**
+     * 自定义多条件动态分页查询-分页计数
+     *
+     * @param map 查询条件
+     * @return 数量
+     */
     int testCount(HashMap map);
 
+    /**
+     * 自定义多条件动态分页查询
+     *
+     * @param map 封装查询条件
+     * @return 图书集合
+     */
     List<BookWithBLOBs> test(HashMap map);
 
     long countByExample(BookExample example);
@@ -40,7 +61,7 @@ public interface BookDao {
 
     List<Book> selectBookByBookSalesLastMonth(PageModel<Book> pageModel);
 
-    List<Book> selectBookByBookSalesLastMonthAndBookCategory(Integer categoryId,PageModel<Book> pageModel);
+    List<Book> selectBookByBookSalesLastMonthAndBookCategory(Integer categoryId, PageModel<Book> pageModel);
 
     Integer selectCountAll();
 

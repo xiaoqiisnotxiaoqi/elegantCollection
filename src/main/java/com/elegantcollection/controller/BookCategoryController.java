@@ -24,26 +24,28 @@ public class BookCategoryController {
 
     /**
      * 加载一级分类
+     *
      * @return 一级类别集合
      */
     @GetMapping("getcategory")
-    public List<BookCategory> getCategoryByNull(){
+    public List<BookCategory> getCategoryByNull() {
         List<BookCategory> list = this.bookCategoryService.queryBookCategoryByUpIdNull();
         return list;
     }
 
     /**
      * 根据总销量降序显示书籍
+     *
      * @param request
      * @return
      */
     @GetMapping("getbooktotal")
-    public PageModel<Book> getBookByTotal(HttpServletRequest request){
+    public PageModel<Book> getBookByTotal(HttpServletRequest request) {
         Integer pagecode = (Integer) request.getSession().getAttribute("page");
         PageModel<Book> pageModel = new PageModel<>();
-        if(pagecode == null){
+        if (pagecode == null) {
             pageModel.setCurrentPageCode(1);
-        }else {
+        } else {
             pageModel.setCurrentPageCode(pagecode);
         }
         pageModel.setPageSize(10);
@@ -57,16 +59,17 @@ public class BookCategoryController {
 
     /**
      * 根据上月销量降序显示书籍
+     *
      * @param request
      * @return
      */
     @GetMapping("getbooklastmonth")
-    public PageModel<Book> getBookByLastMonth(HttpServletRequest request){
+    public PageModel<Book> getBookByLastMonth(HttpServletRequest request) {
         Integer pagecode = (Integer) request.getSession().getAttribute("page");
         PageModel<Book> pageModel = new PageModel<>();
-        if(pagecode == null){
+        if (pagecode == null) {
             pageModel.setCurrentPageCode(1);
-        }else {
+        } else {
             pageModel.setCurrentPageCode(pagecode);
         }
         pageModel.setPageSize(20);
@@ -80,17 +83,18 @@ public class BookCategoryController {
 
     /**
      * 根据上月销量和类别降序显示书籍
+     *
      * @param request
      * @return
      */
     @GetMapping("getbooklastmonthcategory")
-    public PageModel<Book> getBookByLastMonthCategory(HttpServletRequest request){
+    public PageModel<Book> getBookByLastMonthCategory(HttpServletRequest request) {
         Integer id = (Integer) request.getSession().getAttribute("categoryId");
         Integer pagecode = (Integer) request.getSession().getAttribute("page");
         PageModel<Book> pageModel = new PageModel<>();
-        if(pagecode == null){
+        if (pagecode == null) {
             pageModel.setCurrentPageCode(1);
-        }else {
+        } else {
             pageModel.setCurrentPageCode(pagecode);
         }
         pageModel.setPageSize(20);
@@ -98,7 +102,7 @@ public class BookCategoryController {
         pageModel.setTotalPages(pageModel.getTotalRecord() % pageModel.getPageSize() == 0 ? pageModel.getTotalRecord()
                 / pageModel.getPageSize() : pageModel.getTotalRecord() / pageModel.getPageSize() + 1);
         pageModel.setStartRecord((pageModel.getCurrentPageCode() - 1) * pageModel.getPageSize());
-        pageModel = this.bookService.queryBookByBookSalesLastMonthAndBookCategory(id,pageModel);
+        pageModel = this.bookService.queryBookByBookSalesLastMonthAndBookCategory(id, pageModel);
         return pageModel;
     }
 }
