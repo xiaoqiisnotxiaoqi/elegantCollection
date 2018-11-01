@@ -15,8 +15,10 @@
 
 </head>
 <body>
-<iframe src="${pageContext.request.contextPath}/top" style="width: 100%; height: 220px;border: none;
-frameborder:0;"></iframe>
+
+<jsp:include page="top.jsp" flush="true"/>
+<%--<iframe src="${pageContext.request.contextPath}/top" style="width: 100%; height: 220px;border: none;--%>
+<%--frameborder:0;"></iframe>--%>
 
 <div class="mydang" id="J_muneAndContentWrap">
     <div class="my_left">
