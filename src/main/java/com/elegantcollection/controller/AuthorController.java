@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 
@@ -22,24 +23,24 @@ public class AuthorController {
 
     /**
      * 显示作者信息
-     * @param authorId 作者id
-     * @return 作者对象
+     * @param request
+     * @return
      */
     @GetMapping("getauthor")
-    public Author getAuthorByAuthorId(Integer authorId){
-        Integer id = authorId;
+    public Author getAuthorByAuthorId(HttpServletRequest request){
+        Integer id = (Integer) request.getSession().getAttribute("authorId");
         Author author = this.authorService.queryAuthorById(id);
         return author;
     }
 
     /**
      * 显示作者作品
-     * @param authorId 作者id
-     * @return 该作者作品集合
+     * @param request
+     * @return
      */
     @GetMapping("getbook")
-    public List<Book> getBookByAuthorId(Integer authorId){
-        Integer id = authorId;
+    public List<Book> getBookByAuthorId(HttpServletRequest request){
+        Integer id = (Integer) request.getSession().getAttribute("authorId");
         List<Book> list = this.bookService.queryBookByAuthorId(id);
         return list;
     }

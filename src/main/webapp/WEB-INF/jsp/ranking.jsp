@@ -16,8 +16,8 @@
 <div class="all">
     <div class="danming">
         <span class="tou">榜单</span>
-        <span class="saner"><a href="#" onclick="refreshBookTotal()">总销量榜</a> </span>
-        <span class="saner"><a href="#" onclick="getLastMonth()">月销量榜</a> </span>
+        <span class="saner"><a href="javascript:refreshBookTotal(url_getbooktotal)">总销量榜</a> </span>
+        <span class="saner"><a href="javascript:getLastMonth(url_getbooklastmonth)">月销量榜</a> </span>
     </div>
     <div class="danshen">
         <div id="danxiang" class="danxiang">
@@ -48,5 +48,6 @@
     </div>
 </div>
 <script src="../../js/ranking.js"></script>
+<jsp:include page="bottom.jsp"/>
 </body>
 </html>

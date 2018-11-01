@@ -120,8 +120,6 @@ function loadBookLastMonth() {
 var ugbc = null;
 function getLastMonthCategory(pro) {
     ugbc = pro;
-    alert(ugbc);
-    console.log(pro);
     if(window.XMLHttpRequest){
         xhr = new XMLHttpRequest();
     }else {
