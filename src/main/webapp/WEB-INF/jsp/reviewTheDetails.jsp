@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/reviewTheDetails.css">
 
 </head>
-<body>
+<body onload="topPort()">
 <%--顶端导航--%>
 <div class="review-div">
     <div class="review-nav-div">
@@ -40,26 +40,20 @@
             <li><a style="color: black" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=954566097&site=qq&menu=yes">联系客服</a></li>
         </ul>
     </div>
-
-
 </div>
-
-
-
-
-
 
 <div class="search">
     <img src="${pageContext.request.contextPath}/images/review.png">
     <div>
         <form>
             <input type="text" name="search-box">
-            <input type="button" name="" value="帖子搜索">
-            <input type="button" name="" value="全站搜索">
-            <span>高级搜索</span>
+            <input type="button" name="" value="书评区搜索" onclick="blockSearch(this)">
+            <input type="button" name="" value="书评帖搜索" onclick="TotalStationSearch(this)">
         </form>
     </div>
 </div>
+
+
 <div class="post">
     <div id="post-title">
         <img id="block-img">

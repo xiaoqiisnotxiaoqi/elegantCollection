@@ -18,14 +18,14 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 
-@RequestMapping
-public class BookReview {
+@RestController
+public class BookReviewController {
     private final PostService postService;
     private final BlockService blockService;
     private final CustomerService customerService;
 
     @Autowired
-    public BookReview(PostService postService, BlockService blockService, CustomerService customerService) {
+    public BookReviewController(PostService postService, BlockService blockService, CustomerService customerService) {
         this.postService = postService;
         this.blockService = blockService;
         this.customerService = customerService;
@@ -401,7 +401,9 @@ public class BookReview {
     @GetMapping("/postSearch")
     public String postSearch (String queries ,HttpServletRequest request){
         //根据用户输入的内容 查询书评 详情 列表
+        System.out.println(queries);
         List<Post> posts = blockService.queryPostsByQueries(queries);
+        System.out.println(posts);
         //判断用户搜索的内容 是否存在 ,若 存在 则继续 若不存在 返回 false
         if (posts.size() == 0){
             return "false";
@@ -416,10 +418,41 @@ public class BookReview {
      * @return 要搜索内容的 pageModel对象
      */
     @GetMapping("/postSearchPage")
-    public PageModel<Map<String,Object>> postSearchPage(HttpServletRequest request){
+    public PageModel<Map<String,Object>> postSearchPage(HttpServletRequest request,Integer pageNum){
         List<Post> posts = (List<Post>) request.getSession().getAttribute("postSearch");
 
-        for (Post post:posts){
+        if (posts.size() == 0){
+            return null;
+        }
+
+        List<Map<String,Object>> list = new ArrayList<>();
+
+        PageModel<Map<String,Object>> pageModel = new PageModel<>();
+
+        if (pageNum == null) {
+            pageNum = 1;
+        }
+        //总记录数
+        pageModel.setTotalRecord(posts.size());
+        //总页数
+        pageModel.setTotalPages(posts.size() % 10 == 0 ? posts.size() / 10:(posts.size() / 10) + 1);
+        //当前页码
+        pageModel.setCurrentPageCode(pageNum);
+        //每页显示记录数
+        pageModel.setPageSize(10);
+        //本页 从哪一个数据开始获取
+        pageModel.setStartRecord((pageNum - 1) * 10);
+        //查看当前页的数据量为多少
+        if (posts.size() - pageModel.getStartRecord() >= 10){
+            //本页到那个数据结束
+            pageModel.setEndRecord(pageNum * 10 - 1);
+        }else {
+            //本页到那个数据结束
+            pageModel.setEndRecord(posts.size() - 1);
+        }
+
+        for (int i = pageModel.getStartRecord(); i <= pageModel.getEndRecord(); i++){
+            Post post = posts.get(i);
             Map<String,Object> map = new HashMap<>();
             //将postId放入 map中
             map.put("postId",post.getPostId());
@@ -434,17 +467,14 @@ public class BookReview {
             //将帖子的内容放入map中
             map.put("text",text);
             //得到所有的评论数
+            Integer num = blockService.quaryAllReplyNumByPostId(post.getPostId());
+            //将所有的评论数 放入map中
+            map.put("num",num);
 
-
-
-
+            list.add(map);
         }
-
-
-
-
-
-        return null;
+        pageModel.setModelList(list);
+        return pageModel;
     }
 
 

@@ -57,16 +57,17 @@
 .search img{
     width: 100px;
     height: 30px;
-    margin: 38px 0 0 25px;
-
+    position: relative;
+    top: 20px;
+    left: 40px;
 }
 
 .search form input:nth-child(1){
     position: relative;
     width: 500px;
     height: 30px;
-    top: -38px;
-    left: 145px;
+    top: -15px;
+    left: 155px;
     font-size: 14px;
     border: 1px solid #317EF3;
 }
@@ -76,8 +77,8 @@
     position: relative;
     width: 100px;
     height: 32px;
-    top: -37px;
-    left: 140px;
+    top: -14px;
+    left: 151px;
     border: none;
     background-color: #317EF3;
     color: #ffffff;
@@ -87,8 +88,8 @@
     position: relative;
     width: 100px;
     height: 32px;
-    top: -37px;
-    left: 145px;
+    top: -14px;
+    left: 165px;
     border: 1px solid #317EF3;
     color: #317EF3;
     background-color: #ffffff;
@@ -227,6 +228,7 @@
 }
 
 #subject button:nth-child(3),#subject button:nth-child(4){
+    float: right;
     height: 24px;
     border: 1px solid #e7e9eb;
     border-radius: 3px;
@@ -237,14 +239,14 @@
 #subject button:nth-child(3){
     width: 68px;
     font-size: 12px;
-    margin-left: 320px;
+    margin: 15px 10px 0 10px;
 
 }
 
 #subject button:nth-child(4){
     width: 56px;
     text-align: center;
-    margin-left: 10px;
+    margin: 15px 2px 0 0;
 }
 
 .invitation{

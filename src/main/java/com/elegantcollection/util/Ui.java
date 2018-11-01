@@ -1,11 +1,9 @@
 package com.elegantcollection.util;
 
 import com.elegantcollection.entity.Customer;
-import com.elegantcollection.entity.Customer;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
@@ -78,7 +76,7 @@ public class Ui {
     }
 
     @RequestMapping("showOrderDetail0")
-    public String ui2OrderDetail0(Integer out_trade_no, String trade_no, HttpServletRequest request) throws AlipayApiException {
+    public String ui2OrderDetail0(Integer out_trade_no, String trade_no, HttpServletRequest request) {
         request.getSession().setAttribute("orderId", out_trade_no);
         return "order_detail";
     }
@@ -133,4 +131,15 @@ public class Ui {
     public String uio(){
         return "ranking";
     }
+
+
+    /**
+     * 跳转页面至 书评帖搜索结过页面
+     * @return
+     */
+    @RequestMapping("searchThrough")
+    public String postSearch(){
+        return "postSearch";
+    }
+
 }

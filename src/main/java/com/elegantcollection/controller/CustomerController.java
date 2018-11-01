@@ -1,13 +1,10 @@
 package com.elegantcollection.controller;
 
-import com.elegantcollection.entity.Book;
 import com.elegantcollection.entity.Customer;
-import com.elegantcollection.entity.Evaluate;
 import com.elegantcollection.service.BookService;
 import com.elegantcollection.service.CustomerService;
 import com.elegantcollection.service.EvaluateService;
 import com.elegantcollection.util.CodeUtil;
-import com.elegantcollection.util.PageModel;
 import com.elegantcollection.util.RandomNumberGeneration;
 import com.elegantcollection.util.SmsVerification;
 import com.google.code.kaptcha.Constants;
@@ -238,8 +235,21 @@ public class CustomerController {
 
 
 
-
-
-
+    /**
+     * 设置15分钟后删除session中的验证码
+     * @param session
+     * @param attrName
+     */
+    private void removeAttrbute(final HttpSession session, final String attrName) {
+        final Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                // 删除session中存的验证码
+                session.removeAttribute(attrName);
+                timer.cancel();
+            }
+        }, 15 * 60 * 1000);
+    }
 
 }
