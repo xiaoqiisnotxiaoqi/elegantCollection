@@ -10,8 +10,11 @@
     <script src="${pageContext.request.contextPath}/js/user_info.js"></script>
 </head>
 <body>
-<iframe src="${pageContext.request.contextPath}/top" style="width: 100%; border: none;
-frameborder:0;"></iframe>
+<jsp:include page="top.jsp" flush="true"/>
+<%--<iframe src="${pageContext.request.contextPath}/top" style="width: 100%; border: none;--%>
+<%--frameborder:0;"></iframe>--%>
+
+
 
 
 
@@ -408,7 +411,7 @@ frameborder:0;"></iframe>
                                    onfocus="changeclass(div_1)" onblur="cue_chk()">
 
                             <span class="c_gray" id="info_1"><p>您的昵称可以由小写英文字母、中文、数字组成，</p>长度4－20个字符，一个汉字为两个字符</span>
-                            <span class="notice_write" id="info_1" style="display: none"> 最少四个字符,请输入你的名称</span>
+                           
                         </div>
 
                         <div class="empty_box_left"></div>
@@ -448,6 +451,7 @@ frameborder:0;"></iframe>
             </div>
         </div>
     </div>
+<%--<jsp:include page="bottom.jsp" flush="true"/>--%>
 </body>
 
 
@@ -486,8 +490,11 @@ frameborder:0;"></iframe>
                 if (result != "") {
                     document.getElementById("img_head_select").src =result;
                 } else {
+
                     alert("请先登录,才能更改信息");
-                    window.location = "top";
+                    window.location = "index";
+
+
                 }
             }
     }
@@ -534,7 +541,7 @@ frameborder:0;"></iframe>
             }else{
 
                 alert("请先登录,才能更改信息");
-                window.location = "top";
+                window.location = "index";
             }
         }
 

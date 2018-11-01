@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/ranking.css">
 </head>
 <body>
+<jsp:include page="top.jsp"/>
 <div class="all">
     <div class="danming">
         <span class="tou">榜单</span>
