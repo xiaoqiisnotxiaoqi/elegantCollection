@@ -81,10 +81,23 @@
 
 
 		<!-- servlet 依赖包 -->
+
+		<dependency>
+		<groupId>org.apache.santuario</groupId>
+		<artifactId>xmlsec</artifactId>
+		<version>1.4.3</version>
+		<exclusions>
+			<exclusion>
+				<groupId>javax.servlet</groupId>
+				<artifactId>servlet-api</artifactId>
+			</exclusion>
+		</exclusions>
+		</dependency>
+
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
-			<scope>provided</scope>
+			<scope>4.0.1</scope>
 		</dependency>
 		<!-- JSTL (JSP standard Tag Library) JSP 标准标签库 -->
 		<dependency>
