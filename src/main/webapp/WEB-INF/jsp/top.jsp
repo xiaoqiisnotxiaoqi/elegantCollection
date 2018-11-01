@@ -15,47 +15,50 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/index.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/register.css">
-    <script src="${pageContext.request.contextPath}/js/top.js"></script>
+
 </head>
 <body>
 <!--顶端导航入口-->
 <div class="top-nav">
 
     <%
-        if (request.getSession().getAttribute("customer") != null) {
+        if (request.getSession().getAttribute("customer") != null){
     %>
-    <div class="has-logged">
-        <span class="top-welcome">欢迎您,</span>
-        <span id="customer-name" onclick="">${customer.custName}</span>
-        <span class="top-logout" onclick="loginOut()">退出</span>
-    </div>
+        <span style="display: none;" class="DetermineWhetherLog">1</span>
+        <div class="has-logged">
+            <span class="top-welcome">欢迎您,</span>
+            <span id="customer-name" onclick="">${customer.custName}</span>
+            <span class="top-logout" onclick="loginOut()">退出</span>
+        </div>
     <%
         }
     %>
 
     <%
-        if (request.getSession().getAttribute("customer") == null) {
+        if (request.getSession().getAttribute("customer") == null){
     %>
-    <div class="not-login">
-        <span class="top-wellcome">欢迎进入雅致藏书!</span>
-        <span class="top-log"><a onclick="showDiv()" id="asd">登录</a></span>
-        <span class="top-join" onclick="showRegister()">加入雅致</span>
-    </div>
+       <span style="display: none;" class="DetermineWhetherLog">2</span>
+        <div class="not-login">
+            <span class="top-wellcome">欢迎进入雅致藏书!</span>
+            <span class="top-log"><a onclick="showDiv()" id="asd">登录</a></span>
+            <span class="top-join" onclick="showRegister()">加入雅致</span>
+        </div>
     <%
         }
     %>
 
     <span class="top-myEle" onclick="topCustEle()">我的雅致</span>
-    <span class="top-cart" onclick="topCart()">购物车</span>
+    <span class="top-cart" onclick="loginOrCart()">购物车</span>
     <span class="top-order" onclick="myOrder()">订单</span>
-    <span class="top-service" onclick="topService()">联系客服</span>
+    <span class="top-service">
+        <a style="color: black" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=954566097&site=qq&menu=yes">联系客服</a>
+    </span>
     <span id="service-news"></span>
     <span class="top-discuss" onclick="topDiscuss()">讨论区</span>
     <span id="discuss-news"></span>
 
-
-    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
-         aria-hidden="true" style="display: none;">
+    <%--登录弹窗--%>
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
         <div style="display:table; width:100%; height:100%;">
             <div style="vertical-align:middle; display:table-cell;">
                 <div class="modal-dialog modal-sm" style="width:540px;">
@@ -63,31 +66,21 @@
                         <div class="col-left"></div>
                         <div class="col-right">
                             <div class="modal-header">
-                                <button type="button" id="login_close" class="close" data-dismiss="modal"><span
-                                        aria-hidden="true" onclick="stopLoginDiv()">×</span><span
-                                        class="sr-only">Close</span></button>
+                                <button type="button" id="login_close" class="close" data-dismiss="modal"><span aria-hidden="true" onclick="stopLoginDiv()">×</span><span class="sr-only">Close</span></button>
                                 <h4 class="modal-title" id="loginModalLabel" style="font-size: 18px;">登录</h4>
                             </div>
                             <div class="modal-body">
                                 <section class="box-login v5-input-txt" id="box-login">
                                     <form id="login_form" action="" method="post" autocomplete="off">
                                         <ul id="password-login">
-                                            <li class="form-group"><input class="form-control" id="id_account_l"
-                                                                          maxlength="50" name="account_l"
-                                                                          placeholder="请输入邮箱账号/手机号" type="text"></li>
-                                            <li class="form-group"><input class="form-control" id="id_password_l"
-                                                                          name="password_l" placeholder="请输入密码"
-                                                                          type="password"></li>
+                                            <li class="form-group"><input class="form-control" id="id_account_l" maxlength="50" name="account_l" placeholder="请输入邮箱账号/手机号" type="text"></li>
+                                            <li class="form-group"><input class="form-control" id="id_password_l" name="password_l" placeholder="请输入密码" type="password"></li>
                                         </ul>
                                         <ul id="note-login" style="display:none">
-                                            <li class="form-group"><input class="form-control" id="id_account_2"
-                                                                          maxlength="50" name="account_l"
-                                                                          placeholder="请输入手机号" type="text"></li>
+                                            <li class="form-group"><input class="form-control" id="id_account_2" maxlength="50" name="account_l" placeholder="请输入手机号" type="text"></li>
                                             <li class="form-group">
-                                                <input class="form-control" id="id_password_2" name="password_l"
-                                                       placeholder="请输入验证码" type="password">
-                                                <input id="getVCode" type="button" class="send-again" value="点击发送验证码"
-                                                       onclick="sendCode(this)"/>
+                                                <input class="form-control" id="id_password_2" name="password_l" placeholder="请输入验证码" type="text">
+                                                <input id="getVCode" type="button" class="send-again" value="点击发送验证码" onclick="sendCode(this)" />
                                             </li>
 
                                         </ul>
@@ -95,8 +88,7 @@
                                     <p class="good-tips marginB10">
                                         <a id="btnForgetpsw" class="fr">忘记密码？</a>
                                         还没有账号？
-                                        <a href="javaScript:void(0)" target="_blank" id="btnRegister"
-                                           onclick="login2Register()">立即注册</a>
+                                        <a href="javaScript:void(0)" target="_blank" id="btnRegister" onclick="login2Register()">立即注册</a>
                                     </p>
                                     <div class="login-box marginB10">
                                         <span id="login_btn" class="btn btn-micv5 btn-block" onclick="login()">登录</span>
@@ -104,8 +96,7 @@
 
 
                                     <div class="threeLogin">
-                                        <span onclick="loginModeConversion(this)"
-                                              class="loginModeConversion">短信登录</span>
+                                        <span onclick="loginModeConversion(this)" class="loginModeConversion">短信登录</span>
                                         <a class="nqq" href=""></a>
                                         <a class="nwx" href=""></a>
                                         <!--<a class="nwb"></a>-->
@@ -120,7 +111,7 @@
     </div>
     <div style="text-align:center;">
     </div>
-
+    <%--注册弹窗--%>
     <div id="register" style="display: none;">
         <img src="${pageContext.request.contentType}/images/cross.png" id="register-cross" onclick="stopRegisterDiv()"/>
         <div>
@@ -174,11 +165,8 @@
 <div class="category-nav">
     <div class="img-signe"><img src="${pageContext.request.contextPath}/images/biaozhi.png"></div>
     <div class="search-box">
-
-        <input type="text" name="keyWord" value="" id="searchInput">
-        <button onclick="searchBox()">搜索</button>
-        <span onclick="advancedSearch()">高级搜索</span>
-
+            <input type="text" name="seek" value="">
+            <button onclick="searchBox()">搜索</button>
     </div>
     <div class="left-nav">
         <div id="cart" onclick="loginOrCart()" onmouseover="onCart()" onmouseout="outCart()">
@@ -190,9 +178,9 @@
     </div>
     <div class="classify-nav">
         <ul>
-            <li onclick="" onmouseover="onli(this)" onmouseout="outli(this)">首页</li>
-            <li onclick="" onmouseover="onli(this)" onmouseout="outli(this)">排行</li>
-            <li onclick="" onmouseover="onli(this)" onmouseout="outli(this)">书单</li>
+            <li onclick="homePage()" onmouseover="onli(this)" onmouseout="outli(this)">首页</li>
+            <li onclick="rankingList()" onmouseover="onli(this)" onmouseout="outli(this)">排行</li>
+            <li onclick="bookList()" onmouseover="onli(this)" onmouseout="outli(this)">书单</li>
             <li onclick="clickcaterory(this)" id="10003" onmouseover="onli(this)" onmouseout="outli(this)">教育</li>
             <li onclick="clickcaterory(this)" id="10007" onmouseover="onli(this)" onmouseout="outli(this)">小说</li>
             <li onclick="clickcaterory(this)" id="10008" onmouseover="onli(this)" onmouseout="outli(this)">文艺</li>
@@ -200,7 +188,7 @@
             <li onclick="clickcaterory(this)" id="10021" onmouseover="onli(this)" onmouseout="outli(this)">经济</li>
             <li onclick="clickcaterory(this)" id="10022" onmouseover="onli(this)" onmouseout="outli(this)">生活</li>
             <li onclick="clickcaterory(this)" id="10028" onmouseover="onli(this)" onmouseout="outli(this)">科技</li>
-            <li onclick="" onmouseover="onli(this)" onmouseout="outli(this)">讨论区</li>
+            <li onclick="topDiscuss()" onmouseover="onli(this)" onmouseout="outli(this)">讨论区</li>
         </ul>
     </div>
 </div>

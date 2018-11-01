@@ -17,14 +17,15 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 import java.util.stream.Collectors;
 
+
 @RestController
-public class BookReview {
+public class BookReviewController {
     private final PostService postService;
     private final BlockService blockService;
     private final CustomerService customerService;
 
     @Autowired
-    public BookReview(PostService postService, BlockService blockService, CustomerService customerService) {
+    public BookReviewController(PostService postService, BlockService blockService, CustomerService customerService) {
         this.postService = postService;
         this.blockService = blockService;
         this.customerService = customerService;
@@ -75,7 +76,6 @@ public class BookReview {
     @GetMapping("/reviewTheDetails")
     public PageModel<Map<String, Object>> reviewTheDetails(Integer postId, String currentPage, HttpServletRequest request) {
         if (postId == null) {
-            request.getSession().setAttribute("postId", 10004);
             postId = (Integer) request.getSession().getAttribute("postId");
         }
         //确定 用户请求的页数
@@ -370,5 +370,117 @@ public class BookReview {
         System.out.println("text============>" + text);
         return postService.replyOriginalPoster(postId,text,request);
     }
+
+
+    /**
+     * 板块搜索 模糊查询
+     * @param queries 搜素的内容
+     * @param request 用户请求信息
+     * @return 成功("success") 失败/没有搜索到符合要求的板块 ("false")
+     */
+    @GetMapping("/queries")
+    public String blockSearch (String queries ,HttpServletRequest request){
+        //根据用户输入的内容 查询书评板块详情
+        Block block = blockService.queryBlocksByQueries(queries);
+        //判断用户搜索的内容是否存在,若存在 则继续 若不存在 则返回 false
+        if (block == null){
+            return "false";
+        }
+        //将block的id存入 session中,以便页面跳转后 能够进入 当前的 block 板块中
+        request.getSession().setAttribute("blockId",block.getBlockId());
+        return "success";
+    }
+
+
+    /**
+     * 帖子搜索  模糊查询
+     * @param queries 用户的搜素内容
+     * @param request 用户的请求信息
+     * @return 搜索结果
+     */
+    @GetMapping("/postSearch")
+    public String postSearch (String queries ,HttpServletRequest request){
+        //根据用户输入的内容 查询书评 详情 列表
+        System.out.println(queries);
+        List<Post> posts = blockService.queryPostsByQueries(queries);
+        System.out.println(posts);
+        //判断用户搜索的内容 是否存在 ,若 存在 则继续 若不存在 返回 false
+        if (posts.size() == 0){
+            return "false";
+        }
+        //将查询到的 结过 存入 session中
+        request.getSession().setAttribute("postSearch",posts);
+        return "success";
+    }
+
+    /**
+     * 帖子搜索,跳转后页面渲染
+     * @return 要搜索内容的 pageModel对象
+     */
+    @GetMapping("/postSearchPage")
+    public PageModel<Map<String,Object>> postSearchPage(HttpServletRequest request,Integer pageNum){
+        List<Post> posts = (List<Post>) request.getSession().getAttribute("postSearch");
+
+        if (posts.size() == 0){
+            return null;
+        }
+
+        List<Map<String,Object>> list = new ArrayList<>();
+
+        PageModel<Map<String,Object>> pageModel = new PageModel<>();
+
+        if (pageNum == null) {
+            pageNum = 1;
+        }
+        //总记录数
+        pageModel.setTotalRecord(posts.size());
+        //总页数
+        pageModel.setTotalPages(posts.size() % 10 == 0 ? posts.size() / 10:(posts.size() / 10) + 1);
+        //当前页码
+        pageModel.setCurrentPageCode(pageNum);
+        //每页显示记录数
+        pageModel.setPageSize(10);
+        //本页 从哪一个数据开始获取
+        pageModel.setStartRecord((pageNum - 1) * 10);
+        //查看当前页的数据量为多少
+        if (posts.size() - pageModel.getStartRecord() >= 10){
+            //本页到那个数据结束
+            pageModel.setEndRecord(pageNum * 10 - 1);
+        }else {
+            //本页到那个数据结束
+            pageModel.setEndRecord(posts.size() - 1);
+        }
+
+        for (int i = pageModel.getStartRecord(); i <= pageModel.getEndRecord(); i++){
+            Post post = posts.get(i);
+            Map<String,Object> map = new HashMap<>();
+            //将postId放入 map中
+            map.put("postId",post.getPostId());
+            //将postTitle放入map中
+            map.put("postTitle",post.getPostTitle());
+            //得到发帖人的详情
+            Customer customer = customerService.quaryCustomerById(post.getCustId());
+            //将发帖人的id 存入 map中
+            map.put("custName",customer.getCustName());
+            //得到 帖子的内容
+            String text = blockService.quaryTextByPostId(post.getPostId());
+            //将帖子的内容放入map中
+            map.put("text",text);
+            //得到所有的评论数
+            Integer num = blockService.quaryAllReplyNumByPostId(post.getPostId());
+            //将所有的评论数 放入map中
+            map.put("num",num);
+
+            list.add(map);
+        }
+        pageModel.setModelList(list);
+        return pageModel;
+    }
+
+
+
+
+
+
 
 }

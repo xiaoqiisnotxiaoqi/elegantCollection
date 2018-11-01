@@ -49,7 +49,6 @@ function getAllMoney(){
         if(labelNode[i].nextElementSibling.className === "mark"){
             //得到商品的id
             var bookId = labelNode[i].parentNode.parentNode.getAttribute("id");
-            alert(bookId);
 
             //得到单个商品的数量
             var number = labelNode[i].parentNode.nextSibling.nextSibling.nextSibling.nextSibling.childNodes[0].childNodes[1].value;
@@ -58,7 +57,6 @@ function getAllMoney(){
             }else{
                 books += "&"+ bookId + "=" + number;
             }
-            alert(books);
             //选择的商品的数量
             allBooks += parseInt(number);
 
@@ -478,7 +476,7 @@ function  priceStatistics() {
             //满减优惠 优惠额
             document.getElementById("price2").innerText = fullReductionDiscount;
             //用户选择的商品的总价格
-            document.getElementsByClassName("total_text")[0].innerText = allprice - groupPrice - fullReductionDiscount;
+            document.getElementsByClassName("total_text")[0].innerText = (allprice - groupPrice - fullReductionDiscount).toFixed(2);
         }
 
 
@@ -490,7 +488,7 @@ function  priceStatistics() {
 /**
  * 结算按钮
  */
-function buyThis() {
+function settleAccount() {
     if (window.XMLHttpRequest) {
         xhr = new XMLHttpRequest();
     } else {
@@ -501,6 +499,13 @@ function buyThis() {
 
     xhr.open("POST", "/butNow", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
-    xhr.onreadystatechange = priceStatistics;
+    xhr.onreadystatechange = butItNow;
     xhr.send(books);
+}
+
+
+function butItNow() {
+    if (xhr.readyState === 4 && xhr.status === 200){
+            window.location = "/pay"
+    }
 }

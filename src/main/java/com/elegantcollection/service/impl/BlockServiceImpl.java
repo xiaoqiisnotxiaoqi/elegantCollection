@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 
+@SuppressWarnings("all")
 @Service
 public class BlockServiceImpl implements BlockService {
     private final BlockDao blockDao;
@@ -55,6 +56,18 @@ public class BlockServiceImpl implements BlockService {
         postReplyExample.setLimit(10);
         postReplyExample.setOffset(startRecord.longValue());
         return postReplyDao.selectByExample(postReplyExample);
+    }
+
+    @Override
+    public Integer quaryAllReplyNumByPostId(Integer postId) {
+        PostReplyExample postReplyExample = new PostReplyExample();
+        postReplyExample.createCriteria().andPostIdEqualTo(postId);
+        Long num = postReplyDao.countByExample(postReplyExample);
+        if (num != null){
+            return num.intValue();
+        }else {
+            return null;
+        }
     }
 
     @Override
@@ -107,5 +120,36 @@ public class BlockServiceImpl implements BlockService {
     @Override
     public Block queryByBlockId(Integer blockId) {
         return blockDao.selectByPrimaryKey(blockId);
+    }
+
+    @Override
+    public Block queryBlocksByQueries(String blockName) {
+       BlockExample blockExample = new BlockExample();
+       blockExample.createCriteria().andBlockNameLike("%"+blockName +"%");
+       List<Block> blocks = blockDao.selectByExample(blockExample);
+       if (blocks.size() != 0){
+           return blocks.get(0);
+       }
+       return null;
+    }
+
+    @Override
+    public List<Post> queryPostsByQueries(String postTitle) {
+        PostExample postExample = new PostExample();
+        postExample.createCriteria().andPostTitleLike("%" + postTitle + "%");
+        List<Post> posts = postDao.selectByExample(postExample);
+        return posts;
+    }
+
+    @Override
+    public String quaryTextByPostId(Integer postId) {
+        PostReplyExample postReplyExample = new PostReplyExample();
+        postReplyExample.createCriteria().andPostIdEqualTo(postId).andByReplyIdIsNull().andRedundancyField1EqualTo("1");
+        List<PostReply> postReplies = postReplyDao.selectByExample(postReplyExample);
+        if (postReplies.size() == 0){
+            return null;
+        }
+        PostReply postReply = postReplies.get(0);
+        return  postReply.getReplyText();
     }
 }

@@ -70,7 +70,7 @@ function getDetail() {
             //    渲染所有评论
             var evaluateList = pageModel.modelList;
             document.getElementById("pingjia-ul").innerHTML = "";
-            for (let i = 0; i < evaluateList.length; i++) {
+            for (var i = 0; i < evaluateList.length; i++) {
                 document.getElementById("pingjia-ul").innerHTML += "           <li class=\"pingjias\">\n" +
                     "                    <div class=\"customerInfo\">\n" +
                     "                        <img src=\" \" class=\"profile\"/>\n" +

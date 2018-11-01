@@ -36,6 +36,75 @@ public class BookServiceImpl implements BookService {
     }
 
     /**
+     * 查询首页需要的数据
+     *
+     * @return
+     */
+    @Override
+    public ServerResponse<HashMap> queryIndexData() {
+//        查询新书上架:16本书
+        BookExample bookExample = new BookExample();
+        bookExample.setOrderByClause("book_time desc");
+        bookExample.setOffset(0l);
+        bookExample.setLimit(16);
+        List<Book> bookList0 = bookDao.selectByExample(bookExample);
+//        查询总排行前十
+        HashMap condition1 = new HashMap();
+        condition1.put("orderBy", "book_sales_total desc");
+        List<Book> bookList1 = bookDao.selectIndexData(condition1);
+//        查询文艺分类排行前十
+        HashMap condition2 = new HashMap();
+        condition2.put("categoryId", 10008);
+        condition2.put("orderBy", "book_sales_total desc");
+        List<Book> bookList2 = bookDao.selectIndexData(condition2);
+
+//        查询人文社科排行前十
+        HashMap condition3 = new HashMap();
+        condition3.put("categoryId", 10013);
+        condition3.put("orderBy", "book_sales_total desc");
+        List<Book> bookList3 = bookDao.selectIndexData(condition3);
+//        查询生活排行前十
+        HashMap condition4 = new HashMap();
+        condition4.put("categoryId", 10022);
+        condition4.put("orderBy", "book_sales_total desc");
+        List<Book> bookList4 = bookDao.selectIndexData(condition4);
+
+//      获取科技排行
+        HashMap condition5 = new HashMap();
+        condition5.put("categortId", 10028);
+        condition5.put("orderBy", "book_sales_total desc");
+        List<Book> bookList5 = bookDao.selectIndexData(condition5);
+
+//        获取三个书单
+        List<BookOrder> bookOrders = queryBookOrder();
+
+
+//        获取前十的作者
+        AuthorExample authorExample = new AuthorExample();
+        authorExample.setOffset(0l);
+        authorExample.setLimit(10);
+        List<Author> authorList = authorDao.selectByExampleWithBLOBs(authorExample);
+//        获取排行第一的作者的(前四本)作品
+        BookExample bookExample1 = new BookExample();
+        bookExample1.createCriteria().andAuthorIdEqualTo(authorList.get(0).getAuthorId());
+        bookExample1.setOffset(0l);
+        bookExample1.setLimit(4);
+        List<Book> anthorBookList = bookDao.selectByExample(bookExample1);
+
+        HashMap result = new HashMap();
+        result.put("bookList0", bookList0);
+        result.put("bookList1", bookList1);
+        result.put("bookList2", bookList2);
+        result.put("bookList3", bookList3);
+        result.put("bookList4", bookList4);
+        result.put("bookList5", bookList5);
+        result.put("bookOrders", bookOrders);
+        result.put("authorList", authorList);
+        result.put("anthorBookList", anthorBookList);
+        return ServerResponse.createBySuccess("查询首页数据成功", result);
+    }
+
+    /**
      * xml文件版本的多条件动态分页查询
      *
      * @param conditions 封装查询条件

@@ -81,7 +81,11 @@
 }
 
 .top-logout:hover,.top-join:hover,.top-myEle:hover,.top-cart:hover,
-.top-order:hover,.top-service:hover,.top-discuss:hover{
+.top-order:hover,.top-discuss:hover{
+    color: red;
+}
+
+.top-service a:hover{
     color: red;
 }
 
@@ -93,9 +97,13 @@
 }
 
 #customer-name{
+    display: block;
+    width: 110px;
+    height: 32px;
+    text-align: center;
     position: absolute;
     top: 0;
-    left: 60px;
+    left: 50px;
     color: red;
 }
 

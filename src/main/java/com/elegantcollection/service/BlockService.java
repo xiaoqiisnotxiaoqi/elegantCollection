@@ -42,6 +42,14 @@ public interface BlockService {
 
 
     /**
+     * 根据 帖子的id 查询出 所有的评论数量
+     * @param postId 书评帖的id
+     * @return 该帖子的 所有数量
+     */
+    Integer quaryAllReplyNumByPostId(Integer postId);
+
+
+    /**
      * 根据帖子的id 回复的楼层 查询该回复的所有子回复的数量
      * @param postId 帖子id
      * @param floor 楼层
@@ -101,4 +109,29 @@ public interface BlockService {
      * @return 板块信息
      */
     Block queryByBlockId(Integer blockId);
+
+
+    /**
+     * 根据 板块名 模糊查询 所有板块
+     * @param blockName 用户输入的板块名
+     * @return 所有符合条件的 板块列表
+     */
+    Block queryBlocksByQueries(String blockName);
+
+    /**
+     * 根据 帖子名 模糊查询 所有帖子
+     * @param blockName 用户输入的帖子名
+     * @return 所有符合条件的 帖子列表
+     */
+    List<Post> queryPostsByQueries(String blockName);
+
+
+    /**
+     * 根据帖子的id 查询 一楼的内容(楼主发表的正文)
+     * @param postId 帖子的id
+     * @return 楼主发表的正文
+     */
+    String quaryTextByPostId(Integer postId);
+
+
 }

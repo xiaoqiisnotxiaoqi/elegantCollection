@@ -58,6 +58,7 @@
     text-align: center;
     line-height: 20px;
     cursor:pointer;
+    font-size: 12px;
 }
 
 .post-revert:hover,.post-remove:hover,.to-bookReview:hover{

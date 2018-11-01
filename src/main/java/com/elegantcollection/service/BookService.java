@@ -4,12 +4,19 @@ package com.elegantcollection.service;
 import com.elegantcollection.entity.*;
 import com.elegantcollection.util.PageModel;
 import com.elegantcollection.util.ServerResponse;
-import org.omg.PortableInterceptor.INACTIVE;
 
 import java.util.HashMap;
 import java.util.List;
 
 public interface BookService {
+
+    /**
+     * 查询首页数据
+     *
+     * @return 首页需要的数据(新书上架, 书单信息, 几个排行榜, 作家推荐)
+     */
+    ServerResponse<HashMap> queryIndexData();
+
     /**
      * xml文件版本的多条件动态分页查询
      *
