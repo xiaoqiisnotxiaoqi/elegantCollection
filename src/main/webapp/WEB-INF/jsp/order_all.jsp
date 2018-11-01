@@ -11,13 +11,12 @@
 <html>
 <head>
     <link rel="stylesheet" href="../../css/order_all.css">
-    <title>Title</title>
+    <title>雅致藏书--我的订单</title>
 </head>
 <body>
-<div class="order-tip">
-    我的订单
-</div>
-<div>
+<%--引入头部--%>
+<iframe src="${pageContext.request.contextPath}/top" style="width: 100%; height: 220px;border: none;frameborder:0;"></iframe>
+<div class="info-body">
     <div class="order-show-top">
         <ul class="order-state-list">
             <li class="order-state-filter">
@@ -73,6 +72,7 @@
         </tfoot>
     </table>
 </div>
+<jsp:include page="bottom.jsp"/>
 <script src="../../js/order_all.js"></script>
 </body>
 </html>

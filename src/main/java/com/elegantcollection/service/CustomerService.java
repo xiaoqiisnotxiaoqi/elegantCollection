@@ -1,7 +1,6 @@
 package com.elegantcollection.service;
 
 import com.elegantcollection.entity.Customer;
-import com.elegantcollection.entity.Evaluate;
 
 import java.util.List;
 

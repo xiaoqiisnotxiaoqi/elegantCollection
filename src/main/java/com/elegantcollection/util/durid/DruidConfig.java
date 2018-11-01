@@ -13,15 +13,14 @@ import javax.sql.DataSource;
 
 @ServletComponentScan// 用于扫描所有的Servlet、filter、listener ,并实例化
 public class DruidConfig {
-   @Bean
-   @ConfigurationProperties(prefix = "spring.datasource") //可以把同类的配置信息自动封装成实体类
-   @Primary //在同样的DataSource中，首先使用被标注的DataSource
-           //加载时读取指定的配置信息,前缀为spring.datasource.druid
+    @Bean
+    @ConfigurationProperties(prefix = "spring.datasource") //可以把同类的配置信息自动封装成实体类
+    @Primary //在同样的DataSource中，首先使用被标注的DataSource
+    //加载时读取指定的配置信息,前缀为spring.datasource.druid
 
-   public DataSource druidDataSource() {
-       return new DruidDataSource();
+    public DataSource druidDataSource() {
+        return new DruidDataSource();
 
 
-
-   }
+    }
 }

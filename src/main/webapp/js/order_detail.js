@@ -1,7 +1,31 @@
 var xhr = null;
+var xhr0 = null;
 var allUrl = null;
+var payPriceValue = 0;
+var bookQuantity = 0;
+var bookName = "";
+var orderItem = document.getElementById("order-item");
 onload = function getFirstPage() {
     refresh();
+}
+alterOrder();
+
+function alterOrder() {
+    var url = "/order/finishOrder"
+    if (window.XMLHttpRequest) {
+        xhr0 = new XMLHttpRequest(); //for ie7+,FireFox,Chorme,Opera,Safai...
+    } else {
+        xhr0 = new ActiveXObject('Microsoft.XMLHTTP');//for ie6
+    }
+
+    if (xhr0 != null) {
+        xhr0.open("GET", url, false);
+        xhr0.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;");
+        xhr0.onreadystatechange;
+        xhr0.send();
+    } else {
+        alert("不能创建XMLHttpRequest对象实例");
+    }
 }
 
 function refresh() {
@@ -9,6 +33,10 @@ function refresh() {
     refreshData(allUrl);
 }
 
+/**
+ * 请求订单信息
+ * @param url
+ */
 function refreshData(url) {
     if (window.XMLHttpRequest) {
         xhr = new XMLHttpRequest(); //for ie7+,FireFox,Chorme,Opera,Safai...
@@ -27,6 +55,9 @@ function refreshData(url) {
     }
 };
 
+/**
+ * 页面渲染
+ */
 function getDate() {
     if (xhr.readyState === 4 && xhr.status === 200) {
         var orderNumber = document.getElementById("order-number");
@@ -43,15 +74,14 @@ function getDate() {
         var payPrice = document.getElementById("pay-price");
         var discountAmount = document.getElementById("discount-amount");
 
-        var bookAllInfo = document.getElementById("book-all-info");
+        var bookAllInfos = document.getElementById("book-all-infos");
 
         var jsonText = JSON.parse(xhr.responseText);
         var shopOrder = jsonText.shopOrder;
         var address = jsonText.address;
         orderNumber.innerHTML = shopOrder.orderNumber;
-        var orderStateCode = shopOrder.orderStatus
+        var orderStateCode = shopOrder.orderStatus;
         orderState.innerHTML = StatusJudge(orderStateCode);
-
         for (var i = orderStateCode + 1; i < 5; i++) {
             var iconSrc = icons[i].src;
             icons[i].src = iconSrc.replace("-b", "-a");
@@ -60,6 +90,7 @@ function getDate() {
             var segmentationSrc = segmentation[i].src;
             segmentation[i].src = segmentationSrc.replace("-b", "-a");
         }
+
         var shopOrderDetailList = jsonText.shopOrderDetailList;
         var orderImgSource = shopOrderDetailList[0].bookImg;
         orderImg.src = ".." + orderImgSource;
@@ -69,17 +100,22 @@ function getDate() {
         consigneePhone.innerHTML = address.consigneePhone;
         payTime.innerHTML = dataConversion(shopOrder.paymentTime);
         totalPrice.innerHTML = shopOrder.orderPrice;
-        var payPrice = shopOrder.orderPrice - shopOrder.discountAmount;
-        payPrice.innerHTML = shopOrder.payPrice;
+        payPriceValue = shopOrder.orderPrice - shopOrder.discountAmount;
+        payPrice.innerHTML = payPriceValue;
         discountAmount.innerHTML = shopOrder.discountAmount;
-
         for (var i = 0; i < shopOrderDetailList.length; i++) {
-            bookAllInfo.innerHTML += " <div class=\"book-tip\"><a href=\"#\"><img src=" + shopOrderDetailList[i].bookImg + "></a></div>\n" +
-                "        <div class=\"book-information\">" + shopOrderDetailList[i].bookId + "</div>\n" +
-                "        <div class=\"book-information\">" + shopOrderDetailList[i].bookSellingPrice + "</div>\n" +
-                "        <div class=\"book-information\">" + shopOrderDetailList[i].quality + "</div>"
+            bookAllInfos.innerHTML += "<div class=\"book-all-info\">\n" +
+                "                <div class=\"book-tip\"><a href=\"#\" onclick='javascript:toDetail(" + shopOrderDetailList[i].bookId + ")'><img src=" + shopOrderDetailList[i].bookImg + "></a></div>\n" +
+                "                <div class=\"book-information\">" + shopOrderDetailList[i].bookId + "</div>\n" +
+                "                <div class=\"book-information\">" + shopOrderDetailList[i].bookSellingPrice + "</div>\n" +
+                "                <div class=\"book-information\">" + shopOrderDetailList[i].quality + "</div>\n" +
+                "            </div>"
+            bookQuantity += shopOrderDetailList[i].quality;
+            bookName += shopOrderDetailList[i].bookName + "    ";
         }
-
+        if (orderStateCode == 0) {
+            orderItem.innerHTML = "<a href=\"#\" class=\"wait4pay\" onclick=\"pay(" + shopOrder.orderId + ")\">等待支付</a>";
+        }
 
         var courierCompanyId = shopOrder.courierCompanyId;
         var logisticsId = shopOrder.logisticsId;
@@ -93,6 +129,10 @@ function getDate() {
     }
 }
 
+/**
+ * 物流信息获取
+ * @param url
+ */
 function refreshTransport(url) {
     if (window.XMLHttpRequest) {
         xhr = new XMLHttpRequest(); //for ie7+,FireFox,Chorme,Opera,Safai...
@@ -129,6 +169,17 @@ function getTranport() {
     }
 }
 
+//查询图书详情
+function toDetail(bookId) {
+    window.location = "bookdetail/?bookId=" + bookId;
+}
+
+/**
+ * 状态判断
+ * @param statusCode 状态码
+ * @returns {*} 状态信息
+ * @constructor
+ */
 function StatusJudge(statusCode) {
     var statusMsg;
     if (statusCode == 0)
@@ -144,6 +195,11 @@ function StatusJudge(statusCode) {
     return statusMsg;
 }
 
+/**
+ * 时间转换
+ * @param time
+ * @returns {*}
+ */
 function dataConversion(time) {
     var date = new Date(time);
     Y = date.getFullYear() + '-';
@@ -153,4 +209,8 @@ function dataConversion(time) {
     m = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + ':';
     s = (date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds());
     return (Y + M + D + h + m + s);
+}
+
+function pay(orderId) {
+    window.location="order/pay?payPriceValue=" + payPriceValue + "&bookQuantity=" + bookQuantity + "&bookName=" + bookName + "&orderId=" + orderId;
 }

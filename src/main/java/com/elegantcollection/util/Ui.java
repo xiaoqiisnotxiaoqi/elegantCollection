@@ -1,11 +1,9 @@
 package com.elegantcollection.util;
 
 import com.elegantcollection.entity.Customer;
-import com.elegantcollection.entity.Customer;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
@@ -21,7 +19,15 @@ public class Ui {
     //跳转图书列表
     @RequestMapping("allbooks")
     public String ui1() {
+        System.out.println("★★★★★★★★★★★★★★★★--跳转到allbooks--★★★★★★★★★★★★★★★");
         return "allbooks";
+
+    }
+
+    //    测试
+    @RequestMapping("my")
+    public String ui6() {
+        return "My_address";
 
     }
 
@@ -69,9 +75,11 @@ public class Ui {
         return "order_detail";
     }
 
-    @RequestMapping("pay")
-    public String pay() {
-        return "pay";
+    @RequestMapping("showOrderDetail0")
+    public String ui2OrderDetail0(Integer out_trade_no, String trade_no, HttpServletRequest request) {
+
+        request.getSession().setAttribute("orderId", out_trade_no);
+        return "order_detail";
     }
 
     @RequestMapping("post")
@@ -99,7 +107,8 @@ public class Ui {
     }
 
     @RequestMapping("review")
-    public String review() {
+    public String review(HttpServletRequest request, Integer postId) {
+        request.getSession().setAttribute("postId", postId);
         return "reviewTheDetails";
     }
 
@@ -128,4 +137,14 @@ public class Ui {
     public String uiu(){
         return "findpwd";
     }
+
+    /**
+     * 跳转页面至 书评帖搜索结过页面
+     * @return
+     */
+    @RequestMapping("searchThrough")
+    public String postSearch(){
+        return "postSearch";
+    }
+
 }

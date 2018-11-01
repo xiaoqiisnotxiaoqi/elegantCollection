@@ -26,7 +26,7 @@ public class BookCategoryController {
      * @return 二级类别集合
      */
     @GetMapping("getcategory")
-    public List<BookCategory> getCategoryByNull(){
+    public List<BookCategory> getCategoryByNull() {
         List<BookCategory> list = this.bookCategoryService.queryBookCategoryByUpIdNull();
         return list;
     }
@@ -40,9 +40,9 @@ public class BookCategoryController {
     public PageModel<Book> getBookByTotal(Integer page){
         Integer pagecode = page;
         PageModel<Book> pageModel = new PageModel<>();
-        if(pagecode == null){
+        if (pagecode == null) {
             pageModel.setCurrentPageCode(1);
-        }else {
+        } else {
             pageModel.setCurrentPageCode(pagecode);
         }
         pageModel.setPageSize(10);
@@ -63,9 +63,9 @@ public class BookCategoryController {
     public PageModel<Book> getBookByLastMonth(Integer page){
         Integer pagecode = page;
         PageModel<Book> pageModel = new PageModel<>();
-        if(pagecode == null){
+        if (pagecode == null) {
             pageModel.setCurrentPageCode(1);
-        }else {
+        } else {
             pageModel.setCurrentPageCode(pagecode);
         }
         pageModel.setPageSize(20);
@@ -85,14 +85,12 @@ public class BookCategoryController {
      */
     @GetMapping("getbooklastmonthcategory")
     public PageModel<Book> getBookByLastMonthCategory(Integer categoryId,Integer page){
-        System.out.println("cid ="+categoryId);
-        System.out.println("page ="+page);
         Integer id = categoryId;
         Integer pagecode = page;
         PageModel<Book> pageModel = new PageModel<>();
-        if(pagecode == null){
+        if (pagecode == null) {
             pageModel.setCurrentPageCode(1);
-        }else {
+        } else {
             pageModel.setCurrentPageCode(pagecode);
         }
         pageModel.setPageSize(20);
@@ -100,7 +98,7 @@ public class BookCategoryController {
         pageModel.setTotalPages(pageModel.getTotalRecord() % pageModel.getPageSize() == 0 ? pageModel.getTotalRecord()
                 / pageModel.getPageSize() : pageModel.getTotalRecord() / pageModel.getPageSize() + 1);
         pageModel.setStartRecord((pageModel.getCurrentPageCode() - 1) * pageModel.getPageSize());
-        pageModel = this.bookService.queryBookByBookSalesLastMonthAndBookCategory(id,pageModel);
+        pageModel = this.bookService.queryBookByBookSalesLastMonthAndBookCategory(id, pageModel);
         return pageModel;
     }
 }

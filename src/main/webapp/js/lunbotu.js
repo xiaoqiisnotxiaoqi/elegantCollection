@@ -46,7 +46,7 @@ window.onload = function () {
             }
         }
 
-        go()
+        go();
 
     }
 
@@ -115,8 +115,163 @@ window.onload = function () {
     container.onmouseout = play
     //自动切换
     play();
+    indexData();
+
+}
+
+//点击分类,跳转
+function clickCate(ele) {
+    sessionStorage.setItem("categoryId", ele.firstChild.name);
+    window.location = "allbooks";
+
+}
+
+//    渲染首页数据
+function indexData() {
+    var xhr = null;
+    if (window.XMLHttpRequest) {
+        xhr = new XMLHttpRequest(); //for ie7+,FireFox,Chorme,Opera,Safai...
+    }
+    else {
+        xhr = new ActiveXObject('Microsoft.XMLHTTP');//for ie6
+    }
+    if (xhr != null) {
+        xhr.open("GET", "book/index", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;");
+        xhr.onreadystatechange = callFun;
+        xhr.send();
+    } else {
+        alert("不能创建XMLHttpRequest对象实例");
+    }
+
+    function callFun() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            console.log(xhr.responseText);
+            var jsObj = JSON.parse(xhr.responseText);
+
+            // 渲染新书上架数据
+            var classList = document.getElementsByClassName("col-md-3");
+            var newBookList = jsObj.data.bookList0;
+            for (let i = 0; i < 16; i++) {
+                classList[i].innerHTML = "  <a href=\"bookdetail/?bookId=" + newBookList[i].bookId + "\"> <img src=\"" + newBookList[i].bookImg + " \"width=150px height=150px>\n" +
+                    "                    <div class=\"new-title-word\">" + newBookList[i].bookName + "</div>\n</a>" +
+                    "                    <div class=\"new-author\">" + newBookList[i].authorId + "</div>\n" +
+                    "                    <div class=\"cost-price-icon\">¥</div>\n" +
+                    "                    <div class=\"cost-price\">" + newBookList[i].bookSellingPrice + "</div>\n" +
+                    "                    <div class=\"original-price-icon\">¥</div>\n" +
+                    "                    <div class=\"original-price\">" + newBookList[i].bookMarkedPrice + "</div> ";
+            }
+
+
+            //    渲染总榜
+            writeData(document.getElementById("all"), jsObj.data.bookList1);
+            //    渲染其他榜
+            writeData(document.getElementById("childbook1"), jsObj.data.bookList2);
+            writeData(document.getElementById("childbook2"), jsObj.data.bookList3);
+            writeData(document.getElementById("childbook3"), jsObj.data.bookList4);
+            writeData(document.getElementById("childbook4"), jsObj.data.bookList5);
+
+            //渲染作者
+            var authorList = jsObj.data.authorList;
+            document.getElementById("first-author").innerHTML = "<div class=\"col-md-1\">\n" +
+                "            <div class=\"num-1\">1</div>\n" +
+                "            <div class=\"num-st\">st</div>\n" +
+                "        </div>\n" +
+                "        <div class=\"col-md-2 hot-author-img\">\n" +
+                "            <img src=\"" + authorList[0].authorImg + "\" alt=\"\">\n" +
+                "        </div>\n" +
+                "        <div class=\"col-md-8\">\n" +
+                "            <div class=\"row\" >\n" +
+                "                <div class=\"col-md-12 author-name\">\n" +
+                "                    " + authorList[0].authorName + "\n" +
+                "                </div>\n" +
+                "                <div class=\"col-md-12\">\n" +
+                "                    <div class=\"author-content\">\n" +
+                "                        <p class=\"author-content-p\">" + authorList[0].authorIntro + "</p>\n" +
+                "                    </div>\n" +
+                "                </div>\n" +
+                "            </div>\n" +
+                "        </div>";
+            var anthorBookList = jsObj.data.anthorBookList;
+            document.getElementById("first-author-books").innerHTML = "";
+            for (var i = 0; i < anthorBookList.length; i++) {
+                document.getElementById("first-author-books").innerHTML += "<div class=\"col-lg-3\">\n" +
+                    "        <img src=\"" + anthorBookList[i].bookImg + "\" alt=\"\" width='150px' height='150px'>\n" +
+                    "        <div class=\"work-title\">" + anthorBookList[i].bookName + "</div>\n" +
+                    "        <div class=\"work-cost-icon\">￥</div>\n" +
+                    "        <div class=\"work-cost-price\">" + anthorBookList[i].bookSellingPrice + "</div>\n" +
+                    "        <div class=\"work-original-icon\">￥</div>\n" +
+                    "        <div class=\"work-original-price\">" + anthorBookList[i].bookMarkedPrice + "</div>\n" +
+                    "    </div>";
+            }
+
+            for (var i = 0; i < authorList.length; i++) {
+                document.getElementById("author-sort").innerHTML += "<div class=\"col-md-12 author-sort-content\">\n" +
+                    "        <div class=\"author-sort-num\">" + (i + 1) + "</div>\n" +
+                    "        <div class=\"author-sort-name\">" + authorList[i].authorName + "</div>\n" +
+                    "    </div>";
+            }
+
+
+            //    渲染仨书单
+            document.getElementById("orders").innerHTML = "";
+            var orders = jsObj.data.bookOrders;
+            for (var i = 0; i < orders.length; i++) {
+                document.getElementById("orders").innerHTML += "<div class=\"col-lg-4 book-order-content\">\n" +
+                    "        <img src=\"" + orders[i].orderImg + "\" alt=\"\">\n" +
+                    "    </div>";
+            }
+
+        }
+
+    }
 }
 
 
+/**
+ *
+ */
+function writeData(ele, bookList) {
 
+    ele.innerHTML = "";
+    //渲染排行第一的数据
+    ele.innerHTML += "<div class=\"row hot-infor\">\n" +
+        "                    <div class=\"col-md-1 hot-num\">\n" +
+        "                        1\n" +
+        "                    </div>\n" +
+        "                    <div class=\"col-md-5 hot-img\">\n" +
+        "                        <img src=\"" + bookList[0].bookImg + "\" alt=\"\">\n" +
+        "                    </div>\n" +
+        "                    <div class=\"col-md-4\">\n" +
+        "                        <div class=\"hot-book-name\"><a href=\"/bookdetail/?bookId=" + bookList[0].bookId + "\">" + bookList[0].bookName + "</a></div>\n" +
+        "                        <div class=\"hot-cost-price-icon\">￥</div>\n" +
+        "                        <div class=\"hot-cost-price\">" + bookList[0].bookSellingPrice + "</div>\n" +
+        "                        <div class=\"hot-original-price-icon\">￥</div>\n" +
+        "                        <div class=\"hot-original-price\">" + bookList[0].bookSellingPrice + "</div>\n" +
+        "                        <div class=\"hot-comment\">\n" +
+        "                            <a href=\"\">10</a>\n" +
+        "                            <div>条评论</div>\n" +
+        "                        </div>\n" +
+        "                    </div>\n" +
+        "                    <div class=\"hot-xian\"></div>\n" +
+        "                </div>";
+    //渲染2-10的数据
+    for (var i = 1; i < bookList.length; i++) {
+        var bookName = bookList[i].bookName;
+        if (bookList[i].bookName.length > 16) {
+            bookName = bookList[i].bookName.substring(0, 16);
+        }
+        ele.innerHTML += "<div class=\"row hot-normal\">\n" +
+            "                    <div class=\" col-md-1 hot-normal-num\">" + (i + 1) + "</div>\n" +
+            "                    <a href=\"/bookdetail/?bookId=" + bookList[i].bookId + "\">" + bookName + "</a>\n" +
+            "                    <div class=\"hot-normal-xian\"></div>\n" +
+            "                </div>";
+    }
+
+}
+
+function clickCategoryName(ele) {
+
+
+}
 

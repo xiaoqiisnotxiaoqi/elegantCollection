@@ -5,6 +5,7 @@ import com.elegantcollection.service.BookCategoryService;
 import com.elegantcollection.service.BookService;
 import com.elegantcollection.service.DiscountService;
 import com.elegantcollection.util.PageModel;
+import com.elegantcollection.util.ServerResponse;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -30,64 +31,9 @@ public class BookController {
      * @return 结果
      */
     @GetMapping("index")
-    public HashMap index() {
+    public ServerResponse<HashMap> index() {
         System.out.println("!!!!!!!!!!!!!!!!!!!!查询首页数据!!!!!!!!!!!!!!!!!!!");
-//        用来设置查询前十条
-        PageModel pageModel = new PageModel();
-        pageModel.setPageSize(16);
-        pageModel.setCurrentPageCode(1);
-        pageModel.setStartRecord(0);
-        //获取新书上架(上架时间排序,前16本)
-        HashMap condition0 = new HashMap();
-        condition0.put("orderBy", "book_sales_total desc");
-        condition0.put("pageModel", pageModel);
-        List<BookWithBLOBs> bookList0 = bookService.queryByCondition(condition0);
-
-//        获取排行
-//        获取总排行
-        HashMap condition1 = new HashMap();
-        condition1.put("orderBy", "book_sales_total desc");
-        condition1.put("pageModel", pageModel);
-        List<BookWithBLOBs> bookList1 = bookService.queryByCondition(condition1);
-//        获取文艺分类排行
-        HashMap condition2 = new HashMap();
-        condition2.put("categortId", 10008);
-        condition2.put("orderBy", "book_sales_total desc");
-        condition2.put("pageModel", pageModel);
-        List<BookWithBLOBs> bookList2 = bookService.queryByCondition(condition2);
-//      获取人文社科排行
-        HashMap condition3 = new HashMap();
-        condition3.put("categortId", 10013);
-        condition3.put("orderBy", "book_sales_total desc");
-        condition3.put("pageModel", pageModel);
-        List<BookWithBLOBs> bookList3 = bookService.queryByCondition(condition3);
-//      获取生活排行
-        HashMap condition4 = new HashMap();
-        condition4.put("categortId", 10022);
-        condition4.put("orderBy", "book_sales_total desc");
-        condition4.put("pageModel", pageModel);
-        List<BookWithBLOBs> bookList4 = bookService.queryByCondition(condition4);
-//      获取科技排行
-        HashMap condition5 = new HashMap();
-        condition5.put("categortId", 10028);
-        condition5.put("orderBy", "book_sales_total desc");
-        condition5.put("pageModel", pageModel);
-        List<BookWithBLOBs> bookList5 = bookService.queryByCondition(condition5);
-//      获取前三个书单
-        List<BookOrder> bookOrders = bookService.queryBookOrder();
-
-        //获取推荐作家
-
-
-        HashMap result = new HashMap();
-        result.put("bookList0", bookList1);
-        result.put("bookList1", bookList1);
-        result.put("bookList2", bookList1);
-        result.put("bookList3", bookList1);
-        result.put("bookList4", bookList1);
-        result.put("bookList5", bookList1);
-        result.put("bookOrders", bookOrders);
-        return result;
+        return bookService.queryIndexData();
     }
 
 
@@ -155,10 +101,11 @@ public class BookController {
      * @return 结果, 包括图书列表, 子分类列表, 页码信息等
      */
     @GetMapping("search")
-    public HashMap test(String keyWord, Integer bookStatus, String bookLanguage, Float minPrice,
-                        Float maxPrice, Integer categoryId, Integer pageCode, String orderBy,
-                        Integer isDiscount) {
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~调用test");
+    public HashMap search(String keyWord, Integer bookStatus, String bookLanguage, Float minPrice,
+                          Float maxPrice, Integer categoryId, Integer pageCode, String orderBy,
+                          Integer isDiscount, HttpServletRequest request) {
+
+        System.out.println("★★★★★★★★★★★★★★★★--调用test--★★★★★★★★★★★★★★★");
         System.out.println("接收到的参数:keyWord=" + keyWord + ",bookStatus=" + bookStatus + ",bookLanguage=" + bookLanguage + ",minPrice=" + minPrice + ",maxPrice=" + maxPrice + ",categoryID=" + categoryId + ",orderBy=" + orderBy + ",isDiscount=" + isDiscount + ",pageCode=" + pageCode);
 //        此集合表示封装查询图书要用到的所有参数
         HashMap conditions = new HashMap();
@@ -188,7 +135,7 @@ public class BookController {
                     }
 //                    遍历categoryId集合,查询出每个categoryId对应的图书集合,并遍历图书集合,把图书Id放入BookIdList
                     for (Integer bookCategoryId : bookCategoryIdList) {
-                        List<Book> bookList = bookService.queryByCategoryId(categoryId);
+                        List<Book> bookList = bookService.queryByCategoryId(bookCategoryId);
                         if (bookList != null) {
                             for (Book book : bookList) {
                                 bookIdList.add(book.getBookId());
@@ -241,6 +188,58 @@ public class BookController {
         return result;
     }
 
+
+    /**
+     * 从图书详情添加商品到购物车
+     *
+     * @param bookId  图书ID
+     * @param count   数量
+     * @param request 获取用户ID
+     * @return 受影响行数
+     */
+    @GetMapping("add2Cart")
+    public ServerResponse add2Cart(Integer bookId, Integer count, HttpServletRequest request) {
+        Integer custId = ((Customer) request.getSession().getAttribute("customer")).getCustId();
+        ServerResponse serverResponse = bookService.add2Cart(custId, bookId, count);
+        return serverResponse;
+    }
+
+    /**
+     * xml文件版本的多条件动态分页查询
+     *
+     * @param keyWord      查询的关键字
+     * @param bookStatus   是否'只看有货'
+     * @param bookLanguage 语言
+     * @param minPrice     最小价格
+     * @param maxPrice     最大价格
+     * @param categoryId   分类ID
+     * @param pageCode     当前页码
+     * @param orderBy      排序条件
+     * @param isDiscount   是否'只看优惠'
+     * @param zhekou       折扣(0.5/0.6/0.7...)
+     * @param request      用来获取session
+     * @return 图书集合
+     */
+    @GetMapping("test")
+    public ServerResponse sjTest(String keyWord, Integer bookStatus, String bookLanguage, Float minPrice,
+                                 Float maxPrice, Integer categoryId, Integer pageCode, String orderBy,
+                                 Integer isDiscount, Float zhekou, HttpServletRequest request) {
+//      封装查询条件
+        HashMap conditions = new HashMap();
+        conditions.put("keyWord", keyWord);
+        conditions.put("bookStatus", bookStatus);
+        conditions.put("bookLanguage", bookLanguage);
+        conditions.put("minPrice", minPrice);
+        conditions.put("maxPrice", maxPrice);
+        conditions.put("categoryId", categoryId);
+        conditions.put("pageCode", pageCode);
+        conditions.put("orderBy", orderBy);
+        conditions.put("isDiscount", isDiscount);
+        conditions.put("zhekou", zhekou);
+
+//        返回结果
+        return bookService.sjTest(conditions);
+    }
 
 }
 

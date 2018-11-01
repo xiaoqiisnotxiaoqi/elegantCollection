@@ -27,6 +27,8 @@ function getDetail() {
             var bookImgList = jsObj.bookImgList;
             var pageModel = jsObj.evaluatePageModel;
             document.getElementById("book-imgs-box").innerHTML = " ";
+            document.getElementById("bookId").value = book.bookId;
+
             for (var i = 0; i < bookImgList.length; i++) {
                 document.getElementById("book-imgs-box").innerHTML += "<div class=\"other-pic\"><img  onmouseover=changePic(this) src=\" " + bookImgList[i].imgAddress + "\"></div>";
 
@@ -54,6 +56,7 @@ function getDetail() {
 
 
             document.getElementById("nav-bookcategory").innerText = "" + jsObj.mainCategory.categoryName + "";
+
             document.getElementById("detail-category").innerText = "" + jsObj.mainCategory.categoryName + "";
             document.getElementById("nav-bookname").innerText = book.bookName;
 
@@ -67,7 +70,7 @@ function getDetail() {
             //    渲染所有评论
             var evaluateList = pageModel.modelList;
             document.getElementById("pingjia-ul").innerHTML = "";
-            for (let i = 0; i < evaluateList.length; i++) {
+            for (var i = 0; i < evaluateList.length; i++) {
                 document.getElementById("pingjia-ul").innerHTML += "           <li class=\"pingjias\">\n" +
                     "                    <div class=\"customerInfo\">\n" +
                     "                        <img src=\" \" class=\"profile\"/>\n" +
@@ -100,9 +103,6 @@ function getDetail() {
                 // }
 
 
-
-
-
             }
 
 
@@ -120,6 +120,7 @@ function getDetail() {
         }
     }
 }
+
 //数量加减
 function add() {
     document.getElementById("booknum").value++;
@@ -166,6 +167,37 @@ function page(ele) {
     } else
         document.getElementById("currentPageCode").name = ele.value
 
-    getDetail() ;
+    getDetail();
 }
 
+// 添加到购物车
+function add2Cart(btn) {
+    var bookId = document.getElementById("bookId").value;
+    var count = document.getElementById("booknum").value;
+
+    var xhr1 = null;
+    if (window.XMLHttpRequest) {
+        xhr1 = new XMLHttpRequest(); //for ie7+,FireFox,Chorme,Opera,Safai...
+    } else {
+        xhr1 = new ActiveXObject('Microsoft.XMLHTTP');//for ie6
+    }
+    if (xhr1 != null) {
+        var url = "?bookId=" + bookId + "&count=" + count
+
+        xhr1.open("GET", "/book/add2Cart" + url, true);
+        xhr1.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;");
+        xhr1.onreadystatechange = add2CartResp;
+        xhr1.send();
+    } else {
+        alert("不能创建XMLHttpRequest对象实例");
+    }
+
+    function add2CartResp() {
+        if (xhr1.readyState == 4 && xhr1.status == 200) {
+            var jsObj = JSON.parse(xhr1.responseText);
+            alert(jsObj.msg);
+        }
+    }
+
+
+}

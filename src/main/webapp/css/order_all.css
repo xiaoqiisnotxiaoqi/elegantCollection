@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(245, 245, 245);
+    background-color: white;
 }
 
 * {
@@ -16,15 +16,25 @@ li {
     display: inline-block;
     list-style: none;
 }
-
+th{
+    color: gray;
+}
+td{
+    text-align: center;
+}
 .block-segmentation {
     display: inline-block;
-    background-color: rgb(255, 255, 255);
     width: 100%;
     height: 30px;
 }
 
+.order-introduction{
+    border: 1px rgb(205, 205, 205) solid;
+    text-align: left;
+}
+
 .order-introduction span {
+    color: gray;
     display: inline-block;
     margin: 3px 20px;
 }
@@ -38,6 +48,8 @@ li {
     border: 1px rgb(205, 205, 205) solid;
     background-color: rgb(255, 255, 255);
 }
+
+
 
 .order-tip {
     background-color: rgb(255, 255, 255);
@@ -53,6 +65,7 @@ li {
 }
 
 .td-segmentation {
+    background-color: white;
     width: 100%;
     height: 30px;
 }
@@ -62,6 +75,12 @@ li {
     border-collapse: collapse;
 }
 
+.order-time-filter{
+    border: none;
+    font-weight: bold;
+    font-size: 11px;
+    color: gray;
+}
 .order-state-list {
     display: inline-block;
     width: 70%;
@@ -73,6 +92,9 @@ li {
     display: inline-block;
     width: 20%;
     height: 40px;
+}
+.order-state-filter a{
+    color: black;
 }
 
 .order-state-filter a:visited {
@@ -115,6 +137,10 @@ li {
     height: 200px;
 }
 
+.order-one{
+    border: 1px rgb(205, 205, 205) solid;
+}
+
 .book-msg {
     display: inline-block;
     width: 80%;
@@ -141,4 +167,13 @@ li {
     display: inline-block;
     float: right;
     width: 40px;
+}
+.info-body{
+    width: 70%;
+    margin: 0 auto;
+    background-color: rgb(245, 245, 245);
+}
+
+.page-number{
+    float: left;
 }

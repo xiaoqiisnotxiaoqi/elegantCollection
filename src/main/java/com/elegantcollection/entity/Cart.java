@@ -5,7 +5,8 @@ import java.util.Date;
 
 /**
  * cart
- * @author 
+ *
+ * @author
  */
 public class Cart implements Serializable {
     /**
@@ -47,6 +48,21 @@ public class Cart implements Serializable {
      * 冗余2
      */
     private String more2;
+
+    public Cart() {
+    }
+
+    //有参构造函数(孙健添加)
+    public Cart(Integer cartId, Integer custId, Integer bookId, Integer quality, Date addTime, Integer cartStatus, String more1, String more2) {
+        this.cartId = cartId;
+        this.custId = custId;
+        this.bookId = bookId;
+        this.quality = quality;
+        this.addTime = addTime;
+        this.cartStatus = cartStatus;
+        this.more1 = more1;
+        this.more2 = more2;
+    }
 
     private static final long serialVersionUID = 1L;
 
@@ -127,13 +143,13 @@ public class Cart implements Serializable {
         }
         Cart other = (Cart) that;
         return (this.getCartId() == null ? other.getCartId() == null : this.getCartId().equals(other.getCartId()))
-            && (this.getCustId() == null ? other.getCustId() == null : this.getCustId().equals(other.getCustId()))
-            && (this.getBookId() == null ? other.getBookId() == null : this.getBookId().equals(other.getBookId()))
-            && (this.getQuality() == null ? other.getQuality() == null : this.getQuality().equals(other.getQuality()))
-            && (this.getAddTime() == null ? other.getAddTime() == null : this.getAddTime().equals(other.getAddTime()))
-            && (this.getCartStatus() == null ? other.getCartStatus() == null : this.getCartStatus().equals(other.getCartStatus()))
-            && (this.getMore1() == null ? other.getMore1() == null : this.getMore1().equals(other.getMore1()))
-            && (this.getMore2() == null ? other.getMore2() == null : this.getMore2().equals(other.getMore2()));
+                && (this.getCustId() == null ? other.getCustId() == null : this.getCustId().equals(other.getCustId()))
+                && (this.getBookId() == null ? other.getBookId() == null : this.getBookId().equals(other.getBookId()))
+                && (this.getQuality() == null ? other.getQuality() == null : this.getQuality().equals(other.getQuality()))
+                && (this.getAddTime() == null ? other.getAddTime() == null : this.getAddTime().equals(other.getAddTime()))
+                && (this.getCartStatus() == null ? other.getCartStatus() == null : this.getCartStatus().equals(other.getCartStatus()))
+                && (this.getMore1() == null ? other.getMore1() == null : this.getMore1().equals(other.getMore1()))
+                && (this.getMore2() == null ? other.getMore2() == null : this.getMore2().equals(other.getMore2()));
     }
 
     @Override

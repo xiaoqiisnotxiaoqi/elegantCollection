@@ -5,8 +5,10 @@ import com.elegantcollection.entity.Post;
 import com.elegantcollection.service.BlockService;
 import com.elegantcollection.service.PostService;
 import com.elegantcollection.util.PageModel;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,17 +30,17 @@ public class PostController {
         this.blockService = blockService;
     }
 
-@GetMapping("add")
-public String add(String postTitle,String postText,HttpServletRequest request){
+@PostMapping("add")
+public String add(@Param("postTitle") String postTitle, @Param("postContext")String postContext, HttpServletRequest request){
     Integer custId=10002;//(Integer) request.getSession().getAttribute("custId");
     Integer blockId=10002;//(Integer) request.getSession().getAttribute("blockId");
         Post post=new Post();
         post.setCustId(custId);
         post.setPostPetname(String.valueOf(blockId));
         post.setPostTitle(postTitle);
-        post.setPostText(postText);
+        post.setPostText(postContext);
         post.setPostTime(new Date());
-        String.valueOf(postService.add(post));
+        String.valueOf(postService.add(post,request));
         return "post";
 }
 
@@ -81,7 +83,7 @@ public String add(String postTitle,String postText,HttpServletRequest request){
     PageModel<Post> queryPost(HttpServletRequest request, Integer currentPageCode) {
         Integer blockId=10002;//(Integer) request.getSession().getAttribute("blockId");
         initializePageModel(currentPageCode);
-        pageModel.setPageSize(1);
+        pageModel.setPageSize(10);
         Integer size = postService.queryPost4Size(blockId);
         pageModel.setTotalRecord(size);
         initializeTotalPages(size);

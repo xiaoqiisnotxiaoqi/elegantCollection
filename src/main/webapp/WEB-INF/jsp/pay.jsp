@@ -9,10 +9,13 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>雅致藏书--订单结算页</title>
+    <title>雅致藏书--订单结算</title>
     <link rel="stylesheet" href="../../css/pay.css">
 </head>
 <body>
+<%--引入头部--%>
+<iframe src="${pageContext.request.contextPath}/top" style="width: 100%; height: 220px;border: none;frameborder:0;"></iframe>
+<div id="all-body">
 <div class="order-preview">
     <div class="address-options">
         <span class="preview-tip">收货人选择</span>
@@ -24,14 +27,14 @@
     <div class="block-segmentation2"></div>
     <div class="payment-ways">
         <span class="preview-tip">支付方式</span>
-        <div class="payment-option">支付宝</div>
+        <div class="payment-option" id="payment-option">支付宝</div>
     </div>
     <div class="block-segmentation2"></div>
     <div class="book-list">
         <span class="preview-tip">送货清单</span>
         <div class="transport" id="transport">
             <div class="list-tip">配送</div>
-            <input type="date" class="transport-date" name="transport-date"/>
+            <input type="date" class="transport-date" name="transport-date" id="transport-date"/>
             <div class="block-segmentation2"></div>
             <span>自签收后7天内退货，15天内换货，可享1次上门取件服务</span>
             <div class="block-segmentation2"></div>
@@ -39,7 +42,6 @@
         </div>
         <div class="order-simple-info" id="order-simple-info">
             <div class="list-tip">书籍信息</div>
-
 
         </div>
 
@@ -51,7 +53,7 @@
             <span class="dif-price-info">总商品金额：</span>
         </div>
         <div class="price-block">
-            <span class="dif-price" id="discount-price">￥ </span>
+            <span class="dif-price" id="discount-price"> </span>
             <span class="dif-price-info">优惠金额：</span>
         </div>
         <div class="price-block">
@@ -66,9 +68,10 @@
     <span class="total-price" id="pay-price"></span>
     <span class="total-price-info">应付总额：</span>
 </div>
-
 <input type="button" class="pay-button" id="pay-button" value="提交订单">
+</div>
 <script src="../../js/pay.js"></script>
+<jsp:include page="bottom.jsp"/>
 </body>
 </html>
 </html>

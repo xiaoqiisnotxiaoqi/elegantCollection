@@ -52,7 +52,7 @@
     %>
 
     <span class="top-myEle" onclick="topCustEle()">我的雅致</span>
-    <span class="top-cart" onclick="topCart()">购物车</span>
+    <span class="top-cart" onclick="loginOrCart()">购物车</span>
     <span class="top-order" onclick="myOrder()">订单</span>
     <span class="top-service" onclick="topService()">联系客服</span>
     <span id="service-news"></span>
@@ -245,7 +245,7 @@
                 <span>满减优惠折扣:</span><span id="price2"></span>
             </div>
             <div class="totalMoney">共计: <strong class="total_text">0.00</strong></div>
-            <div class="calBtn"><a href="javascript:void(0);" id="settle-account">结算</a></div>
+            <div class="calBtn"  onclick="settleAccount()"><a href="javascript:void(0);" id="settle-account">结算</a></div>
         </div>
     </div>
 

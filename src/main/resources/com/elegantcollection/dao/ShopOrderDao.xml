@@ -76,8 +76,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    order_id, order_number, cust_id, order_create_time, order_price, order_status, evaluate_status, 
-    address_id, discount_amount, payment_time, outlibrary_time, courier_company_id, logistics_id, 
+    order_id, order_number, cust_id, order_create_time, order_price, order_status, evaluate_status,
+    address_id, discount_amount, payment_time, outlibrary_time, courier_company_id, logistics_id,
     expectation_time
   </sql>
   <select id="selectByExample" parameterType="com.elegantcollection.entity.ShopOrderExample" resultMap="BaseResultMap">
@@ -119,18 +119,18 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.elegantcollection.entity.ShopOrder">
-    insert into shop_order (order_id, order_number, cust_id, 
-      order_create_time, order_price, order_status, 
-      evaluate_status, address_id, discount_amount, 
-      payment_time, outlibrary_time, courier_company_id, 
+    insert into shop_order (order_id, order_number, cust_id,
+      order_create_time, order_price, order_status,
+      evaluate_status, address_id, discount_amount,
+      payment_time, outlibrary_time, courier_company_id,
       logistics_id, expectation_time)
-    values (#{orderId,jdbcType=INTEGER}, #{orderNumber,jdbcType=BIGINT}, #{custId,jdbcType=INTEGER}, 
-      #{orderCreateTime,jdbcType=TIMESTAMP}, #{orderPrice,jdbcType=REAL}, #{orderStatus,jdbcType=INTEGER}, 
-      #{evaluateStatus,jdbcType=INTEGER}, #{addressId,jdbcType=INTEGER}, #{discountAmount,jdbcType=VARCHAR}, 
-      #{paymentTime,jdbcType=TIMESTAMP}, #{outlibraryTime,jdbcType=TIMESTAMP}, #{courierCompanyId,jdbcType=VARCHAR}, 
+    values (#{orderId,jdbcType=INTEGER}, #{orderNumber,jdbcType=BIGINT}, #{custId,jdbcType=INTEGER},
+      #{orderCreateTime,jdbcType=TIMESTAMP}, #{orderPrice,jdbcType=REAL}, #{orderStatus,jdbcType=INTEGER},
+      #{evaluateStatus,jdbcType=INTEGER}, #{addressId,jdbcType=INTEGER}, #{discountAmount,jdbcType=VARCHAR},
+      #{paymentTime,jdbcType=TIMESTAMP}, #{outlibraryTime,jdbcType=TIMESTAMP}, #{courierCompanyId,jdbcType=VARCHAR},
       #{logisticsId,jdbcType=VARCHAR}, #{expectationTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.elegantcollection.entity.ShopOrder">
+  <insert id="insertSelective" parameterType="com.elegantcollection.entity.ShopOrder" useGeneratedKeys="true" keyProperty="orderId">
     insert into shop_order
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="orderId != null">

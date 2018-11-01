@@ -21,4 +21,12 @@ public class RandomNumberGeneration {
     }
 
 
+    /**
+     * 随机生成四位数,用于 短信验证
+     * @return 随机的四位数字
+     */
+    public static Integer randomNumber(){
+       return  (int)(Math.random()*9000+1000);
+    }
+
 }
