@@ -68,7 +68,7 @@ public class BookCategoryController {
         } else {
             pageModel.setCurrentPageCode(pagecode);
         }
-        pageModel.setPageSize(20);
+        pageModel.setPageSize(10);
         pageModel.setTotalRecord(this.bookService.queryCountAll());
         pageModel.setTotalPages(pageModel.getTotalRecord() % pageModel.getPageSize() == 0 ? pageModel.getTotalRecord()
                 / pageModel.getPageSize() : pageModel.getTotalRecord() / pageModel.getPageSize() + 1);
@@ -93,7 +93,7 @@ public class BookCategoryController {
         } else {
             pageModel.setCurrentPageCode(pagecode);
         }
-        pageModel.setPageSize(20);
+        pageModel.setPageSize(10);
         pageModel.setTotalRecord(this.bookService.queryCountOne(id));
         pageModel.setTotalPages(pageModel.getTotalRecord() % pageModel.getPageSize() == 0 ? pageModel.getTotalRecord()
                 / pageModel.getPageSize() : pageModel.getTotalRecord() / pageModel.getPageSize() + 1);

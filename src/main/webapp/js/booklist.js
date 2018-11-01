@@ -39,7 +39,6 @@ function refreshBookOrderDetail(url_getbookorderdetail){
 }
 function loadBookOrderDetail() {
     if (xrh.readyState == 4 && xrh.status == 200) {
-        alert(xrh.readyState + xrh.status);
         var result = JSON.parse(xrh.responseText);
         var shen = document.getElementById("shen");
         shen.innerHTML = "";
