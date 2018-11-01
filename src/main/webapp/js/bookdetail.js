@@ -56,6 +56,7 @@ function getDetail() {
 
 
             document.getElementById("nav-bookcategory").innerText = "" + jsObj.mainCategory.categoryName + "";
+            document.getElementById("info-cateName").innerText = "" + jsObj.mainCategory.categoryName + "";
 
             document.getElementById("detail-category").innerText = "" + jsObj.mainCategory.categoryName + "";
             document.getElementById("nav-bookname").innerText = book.bookName;
