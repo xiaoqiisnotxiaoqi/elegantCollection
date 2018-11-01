@@ -15,6 +15,7 @@
 }
 
 .classify-content-title {
+    cursor:pointer;
     color: #ff2832;
     font-weight: 800;
 }
@@ -30,7 +31,7 @@
 }
 
 .classify-con {
-
+    cursor:pointer;
     float: left;
     /*background:chocolate;*/
 }
@@ -63,7 +64,7 @@
 .trun_img {
     position: relative;
     top: -610px;
-    left: 360px;
+    left: 370px;
 }
 
 .new-trends {
@@ -195,7 +196,7 @@
 }
 
 .new-xian {
-    width: 695px;
+    width: 680px;
     height: 1px;
     background: #ff2832;
     position: relative;
@@ -707,7 +708,7 @@
     width: 1225px;
     /*background: #D45328;*/
     position: relative;
-    top: -1940px;
+    top: -2150px;
     left: 160px;
 }
 .book-order-content img{

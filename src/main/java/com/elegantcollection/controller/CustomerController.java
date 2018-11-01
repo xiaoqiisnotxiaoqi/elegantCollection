@@ -11,13 +11,16 @@ import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.imageio.ImageIO;
+import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.*;
 
 @SuppressWarnings("all")
@@ -250,6 +253,90 @@ public class CustomerController {
                 timer.cancel();
             }
         }, 15 * 60 * 1000);
+    }
+
+    /**
+     *  从前那端或的信息保存到数据库里
+     * @param customer 传入一个 customer对象
+     * @param request   服务器请求
+     * @param response   服务器做出相应
+     * @return   方法返回String
+     * @throws ServletException /500/400 错误 ruquest 回应的时候未能处理的错误异常
+     * @throws IOException  抛出异常
+     */
+
+    @PostMapping("/updatainfo")
+    public ModelAndView updatByCustNameAndGender(Customer customer, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+
+        Customer c = (Customer) request.getSession().getAttribute("customer");
+        ModelAndView mav = new ModelAndView();
+        System.out.println(customer);
+        if (c == null) {
+            request.setAttribute("messsage", "请先登录");
+            mav.setViewName("top");
+            return mav;
+
+        } else {
+            c.setCustName(customer.getCustName());
+            c.setCustGender(customer.getCustGender());
+            customerService.updataCustNameAndCustGender(c);
+            System.out.println(c);
+            mav.setViewName("user_info");
+
+            return mav;
+
+        }
+
+    }
+
+    /**
+     * 从前端获得头像以地址的方式存到数据库里
+     * @param custProfile  头像的地址
+     * @param request  服务器请求
+     * @param response  服务器做出的回应
+     *   @return 函数返回一个String 类型的值
+     * @throws ServletException  /500/400 错误 ruquest 回应的时候未能处理的错误异常
+     * @throws IOException 抛出异常
+     */
+
+
+    @PostMapping("/saveHead")
+    public String saveHead(String custProfile, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//        String p2  = request.getSession().getServletContext().getRealPath("/");
+
+        System.out.println(custProfile);//用来测试用的的 看看传进来的参数
+
+
+
+        Customer c = (Customer) request.getSession().getAttribute("customer");
+
+
+        if (c == null) {
+            return "";
+        } else {
+            c.setCustProfile(custProfile);
+            customerService.updataCustProfile(c);
+
+        }
+        return  c.getCustProfile();
+    }
+
+    /**
+     *  从前端页面获得头像
+     * @param request 向服务器请求
+     * @param response 服务器做出回应
+     * @return 返回类型
+     */
+    @PostMapping("getprofile")
+    public String getCustprofile(HttpServletRequest request,HttpServletResponse response){
+        Customer c = (Customer) request.getSession().getAttribute("customer");
+        if (c == null) {
+            return "";
+        }else {
+            return c.getCustProfile();
+        }
+
     }
 
 }

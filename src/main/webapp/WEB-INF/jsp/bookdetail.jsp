@@ -14,7 +14,9 @@
 
 </head>
 <body>
-<jsp:include page="top.jsp"/>
+<%--引入头部--%>
+<iframe src="${pageContext.request.contextPath}/top" style="width: 100%; height: 220px;border: none;frameborder:0;"></iframe>
+
 
 <input type="hidden" value="" id="bookId">
 <div id="main-box">
@@ -49,7 +51,7 @@
                 <span class="publish-spans" id="author">作者:<a href=""></a></span>
                 <span class="publish-spans" id="chubanshe">出版社:</span>
                 <span class="publish-spans" id="publish-time">出版时间:</span><br>
-                <span class="publish-spans">在<a>xxx</a>分类排行第 xx 位</span>
+                <span class="publish-spans">在<a id="info-cateName">xxx</a>分类排行第 1 位</span>
                 <span class="publish-spans" id="pinglunshu"><a href=""></a>条评论 </span>
             </div>
             <!--价格区域-->

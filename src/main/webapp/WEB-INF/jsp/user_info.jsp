@@ -5,14 +5,19 @@
 <head>
     <meta charset="UTF-8">
     <title>编辑个人信息档案</title>
-    <link rel="stylesheet" href="../css/user_info.css">
-    <script src="../js/jquery.min.js"></script>
-    <script src="../js/user_info.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/user_info.css">
+    <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/user_info.js"></script>
 </head>
 <body>
+<iframe src="${pageContext.request.contextPath}/top" style="width: 100%; border: none;
+frameborder:0;"></iframe>
+
+
 
 
 <div class="mydnew_break">
+
     您现在的位置：
     <a href="#">雅志</a> &gt;
     <span><a href="#">我的Elegant</a></span> &gt;
@@ -24,8 +29,8 @@
         <div class="mydang_left">
             <div class="mydang_left_inner">
                 <h3 class="mydang_left_title border_top0">我的长用链接
-                    <a id="DocPersonal_set" name="setting" href="#" style="font-size: 12px; color:#1A66B3;
-                    font-family: 宋体; font-weight:normal; padding-left: 40px;">设置</a>
+                    <%--<a id="DocPersonal_set" name="setting" href="#" style="font-size: 12px; color:#1A66B3;--%>
+                    <%--font-family: 宋体; font-weight:normal; padding-left: 40px;">设置</a>--%>
                 </h3>
                 <ul style="padding:0px;" class="my_href" id="myfavoriteLink"></ul>
                 <h3 class="mydang_left_title">我的交易
@@ -46,7 +51,7 @@
                 </h3>
                 <ul class="my_content" style="display:block;" id="display620">
 
-                    <li><a class="" target="_parent" href="#" name="mycoupons">我的礼券</a></li>
+
 
                     <li><a class="" target="_parent" href="#" name="points_index_list">我的积分</a></li>
                 </ul>
@@ -55,7 +60,7 @@
                 </h3>
                 <ul class="my_content" style="display:block;" id="display630">
                     <li><a class="" target="_parent" href="#" name="re_list">申请/查询退换货</a></li>
-                    <li><a class="" target="_parent" href="#" name="myinvoice">补开发票</a></li>
+
                 </ul>
                 <h3 class="mydang_left_title">个人中心
                     <a class="slide_up" id="class640" href="javascript:click_a('class640','display640')"></a>
@@ -399,11 +404,11 @@
                             <input name="v_date" type="hidden" id="v_date" value="">
                         </div>
                         <div class="list_edit">
-                            <input type="text" name="custName" id="Text_petname" class=" nickname"
+                            <input type="text" name="custName" id="Text_petname" class="nickname"
                                    onfocus="changeclass(div_1)" onblur="cue_chk()">
 
                             <span class="c_gray" id="info_1"><p>您的昵称可以由小写英文字母、中文、数字组成，</p>长度4－20个字符，一个汉字为两个字符</span>
-                            <!--<span class="notice_write" id="info_1" style="display: none"> 最少四个字符,请输入你的名称</span>-->
+                            <span class="notice_write" id="info_1" style="display: none"> 最少四个字符,请输入你的名称</span>
                         </div>
 
                         <div class="empty_box_left"></div>
@@ -417,11 +422,11 @@
 
                         <div class="list_edit add_edit_h">
                             <input name="gp_sex" type="radio" id="Rd_sex_1" class="radio_button"
-                                   value="0" onclick="disablcontrol('Rd_sexis');changeclass_new('span_1');"
+                                   value="0" onclick="changeclass_new('span_1');"
                                    checked="checked">
                             <span class="choice_cont">男</span>
                             <input name="gp_sex" type="radio" id="Rd_sex_2" class="radio_button"
-                                   value="1" onclick="disablcontrol('Rd_sexis');changeclass_new('span_1');">
+                                   value="1" onclick="changeclass_new('span_1');">
                             <span class="choice_cont">女</span>
                             <div id="notice_3" style="visibility: hidden;"></div>
                         </div>
@@ -432,7 +437,7 @@
                     <div class="separate_line"></div>
 
                     <div class="mesage_list">
-                        <input type="submit" name="Button1"  onclick="showupdata()"  value="保存基本信息" id="Button1" class="save_mess">
+                        <input type="submit" name="Button1"  onclick="Chksubmit()"  value="保存基本信息" id="Button1" class="save_mess">
                         <div class="total_ok" id="total_ok" style="display: none">基本信息已更新!</div>
                         <div id="stateinfo_info">
                         </div>
@@ -445,15 +450,10 @@
     </div>
 </body>
 
-<
+
 <script>
 
 
-    function showupdata() {
-        alert("基本信息已保存");
-        window.location =
-
-    }
 
 
 
@@ -464,7 +464,7 @@
         getprofile();
     }
 
-
+//从session中获得头像
     function getprofile() {
         if (window.XMLHttpRequest) {
             xhr = new XMLHttpRequest();
@@ -498,6 +498,7 @@
 
 
     var xhr =null;
+    //保存头像
         function saveHead() {
             if (window.XMLHttpRequest) {
                 xhr = new XMLHttpRequest();
@@ -508,7 +509,7 @@
 
             var message = "custProfile=" +custProfile.substring(22);
 
-            alert(message);
+            // alert(message);
 
               xhr.open("POST", save_url, true);
 
@@ -538,10 +539,10 @@
         }
 
     }
-
+        //添加头像显示预加载
        function addimg() {
 
-             var files =document.getElementById("Myfile").files[0];
+             var files = document.getElementById("Myfile").files[0];
              var path=window.URL.createObjectURL(files);
              img_head_select.src =path;
     }

@@ -36,23 +36,27 @@ public class Ui {
 
         return "top";
     }
-
+//个人信息
     @RequestMapping("userinfo")
     public String ui3() {
 
         return "user_info";
     }
-
+//更改信息
     @RequestMapping("updatainfo")
     public String ui4() {
         return "updatainfo";
     }
-
+//个人中心
     @RequestMapping("myelegant")
     public String ui5() {
         return "my_Elegant";
     }
-
+    //我的地址
+    @RequestMapping("myaddress")
+    public String  address(){
+        return "My_address";
+    }
     //    跳转图书详情
     @RequestMapping("bookdetail")
     public String ui3(Integer bookId, HttpServletRequest request) {

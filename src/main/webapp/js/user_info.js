@@ -334,111 +334,120 @@ else if (navigator.userAgent.indexOf("MSIE")>0){
     CheckForm();
 }
 
-function cue_chk(){
+
+function changeclass(objname){
+    var obj = document.getElementById(objname);
+    if (obj==null)
+        return;
+    obj.className = "list_other now_color";
+
+}
+
+function cue_chk() {
 
     var obj = document.getElementById("Text_petname");
     var info = document.getElementById("info_1");
     var reg = /^\d+$/g;
     var reg1 = /[A-Z]/g;
-    if (obj!=null && info!=null)
-    {
-        if (GetCharLength(obj.value)<4){
+    if (obj != null && info != null) {
+        if (GetCharLength(obj.value) < 4) {
             info.className = "notice_write";
-            info.innerHTML="最少四个字符，请输入您的昵称";
+            info.innerHTML = "最少四个字符，请输入您的昵称";
             return false;
-        }else if(reg.test(obj.value)){
+        } else if (reg.test(obj.value)) {
 
             info.className = "notice_write";
-            info.innerHTML="昵称不能全由数字组成！";
+            info.innerHTML = "昵称不能全由数字组成！";
             return false;
-        }else if(reg1.test(obj.value)){
+        } else if (reg1.test(obj.value)) {
 
             info.className = "notice_write";
-            info.innerHTML="昵称不能有大写字母！";
+            info.innerHTML = "昵称不能有大写字母！";
             return false;
         }
-        else{
 
-            if (ChkNickname_new()){
-                var v_date = document.getElementById("v_date");
-                if (v_date!=null){
-                    var v_date_value = v_date.value;
-                    info = null;
-                    chknickname(v_date_value,obj.value);
+    }
 
-                }
-                return true;
+    function chsex() {
+        var obj1 = document.getElementById("Rd_sex_1");//男
+        var obj2 = document.getElementById("Rd_sex_2");
+        if (obj1 != null && obj2 != null) {
+            if (obj1.checked == false && obj2.checked == false) {
+                obj1.focus();
+                var div = document.getElementById("notice_3");
+                div.className = "notice_write";
+                div.innerHTML = "此项为必填项,请选择您的性别";
+                div.style.visibility = 'visible';
+                return false;
+            }
+        }
+        else {
+            return false;
+        }
+        return true;
+    }
+
+
+
+
+
+    function chkonkeydown(evt) {
+        if (navigator.userAgent.indexOf("Firefox") > 0) {
+            evt = evt ? evt : (window.event ? window.event : null);
+            evt.preventDefault();
+            evt.stopPropagation();
+
+        }
+        else if (navigator.userAgent.indexOf("MSIE") > 0) {
+            event.returnValue = false;
+            event.cancelBubble = true;
+        }
+    }
+
+
+    function chksex() {
+        var obj1 = document.getElementById("Rd_sex_1");
+        var obj2 = document.getElementById("Rd_sex_2");
+
+        if (obj1 != null && obj2 != null) {
+
+            if (obj1.checked == true || obj2.checked == true) {
+                changeclass_new('span_1');
+            }
+            else {
+                var Rd_sexis_0 = document.getElementById("Rd_sexis_0");
+                var Rd_sexis_1 = document.getElementById("Rd_sexis_1");
+                Rd_sexis_0.disabled = true;
+                Rd_sexis_1.disabled = true;
+                //var Button2 = document.getElementById("Button2");
+                //Button2.disabled="true";
             }
         }
     }
-}
-
-function ChkNickname_new(){
-
-    var info = document.getElementById("info_1");
-    var obj = document.getElementById("Txt_petname");
-    var username = obj.value;
-    var reg = /^(\w|[\u4E00-\u9FA5])*$/;
-    if(arr=username.match(reg))
-    {
-        return true;
-    }
-    else
-    {
-        info.className = "notice_write";
-        //obj.focus();
-        info.innerHTML="昵称只能是数字，字母和汉字";
-        return false;
-    }
-}
 
 
-function chkonkeydown(evt){
-    if(navigator.userAgent.indexOf("Firefox")>0){
-        evt = evt ? evt : (window.event ? window.event : null);
-        evt.preventDefault();
-        evt.stopPropagation();
-
-    }
-    else if (navigator.userAgent.indexOf("MSIE")>0){
-        event.returnValue = false;
-        event.cancelBubble = true;
-    }
-}
-
-
-
-
-
-
-
-
-
-function GetCharLength(str)
-{
-    var iLength = 0;
-    for(var i = 0;i<str.length;i++)
-    {
-        if(str.charCodeAt(i) >255)
-        {
-            iLength += 2;
+    function GetCharLength(str) {
+        var iLength = 0;
+        for (var i = 0; i < str.length; i++) {
+            if (str.charCodeAt(i) > 255) {
+                iLength += 2;
+            }
+            else {
+                iLength += 1;
+            }
         }
-        else
-        {
-            iLength += 1;
-        }
+        return iLength;
     }
-    return iLength;
-}
 
 
-function changeclass_new(name){
-    var obj1 = document.getElementById(name+"_1");
-    var obj2 = document.getElementById(name+"_2");
-    if(obj1)
-        obj1.className = "choice_cont now_color";
-    if(obj2)
-        obj2.className = "choice_cont now_color choice_cont_r";
+    function changeclass_new(name) {
+        var obj1 = document.getElementById(name + "_1");
+        var obj2 = document.getElementById(name + "_2");
+        if (obj1)
+            obj1.className = "choice_cont now_color";
+        if (obj2)
+            obj2.className = "choice_cont now_color choice_cont_r";
+    }
 }
 
 

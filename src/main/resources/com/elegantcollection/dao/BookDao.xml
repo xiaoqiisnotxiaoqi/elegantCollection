@@ -323,7 +323,6 @@
         from book
         where book_id = #{bookId,jdbcType=INTEGER}
     </select>
-
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from book
     where book_id = #{bookId,jdbcType=INTEGER}

@@ -121,7 +121,7 @@ a:link, a:visited {
     text-align: center;
     padding: 0 0 5px;
 }
-.pop .delete .btn_bar .btn {
+.pop.delete .btn_bar .btn {
     height: 32px;
     line-height: 32px;
     border: 1px solid #ff2832;
@@ -143,7 +143,7 @@ a:link, a:visited {
     border-radius: 3px;
 }
 
-.pop .delete .btn_bar .btn.cancle {
+.pop .delete .btn_bar .btn .cancle {
     background-color: #fff;
     color: #787878;
     border-color: #bfbfbf;
@@ -168,4 +168,121 @@ a:link, a:visited {
     height: 13px;
     display: block;
     background: url(../images/icon_address.png) 0 -80px no-repeat;
+}
+
+.address_list .addr {
+    width: 204px;
+    padding: 2px 8px 0;
+    height: 120px;
+    float: left;
+    line-height: 22px;
+    background: #fbfbfb;
+    margin: 0 17px 20px 0;
+    position: relative;
+    color: #000;
+    border: 1px solid #e6e4e2;
+    cursor: pointer;
+}
+
+.address_list .addr h1 {
+    font-weight: normal;
+    line-height: 30px;
+    border-bottom: 1px solid #e6e6e6;
+    margin: 0 0 8px;
+    font-size: 12px;
+}
+
+.address_list .addr .icon.man {
+    background-position: 0 0;
+    margin-top: 9px;
+    *margin-top: 2px;
+}
+.address_list .addr  .icon {
+    display: inline-block;
+    width: 12px;
+    margin: 1px 5px 0 0;
+    height: 16px;
+    background-image: url(../images/icon_address.png);
+    background-repeat: no-repeat;
+    vertical-align: top;
+}
+.address_list  .addr  p {
+    height: 36px;
+    line-height: 18px;
+    overflow: hidden;
+    margin-bottom: 6px;
+}
+.address_list .addr .icon.lbs {
+    background-position: 0 -19px;
+}
+
+span {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 12px;
+    background: transparent;
+    list-style: none;
+}
+.address_list .addr .icon {
+    display: inline-block;
+    width: 12px;
+    margin: 1px 5px 0 0;
+    height: 16px;
+    background-image: url(../images/icon_address.png);
+    background-repeat: no-repeat;
+    vertical-align: top;
+}
+
+
+
+.address_list .addr  .txt {
+
+    display: inline;
+    width: 187px;
+
+
+}
+
+.address_list .addr .tag {
+    line-height: 14px;
+    height: 14px;
+    display: inline-block;
+    margin-right: 5px;
+    color: #0000ff;
+    border: 1px solid #0000ff;
+    border-radius: 2px;
+    padding: 0 4px;
+}
+
+.address_list .addr .icon.tel {
+    background-position: 0 -40px;
+}
+
+.address_list .addr .op {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    display: none;
+}
+.address_list ul {
+    overflow: hidden;
+}
+
+.address_list .addr a {
+    color: #b17474;
+    padding: 0 0 0 10px;
+}
+
+.address_list .addr a:hover {
+    color: #ff2832;
+}
+.address_list .addr:hover .op, .address_list .addr:hover a.fr {
+    display: block;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #646464;
 }

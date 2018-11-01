@@ -63,9 +63,20 @@ public interface CustomerService {
      * @param customer
      * @return
      */
-
+    /**
+     *根据customer对象跟新头像
+     * @param customer 传进来是对象值
+     * @return 返回受影响的函数
+     */
     int  updataCustProfile(Customer customer);
+
+    /**
+     * 根据对象跟新用户名和性别
+     * @param customer  传进来一个对象
+     * @return  返回受影响函数
+     */
     int  updataCustNameAndCustGender(Customer customer);
+
 
     /**
      * 根据电话号查找用户
@@ -80,4 +91,8 @@ public interface CustomerService {
      * @return
      */
     int alterByPhone(String custPhone,String custPassword);
+
+
+
+
 }
