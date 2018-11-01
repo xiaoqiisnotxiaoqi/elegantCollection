@@ -411,7 +411,7 @@
                                    onfocus="changeclass(div_1)" onblur="cue_chk()">
 
                             <span class="c_gray" id="info_1"><p>您的昵称可以由小写英文字母、中文、数字组成，</p>长度4－20个字符，一个汉字为两个字符</span>
-                            <span class="notice_write" id="info_1" style="display: none"> 最少四个字符,请输入你的名称</span>
+                           
                         </div>
 
                         <div class="empty_box_left"></div>
