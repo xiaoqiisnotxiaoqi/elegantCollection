@@ -105,6 +105,53 @@
     <sql id="Blob_Column_List">
     book_intro, book_catalog, book_wonderful, book_media_evaluation
   </sql>
+  <select id="selectBookByAuthorId" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from book
+    where author_id = #{authorId,jdbcType=INTEGER}
+  </select>
+  <select id="selectBookByBookSalesTotal" parameterType="com.elegantcollection.util.PageModel" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from book
+    order by book_sales_total desc
+    limit #{startRecord},#{pageSize}
+  </select>
+  <select id="selectBookByBookSalesLastMonth" parameterType="com.elegantcollection.util.PageModel" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from book
+    order by book_sales_last_month desc
+    limit #{startRecord},#{pageSize}
+  </select>
+  <select id="selectBookByBookSalesLastMonthAndBookCategory" parameterType="hashmap" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from book
+    where book_main_category = #{categoryId} or book_first_category = #{categoryId} or book_second_category =
+    #{categoryId}
+    order by book_sales_last_month desc
+    limit #{startRecord},#{pageSize}
+  </select>
+  <select id="selectCountAll" resultType="java.lang.Integer">
+    select count(book_id)
+    from book
+  </select>
+  <select id="selectCountOne" resultType="java.lang.Integer">
+    select count(book_id)
+    from book
+    where book_main_category = #{categoryId} or book_first_category = #{categoryId} or book_second_category =
+    #{categoryId}
+  </select>
     <!--多条件动态分页查询计数-->
     <select id="testCount" parameterType="java.util.HashMap" resultType="java.lang.Integer">
         select count(*)
@@ -267,14 +314,6 @@
                 limit ${limit}
             </if>
         </if>
-    </select>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
-        select
-        <include refid="Base_Column_List"/>
-        ,
-        <include refid="Blob_Column_List"/>
-        from book
-        where book_id = #{bookId,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from book

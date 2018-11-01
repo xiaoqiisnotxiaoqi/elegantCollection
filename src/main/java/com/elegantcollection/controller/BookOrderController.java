@@ -27,26 +27,24 @@ public class BookOrderController {
 
     /**
      * 显示书单信息
-     * @param request
+     * @param orderId 书单id
      * @return 书单对象
      */
     @GetMapping("getbookorder")
-    public BookOrder getBookOrderByBookOrderId(HttpServletRequest request){
-//        Integer id = (Integer) request.getSession().getAttribute("orderId");
-        Integer id = 10001;
+    public BookOrder getBookOrderByBookOrderId(Integer orderId){
+        Integer id = orderId;
         BookOrder bookOrder = this.bookOrderService.queryBookOrderById(id);
         return bookOrder;
     }
 
     /**
      * 显示书单详情
-     * @param request
-     * @return 书单详情集合
+     * @param orderId 书单id
+     * @return 书单中所有书集合
      */
     @GetMapping("getbookorderdetail")
-    public List<Book> getBookOrderDetailByBookOrderId(HttpServletRequest request){
-//        Integer id = (Integer) request.getSession().getAttribute("orderId");
-        Integer id = 10001;
+    public List<Book> getBookOrderDetailByBookOrderId(Integer orderId){
+        Integer id = orderId;
         List<Integer> list = this.bookOrderDetailService.queryBookIdByOrderId(id);
         List<Book> bookList = new ArrayList<>();
         for (int i = 0;i < list.size();i ++){

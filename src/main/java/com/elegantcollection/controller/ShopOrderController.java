@@ -108,7 +108,8 @@ public class ShopOrderController {
         if (shopOrderService.add(shopOrder) == 1) {//添加订单
             ShopOrderDetail shopOrderDetail = new ShopOrderDetail();
             for (HashMap<String, Object> b : booklist) {//添加订单详情条目
-                shopOrderDetail.setOrderId(shopOrder.getOrderId());System.out.println(shopOrder.getOrderId());
+                shopOrderDetail.setOrderId(shopOrder.getOrderId());
+                System.out.println(shopOrder.getOrderId());
                 shopOrderDetail.setBookId(((Book) b.get("book")).getBookId());
                 shopOrderDetail.setQuality((Integer) b.get("bookNumber"));
                 shopOrderDetailService.add(shopOrderDetail);
@@ -162,25 +163,23 @@ public class ShopOrderController {
     }
 
     /**
-     * 订单支付
+     * 订单完善
      *
      * @param httpRequest
      * @param httpResponse
-     * @param orderNumber
-     * @param payPriceValue
-     * @param bookQuantity
-     * @param bookName
-     * @param orderId
-     * @param addressId
-     * @param expectationTime
-     * @param discountPriceValue
-     * @throws ServletException
+     * @param orderNumber        订单编号
+     * @param payPriceValue      支付金额
+     * @param bookQuantity       图书数量
+     * @param bookName           图书名称
+     * @param orderId            图书id
+     * @param addressId          地址id
+     * @param expectationTime    期望时间
+     * @param discountPriceValue 折扣金额
      * @throws IOException
      * @throws ParseException
-     * @throws AlipayApiException
      */
-    @GetMapping("pay")
-    public void pay(HttpServletRequest httpRequest, HttpServletResponse httpResponse, String orderNumber, Integer payPriceValue, Integer bookQuantity, String bookName, String orderId, String addressId, String expectationTime, String discountPriceValue) throws ServletException, IOException, ParseException, AlipayApiException {
+    @GetMapping("perfect")
+    public void perfect(HttpServletRequest httpRequest, HttpServletResponse httpResponse, String orderNumber, Integer payPriceValue, Integer bookQuantity, String bookName, String orderId, String addressId, String expectationTime, String discountPriceValue) throws IOException, ParseException {
         //订单完善
         ShopOrder shopOrder = new ShopOrder();
         shopOrder.setOrderId(Integer.valueOf(orderId));
@@ -192,7 +191,22 @@ public class ShopOrderController {
         shopOrder.setDiscountAmount(discountPriceValue);
         shopOrderService.alter(shopOrder);
         httpRequest.getSession().setAttribute("orderId", orderId);
+        pay(httpResponse, String.valueOf(payPriceValue), String.valueOf(bookQuantity), bookName, orderId);
+    }
 
+    /**
+     * 支付
+     *
+     * @param httpResponse
+     * @param payPriceValue 支付金额
+     * @param bookQuantity  图书数量
+     * @param bookName      图书名称
+     * @param orderId       订单ID
+     * @throws IOException
+     */
+    @GetMapping("pay")
+    public void pay(HttpServletResponse httpResponse, String payPriceValue, String bookQuantity, String bookName, String orderId) throws IOException {
+        System.out.println("ffffffffffff");
         //支付接口
         AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.URL, AlipayConfig.APPID, AlipayConfig.RSA_PRIVATE_KEY, AlipayConfig.FORMAT, AlipayConfig.CHARSET, AlipayConfig.ALIPAY_PUBLIC_KEY, AlipayConfig.SIGNTYPE);
         AlipayTradePagePayRequest alipayRequest = new AlipayTradePagePayRequest();//创建API对应的request
@@ -223,21 +237,25 @@ public class ShopOrderController {
         httpResponse.getWriter().close();
     }
 
-    @GetMapping("alterOrder")
+    /**
+     * 订单完成
+     *
+     * @param httpServletRequest
+     * @throws AlipayApiException
+     */
+    @GetMapping("finishOrder")
     public void alterOrder(HttpServletRequest httpServletRequest) throws AlipayApiException {
         Integer orderId = (Integer) httpServletRequest.getSession().getAttribute("orderId");
-        String payJudge= (String) httpServletRequest.getSession().getAttribute("payJudge");
+        Integer payJudge = shopOrderService.queryByOrderId(orderId).getOrderStatus();
         AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.URL, AlipayConfig.APPID, AlipayConfig.RSA_PRIVATE_KEY, AlipayConfig.FORMAT, AlipayConfig.CHARSET, AlipayConfig.ALIPAY_PUBLIC_KEY, AlipayConfig.SIGNTYPE);
         AlipayTradeQueryRequest request = new AlipayTradeQueryRequest();//创建API对应的request类
         request.setBizContent("{" +
                 " \"out_trade_no\":\"" + orderId + "\"" +
                 " }");//设置业务参数
-        //System.out.println(request.getBizContent());
         AlipayTradeQueryResponse response = alipayClient.execute(request);//通过alipayClient调用API，获得对应的response类
-        System.out.print(response.getBody());
         //根据response中的结果继续业务逻辑处理
-        if (payJudge==null&&response.getTradeStatus().equals("TRADE_SUCCESS")) {
-             httpServletRequest.getSession().setAttribute("payJudge","Y");
+        if (payJudge == 0 && response.getTradeStatus().equals("TRADE_SUCCESS")) {
+            System.out.println("支付成功");
             shopOrderService.alterStatus(Integer.valueOf(orderId));
         } else {
             System.out.println("支付失败");

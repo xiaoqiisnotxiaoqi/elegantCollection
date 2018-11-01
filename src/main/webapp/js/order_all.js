@@ -100,7 +100,7 @@ function getDate() {
                     "    <td>\n" +
                     "        <div class=\"book-msg\">" + orderDetailList[j].bookName + "</div>\n" +
                     "        <div class=\"book-number\">" + 'x' + bookNumber + "</div>\n" + "</td>\n" +
-                    "            <td>" + (j == 0 ?
+                     (j == 0 ?"            <td>" +
                     "        <div class=\"consignee-tooltip\">" + orderList[i].consigneeName + "</div>\n" +
                     "    </td>\n" +
                     "    <td>\n" +
@@ -119,7 +119,6 @@ function getDate() {
                     "        <a class=\"order-operate\" href=\"#\" onclick=\"remove(" + orderList[i].shopOrder.orderId + ")\">删除</a>\n" +
                     "    </td>\n" : "<td colspan=\"4\"></td>") +
                     "</tr>\n" +
-                    "<tr></tr>\n" +
                     "\n";
             }
         }
@@ -133,8 +132,8 @@ function getDate() {
             "                    <span class=\"page-code\">" + jsonText.currentPageCode + "</span>\n" +
             (jsonText.currentPageCode != 1 ? "<a href=\"#\" onclick=\"refreshByPage(" + previousNumber + ")\">上一页</a>\n" : "<a href=\"#\">上一页</a>\n") +
             (jsonText.currentPageCode != 1 ? "<a href=\"#\" onclick=\"refreshByPage(1)\">首页</a>\n" : "<a href=\"#\">首页</a>\n") +
-            "                    <span>总页数</span>\n" +
-            "               <span>" + jsonText.totalPages + "</span>\n" +
+            "                    <span class=\"page-number\">总页数</span>\n" +
+            "               <span class=\"page-number\">" + jsonText.totalPages + "</span>\n" +
             "                </div>\n" +
             "            </td>\n" +
             "        </tr>"
@@ -177,7 +176,7 @@ function refreshData4State(url) {
 }
 
 /**
- * 页面渲染
+ * 页面渲染xxx
  */
 function getDate4State() {
     if (xhr.readyState == 4 && xhr.status == 200) {
@@ -218,8 +217,8 @@ function getDate4State() {
                     "    <td>\n" +
                     "        <div class=\"book-msg\">" + orderDetailList[j].bookName + "</div>\n" +
                     "        <div class=\"book-number\">" + 'x' + bookNumber + "</div>\n" +
-                    "    </td>\n" +
-                    "    <td>\n" + (j == 0 ?
+                    "    </td>\n"  + (j == 0 ?
+                        "    <td>\n"+
                     "        <div class=\"consignee-tooltip\">" + orderList[i].consigneeName + "</div>\n" +
                     "    </td>\n" +
                     "    <td>\n" +
@@ -239,7 +238,6 @@ function getDate4State() {
 
                     "    </td>\n" : "<td colspan=\"4\"></td>") +
                     "</tr>\n" +
-                    "<tr></tr>\n" +
                     "\n";
             }
         }
@@ -338,7 +336,7 @@ function getDate4Condition() {
                     "        <div class=\"book-msg\">" + orderDetailList[j].bookName + "</div>\n" +
                     "        <div class=\"book-number\">" + 'x' + bookNumber + "</div>\n" +
                     "    </td>\n" +
-                    "    <td>\n" + (j == 0 ?
+                     (j == 0 ?"    <td>\n" +
                     "        <div class=\"consignee-tooltip\">" + orderList[i].consigneeName + "</div>\n" +
                     "    </td>\n" +
                     "    <td>\n" +
@@ -357,7 +355,6 @@ function getDate4Condition() {
                     "        <a class=\"order-operate\" href=\"#\" onclick=\"remove(" + orderList[i].shopOrder.orderId + ")\">删除</a>\n" +
                     "    </td>\n" : "<td colspan=\"4\"></td>") +
                     "</tr>\n" +
-                    "<tr></tr>\n" +
                     "\n";
             }
         }

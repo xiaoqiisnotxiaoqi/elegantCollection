@@ -63,8 +63,8 @@ public class BookCategoryServiceImpl implements BookCategoryService {
     }
 
     /**
-     * 获取第一级分类
-     * @return 第一级类别集合
+     * 获取第二级分类
+     * @return 第二级类别集合
      */
     @Override
     public List<BookCategory> queryBookCategoryByUpIdNull() {

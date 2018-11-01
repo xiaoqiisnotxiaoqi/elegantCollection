@@ -7,7 +7,9 @@ import com.elegantcollection.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Component
@@ -85,6 +87,20 @@ public class CustomerServiceImpl implements CustomerService {
         return customerDao.updateByExampleSelective(customer,customerExample);
 
 
+    }
+
+    @Override
+    public Customer queryByPhone(String custPhone) {
+        return customerDao.selectByPhone(custPhone);
+    }
+
+    @Override
+    public int alterByPhone(String custPhone, String custPassword) {
+        Map<String ,Object> args = new HashMap<>();
+        args.put("custPhone",custPhone);
+        args.put("custPassword",custPassword);
+        int t = customerDao.updateByPhone(args);
+        return t;
     }
 
 

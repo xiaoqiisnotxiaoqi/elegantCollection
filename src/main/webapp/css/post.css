@@ -120,7 +120,10 @@ body {
 .post-text {
     margin-top: 20px;
     margin-bottom: 10px;
+    height: 40px;
+    overflow: hidden;
     display: block;
+    font-size: 13px;
 }
 
 .reply-number {
@@ -128,17 +131,18 @@ body {
     float: left;
     display: inline-block;
     height: 30px;
-    width: 80px;
+    width: 11%;
     border-bottom-right-radius: 40px 30px;
     background-color: rgb(240, 240, 240);
 }
 
 .post-all {
     display: inline-block;
+    width: 80%;
 }
 
 .all-popular-posts {
-    border: rgb(215, 215, 215) 1px solid;;
+
     margin-left: 2px;
     display: inline-block;
     border: none;
