@@ -21,8 +21,8 @@
 </head>
 <body>
 <%--引入头部--%>
-<iframe src="${pageContext.request.contextPath}/top" style="width: 100%; height: 220px;border: none;frameborder:0;"></iframe>
-
+<jsp:include page="topIndex.jsp"/>
+<%--<iframe src="/top" style="width: 100%; height: 220px;border: none;frameborder:0;"></iframe>--%>
 
 <!--左侧图书分类-->
 <div class="container">

@@ -14,9 +14,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/top.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/index.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/register.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/topTwo.css">
-
-
 
 </head>
 <body>
@@ -42,7 +39,7 @@
        <span style="display: none;" class="DetermineWhetherLog">2</span>
         <div class="not-login">
             <span class="top-wellcome">欢迎进入雅致藏书!</span>
-            <span class="top-log"><a onclick="showDiv()" id="asd">登录</a></span>
+            <span class="top-log"><a onclick="showDiv2()" id="asd">登录</a></span>
             <span class="top-join" onclick="showRegister()">加入雅致</span>
         </div>
     <%
@@ -68,7 +65,7 @@
                         <div class="col-left"></div>
                         <div class="col-right">
                             <div class="modal-header">
-                                <button type="button" id="login_close" class="close" data-dismiss="modal"><span id="login_clode" aria-hidden="true" onclick="stopLoginDiv()">×</span></button>
+                                <button type="button" id="login_close" class="close" data-dismiss="modal"><span aria-hidden="true" onclick="stopLoginDiv()">×</span><span class="sr-only">Close</span></button>
                                 <h4 class="modal-title" id="loginModalLabel" style="font-size: 18px;">登录</h4>
                             </div>
                             <div class="modal-body">
@@ -97,7 +94,7 @@
                                     </div>
 
 
-                                    <div class="threeLogin" style="position: absolute;left: 274px;bottom: 15px;">
+                                    <div class="threeLogin">
                                         <span onclick="loginModeConversion(this)" class="loginModeConversion">短信登录</span>
                                         <a class="nqq" href=""></a>
                                         <a class="nwx" href=""></a>
