@@ -10,18 +10,16 @@ public interface CustomerService {
     /**
      * 根据用户邮箱,密码查找用户
      * @param email 用户邮箱
-     * @param pwd 用户登录密码
      * @return 该用户对象
      */
-    List<Customer> quaryCustomerByEmail(String email,String pwd);
+    List<Customer> quaryCustomerByEmail(String email);
 
     /**
-     * 根据用户手机号和密码查找用户
+     * 根据用户手机号
      * @param phone 用户手机号
-     * @param pwd 用户密码
      * @return 该用户对象
      */
-    List<Customer> quaryCustomerByPhone(String phone,String pwd);
+    List<Customer> quaryCustomerByPhone(String phone);
 
     /**
      * 添加用户
@@ -93,6 +91,15 @@ public interface CustomerService {
     int alterByPhone(String custPhone,String custPassword);
 
 
+    /**
+     * 查询所有用户
+     */
+     List<Customer> queryAllCust();
 
-
+    /**
+     * 修改用户信息
+     * @param customer 用户对象
+     * @return
+     */
+     Integer updateCustomer(Customer customer);
 }

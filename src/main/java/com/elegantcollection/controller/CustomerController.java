@@ -5,6 +5,7 @@ import com.elegantcollection.service.BookService;
 import com.elegantcollection.service.CustomerService;
 import com.elegantcollection.service.EvaluateService;
 import com.elegantcollection.util.CodeUtil;
+import com.elegantcollection.util.Md5;
 import com.elegantcollection.util.RandomNumberGeneration;
 import com.elegantcollection.util.SmsVerification;
 import com.google.code.kaptcha.Constants;
@@ -56,17 +57,32 @@ public class CustomerController {
         List<Customer> customerList;
         //判断用户输入的用户名为手机号,还是邮箱号
         if (custName.contains("@")) {
-            customerList = customerService.quaryCustomerByEmail(custName, pwd);
+            customerList = customerService.quaryCustomerByEmail(custName);
         } else {
-            customerList = customerService.quaryCustomerByPhone(custName, pwd);
+            customerList = customerService.quaryCustomerByPhone(custName);
         }
-
+        //判断用户名是否错误
         if (customerList.size() == 0){
             return "用户名或密码错误";
-        }else {
-            request.getSession().setAttribute("customer",customerList.get(0));
-            return  "success";
         }
+        //得到 该用户 对象
+        Customer customer = customerList.get(0);
+        //验证密码是否正确
+        boolean isCust = Md5.passwordEncryptionVerification(pwd,customer.getMore1(),customer.getCustPassword());
+
+
+        if (!isCust){
+            return "用户名或密码错误";
+        }else{
+            request.getSession().setAttribute("customer",customer);
+            return "success";
+
+        }
+
+
+
+
+
     }
 
 
@@ -145,8 +161,12 @@ public class CustomerController {
             return "短信验证码错误";
         }
         Customer customer = new Customer();
-        //用户密码
-        customer.setCustPassword(password);
+        Map<String,String> map = Md5.getMd5(password);
+
+        //用户密码(加密后)
+        customer.setCustPassword(map.get("md5"));
+        //该用户的盐值
+        customer.setMore1(map.get("secklillId"));
         //用户手机号
         customer.setCustPhone(phone);
         //用户注册时间
@@ -336,6 +356,28 @@ public class CustomerController {
         }else {
             return c.getCustProfile();
         }
+
+    }
+
+
+    @PostMapping("all")
+    public void updatePsw(){
+        List<Customer> customer = customerService.queryAllCust();
+        System.out.println(customer);
+        for (Customer customer1:customer){
+            Map<String,String> map = Md5.getMd5(customer1.getCustPassword());
+            customer1.setCustPassword(map.get("md5"));
+            customer1.setMore1(map.get("secklillId"));
+
+            customerService.updateCustomer(customer1);
+
+            System.out.println(map);
+           boolean a =  Md5.passwordEncryptionVerification(customer1.getCustPassword(),map.get("secklillId"),map.get("md5"));
+
+            System.out.println(a);
+        }
+
+
 
     }
 
