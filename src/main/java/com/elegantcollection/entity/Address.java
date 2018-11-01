@@ -47,6 +47,8 @@ public class Address implements Serializable {
      */
     private String addressDetail;
 
+    private Integer addressStatus;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getAddressId() {
@@ -113,6 +115,14 @@ public class Address implements Serializable {
         this.addressDetail = addressDetail;
     }
 
+    public Integer getAddressStatus() {
+        return addressStatus;
+    }
+
+    public void setAddressStatus(Integer addressStatus) {
+        this.addressStatus = addressStatus;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -132,7 +142,8 @@ public class Address implements Serializable {
             && (this.getProvince() == null ? other.getProvince() == null : this.getProvince().equals(other.getProvince()))
             && (this.getCity() == null ? other.getCity() == null : this.getCity().equals(other.getCity()))
             && (this.getDistrict() == null ? other.getDistrict() == null : this.getDistrict().equals(other.getDistrict()))
-            && (this.getAddressDetail() == null ? other.getAddressDetail() == null : this.getAddressDetail().equals(other.getAddressDetail()));
+            && (this.getAddressDetail() == null ? other.getAddressDetail() == null : this.getAddressDetail().equals(other.getAddressDetail()))
+            && (this.getAddressStatus() == null ? other.getAddressStatus() == null : this.getAddressStatus().equals(other.getAddressStatus()));
     }
 
     @Override
@@ -147,6 +158,7 @@ public class Address implements Serializable {
         result = prime * result + ((getCity() == null) ? 0 : getCity().hashCode());
         result = prime * result + ((getDistrict() == null) ? 0 : getDistrict().hashCode());
         result = prime * result + ((getAddressDetail() == null) ? 0 : getAddressDetail().hashCode());
+        result = prime * result + ((getAddressStatus() == null) ? 0 : getAddressStatus().hashCode());
         return result;
     }
 
@@ -164,6 +176,7 @@ public class Address implements Serializable {
         sb.append(", city=").append(city);
         sb.append(", district=").append(district);
         sb.append(", addressDetail=").append(addressDetail);
+        sb.append(", addressStatus=").append(addressStatus);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

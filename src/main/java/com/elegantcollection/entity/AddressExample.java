@@ -663,6 +663,66 @@ public class AddressExample {
             addCriterion("address_detail not between", value1, value2, "addressDetail");
             return (Criteria) this;
         }
+
+        public Criteria andAddressStatusIsNull() {
+            addCriterion("address_status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressStatusIsNotNull() {
+            addCriterion("address_status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressStatusEqualTo(Integer value) {
+            addCriterion("address_status =", value, "addressStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressStatusNotEqualTo(Integer value) {
+            addCriterion("address_status <>", value, "addressStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressStatusGreaterThan(Integer value) {
+            addCriterion("address_status >", value, "addressStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressStatusGreaterThanOrEqualTo(Integer value) {
+            addCriterion("address_status >=", value, "addressStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressStatusLessThan(Integer value) {
+            addCriterion("address_status <", value, "addressStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressStatusLessThanOrEqualTo(Integer value) {
+            addCriterion("address_status <=", value, "addressStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressStatusIn(List<Integer> values) {
+            addCriterion("address_status in", values, "addressStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressStatusNotIn(List<Integer> values) {
+            addCriterion("address_status not in", values, "addressStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressStatusBetween(Integer value1, Integer value2) {
+            addCriterion("address_status between", value1, value2, "addressStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andAddressStatusNotBetween(Integer value1, Integer value2) {
+            addCriterion("address_status not between", value1, value2, "addressStatus");
+            return (Criteria) this;
+        }
     }
 
     /**

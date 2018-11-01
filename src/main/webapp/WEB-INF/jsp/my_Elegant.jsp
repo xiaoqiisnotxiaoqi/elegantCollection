@@ -12,10 +12,12 @@
     <title>我的雅志</title>
     <link rel="icon" href="${pageContext.request.contextPath}/images/logo.ico" type="img/x-ico"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/my_Elegant.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/personalCenter_messageView.css">
 
 </head>
 <body>
+<iframe src="${pageContext.request.contextPath}/top" style="width: 100%; height: 220px;border: none;
+frameborder:0;"></iframe>
+
 <div class="mydang" id="J_muneAndContentWrap">
     <div class="my_left">
         <div class="my_menu">
@@ -27,22 +29,21 @@
                 <ul>我的交易</ul>
                 <li><a href="#">我的订单</a></li>
                 <ul>我的钱包</ul>
-                <li><a href="#">我的礼券</a></li>
                 <!--<li><a href="#">我的余额</a></li>-->
                 <li><a href="#">我的积分</a></li>
                 <ul>售后服务</ul>
                 <li><a href="#">申请/查询退换货</a></li>
-                <li><a href="#">补开发票</a></li>
+
                 <ul>个人中心</ul>
                 <li><a href="#">个人信息</a></li>
 
                 <li><a href="#">收货地址</a></li>
                 <ul>安全中心</ul>
-                <li><a href="JavaScript:void(0);" onclick="goToChangePassword()">登录密码</a></li>
-                <li><a href="JavaScript:void(0);" onclick="goToChangeEmail()">邮箱验证</a></li>
-                <li><a href="JavaScript:void(0);" onclick="goToChangePhone()">手机绑定</a></li>
+                <li><a href="#">登录密码</a></li>
+                <li><a href="#">邮箱验证</a></li>
+                <li><a href="#">手机绑定</a></li>
                 <ul>我的消息</ul>
-                <li><a href="javaScript:void(0);" onclick="goToMessage()">消息查看</a></li>
+                <li><a href="#">消息查看</a></li>
                 <!--<li><a href="#">发帖记录</a></li>-->
                 <li><a href="#">评论/晒单</a></li>
                 <li><a href="#">提问/回答</a></li>
@@ -145,26 +146,6 @@
         </div>
         <!--J_userInfo 结束-->
 
-
-        <%--页面渲染专用div--%>
-        <div id="input-text" style="display: none">
-
-        </div>
-
-        <%--修改密码--%>
-        <div id="changeEmail" style="width: 500px;height: 300px;margin: 0 auto;display: none">
-            <span style="position: relative;left: 190px;top: 50px;font-size: 14px;line-height: 22px;">原密码:</span>
-            <input type="text" value="" style="width: 100px;height: 24px;position: relative;top: 46px;left: 220px;"/>
-            <span>密码不正确</span>
-            <span style="position: relative;left: 40px;top: 100px;font-size: 14px;line-height: 22px;">新密码:</span>
-            <input type="text" value="" style="width: 100px;position: relative;top: 100px;left: 70px;font-size: 14px;line-height: 22px;height: 24px;"/>
-            <span>密码必须由大小写字母和数字组成</span>
-            <span style="width: 80px;display: block;position: relative;left: 165px;top: 135px;font-size: 14px;line-height: 22px;">确认新密码:</span>
-            <input type="text" value="" style="width: 100px;height: 24px;position: relative;left: 265px;top: 106px;" />
-            <span>两次密码不一致</span>
-            <button style="width: 100px;height: 36px;border: 1px solid orange;color:white;font-size:16px;position:relative;top:200px;left:100px;border-radius:5px;background-color:red;" onclick="changePsw(ele)">修改</button>
-        </div>
-
     </div>
     <!--my_main结束-->
 </div>
@@ -191,24 +172,7 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-<!- 黑色遮罩层 z 999 ->
-<section class="cust-black" id="cust-black-ded"></section>
-<section class="cust-deleve" id="cust-deleve">
-    <p class="title">删除宝贝<span class="closeModel" onclick="closeDed()">X</span></p>
-    <p>您确认要删除该宝贝吗？</p>
-    <div class="opBtn"><a href="javascript:void(0);" onclick="deleteTheMessage()" class="dialog-sure">确定</a><a href="javascript:void(0);" onclick="closeDed()" class="dialog-close">关闭</a></div>
-</section>
 <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/personalCenter_messageView.js"></script>
 <script>
     $(function () {
         $('.back_top').click(function () {

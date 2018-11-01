@@ -30,4 +30,39 @@ public class AddressServiceImp implements AddressService {
     public Address queryByAddressId(Integer addressId) {
         return addressDao.selectByPrimaryKey(addressId);
     }
+
+    @Override
+    public int insertAddress(Address address) {
+        AddressExample example = new AddressExample();
+        example.createCriteria();
+        return addressDao.insert(address);
+    }
+
+    @Override
+    public List<Address> queryByAddress(int custId) {
+        AddressExample example = new AddressExample();
+        example.createCriteria().andCustIdEqualTo(custId).andAddressStatusEqualTo(0);
+        return addressDao.selectByExample(example);
+    }
+
+    @Override
+    public int deteleaddress(Address address) {
+        AddressExample example = new AddressExample();
+        example.createCriteria().andAddressIdEqualTo(address.getAddressId());
+        return addressDao.updateByExampleSelective(address, example);
+    }
+
+    @Override
+    public Address queryByAdd(Integer addressId) {
+        AddressExample example = new AddressExample();
+        example.createCriteria();
+        return addressDao.selectByPrimaryKey(addressId);
+    }
+
+    @Override
+    public int updateadd(Address address) {
+        AddressExample example = new AddressExample();
+        example.createCriteria().andAddressIdEqualTo(address.getAddressId());
+        return addressDao.updateByExampleSelective(address,example);
+    }
 }

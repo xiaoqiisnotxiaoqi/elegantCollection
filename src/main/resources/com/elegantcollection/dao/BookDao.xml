@@ -129,28 +129,6 @@
       </if>
     </if>
   </select>
-  <select id="selectByExample" parameterType="com.elegantcollection.entity.BookExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from book
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-    <if test="limit != null">
-      <if test="offset != null">
-        limit ${offset}, ${limit}
-      </if>
-      <if test="offset == null">
-        limit ${limit}
-      </if>
-    </if>
-  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
@@ -206,7 +184,7 @@
     where book_main_category = #{categoryId} or book_first_category = #{categoryId} or book_second_category =
     #{categoryId}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+
     <!--多条件动态分页查询计数-->
     <select id="testCount" parameterType="java.util.HashMap" resultType="java.lang.Integer">
         select count(*)
@@ -323,31 +301,6 @@
         </if>
         limit 0 ,10
     </select>
-    <select id="selectByExampleWithBLOBs" parameterType="com.elegantcollection.entity.BookExample"
-            resultMap="ResultMapWithBLOBs">
-        select
-        <if test="distinct">
-            distinct
-        </if>
-        <include refid="Base_Column_List"/>
-        ,
-        <include refid="Blob_Column_List"/>
-        from book
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause"/>
-        </if>
-        <if test="orderByClause != null">
-            order by ${orderByClause}
-        </if>
-        <if test="limit != null">
-            <if test="offset != null">
-                limit ${offset}, ${limit}
-            </if>
-            <if test="offset == null">
-                limit ${limit}
-            </if>
-        </if>
-    </select>
     <select id="selectByExample" parameterType="com.elegantcollection.entity.BookExample" resultMap="BaseResultMap">
         select
         <if test="distinct">
@@ -369,14 +322,6 @@
                 limit ${limit}
             </if>
         </if>
-    </select>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
-        select
-        <include refid="Base_Column_List"/>
-        ,
-        <include refid="Blob_Column_List"/>
-        from book
-        where book_id = #{bookId,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from book
