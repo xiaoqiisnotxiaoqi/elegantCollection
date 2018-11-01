@@ -85,7 +85,7 @@ function responseRegister() {
             document.getElementById("message-span").innerText = "短信验证码错误";
         }else {
             custLodin = true;
-            window.top.location = "/index";
+            window.location = "/top";
         }
 
     }
@@ -122,9 +122,6 @@ function login() {
     xhr.send(formData);
 }
 
-
-
-
 /**
  * 登录json数据解析
  */
@@ -134,7 +131,7 @@ function responselogin() {
             document.getElementById("loginModalLabel").innerText +="              " + xhr.responseText;
         }else {
             document.getElementById("loginModalLabel").innerText = "登录";
-            window.top.location = "/index";
+            window.location = "/top";
         }
     }
 }
@@ -233,7 +230,7 @@ function loginOutResolution() {
     if (xhr.readyState === 4 && xhr.status === 200){
         if (xhr.responseText === "success") {
             custLodin = false;
-            window.top.location = "/index"
+            window.location = "/top"
         }
     }
 }
@@ -245,7 +242,7 @@ function searchBox() {
     //把keyword添加到jsSession
     sessionStorage.clear();
     sessionStorage.setItem("keyWord", document.getElementById("searchInput").value);
-    window.top.location = "/allbooks";
+    window.location = "allbooks";
 
 }
 
@@ -257,7 +254,7 @@ function clickcaterory(ele) {
     sessionStorage.clear();
     alert(ele.id);
     sessionStorage.setItem("categoryId", ele.id);
-    window.top.location = "/allbooks";
+    window.location = "allbooks";
 }
 
 

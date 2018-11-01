@@ -10,7 +10,7 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>排行榜</title>
-    <link rel="stylesheet" href="../../css/ranking.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/ranking.css">
 </head>
 <body>
 <div class="all">

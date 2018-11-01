@@ -167,7 +167,7 @@
 <div class="category-nav">
     <div class="img-signe"><img src="${pageContext.request.contextPath}/images/biaozhi.png"></div>
     <div class="search-box">
-            <input type="text" name="seek" value="">
+            <input type="text" name="seek" value="" id="searchInput">
             <button onclick="searchBox()">搜索</button>
     </div>
     <div class="left-nav">

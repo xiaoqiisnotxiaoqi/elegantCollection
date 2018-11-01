@@ -2,9 +2,10 @@ package com.elegantcollection.dao;
 
 import com.elegantcollection.entity.Address;
 import com.elegantcollection.entity.AddressExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public interface AddressDao {

@@ -26,8 +26,6 @@ var bookName = "";
 var addressOptions = document.getElementById("address-options");
 //期待到达时间
 var transportDate = document.getElementById("transport-date");
-//物流信息框
-var transport = document.getElementById("transport");
 //订单简略信息
 var orderSimpleInfo = document.getElementById("order-simple-info");
 //总价
@@ -45,12 +43,15 @@ var paymentOption = document.getElementById("payment-option");
 paymentOption.addEventListener("click", function () {
     this.style.color = "red";
 })
+var allBody=document.getElementById("all-body")
+
 onload = function () {
     refreshAddress();
     refreshOther();
 //获取并复制动态页面高度
-    var style = window.getComputedStyle(orderSimpleInfo, null);
-    transport.style.height = style.height;
+
+
+
 }
 
 /**
@@ -163,6 +164,12 @@ function getOtherData() {
         totalPrice.innerHTML += "￥ " + allprice;
         discountPrice.innerHTML += "￥ " + discountPriceValue;
         payPrice.innerHTML += "￥ " + payPriceValue;
+
+        var style = window.getComputedStyle(orderSimpleInfo, null);
+        var style1=window.getComputedStyle(allBody, null);
+        var height=parseInt(style.height)+197+parseInt(style1.height);
+        allBody.style.height=height+'px';
+
     } else {
         //alert("xhr.readyState = " + xhr.readyState + ", xhr.status =  " + xhr.status)
     }
@@ -180,8 +187,14 @@ payButton.addEventListener("click", toPay);
  * 订单完善
  */
 function toPay() {
-    window.location = "/order/pay?orderNumber=" + orderNumber + "&payPriceValue=" + payPriceValue + "&bookQuantity=" + bookQuantity + "&bookName=" + bookName + "&orderId=" + orderId + "&addressId=" + addressId + "&expectationTime=" + expectationTime + "&discountPriceValue=" + discountPriceValue;
-
+    if (addressId == null)
+        alert("请选择收货地址")
+    else if (expectationTime == null||expectationTime=="") {
+        alert("请输入期待收货时间")
+    }
+    else {
+        window.location = "/order/perfect?orderNumber=" + orderNumber + "&payPriceValue=" + payPriceValue + "&bookQuantity=" + bookQuantity + "&bookName=" + bookName + "&orderId=" + orderId + "&addressId=" + addressId + "&expectationTime=" + expectationTime + "&discountPriceValue=" + discountPriceValue;
+    }
 }
 
 

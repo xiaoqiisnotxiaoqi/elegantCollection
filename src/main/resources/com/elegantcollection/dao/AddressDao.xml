@@ -10,6 +10,7 @@
     <result column="city" jdbcType="VARCHAR" property="city" />
     <result column="district" jdbcType="VARCHAR" property="district" />
     <result column="address_detail" jdbcType="VARCHAR" property="addressDetail" />
+    <result column="address_status" jdbcType="INTEGER" property="addressStatus" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -70,7 +71,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    address_id, cust_id, consignee_name, consignee_phone, province, city, district, address_detail
+    address_id, cust_id, consignee_name, consignee_phone, province, city, district, address_detail, 
+    address_status
   </sql>
   <select id="selectByExample" parameterType="com.elegantcollection.entity.AddressExample" resultMap="BaseResultMap">
     select
@@ -113,10 +115,15 @@
   <insert id="insert" parameterType="com.elegantcollection.entity.Address">
     insert into address (address_id, cust_id, consignee_name, 
       consignee_phone, province, city, 
-      district, address_detail)
+      district, address_detail, address_status
+      )
     values (#{addressId,jdbcType=INTEGER}, #{custId,jdbcType=INTEGER}, #{consigneeName,jdbcType=VARCHAR}, 
       #{consigneePhone,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
-      #{district,jdbcType=VARCHAR}, #{addressDetail,jdbcType=VARCHAR})
+      #{district,jdbcType=VARCHAR}, #{addressDetail,jdbcType=VARCHAR}, #{addressStatus,jdbcType=INTEGER}
+      )
+      <selectKey keyProperty="addressId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+      </selectKey>
   </insert>
   <insert id="insertSelective" parameterType="com.elegantcollection.entity.Address">
     insert into address
@@ -145,6 +152,9 @@
       <if test="addressDetail != null">
         address_detail,
       </if>
+      <if test="addressStatus != null">
+        address_status,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="addressId != null">
@@ -170,6 +180,9 @@
       </if>
       <if test="addressDetail != null">
         #{addressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="addressStatus != null">
+        #{addressStatus,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -206,6 +219,9 @@
       <if test="record.addressDetail != null">
         address_detail = #{record.addressDetail,jdbcType=VARCHAR},
       </if>
+      <if test="record.addressStatus != null">
+        address_status = #{record.addressStatus,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -220,7 +236,8 @@
       province = #{record.province,jdbcType=VARCHAR},
       city = #{record.city,jdbcType=VARCHAR},
       district = #{record.district,jdbcType=VARCHAR},
-      address_detail = #{record.addressDetail,jdbcType=VARCHAR}
+      address_detail = #{record.addressDetail,jdbcType=VARCHAR},
+      address_status = #{record.addressStatus,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -249,6 +266,9 @@
       <if test="addressDetail != null">
         address_detail = #{addressDetail,jdbcType=VARCHAR},
       </if>
+      <if test="addressStatus != null">
+        address_status = #{addressStatus,jdbcType=INTEGER},
+      </if>
     </set>
     where address_id = #{addressId,jdbcType=INTEGER}
   </update>
@@ -260,7 +280,8 @@
       province = #{province,jdbcType=VARCHAR},
       city = #{city,jdbcType=VARCHAR},
       district = #{district,jdbcType=VARCHAR},
-      address_detail = #{addressDetail,jdbcType=VARCHAR}
+      address_detail = #{addressDetail,jdbcType=VARCHAR},
+      address_status = #{addressStatus,jdbcType=INTEGER}
     where address_id = #{addressId,jdbcType=INTEGER}
   </update>
 </mapper>

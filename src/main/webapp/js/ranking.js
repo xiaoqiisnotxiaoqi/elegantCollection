@@ -1,7 +1,7 @@
 var url_getcategory = '/category/getcategory';
 var url_getbooktotal = '/category/getbooktotal';
 var url_getbooklastmonth = '/category/getbooklastmonth';
-var url_getbooklastmonthcategory = '/category/getbooklastmonthcategory';
+var url_getbooklastmonthcategory = '/category/getbooklastmonthcategory?categoryId=';
 onload = function () {
     refreshCategory(url_getcategory);
     refreshBookTotal(url_getbooktotal);
@@ -25,18 +25,19 @@ function loadCategory() {
         var danxiang = document.getElementById("danxiang");
         danxiang.innerHTML = "";
         for (var i = 0; i < result.length; i++) {
-            danxiang.innerHTML += ('<span class="lei"><a href="#" name="' + result[i].categoryId + '" onclick="' +
-                'getLastMonthCategory(this)">' + result[i].categoryName + '</a></span>');
+            var href = 'javascript:getLastMonthCategory("' + url_getbooklastmonthcategory + result[i].categoryId + '")';
+            var dx = "<span class='lei'><a href='" + href + "'>" + result[i].categoryName + "</a></span>";
+            danxiang.innerHTML += dx;
         }
     }
 }
-function refreshBookTotal(url_getbooktotal){
+function refreshBookTotal(ugbt){
     if(window.XMLHttpRequest){
         xhr = new XMLHttpRequest();
     }else {
         xhr = new ActiveXObject('Microsoft.XMLHTTP');
     }
-    xhr.open("GET",url_getbooktotal,true);
+    xhr.open("GET",ugbt,true);
     xhr.setRequestHeader("Content-Type","application/json;charset=utf-8");
     xhr.onreadystatechange = loadBookTotal;
     xhr.send();
@@ -58,28 +59,28 @@ function loadBookTotal() {
         var fenye = document.getElementById("fenye");
         fenye.innerHTML = "";
         if(result.currentPageCode != result.totalPages){
-            var url_next_page = url_getbooktotal + "/?page=" + (result.currentPageCode + 1);
+            var url_next_page = url_getbooktotal + "?page=" + (result.currentPageCode + 1);
             var href = 'javascript:refreshBookTotal("' + url_next_page + '")';
-            var nextPageEle = '<span class="ye"><a href="' + href + '">下一页</a> </span>';
+            var nextPageEle = "<span class='ye'><a href='" + href + "'>下一页</a> </span>";
             fenye.innerHTML += nextPageEle;
         }
-        var currentPageEle = '<span class="ma">' + result.currentPageCode + '</span>';
+        var currentPageEle = "<span class='ma'>" + result.currentPageCode + "</span>";
         fenye.innerHTML += currentPageEle;
         if(result.currentPageCode != 1){
-            var url_pre_page = url_getbooktotal + "/?page=" + (result.currentPageCode - 1);
+            var url_pre_page = url_getbooktotal + "?page=" + (result.currentPageCode - 1);
             var href = 'javascript:refreshBookTotal("' + url_pre_page + '")';
-            var prePageEle = '<span class="ye"><a href="' + href + '">上一页</a> </span>';
+            var prePageEle = "<span class='ye'><a href='" + href + "'>上一页</a> </span>";
             fenye.innerHTML += prePageEle;
         }
     }
 }
-function getLastMonth(url_getbooklastmonth) {
+function getLastMonth(ugbl) {
     if(window.XMLHttpRequest){
         xhr = new XMLHttpRequest();
     }else {
         xhr = new ActiveXObject('Microsoft.XMLHTTP');
     }
-    xhr.open("GET",url_getbooklastmonth,true);
+    xhr.open("GET",ugbl,true);
     xhr.setRequestHeader("Content-Type","application/json;charset=utf-8");
     xhr.onreadystatechange = loadBookLastMonth;
     xhr.send();
@@ -101,40 +102,44 @@ function loadBookLastMonth() {
         var fenye = document.getElementById("fenye");
         fenye.innerHTML = "";
         if(result.currentPageCode != result.totalPages){
-            var url_next_page = url_getbooklastmonth + "/?page=" + (result.currentPageCode + 1);
+            var url_next_page = url_getbooklastmonth + "?page=" + (result.currentPageCode + 1);
             var href = 'javascript:getLastMonth("' + url_next_page + '")';
-            var nextPageEle = '<span class="ye"><a href="' + href + '">下一页</a> </span>';
+            var nextPageEle = "<span class='ye'><a href='" + href + "'>下一页</a> </span>";
             fenye.innerHTML += nextPageEle;
         }
-        var currentPageEle = '<span class="ma">' + result.currentPageCode + '</span>';
+        var currentPageEle = "<span class='ma'>" + result.currentPageCode + "</span>";
         fenye.innerHTML += currentPageEle;
         if(result.currentPageCode != 1){
-            var url_pre_page = url_getbooklastmonth + "/?page=" + (result.currentPageCode - 1);
+            var url_pre_page = url_getbooklastmonth + "?page=" + (result.currentPageCode - 1);
             var href = 'javascript:getLastMonth("' + url_pre_page + '")';
-            var prePageEle = '<span class="ye"><a href="' + href + '">上一页</a> </span>';
+            var prePageEle = "<span class='ye'><a href='" + href + "'>上一页</a> </span>";
             fenye.innerHTML += prePageEle;
         }
     }
 }
+var ugbc = null;
 function getLastMonthCategory(pro) {
-    url_getbooklastmonthcategory = url_getbooklastmonthcategory + "/?categoryId=" + (pro.name);
+    ugbc = pro;
+    alert(ugbc);
+    console.log(pro);
     if(window.XMLHttpRequest){
         xhr = new XMLHttpRequest();
     }else {
         xhr = new ActiveXObject('Microsoft.XMLHTTP');
     }
-    xhr.open("GET",url_getbooklastmonthcategory,true);
+    xhr.open("GET",ugbc,true);
     xhr.setRequestHeader("Content-Type","application/json;charset=utf-8");
     xhr.onreadystatechange = loadBookLastMonthCategory;
     xhr.send();
 }
 function loadBookLastMonthCategory() {
+    console.log(xhr.responseText);
     if (xhr.readyState == 4 && xhr.status == 200) {
         var result = JSON.parse(xhr.responseText);
         var relist = result.modelList;
         var shulie = document.getElementById("shulie");
         shulie.innerHTML = "";
-        for (var i = 0; i < result.length; i++) {
+        for (var i = 0; i < relist.length; i++) {
             shulie.innerHTML += ('<div class="shu"><div class="zuo"><a href="#" name="' + relist[i].bookId +
                 '" onclick="getDetail(this)"><img src="' + relist[i].bookImg + '"></a></div><div class="you">' +
                 '<span class="sqone"><a href="#" name="' + relist[i].bookId + '" onclick="getDetail(this)">' +
@@ -145,21 +150,22 @@ function loadBookLastMonthCategory() {
         var fenye = document.getElementById("fenye");
         fenye.innerHTML = "";
         if(result.currentPageCode != result.totalPages){
-            var url_next_page = url_getbooklastmonthcategory + "&page=" + (result.currentPageCode + 1);
-            var href = 'javascript:getLastMonth("' + url_next_page + '")';
-            var nextPageEle = '<span class="ye"><a href="' + href + '">下一页</a> </span>';
+            var url_next_page = ugbc + "&page=" + (result.currentPageCode + 1);
+            alert(url_next_page);
+            var href = 'javascript:getLastMonthCategory("' + url_next_page + '")';
+            var nextPageEle = "<span class='ye'><a href='" + href + "'>下一页</a> </span>";
             fenye.innerHTML += nextPageEle;
         }
-        var currentPageEle = '<span class="ma">' + result.currentPageCode + '</span>';
+        var currentPageEle = "<span class='ma'>" + result.currentPageCode + "</span>";
         fenye.innerHTML += currentPageEle;
         if(result.currentPageCode != 1){
-            var url_pre_page = url_getbooklastmonthcategory + "&page=" + (result.currentPageCode - 1);
-            var href = 'javascript:getLastMonth("' + url_pre_page + '")';
-            var prePageEle = '<span class="ye"><a href="' + href + '">上一页</a> </span>';
+            var url_pre_page = ugbc + "&page=" + (result.currentPageCode - 1);
+            var href = 'javascript:getLastMonthCategory("' + url_pre_page + '")';
+            var prePageEle = "<span class='ye'><a href='" + href + "'>上一页</a> </span>";
             fenye.innerHTML += prePageEle;
         }
     }
 }
 function getDetail(pro) {
-    window.location = "bookdetail/?bookId=" + pro.name;
+    window.location = "bookdetail?bookId=" + pro.name;
 }
