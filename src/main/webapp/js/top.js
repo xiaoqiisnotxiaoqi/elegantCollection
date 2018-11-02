@@ -80,13 +80,12 @@ function outli(ele){
 function showDiv(){
         var Idiv     = document.getElementById("loginModal");
         Idiv.className = "modal";
-        Idiv.style.display = "fixed";
-        Idiv.style.top = "40%";
-        Idiv.style.left = "45%";
-        Idiv.style.position = "absolute";
+        Idiv.style.zIndex = "600";
+        Idiv.style.display = "";
+        Idiv.style.position = "fixed";
         //以下部分要将弹出层居中显示
-        Idiv.style.left=(window.screen.availWidth - 540)/2 + 100 +"px";
-        Idiv.style.top =(window.screen.availHeight - 320)/2 - 100 +"px";
+        Idiv.style.left=(window.screen.availWidth )/2 - 100 +"px";
+        Idiv.style.top =(window.screen.availHeight )/2 - 150 +"px";
                          
         //以下部分使整个页面至灰不可点击
         var procbg = document.createElement("div"); //首先创建一个div
