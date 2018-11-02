@@ -223,7 +223,7 @@ function showRegister(){
     Idiv.style.zIndex = "1000";
     //以下部分要将弹出层居中显示
     Idiv.style.left=(document.documentElement.clientWidth-Idiv.clientWidth)/2+document.documentElement.scrollLeft - 500+"px";
-    Idiv.style.top =(document.documentElement.clientHeight-Idiv.clientHeight)/2+document.documentElement.scrollTop+"px";
+    Idiv.style.top =(screen.height - Idiv.clientHeight)/2+document.documentElement.scrollTop+"px";
 
     //以下部分使整个页面至灰不可点击
     var procbg = document.createElement("div"); //首先创建一个div
