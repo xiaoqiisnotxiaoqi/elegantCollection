@@ -95,12 +95,12 @@ body {
     border-right: rgb(215, 215, 215) 1px solid;
 }
 
-
-.block-segmentation{
+.block-segmentation {
     background-color: rgb(225, 225, 225);
     width: 100%;
     height: 2px;
 }
+
 .time-post {
     border-bottom: rgb(215, 215, 215) 1px dashed;
     width: 100%;
@@ -120,7 +120,7 @@ body {
 .post-text {
     margin-top: 20px;
     margin-bottom: 10px;
-    height: 40px;
+    height: 38px;
     overflow: hidden;
     display: block;
     font-size: 13px;
@@ -142,35 +142,48 @@ body {
 }
 
 .all-popular-posts {
-
     margin-left: 2px;
     display: inline-block;
     border: none;
-    width: 240px;
-    height: 400px;
+    width: 237px;
+    height: 450px;
     font-size: 10px;
     background-color: rgb(247, 248, 250);
     position: fixed;
 }
 
+.all-popular-posts-tip{
+    display: block;
+    margin: 12px 0px 14px 25px;
+    font-weight: bold;
+    font-size: 17px;
+}
+
 .all-popular-post {
-    width: 100%;
-    height: 35px;
+    margin-left: 1%;
+    padding: 3px 0;
+    width: 96%;
+    height: 34px;
     overflow: hidden;
+}
+
+.all-popular-post a {
+    padding: 0 4px;
 }
 
 .all-popular-post-tip {
     display: inline-block;
-    margin-left: 5px;
-    margin-right: 8px;
-    width: 11px;
+    margin-left: 4px;
+    margin-right: 7px;
+    width: 12px;
     height: 16px;
-    background-color: rgb(240, 133, 81);
+    background-color: #FF7F42;
     text-align: center;
+    color: white;
 }
 
-.now-pagination-btn{
-    border:none;
+.now-pagination-btn {
+    border: none;
     color: rgb(77, 139, 242);
     width: 35px;
     height: 90px;
@@ -225,5 +238,5 @@ body {
     height: 30px;
     background-color: rgb(77, 139, 242);
     color: white;
-    maxLength:30;
+    maxLength: 30;
 }

@@ -60,7 +60,7 @@
                             <div class="item-info" id="consignee-name">杨健</div>
                         </div>
                         <div class="item">
-                            <span>地址：</span>
+                            <span style="float: left">地址：</span>
                             <div class="item-info" id="address-detail">黑龙江大庆市萨尔图区城区东北石油大学</div>
                         </div>
                         <div class="item">
