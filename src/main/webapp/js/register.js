@@ -256,7 +256,7 @@ function clickcaterory(ele) {
     sessionStorage.clear();
     alert(ele.id);
     sessionStorage.setItem("categoryId", ele.id);
-    window.location = "allbooks";
+    window.top.location = "allbooks";
 }
 
 

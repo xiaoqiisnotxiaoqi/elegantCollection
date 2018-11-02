@@ -40,7 +40,8 @@ public class ShopOrderController {
     private final AddressService addressService;
     private final BookService bookService;
 
-    PageModel<ShopOrder> pageModel = new PageModel<>();
+
+    private PageModel<ShopOrder> pageModel = new PageModel<>();
 
 
     @Autowired
@@ -49,39 +50,29 @@ public class ShopOrderController {
         this.shopOrderDetailService = shopOrderDetailService;
         this.addressService = addressService;
         this.bookService = bookService;
-        pageModel.setPageSize(4);
     }
 
     /**
      * 添加订单（订单创建时间：转入支付页面时）
      *
-     * @param request
-     * @param
-     * @return
+     * @param request 存入用户id，购物车信息
+     * @return 输出json对象
      */
     @GetMapping("add")
     public HashMap<String, Object> add(HttpServletRequest request) {
+        //获取用户id
         Integer custId = ((Customer) request.getSession().getAttribute("customer")).getCustId();
-
-      /*  HashMap<String, String> buyThis = new HashMap<>();
-        buyThis.put("10001", "2");
-        buyThis.put("10002", "5");
-        buyThis.put("allprice", "223");
-        buyThis.put("groupPrice", "20");
-        buyThis.put("fullReductionDiscount", "100");
-        request.getSession().setAttribute("buyThis", buyThis);
-*/
-
-        //获取购物车传入session
+        //获取购物车内信息
         HashMap<String, String> map = (HashMap<String, String>) request.getSession().getAttribute("buyThis");
-        //展示的bookList
+        //购物车内的书籍列表
         List<HashMap<String, Object>> booklist = new ArrayList<>();
-        //总价
+        //购物车内的书籍总价
         Float allprice = Float.parseFloat(map.get("allprice"));
-        //组合优惠价格
+        //购物车内的书籍组合优惠价格
         Float groupPrice = Float.parseFloat(map.get("groupPrice"));
-        //满减价格
+        //购物车内的书籍满减价格
         Float fullReductionDiscount = Float.parseFloat(map.get("fullReductionDiscount"));
+        //获取详细图书信息存入图书列表booklist
         for (Map.Entry<String, String> entry : map.entrySet()) {
             if (isInteger(entry.getKey())) {
                 HashMap<String, Object> bookMap = new HashMap<>();
@@ -93,24 +84,28 @@ public class ShopOrderController {
             }
         }
 
-
+        //构建返回json对象
         HashMap<String, Object> objectHashMap = new HashMap<>();
+        //获取订单编号生成
         Long orderNumber = orderNumberGenerate(custId);
+        //向json对象放入订单信息
         objectHashMap.put("bookList", booklist);
         objectHashMap.put("allprice", allprice);
         objectHashMap.put("groupPrice", groupPrice);
         objectHashMap.put("fullReductionDiscount", fullReductionDiscount);
         objectHashMap.put("orderNumber", orderNumber);
+        //插入数据库的订单容器
         ShopOrder shopOrder = new ShopOrder();
         shopOrder.setCustId(custId);
         shopOrder.setOrderNumber(orderNumber);
         shopOrder.setOrderPrice(allprice - groupPrice - fullReductionDiscount);
         shopOrder.setOrderCreateTime(new Date());
-        if (shopOrderService.add(shopOrder) == 1) {//添加订单
+        //添加订单
+        if (shopOrderService.add(shopOrder) == 1) {
+            //添加订单详情条目
             ShopOrderDetail shopOrderDetail = new ShopOrderDetail();
-            for (HashMap<String, Object> b : booklist) {//添加订单详情条目
+            for (HashMap<String, Object> b : booklist) {
                 shopOrderDetail.setOrderId(shopOrder.getOrderId());
-                System.out.println(shopOrder.getOrderId());
                 shopOrderDetail.setBookId(((Book) b.get("book")).getBookId());
                 shopOrderDetail.setQuality((Integer) b.get("bookNumber"));
                 shopOrderDetailService.add(shopOrderDetail);
@@ -118,10 +113,11 @@ public class ShopOrderController {
         }
         objectHashMap.put("orderId", shopOrder.getOrderId());
         return objectHashMap;
-    }
+    }//由购物车custCart.jsp跳转结算页面pay.jsp
+
 
     /**
-     * 获取收货人地址（）
+     * 获取收货人地址
      *
      * @return 收货人地址
      */
@@ -130,45 +126,42 @@ public class ShopOrderController {
         Integer custId = ((Customer) request.getSession().getAttribute("customer")).getCustId();
         List<Address> addressList = addressService.queryByCustId(custId);
         return addressList;
-    }
+    }//由购物车custCart.jsp跳转结算pay.jsp页面
 
 
     /**
      * 删除订单（可找回）
      *
-     * @param request request请求
      * @param orderId 订单id
      * @return 动作结果
      */
     @GetMapping("removeByOrderId")
-    public String removeByOrderId(HttpServletRequest request, Integer orderId) {
+    public String removeByOrderId(Integer orderId) {
         if (shopOrderService.removeByOrderId(orderId) == 1)
             return "success";
         else
             return "fail";
-    }
+    }//全部订单页面order_all.jsp操作
 
     /**
      * 完全删除订单（不可找回）
      *
-     * @param request request请求
      * @param orderId 订单id
      * @return 动作结果
      */
     @GetMapping("delByOrderId")
-    public String delByOrderId(HttpServletRequest request, Integer orderId) {
+    public String delByOrderId(Integer orderId) {
         if (shopOrderService.delByOrderId(orderId) == 1)
             return "success";
         else
             return "fail";
-    }
+    }//全部订单页面order_all.jsp操作
 
     /**
      * 订单完善
      *
-     * @param httpRequest
-     * @param httpResponse
-     * @param orderNumber        订单编号
+     * @param httpRequest        存入用户id
+     * @param httpResponse       输出支付宝页面
      * @param payPriceValue      支付金额
      * @param bookQuantity       图书数量
      * @param bookName           图书名称
@@ -176,29 +169,34 @@ public class ShopOrderController {
      * @param addressId          地址id
      * @param expectationTime    期望时间
      * @param discountPriceValue 折扣金额
-     * @throws IOException
-     * @throws ParseException
+     * @throws IOException    输出支付宝页面，输出异常
+     * @throws ParseException 期待收货时间由字符串转换为Date类型，格式转换异常
      */
     @GetMapping("perfect")
-    public void perfect(HttpServletRequest httpRequest, HttpServletResponse httpResponse, String orderNumber, Float payPriceValue, Integer bookQuantity, String bookName, String orderId, String addressId, String expectationTime, String discountPriceValue) throws IOException, ParseException {
-        //订单完善
+    public void perfect(HttpServletRequest httpRequest, HttpServletResponse httpResponse, Float payPriceValue, Integer bookQuantity, String bookName, String orderId, String addressId, String expectationTime, String discountPriceValue) throws IOException, ParseException {
+        //构建订单对象
         ShopOrder shopOrder = new ShopOrder();
+        //放入订单完善的信息
         shopOrder.setOrderId(Integer.valueOf(orderId));
         shopOrder.setAddressId(Integer.valueOf(addressId));
+        //期待收货时间格式转换
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date expectationDate = format.parse(expectationTime);
         shopOrder.setExpectationTime(expectationDate);
         shopOrder.setPaymentTime(new Date());
         shopOrder.setDiscountAmount(discountPriceValue);
+        //修改订单
         shopOrderService.alter(shopOrder);
+        //存入orderId，从而在支付后跳转支付详情
         httpRequest.getSession().setAttribute("orderId", orderId);
+        //跳转支付宝支付功能
         pay(httpResponse, String.valueOf(payPriceValue), String.valueOf(bookQuantity), bookName, orderId);
-    }
+    }//由结算页面pay.jsp进入支付宝支付方法
 
     /**
-     * 支付
+     * 支付宝支付功能
      *
-     * @param httpResponse
+     * @param httpResponse  输出支付宝页面
      * @param payPriceValue 支付金额
      * @param bookQuantity  图书数量
      * @param bookName      图书名称
@@ -210,20 +208,24 @@ public class ShopOrderController {
         //支付接口
         AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.URL, AlipayConfig.APPID, AlipayConfig.RSA_PRIVATE_KEY, AlipayConfig.FORMAT, AlipayConfig.CHARSET, AlipayConfig.ALIPAY_PUBLIC_KEY, AlipayConfig.SIGNTYPE);
         AlipayTradePagePayRequest alipayRequest = new AlipayTradePagePayRequest();//创建API对应的request
+        //返回客户网页
         alipayRequest.setReturnUrl("http://localhost:8080/showOrderDetail0");
-        //alipayRequest.setNotifyUrl("http://localhost:8080/notify");//在公共参数中设置回跳和通知地址
+        //alipayRequest.setNotifyUrl("http://localhost:8080/notify");//在公共参数中设置回跳和通知地址（无法使用）
         alipayRequest.setBizContent("{" +
+                //订单id
                 "    \"out_trade_no\":\"" + orderId + "\"," +
                 "    \"product_code\":\"FAST_INSTANT_TRADE_PAY\"," +
+                //支付价格
                 "    \"total_amount\":" + payPriceValue + "," +
+                //图书数量
                 "    \"subject\":\"雅致图书 x" + bookQuantity + "\"," +
+                //图书名
                 "    \"body\":\"" + bookName + "\"," +
                 "    \"passback_params\":\"merchantBizType%3d3C%26merchantBizNo%3d2016010101111\"," +
                 "    \"extend_params\":{" +
                 "    \"sys_service_provider_id\":\"2088511833207846\"" +
                 "    }" +
                 "  }");//填充业务参数
-        // System.out.println(alipayRequest.getBizContent());
         String form = "";
         try {
             form = alipayClient.pageExecute(alipayRequest).getBody(); //调用SDK生成表单
@@ -238,7 +240,7 @@ public class ShopOrderController {
     }
 
     /**
-     * 订单完成
+     * 完成支付后的订单状态修改
      *
      * @param httpServletRequest
      * @throws AlipayApiException
@@ -246,14 +248,16 @@ public class ShopOrderController {
     @GetMapping("finishOrder")
     public void alterOrder(HttpServletRequest httpServletRequest) throws AlipayApiException {
         Integer orderId = (Integer) httpServletRequest.getSession().getAttribute("orderId");
+        //查询订单状态，如果未支付则修改状态
         Integer payJudge = shopOrderService.queryByOrderId(orderId).getOrderStatus();
         AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.URL, AlipayConfig.APPID, AlipayConfig.RSA_PRIVATE_KEY, AlipayConfig.FORMAT, AlipayConfig.CHARSET, AlipayConfig.ALIPAY_PUBLIC_KEY, AlipayConfig.SIGNTYPE);
         AlipayTradeQueryRequest request = new AlipayTradeQueryRequest();//创建API对应的request类
         request.setBizContent("{" +
+                //订单id
                 " \"out_trade_no\":\"" + orderId + "\"" +
-                " }");//设置业务参数
+                " }");
         AlipayTradeQueryResponse response = alipayClient.execute(request);//通过alipayClient调用API，获得对应的response类
-        //根据response中的结果继续业务逻辑处理
+        //订单状态为未支付，支付结果为支付成功
         if (payJudge == 0 && response.getTradeStatus().equals("TRADE_SUCCESS")) {
             System.out.println("支付成功");
             shopOrderService.alterStatus(Integer.valueOf(orderId));
@@ -281,7 +285,7 @@ public class ShopOrderController {
     /**
      * 查询所有
      *
-     * @param request         request请求
+     * @param request         获取用户id
      * @param currentPageCode 当前页数
      * @return 订单列表的PageModel对象
      */
@@ -298,14 +302,15 @@ public class ShopOrderController {
         initializeTotalPages(size);
         List<ShopOrder> shopOrderList = shopOrderService.queryByPage(custId, pageModel);
         return getOrderDetail(shopOrderList);
-    }
+    }//全部订单页面order_all.jsp
 
 
     /**
-     * 状态查询
+     * 状态查询（订单状态，时间状态）
      *
-     * @param request         request请求
+     * @param request         获取用户id
      * @param orderStatus     订单状态
+     * @param timeState       时间状态
      * @param currentPageCode 当前页数
      * @return 订单列表的PageModel对象
      */
@@ -319,13 +324,13 @@ public class ShopOrderController {
         initializeTotalPages(size);
         List<ShopOrder> shopOrderList = shopOrderService.queryByState(custId, orderStatus, timeState, pageModel);
         return getOrderDetail(shopOrderList);
-    }
+    }//全部订单页面order_all.jsp的操作
 
 
     /**
      * 条件查询
      *
-     * @param request         request请求
+     * @param request         获取用户id
      * @param condition       当前条件（书名，订单编号）
      * @param currentPageCode 当前页码
      * @return 订单列表的PageModel对象
@@ -337,12 +342,12 @@ public class ShopOrderController {
             result = queryByBookName(request, condition, currentPageCode);
         }
         return result;
-    }
+    }//全部订单页面order_all.jsp的操作
 
     /**
      * 订单编号查询
      *
-     * @param request         request请求
+     * @param request         获取用户id
      * @param orderNumber     订单编号
      * @param currentPageCode 当前页数
      * @return 订单列表的PageModel对象
@@ -350,6 +355,7 @@ public class ShopOrderController {
     public PageModel<Object> queryByOrderNumber(HttpServletRequest request, String orderNumber, Integer currentPageCode) {
         Integer custId = ((Customer) request.getSession().getAttribute("customer")).getCustId();
         initializePageModel(currentPageCode);
+        //订单编号查询唯一，pageModel内信息固定
         pageModel.setPageSize(4);
         pageModel.setTotalPages(1);
         pageModel.setStartRecord(0);
@@ -360,7 +366,7 @@ public class ShopOrderController {
     /**
      * 书名查询
      *
-     * @param request         request请求
+     * @param request         获取用户id
      * @param bookName        书名
      * @param currentPageCode 当前页数
      * @return 订单列表的PageModel对象
@@ -441,7 +447,6 @@ public class ShopOrderController {
 
     /**
      * 订单编号生成
-     * <p>
      * 订单编号由用户id与当前时间戳的字符组合形成
      *
      * @param custId 用户id
