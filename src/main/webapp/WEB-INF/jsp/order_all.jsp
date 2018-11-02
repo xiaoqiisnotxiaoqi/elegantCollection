@@ -14,8 +14,7 @@
     <title>雅致藏书--我的订单</title>
 </head>
 <body>
-<%--引入头部--%>
-<iframe src="${pageContext.request.contextPath}/top" style="width: 100%; height: 220px;border: none;frameborder:0;"></iframe>
+<jsp:include page="top.jsp"/>
 <div class="info-body">
     <div class="order-show-top">
         <ul class="order-state-list">
