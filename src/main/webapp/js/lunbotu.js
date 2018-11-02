@@ -196,13 +196,14 @@ function indexData() {
             document.getElementById("first-author-books").innerHTML = "";
             for (var i = 0; i < anthorBookList.length; i++) {
                 document.getElementById("first-author-books").innerHTML += "<div class=\"col-lg-3\">\n" +
-                    "        <img src=\"" + anthorBookList[i].bookImg + "\" alt=\"\" width='150px' height='150px'>\n" +
-                    "        <div class=\"work-title\">" + anthorBookList[i].bookName + "</div>\n" +
+                    "        <a href=\"bookdetail/?bookId=" + anthorBookList[i].bookId + "\">\n" +
+                    "        <img src=\"" + anthorBookList[i].bookImg + "\" width='150px' height='150px'>\n" +
+                    "        <div class=\"work-title\">" + anthorBookList[i].bookName + "</div></a>\n" +
                     "        <div class=\"work-cost-icon\">￥</div>\n" +
                     "        <div class=\"work-cost-price\">" + anthorBookList[i].bookSellingPrice + "</div>\n" +
                     "        <div class=\"work-original-icon\">￥</div>\n" +
                     "        <div class=\"work-original-price\">" + anthorBookList[i].bookMarkedPrice + "</div>\n" +
-                    "    </div>";
+                    "    </a>";
             }
 
             for (var i = 0; i < authorList.length; i++) {

@@ -16,7 +16,7 @@
 </head>
 <body>
 <%--引入头部--%>
-<iframe src="${pageContext.request.contextPath}/top" style="width: 100%; height: 220px;border: none;frameborder:0;"></iframe>
+<jsp:include page="top.jsp"/>
 
 
 <div class="mydnew_break">
@@ -92,8 +92,6 @@
             </ul>
         </div>
     </div>
-
-
     <!--左侧结束-->
     <!--右侧开始-->
     <div class="account_right" id="your_position">
@@ -113,21 +111,7 @@
 
         </div>
         <ul id="evaluateul">
-            <li class="eval-li">
-                <div class="inner-div"><img src="sadss"/></div>
-                <div class="inner-div">
-                    <div class="shuming"> 书名书名书名书名书名书名书名书名书名</div>
-                    <div class="price">价格</div>
-                </div>
-
-                <div class="neirong">
-                    <div class="shuming">这本书怎么这么好看这本书怎么这么好看这本书怎么这么好看这本书怎么这么好看这本书怎么这么好看这本书怎么这么好看</div>
-                    <div class="price">xx年xx月xx日</div>
-                </div>
-                <div class="inner-div">
-                    <button class="btn">订单详情</button>
-                </div>
-            </li>
+            <li class="eval-li"></li>
             <li class="eval-li"></li>
             <li class="eval-li"></li>
             <li class="eval-li"></li>
@@ -139,7 +123,7 @@
             <ul>
                 <li value="1" onclick="page(this)">首页</li>
                 <li value="" id="shangye" onclick="page(this)">&lt;</li>
-                <li value="" class="active" id="currentPage"></li>
+                <li value="1" class="active" id="currentPage">1</li>
                 <li value="" id="xiaye" onclick="page(this)">&gt;</li>
                 <li value="" id="last" onclick="page(this)">尾页</li>
                 <li class="totalPage"><span>跳转到</span><input type="number" value="1" id="pageinput"/><span>页</span></li>
@@ -154,9 +138,10 @@
 
 
 </div>
-
-
+<%--引用底部--%>
+<jsp:include page="bottom.jsp"/>
 <script src="${pageContext.request.contextPath}/js/myEvaluate.js"></script>
+
 </body>
 
 </html>
