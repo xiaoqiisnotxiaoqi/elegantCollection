@@ -129,6 +129,7 @@ function responselogin() {
     if (xhr.readyState === 4 && xhr.status === 200){
         if(xhr.responseText != "success"){
             document.getElementById("loginModalLabel").innerText +="              " + xhr.responseText;
+            sessionStorage.setItem("login","success");
         }else {
             document.getElementById("loginModalLabel").innerText = "登录";
             window.location = "/index";
@@ -230,6 +231,7 @@ function loginOutResolution() {
     if (xhr.readyState === 4 && xhr.status === 200){
         if (xhr.responseText === "success") {
             custLodin = false;
+            sessionStorage.removeItem("login");
             window.location = "/index"
         }
     }

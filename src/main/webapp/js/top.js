@@ -80,7 +80,9 @@ function outli(ele){
 function showDiv(){
         var Idiv     = document.getElementById("loginModal");
         Idiv.className = "modal";
-        Idiv.style.display = "block";
+        Idiv.style.display = "fixed";
+        Idiv.style.top = "40%";
+        Idiv.style.left = "45%";
         Idiv.style.position = "absolute";
         //以下部分要将弹出层居中显示
         Idiv.style.left=(window.screen.availWidth - 540)/2 + 100 +"px";
@@ -92,9 +94,11 @@ function showDiv(){
         procbg.style.background = "#000000";
         procbg.style.width = "100%";
         procbg.style.height = "100%";
-        procbg.style.position = "absolute";
+        procbg.style.position = "fixed";
         procbg.style.top = "0";
         procbg.style.left = "0";
+        procbg.style.bottom = "0";
+        procbg.style.right = "0";
         procbg.style.zIndex = "500";
         procbg.style.opacity = "0.6";
         procbg.style.filter = 0.9;
@@ -124,9 +128,11 @@ function showDiv2(){
     procbg.style.background = "#000000";
     procbg.style.width = "100%";
     procbg.style.height = "100%";
-    procbg.style.position = "absolute";
+    procbg.style.position = "fixed";
     procbg.style.top = "0";
     procbg.style.left = "0";
+    procbg.style.bottom = "0";
+    procbg.style.right = "0";
     procbg.style.zIndex = "500";
     procbg.style.opacity = "0.6";
     procbg.style.filter = 0.9;
@@ -136,7 +142,6 @@ function showDiv2(){
     isLogin = true;
 
 }
-
 
 
 
@@ -310,7 +315,6 @@ function register2Login(){
  */
 function loginOrCart() {
     var name = document.getElementsByClassName("DetermineWhetherLog");
-    alert(name[0].innerText);
     if (name[0].innerText == 1){
         window.location = "/custCart";
     } else {
@@ -324,7 +328,6 @@ function loginOrCart() {
  */
 function myOrder() {
     var name = document.getElementsByClassName("DetermineWhetherLog");
-    alert(name[0].innerText);
     if (name[0].innerText == 1){
         window.top.location = "/order_all";
     } else {

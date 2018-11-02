@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public class CodeUtil {
     /**
-     * 验证码校验
+     * 图片 验证码校验
      * @param request 请求信息
      * @return 验证用户输入的验证码是否正确
      */
