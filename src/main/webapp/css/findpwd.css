@@ -6,7 +6,7 @@
     width: 100%;
     height: 610px;
     background-color: gainsboro;
-    float: left;
+    padding: 3px;
 }
 .neitu{
     width: 70%;
@@ -113,4 +113,11 @@
     display: block;
     margin-top: 80px;
     margin-left: 60px;
+}
+#phonenb,#textcode,#duanma,#npwd,#newpwd{
+    border: 1px solid gainsboro;
+    width: 155px;
+}
+#code,#quma{
+    border: 1px solid gainsboro;
 }

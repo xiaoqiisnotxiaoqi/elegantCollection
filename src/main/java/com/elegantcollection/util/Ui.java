@@ -3,10 +3,8 @@ package com.elegantcollection.util;
 import com.elegantcollection.entity.Customer;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Map;
 
 @Controller
 public class Ui {
@@ -116,9 +114,14 @@ public class Ui {
         return "reviewTheDetails";
     }
 
-    @RequestMapping("butNow")
-    public String butNow(@RequestParam Map<String, String> map, HttpServletRequest request) {
-        request.getSession().setAttribute("buyThis", map);
+
+
+    /**
+     * 订单详情
+     * @return 订单页面 url
+     */
+    @RequestMapping("pay")
+    public String pay(){
         return "pay";
     }
 

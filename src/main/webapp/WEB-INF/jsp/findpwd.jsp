@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="../../css/findpwd.css">
 </head>
 <body>
+<jsp:include page="top.jsp"/>
 <script src="../../js/findpwd.js"></script>
 <div class="all">
     <div class="neitu">
@@ -58,5 +59,6 @@
         </div>
     </div>
 </div>
+<jsp:include page="bottom.jsp"/>
 </body>
 </html>

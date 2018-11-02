@@ -506,6 +506,7 @@ function settleAccount() {
 
 function butItNow() {
     if (xhr.readyState === 4 && xhr.status === 200){
+        if (xhr.responseText == "success")
             window.location = "/pay"
     }
 }
