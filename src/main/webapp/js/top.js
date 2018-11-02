@@ -312,7 +312,7 @@ function loginOrCart() {
     var name = document.getElementsByClassName("DetermineWhetherLog");
     alert(name[0].innerText);
     if (name[0].innerText == 1){
-        window.location = "custCart";
+        window.location = "/custCart";
     } else {
         showDiv();
     }
