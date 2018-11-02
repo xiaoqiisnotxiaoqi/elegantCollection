@@ -1,7 +1,9 @@
 package com.elegantcollection.controller;
 
 import com.elegantcollection.entity.Customer;
+import com.elegantcollection.service.BookService;
 import com.elegantcollection.service.CustomerService;
+import com.elegantcollection.util.ServerResponse;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,11 +17,13 @@ import javax.servlet.http.HttpSession;
 public class PwdController {
     @Autowired
     private CustomerService customerService;
+    @Autowired
+    private BookService bookService;
 
     /**
      * 根据手机号查看用户是否存在
      * @param custPhone 手机号
-     * @return
+     * @return 是否存在
      */
     @GetMapping("phonething")
     public Boolean getCustomerByPhone(String custPhone){
@@ -32,6 +36,12 @@ public class PwdController {
         }
     }
 
+    /**
+     * 根据手机号更改密码
+     * @param custPhone 手机号
+     * @param custPassword 密码
+     * @return 是否更改成功
+     */
     @GetMapping("phonepwd")
     public Boolean updatePwdByPhone(String custPhone,String custPassword){
         int n = this.customerService.alterByPhone(custPhone,custPassword);
@@ -42,6 +52,12 @@ public class PwdController {
         }
     }
 
+    /**
+     * 判断短信验证码是否正确
+     * @param mage 输入的短信验证码
+     * @param request 发送出的短信验证码
+     * @return 是否正确
+     */
     @GetMapping("message")
     public Boolean getMess(Integer mage, HttpServletRequest request){
         HttpSession session = request.getSession();
@@ -51,5 +67,19 @@ public class PwdController {
         }else {
             return false;
         }
+    }
+
+    /**
+     * 添加到购物车
+     * @param bookId 书id
+     * @param bookCount 书数量
+     * @param request 用户id
+     * @return 是否添加成功
+     */
+    @GetMapping("cart")
+    public ServerResponse<Integer> toCart(Integer bookId, Integer bookCount, HttpServletRequest request){
+        Integer custId = (Integer) request.getSession().getAttribute("custId");
+        ServerResponse<Integer> sri = this.bookService.add2Cart(custId,bookId,bookCount);
+        return sri;
     }
 }

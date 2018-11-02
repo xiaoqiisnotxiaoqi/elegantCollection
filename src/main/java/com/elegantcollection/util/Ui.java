@@ -125,21 +125,37 @@ public class Ui {
         return "pay";
     }
 
+    /**
+     * 跳转到作者详情
+     * @return
+     */
     @RequestMapping("author")
     public String uiz(){
         return "author";
     }
 
+    /**
+     * 跳转到书单详情
+     * @return
+     */
     @RequestMapping("booklist")
     public String uih(){
         return "booklist";
     }
 
+    /**
+     * 跳转到榜单
+     * @return
+     */
     @RequestMapping("ranking")
     public String uio(){
         return "ranking";
     }
 
+    /**
+     * 跳转到找回密码
+     * @return
+     */
     @RequestMapping("findpwd")
     public String uiu(){
         return "findpwd";

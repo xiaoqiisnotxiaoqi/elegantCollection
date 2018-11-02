@@ -178,7 +178,6 @@ li {
 }
 
 .item span {
-    float: left;
     display: inline-block;
     width: 30%;
     color: grey;
