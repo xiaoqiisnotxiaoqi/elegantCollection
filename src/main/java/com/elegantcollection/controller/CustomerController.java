@@ -1,13 +1,12 @@
 package com.elegantcollection.controller;
 
+import com.elegantcollection.entity.Book;
 import com.elegantcollection.entity.Customer;
+import com.elegantcollection.entity.Evaluate;
 import com.elegantcollection.service.BookService;
 import com.elegantcollection.service.CustomerService;
 import com.elegantcollection.service.EvaluateService;
-import com.elegantcollection.util.CodeUtil;
-import com.elegantcollection.util.Md5;
-import com.elegantcollection.util.RandomNumberGeneration;
-import com.elegantcollection.util.SmsVerification;
+import com.elegantcollection.util.*;
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -380,5 +379,44 @@ public class CustomerController {
 
 
     }
+
+
+    /**
+     * 查询我的评价
+     * @param pageCode 当前页码
+     * @param request  用来获取session
+     * @return 查询结果, 包含pagemodel booklist
+     */
+    @GetMapping("getMyEvaluate")
+    public HashMap myEvaluate(Integer pageCode, HttpServletRequest request) {
+        HashMap map = new HashMap();
+        PageModel pageModel = new PageModel();
+        Customer customer = (Customer) request.getSession().getAttribute("customer");
+        if (pageCode == null) {
+            pageModel.setCurrentPageCode(1);
+        } else {
+            pageModel.setCurrentPageCode(pageCode);
+        }
+        System.out.println("当前是第" + pageModel.getCurrentPageCode() + "页");
+        pageModel.setTotalRecord(evaluateService.countByCustomerId(customer.getCustId()));
+        System.out.println("共有 " + evaluateService.countByCustomerId(customer.getCustId()) + " 条记录");
+        pageModel.setTotalPages(pageModel.getTotalRecord() % pageModel.getPageSize() == 0 ? pageModel.getTotalRecord() / pageModel.getPageSize() : pageModel.getTotalRecord() / pageModel.getPageSize() + 1);
+        pageModel.setStartRecord((pageModel.getCurrentPageCode() - 1) * pageModel.getPageSize());
+
+        List<Evaluate> evaluateList = evaluateService.queryEvaluateByPage(pageModel, customer.getCustId());
+        List<Book> bookList = new ArrayList<>();
+        for (Evaluate e : evaluateList) {
+            Book book = bookService.quaryBookByBookId(e.getBookId());
+            bookList.add(book);
+        }
+
+        pageModel.setModelList(evaluateService.queryEvaluateByPage(pageModel, customer.getCustId()));
+
+
+        map.put("pageModel", pageModel);
+        map.put("bookList", bookList);
+        return map;
+    }
+
 
 }

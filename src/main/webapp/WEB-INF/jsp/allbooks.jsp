@@ -14,7 +14,7 @@
 </head>
 <body>
 <%--引入头部--%>
-<iframe src="${pageContext.request.contextPath}/top" style="width: 100%; height: 220px;border: none;frameborder:0;"></iframe>
+<jsp:include page="top.jsp"/>
 
 <input id="current-category" name="10034" type="hidden"/>
 <input id="keyword" name="" type="hidden"/>
@@ -115,8 +115,8 @@
     <!--右侧广告-->
 
 </div>
-</div>
 
+<jsp:include page="bottom.jsp"/>
 <%--加载js--%>
 <script src="${pageContext.request.contextPath}/js/allbooks.js"></script>
 <%--<script src="${pageContext.request.contextPath}/js/utilsnotoken.js"></script>--%>

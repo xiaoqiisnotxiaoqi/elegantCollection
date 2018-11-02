@@ -199,6 +199,32 @@ function add2Cart(btn) {
             alert(jsObj.msg);
         }
     }
+}
 
+function buyNow() {
+    var bookId = document.getElementById("bookId").value;
+    var count = document.getElementById("booknum").value;
 
+    var xhr1 = null;
+    if (window.XMLHttpRequest) {
+        xhr1 = new XMLHttpRequest(); //for ie7+,FireFox,Chorme,Opera,Safai...
+    } else {
+        xhr1 = new ActiveXObject('Microsoft.XMLHTTP');//for ie6
+    }
+    if (xhr1 != null) {
+        var url = "?bookId=" + bookId + "&count=" + count
+
+        xhr1.open("GET", "/book/add2Cart" + url, true);
+        xhr1.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;");
+        xhr1.onreadystatechange = buyResp;
+        xhr1.send();
+    } else {
+        alert("不能创建XMLHttpRequest对象实例");
+    }
+
+    function buyResp() {
+        if (xhr1.readyState == 4 && xhr1.status == 200) {
+            window.location = "/custCart";
+        }
+    }
 }
