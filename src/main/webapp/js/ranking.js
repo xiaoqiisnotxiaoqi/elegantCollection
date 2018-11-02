@@ -8,6 +8,7 @@ onload = function () {
 }
 var xhr = null;
 var xrh = null;
+//获取书籍二级类别
 function refreshCategory(url_getcategory){
     if(window.XMLHttpRequest){
         xrh = new XMLHttpRequest();
@@ -31,6 +32,7 @@ function loadCategory() {
         }
     }
 }
+//按总销量降序显示图书
 function refreshBookTotal(ugbt){
     if(window.XMLHttpRequest){
         xhr = new XMLHttpRequest();
@@ -57,6 +59,7 @@ function loadBookTotal() {
                 relist[i].bookMarkedPrice + '</span><span class="che"><a id="gw" href="javascript:checklogin()">' +
                 '加入购物车</a></span></div></div>');
         }
+        //判断是否登录
         var su = sessionStorage.getItem("login");
         if (su != "success") {
             var df = document.getElementById("gw");
@@ -86,6 +89,7 @@ function checklogin() {
 }
 var url_gotocart = '/find/cart?bookId=';
 var ppx = null;
+//向购物车添加数据
 function comecart(dd) {
     var ulr = url_gotocart + dd + "&bookCount=" + 1;
     if(window.XMLHttpRequest){
@@ -98,6 +102,7 @@ function comecart(dd) {
     ppx.onreadystatechange = loadCart;
     ppx.send();
 }
+//跳转到购物车
 function loadCart() {
     if (xhr.readyState == 4 && xhr.status == 200){
         var result = JSON.parse(xhr.responseText);
@@ -106,6 +111,7 @@ function loadCart() {
         }
     }
 }
+//按上月销量降序显示图书
 function getLastMonth(ugbl) {
     if(window.XMLHttpRequest){
         xhr = new XMLHttpRequest();
@@ -156,6 +162,7 @@ function loadBookLastMonth() {
     }
 }
 var ugbc = null;
+//单一类别按总销量降序显示图书
 function getLastMonthCategory(pro) {
     ugbc = pro;
     if(window.XMLHttpRequest){
@@ -208,6 +215,7 @@ function loadBookLastMonthCategory() {
         }
     }
 }
+//跳转到图书详情
 function getDetail(pro) {
     window.location = "bookdetail?bookId=" + pro.name;
 }
