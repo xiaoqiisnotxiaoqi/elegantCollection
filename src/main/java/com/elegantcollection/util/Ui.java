@@ -34,27 +34,32 @@ public class Ui {
 
         return "top";
     }
-//个人信息
+
+    //个人信息
     @RequestMapping("userinfo")
     public String ui3() {
 
         return "user_info";
     }
-//更改信息
+
+    //更改信息
     @RequestMapping("updatainfo")
     public String ui4() {
         return "updatainfo";
     }
-//个人中心
+
+    //个人中心
     @RequestMapping("myelegant")
     public String ui5() {
         return "my_Elegant";
     }
+
     //我的地址
     @RequestMapping("myaddress")
-    public String  address(){
+    public String address() {
         return "My_address";
     }
+
     //    跳转图书详情
     @RequestMapping("bookdetail")
     public String ui3(Integer bookId, HttpServletRequest request) {
@@ -65,25 +70,49 @@ public class Ui {
         return "bookdetail";
     }
 
+    /**
+     * 跳转全部订单页面
+     *
+     * @return
+     */
     @RequestMapping("order_all")
     public String order() {
         return "order_all";
     }
 
-
+    /**
+     * 跳转订单详情页面（由全部订单页面跳转）
+     *
+     * @param orderId 订单id
+     * @param request
+     * @return
+     */
     @RequestMapping("showOrderDetail")
     public String ui2OrderDetail(Integer orderId, HttpServletRequest request) {
+        //放入订单id
         request.getSession().setAttribute("orderId", orderId);
         return "order_detail";
     }
 
+    /**
+     * 跳转订单详情页面（由支付宝支付页面跳转）
+     *
+     * @param out_trade_no
+     * @param trade_no
+     * @param request
+     * @return
+     */
     @RequestMapping("showOrderDetail0")
     public String ui2OrderDetail0(Integer out_trade_no, String trade_no, HttpServletRequest request) {
-
         request.getSession().setAttribute("orderId", out_trade_no);
         return "order_detail";
     }
 
+    /**
+     * 跳转书评区
+     *
+     * @return
+     */
     @RequestMapping("post")
     public String post() {
         return "post";
@@ -115,58 +144,63 @@ public class Ui {
     }
 
 
-
     /**
-     * 订单详情
-     * @return 订单页面 url
+     * 跳转支付页面
+     *
+     * @return
      */
     @RequestMapping("pay")
-    public String pay(){
+    public String pay() {
         return "pay";
     }
 
     /**
      * 跳转到作者详情
+     *
      * @return
      */
     @RequestMapping("author")
-    public String uiz(){
+    public String uiz() {
         return "author";
     }
 
     /**
      * 跳转到书单详情
+     *
      * @return
      */
     @RequestMapping("booklist")
-    public String uih(){
+    public String uih() {
         return "booklist";
     }
 
     /**
      * 跳转到榜单
+     *
      * @return
      */
     @RequestMapping("ranking")
-    public String uio(){
+    public String uio() {
         return "ranking";
     }
 
     /**
      * 跳转到找回密码
+     *
      * @return
      */
     @RequestMapping("findpwd")
-    public String uiu(){
+    public String uiu() {
         return "findpwd";
     }
 
     /**
      * 跳转页面至 书评帖搜索结过页面
+     *
      * @return
      */
     @RequestMapping("searchThrough")
-    public String postSearch(){
+    public String postSearch() {
         return "postSearch";
     }
 

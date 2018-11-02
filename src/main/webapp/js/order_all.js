@@ -252,7 +252,7 @@ function getDate4State() {
             "                    <span class=\"page-code\">" + jsonText.currentPageCode + "</span>\n" +
             (jsonText.currentPageCode != 1 ? "<a href=\"#\" onclick=\"refreshByState(" + State + ",0," + previousNumber + ")\">上一页</a>\n" : "<a href=\"#\">上一页</a>\n") +
             (jsonText.currentPageCode != 1 ? "<a href=\"#\" onclick=\"refreshByState(" + State + ",0,1)\">首页</a>\n" : "<a href=\"#\">首页</a>\n") +
-            "                    <span>总页数</span>\n" +
+            "                    <span class=\"page-number\">总页数</span>\n" +
             "               <span>" + jsonText.totalPages + "</span>\n" +
             "                </div>\n" +
             "            </td>\n" +
@@ -369,7 +369,7 @@ function getDate4Condition() {
             "                    <span class=\"page-code\">" + jsonText.currentPageCode + "</span>\n" +
             (jsonText.currentPageCode != 1 ? "<a href=\"#\" onclick=\"refreshByState(" + State + ",0," + previousNumber + ")\">上一页</a>\n" : "<a href=\"#\">上一页</a>\n") +
             (jsonText.currentPageCode != 1 ? "<a href=\"#\" onclick=\"refreshByState(" + State + ",0,1)\">首页</a>\n" : "<a href=\"#\">首页</a>\n") +
-            "                    <span>总页数</span>\n" +
+            "                    <span class=\"page-number\">总页数</span>\n" +
             "               <span>" + jsonText.totalPages + "</span>\n" +
             "                </div>\n" +
             "            </td>\n" +

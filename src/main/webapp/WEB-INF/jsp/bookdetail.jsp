@@ -15,7 +15,8 @@
 </head>
 <body>
 <%--引入头部--%>
-<iframe src="${pageContext.request.contextPath}/top" style="width: 100%; height: 220px;border: none;frameborder:0;"></iframe>
+<iframe src="${pageContext.request.contextPath}/top"
+        style="width: 100%; height: 220px;border: none;frameborder:0;"></iframe>
 
 
 <input type="hidden" value="" id="bookId">
@@ -36,9 +37,7 @@
                 <img src=""/>
             </div>
             <div id="book-imgs-box">
-
             </div>
-
         </div>
         <!--买书区域-->
         <div id="info-area">
@@ -125,8 +124,8 @@
                     <button class="num-buttons" onclick=minus()>-
                     </button>
                 </div>
-                <button id="addtocart" onclick="add2Cart(this)">加入购物车</button>
-                <button id="buynow" onclick="add2Cart(this)">立即购买</button>
+                <button id="addtocart" onclick="add2Cart()">加入购物车</button>
+                <button id="buynow" onclick="buyNow()">立即购买</button>
             </div>
             <!--加入购物车按钮-->
 
@@ -223,8 +222,10 @@
         </div>
     </div>
 </div>
-<script src="${pageContext.request.contextPath}/js/bookdetail.js">
 
-</script>
+<%--引用底部--%>
+<jsp:include page="bottom.jsp"/>
+<%--引用js--%>
+<script src="${pageContext.request.contextPath}/js/bookdetail.js"></script>
 </body>
 </html>
