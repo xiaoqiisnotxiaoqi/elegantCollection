@@ -57,6 +57,11 @@ function loadBookTotal() {
                 relist[i].bookMarkedPrice + '</span><span class="che"><a id="gw" href="javascript:checklogin()">' +
                 '加入购物车</a></span></div></div>');
         }
+        var su = sessionStorage.getItem("login");
+        if (su != "success") {
+            var df = document.getElementById("gw");
+            df.disabled = true;
+        }
         var fenye = document.getElementById("fenye");
         fenye.innerHTML = "";
         if(result.currentPageCode != result.totalPages){
@@ -76,14 +81,8 @@ function loadBookTotal() {
     }
 }
 function checklogin() {
-    var coco = document.getElementsByClassName("DetermineWhetherLog").value;
-    if (coco == 2) {
-        var df = document.getElementById("gw");
-        df.disabled = true;
-    }else {
-        var bd = document.getElementById("bd").name;
-        comecart(bd);
-    }
+    var bd = document.getElementById("bd").name;
+    comecart(bd);
 }
 var url_gotocart = '/find/cart?bookId=';
 var ppx = null;
@@ -133,6 +132,11 @@ function loadBookLastMonth() {
                 relist[i].bookMarkedPrice + '</span><span class="che"><a id="gw" href="javascript:checklogin()">' +
                 '加入购物车</a></span></div></div>');
         }
+        var su = sessionStorage.getItem("login");
+        if (su != "success") {
+            var df = document.getElementById("gw");
+            df.disabled = true;
+        }
         var fenye = document.getElementById("fenye");
         fenye.innerHTML = "";
         if(result.currentPageCode != result.totalPages){
@@ -179,6 +183,11 @@ function loadBookLastMonthCategory() {
                 relist[i].bookSellingPrice + '</span><span class="jiaxian">¥</span><span class="jiaxian">' +
                 relist[i].bookMarkedPrice + '</span><span class="che"><a id="gw" href="javascript:checklogin()">' +
                 '加入购物车</a></span></div></div>');
+        }
+        var su = sessionStorage.getItem("login");
+        if (su != "success") {
+            var df = document.getElementById("gw");
+            df.disabled = true;
         }
         var fenye = document.getElementById("fenye");
         fenye.innerHTML = "";
