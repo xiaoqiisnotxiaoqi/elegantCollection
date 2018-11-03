@@ -6,13 +6,12 @@
     <meta charset="UTF-8">
     <title>编辑个人信息档案</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/user_info.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/my_Elegant.css">
     <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/user_info.js"></script>
 </head>
 <body>
 <jsp:include page="top.jsp" flush="true"/>
-<%--<iframe src="${pageContext.request.contextPath}/top" style="width: 100%; border: none;--%>
-<%--frameborder:0;"></iframe>--%>
 
 
 
@@ -29,68 +28,36 @@
     <!--个人信息开始操作-->
     <div class="main_frame">
         <!--左侧栏开始-->
-        <div class="mydang_left">
-            <div class="mydang_left_inner">
-                <h3 class="mydang_left_title border_top0">我的长用链接
-                    <%--<a id="DocPersonal_set" name="setting" href="#" style="font-size: 12px; color:#1A66B3;--%>
-                    <%--font-family: 宋体; font-weight:normal; padding-left: 40px;">设置</a>--%>
-                </h3>
-                <ul style="padding:0px;" class="my_href" id="myfavoriteLink"></ul>
-                <h3 class="mydang_left_title">我的交易
-                    <a class="slide_up" id="class600" href="javascript:click_a('class600','display600')"></a>
-                </h3>
+        <div class="my_left">
+            <div class="my_menu">
 
-                <ul class="my_content" style="display:block;" id="display600">
+                <h3 class="my_menu-title"><a href="#">我的雅志</a></h3>
+                <div class="dl">
+                    <!--导航栏开始-->
 
-                    <li><a class="" target="_parent" href="#"
-                           name="myallorders">我的订单test</a>
-                    </li>
+                    <ul>我的交易</ul>
+                    <li><a href="#">我的订单</a></li>
+                    <ul>我的钱包</ul>
+                    <!--<li><a href="#">我的余额</a></li>-->
+                    <li><a href="#">我的积分</a></li>
+                    <ul>售后服务</ul>
+                    <li><a href="#">申请/查询退换货</a></li>
 
-                </ul>
+                    <ul>个人中心</ul>
+                    <li><a href="#">个人信息</a></li>
 
-
-                <h3 class="mydang_left_title">我的钱包
-                    <a class="slide_up" id="class620" href="javascript:click_a('class620','display620')"></a>
-                </h3>
-                <ul class="my_content" style="display:block;" id="display620">
-
-
-
-                    <li><a class="" target="_parent" href="#" name="points_index_list">我的积分</a></li>
-                </ul>
-                <h3 class="mydang_left_title">售后服务
-                    <a class="slide_up" id="class630" href="javascript:click_a('class630','display630')"></a>
-                </h3>
-                <ul class="my_content" style="display:block;" id="display630">
-                    <li><a class="" target="_parent" href="#" name="re_list">申请/查询退换货</a></li>
-
-                </ul>
-                <h3 class="mydang_left_title">个人中心
-                    <a class="slide_up" id="class640" href="javascript:click_a('class640','display640')"></a>
-                </h3>
-                <ul class="my_content" style="display:block;" id="display640">
-                    <li><a href="#" class="on">个人信息</a></li>
-
-                    <li><a class="" target="_parent" href="#" name="myaddress">收货地址</a></li>
-                    <li><a class="" target="_parent" href="#" name="myfeed">邮件/短信订阅</a></li>
-                </ul>
-                <h3 class="mydang_left_title">安全中心
-                    <a class="slide_up" id="class610" href="javascript:click_a('class610','display610')"></a>
-                </h3>
-                <ul class="my_content" style="display:block;" id="display610">
-                    <li><a class="" target="_parent" href="#" name="my_login_pwd">登录密码</a></li>
-                    <li><a class="" target="_parent" href="#" name="my_email">邮箱验证</a></li>
-                    <li><a class="" target="_parent" href="#" name="my_phone">手机绑定</a></li>
-
-                </ul>
-
-                <h3 class="mydang_left_title">社区
-                    <a class="slide_up" id="class650" href="javascript:click_a('class650','display650')"></a>
-                </h3>
-                <ul class="my_content" style="display:block;" id="display650">
-                    <li><a class="" target="_parent" href="#" name="myreview">评论/晒单</a></li>
-                    <li><a class="" target="_parent" href="#" name="myquestion">提问/回答</a></li>
-                </ul>
+                    <li><a href="#">收货地址</a></li>
+                    <ul>安全中心</ul>
+                    <li><a href="#">登录密码</a></li>
+                    <li><a href="#">邮箱验证</a></li>
+                    <li><a href="#">手机绑定</a></li>
+                    <ul>我的消息</ul>
+                    <li><a href="#">消息查看</a></li>
+                    <!--<li><a href="#">发帖记录</a></li>-->
+                    <li><a href="#">评论/晒单</a></li>
+                    <li><a href="#">提问/回答</a></li>
+                </div>
+                <!--导航栏结束-->
             </div>
         </div>
 
@@ -356,7 +323,9 @@
                             <form  method="post"  enctype="multipart/form-data">
                             <input onclick="Hid(1); saveHead()" name="btnSaveHead" type="button"
                                    id="btnSaveHead" class="save_photo" disabled="disabled" value="保存头像">
-                            <input type="hidden" name="hd_value" id="hd_value">
+
+                                <input type="hidden" name="hd_value" id="hd_value">
+
                             <div class="total_ok_pic_green" id="div_update_state" style="display:none">头像已保存！</div>
                             <div class="clear"></div>
                             </form>
@@ -370,7 +339,7 @@
                                 <input type="file" name="file" id="Myfile" size="36" maxlength="30"
                                        onchange="changeSrc(this);addimg()" onclick="div_hidden('div_update_state');"
                                        onkeydown="chkonkeydown(event); "
-                                       style="height:21px; width:290px; font-size:12px; padding-top:3px; float:left;">
+                                       style="height:25px; width:290px; font-size:12px; padding-top:3px; float:left;">
                                 <input type="hidden" name="hid_opt" id="hid_opt">
                                 <input onclick="if (!Chkfile()) return false; upload()"
                                        name="btnUpload" type="submit" id="btnUpload" class="browse_button" height="20px"
@@ -411,7 +380,7 @@
                                    onfocus="changeclass(div_1)" onblur="cue_chk()">
 
                             <span class="c_gray" id="info_1"><p>您的昵称可以由小写英文字母、中文、数字组成，</p>长度4－20个字符，一个汉字为两个字符</span>
-                           
+
                         </div>
 
                         <div class="empty_box_left"></div>
@@ -441,6 +410,7 @@
 
                     <div class="mesage_list">
                         <input type="submit" name="Button1"  onclick="Chksubmit()"  value="保存基本信息" id="Button1" class="save_mess">
+
                         <div class="total_ok" id="total_ok" style="display: none">基本信息已更新!</div>
                         <div id="stateinfo_info">
                         </div>
@@ -451,9 +421,9 @@
             </div>
         </div>
     </div>
-<%--<jsp:include page="bottom.jsp" flush="true"/>--%>
-</body>
 
+</body>
+<jsp:include page="bottom.jsp" flush="true"/>
 
 <script>
 

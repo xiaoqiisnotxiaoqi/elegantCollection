@@ -111,11 +111,11 @@ public class AddressController {
     }
     @DeleteMapping("/delete")
     public String deleteaddress(Integer id){
-        System.out.println(id);
+//        System.out.println(id);
         Address address =addressService.queryByAdd(id);
         address.setAddressStatus(1);
         int result = addressService.deteleaddress(address);
-        System.out.println(result);
+//        System.out.println(result);
         if (result != 0)
             return "success";
         return "fail";

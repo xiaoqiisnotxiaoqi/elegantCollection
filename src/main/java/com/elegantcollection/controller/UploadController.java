@@ -50,7 +50,7 @@ public class UploadController {
             response.sendRedirect("/top");
             return "登陆中...";
         }
-        //check()
+        //check()检查文件的格式
         String originFileName = imageFile.getOriginalFilename();
         if (!originFileName.endsWith(".jpg")
                 && !originFileName.endsWith(".bmp")

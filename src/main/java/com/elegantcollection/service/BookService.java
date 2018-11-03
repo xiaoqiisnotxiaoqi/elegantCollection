@@ -84,6 +84,14 @@ public interface BookService {
      */
     Book quaryBookByBookId(Integer BookId);
 
+    /**
+     * 根据bookId查询书的对象
+     * @param BookId
+     * @return 返回一个BookWithBlOBs对象
+     */
+
+    BookWithBLOBs queryBybookIntro(Integer BookId);
+
 
     /**
      * 根据分类ID查询符合的图书
