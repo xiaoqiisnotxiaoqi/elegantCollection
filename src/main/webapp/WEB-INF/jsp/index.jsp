@@ -23,183 +23,183 @@
 <%--引入头部--%>
 <jsp:include page="topIndex.jsp"/>
 <%--<iframe src="/top" style="width: 100%; height: 220px;border: none;frameborder:0;"></iframe>--%>
-<div class="index">
+<div class="index-main">
     <!--左侧图书分类-->
-    <div class="container">
-        <div class="row classify">
-            <div class="panel panel-default">
-                <div class="panel-heading " id="classify-title">
-                    <h3 class="panel-title classify-font">图书分类</h3>
-                </div>
-                <div class="panel-body classify-content">
 
-                    <div class="row">
-                        <div class="col-md-10 classify-content-title" onclick="clickCate(this)"><input type="hidden"
-                                                                                                       name="10003">教育
-                        </div>
-                    </div>
-                    <div class="row classify-content-all">
-                        <div class="col-md-2 classify-content-con">
-                            <div class="classify-con" onclick="clickCate(this)"><input type="hidden" name="10004">教材
-                            </div>
-                            <div class="classify-xian"></div>
-                        </div>
-                        <div class="col-md-2 classify-content-con">
-                            <div class="classify-con" onclick="clickCate(this)"><input type="hidden" name="10005">外语
-                            </div>
-                            <div class="classify-xian"></div>
-                        </div>
-                        <div class="col-md-2 classify-content-con">
-                            <div class="classify-con" onclick="clickCate(this)"><input type="hidden" name="10006">工具书
-                            </div>
-                        </div>
-                        <%--<div class="classify-bottom-xian"></div>--%>
-                    </div>
-                </div>
+    <div class="row classify">
+        <div class="panel panel-default">
+            <div class="panel-heading " id="classify-title">
+                <h3 class="panel-title classify-font">图书分类</h3>
+            </div>
+            <div class="panel-body classify-content">
 
-                <div class="panel-body classify-content">
-                    <div class="classify-bottom-xian"></div>
-                    <div class="row">
-                        <div class="col-md-10 classify-content-title" onclick="clickCate(this)"><input type="hidden"
-                                                                                                       name="10008">文艺
-                        </div>
-                    </div>
-                    <div class="row classify-content-all">
-                        <div class="col-md-2 classify-content-con">
-                            <div class="classify-con" onclick="clickCate(this)"><input type="hidden" name="10009">文学
-                            </div>
-                            <div class="classify-xian"></div>
-                        </div>
-                        <div class="col-md-2 classify-content-con">
-                            <div class="classify-con" onclick="clickCate(this)"><input type="hidden" name="10010">传记
-                            </div>
-                            <div class="classify-xian"></div>
-                        </div>
-                        <div class="col-md-2 classify-content-con">
-                            <div class="classify-con" onclick="clickCate(this)"><input type="hidden" name="10011">艺术
-                            </div>
-                        </div>
-                        <%--<div class="classify-bottom-xian"></div>--%>
+                <div class="row">
+                    <div class="col-md-10 classify-content-title" onclick="clickCate(this)"><input type="hidden"
+                                                                                                   name="10003">教育
                     </div>
                 </div>
-                <div class="panel-body classify-content">
-                    <div class="classify-bottom-xian"></div>
-                    <div class="row">
-                        <div class="col-md-10 classify-content-title" onclick="clickCate(this)"><input type="hidden"
-                                                                                                       name="10013">人文社科
+                <div class="row classify-content-all">
+                    <div class="col-md-2 classify-content-con">
+                        <div class="classify-con" onclick="clickCate(this)"><input type="hidden" name="10004">教材
+                        </div>
+                        <div class="classify-xian"></div>
+                    </div>
+                    <div class="col-md-2 classify-content-con">
+                        <div class="classify-con" onclick="clickCate(this)"><input type="hidden" name="10005">外语
+                        </div>
+                        <div class="classify-xian"></div>
+                    </div>
+                    <div class="col-md-2 classify-content-con">
+                        <div class="classify-con" onclick="clickCate(this)"><input type="hidden" name="10006">工具书
                         </div>
                     </div>
-                    <div class="row classify-content-all">
-                        <div class="col-md-2 classify-content-con">
-                            <div class="classify-con" onclick="clickCate(this)"><input type="hidden" name="10014">历史
-                            </div>
-                            <div class="classify-xian"></div>
-                        </div>
-                        <div class="col-md-2 classify-content-con">
-                            <div class="classify-con" onclick="clickCate(this)"><input type="hidden" name="10015">哲学
-                            </div>
-                            <div class="classify-xian"></div>
-                        </div>
-                        <div class="col-md-2 classify-content-con">
-                            <div class="classify-con" onclick="clickCate(this)"><input type="hidden" name="10016">文化
-                            </div>
-                            <div class="classify-xian"></div>
-                        </div>
-                        <div class="col-md-2 classify-content-con">
-                            <div class="classify-con" onclick="clickCate(this)"><input type="hidden" name="10017">政治/军事
-                            </div>
-                            <div class="classify-xian"></div>
-                        </div>
+                    <%--<div class="classify-bottom-xian"></div>--%>
+                </div>
+            </div>
 
-                        <div class="col-md-2 classify-content-con">
-                            <div class="classify-con" onclick="clickCate(this)"><input type="hidden" name="10018">法律
-                            </div>
-                            <div class="classify-xian"></div>
-                        </div>
-                        <div class="col-md-2 classify-content-con">
-                            <div class="classify-con" onclick="clickCate(this)"><input type="hidden" name="10019">社会科学
-                            </div>
-                            <div class="classify-xian"></div>
-                        </div>
-                        <div class="col-md-2 classify-content-con">
-                            <div class="classify-con" onclick="clickCate(this)"><input type="hidden" name="10020">心理学
-                            </div>
-                        </div>
-                        <%--<div class="classify-bottom-xian"></div>--%>
+            <div class="panel-body classify-content">
+                <div class="classify-bottom-xian"></div>
+                <div class="row">
+                    <div class="col-md-10 classify-content-title" onclick="clickCate(this)"><input type="hidden"
+                                                                                                   name="10008">文艺
                     </div>
                 </div>
-                <div class="panel-body classify-content">
-                    <div class="classify-bottom-xian"></div>
-                    <div class="row">
-                        <div class="col-md-10 classify-content-title" onclick="clickCate(this)"><input type="hidden"
-                                                                                                       name="10022">生活
+                <div class="row classify-content-all">
+                    <div class="col-md-2 classify-content-con">
+                        <div class="classify-con" onclick="clickCate(this)"><input type="hidden" name="10009">文学
+                        </div>
+                        <div class="classify-xian"></div>
+                    </div>
+                    <div class="col-md-2 classify-content-con">
+                        <div class="classify-con" onclick="clickCate(this)"><input type="hidden" name="10010">传记
+                        </div>
+                        <div class="classify-xian"></div>
+                    </div>
+                    <div class="col-md-2 classify-content-con">
+                        <div class="classify-con" onclick="clickCate(this)"><input type="hidden" name="10011">艺术
                         </div>
                     </div>
-                    <div class="row classify-content-all">
-                        <div class="col-md-2 classify-content-con">
-                            <div class="classify-con" onclick="clickCate(this)"><input type="hidden" name="10023">两性
-                            </div>
-                            <div class="classify-xian"></div>
-                        </div>
-                        <div class="col-md-2 classify-content-con">
-                            <div class="classify-con" onclick="clickCate(this)"><input type="hidden" name="10024">育儿
-                            </div>
-                            <div class="classify-xian"></div>
-                        </div>
-                        <div class="col-md-2 classify-content-con">
-                            <div class="classify-con" onclick="clickCate(this)"><input type="hidden" name="10025">亲子家教
-                            </div>
-                            <div class="classify-xian"></div>
-                        </div>
-                        <div class="col-md-2 classify-content-con">
-                            <div class="classify-con" onclick="clickCate(this)"><input type="hidden" name="10026">运动
-                            </div>
-                            <div class="classify-xian"></div>
-                        </div>
-                        <div class="col-md-2 classify-content-con">
-                            <div class="classify-con" onclick="clickCate(this)"><input type="hidden" name="10027">家居
-                            </div>
-                        </div>
-                        <%--<div class="classify-bottom-xian"></div>--%>
+                    <%--<div class="classify-bottom-xian"></div>--%>
+                </div>
+            </div>
+            <div class="panel-body classify-content">
+                <div class="classify-bottom-xian"></div>
+                <div class="row">
+                    <div class="col-md-10 classify-content-title" onclick="clickCate(this)"><input type="hidden"
+                                                                                                   name="10013">人文社科
                     </div>
                 </div>
-                <div class="panel-body classify-content">
-                    <div class="classify-bottom-xian"></div>
-                    <div class="row">
-                        <div class="col-md-10 classify-content-title" onclick="clickCate(this)"><input type="hidden"
-                                                                                                       name="10028">科技
+                <div class="row classify-content-all">
+                    <div class="col-md-2 classify-content-con">
+                        <div class="classify-con" onclick="clickCate(this)"><input type="hidden" name="10014">历史
                         </div>
+                        <div class="classify-xian"></div>
                     </div>
-                    <div class="row classify-content-all">
-                        <div class="col-md-2 classify-content-con">
-                            <div class="classify-con" onclick="clickCate(this)"><input type="hidden" name="10029">建筑
-                            </div>
-                            <div class="classify-xian"></div>
+                    <div class="col-md-2 classify-content-con">
+                        <div class="classify-con" onclick="clickCate(this)"><input type="hidden" name="10015">哲学
                         </div>
-                        <div class="col-md-2 classify-content-con">
-                            <div class="classify-con" onclick="clickCate(this)"><input type="hidden" name="10030">医学
-                            </div>
-                            <div class="classify-xian"></div>
+                        <div class="classify-xian"></div>
+                    </div>
+                    <div class="col-md-2 classify-content-con">
+                        <div class="classify-con" onclick="clickCate(this)"><input type="hidden" name="10016">文化
                         </div>
-                        <div class="col-md-2 classify-content-con">
-                            <div class="classify-con" onclick="clickCate(this)"><input type="hidden" name="10031">计算机
-                            </div>
-                            <div class="classify-xian"></div>
+                        <div class="classify-xian"></div>
+                    </div>
+                    <div class="col-md-2 classify-content-con">
+                        <div class="classify-con" onclick="clickCate(this)"><input type="hidden" name="10017">政治/军事
                         </div>
-                        <div class="col-md-2 classify-content-con">
-                            <div class="classify-con" onclick="clickCate(this)"><input type="hidden" name="10032">自然科学
-                            </div>
-                            <div class="classify-xian"></div>
-                        </div>
-                        <div class="col-md-2 classify-content-con">
-                            <div class="classify-con" onclick="clickCate(this)"><input type="hidden" name="10033">工业
-                            </div>
-                        </div>
+                        <div class="classify-xian"></div>
+                    </div>
 
+                    <div class="col-md-2 classify-content-con">
+                        <div class="classify-con" onclick="clickCate(this)"><input type="hidden" name="10018">法律
+                        </div>
+                        <div class="classify-xian"></div>
                     </div>
+                    <div class="col-md-2 classify-content-con">
+                        <div class="classify-con" onclick="clickCate(this)"><input type="hidden" name="10019">社会科学
+                        </div>
+                        <div class="classify-xian"></div>
+                    </div>
+                    <div class="col-md-2 classify-content-con">
+                        <div class="classify-con" onclick="clickCate(this)"><input type="hidden" name="10020">心理学
+                        </div>
+                    </div>
+                    <%--<div class="classify-bottom-xian"></div>--%>
+                </div>
+            </div>
+            <div class="panel-body classify-content">
+                <div class="classify-bottom-xian"></div>
+                <div class="row">
+                    <div class="col-md-10 classify-content-title" onclick="clickCate(this)"><input type="hidden"
+                                                                                                   name="10022">生活
+                    </div>
+                </div>
+                <div class="row classify-content-all">
+                    <div class="col-md-2 classify-content-con">
+                        <div class="classify-con" onclick="clickCate(this)"><input type="hidden" name="10023">两性
+                        </div>
+                        <div class="classify-xian"></div>
+                    </div>
+                    <div class="col-md-2 classify-content-con">
+                        <div class="classify-con" onclick="clickCate(this)"><input type="hidden" name="10024">育儿
+                        </div>
+                        <div class="classify-xian"></div>
+                    </div>
+                    <div class="col-md-2 classify-content-con">
+                        <div class="classify-con" onclick="clickCate(this)"><input type="hidden" name="10025">亲子家教
+                        </div>
+                        <div class="classify-xian"></div>
+                    </div>
+                    <div class="col-md-2 classify-content-con">
+                        <div class="classify-con" onclick="clickCate(this)"><input type="hidden" name="10026">运动
+                        </div>
+                        <div class="classify-xian"></div>
+                    </div>
+                    <div class="col-md-2 classify-content-con">
+                        <div class="classify-con" onclick="clickCate(this)"><input type="hidden" name="10027">家居
+                        </div>
+                    </div>
+                    <%--<div class="classify-bottom-xian"></div>--%>
+                </div>
+            </div>
+            <div class="panel-body classify-content">
+                <div class="classify-bottom-xian"></div>
+                <div class="row">
+                    <div class="col-md-10 classify-content-title" onclick="clickCate(this)"><input type="hidden"
+                                                                                                   name="10028">科技
+                    </div>
+                </div>
+                <div class="row classify-content-all">
+                    <div class="col-md-2 classify-content-con">
+                        <div class="classify-con" onclick="clickCate(this)"><input type="hidden" name="10029">建筑
+                        </div>
+                        <div class="classify-xian"></div>
+                    </div>
+                    <div class="col-md-2 classify-content-con">
+                        <div class="classify-con" onclick="clickCate(this)"><input type="hidden" name="10030">医学
+                        </div>
+                        <div class="classify-xian"></div>
+                    </div>
+                    <div class="col-md-2 classify-content-con">
+                        <div class="classify-con" onclick="clickCate(this)"><input type="hidden" name="10031">计算机
+                        </div>
+                        <div class="classify-xian"></div>
+                    </div>
+                    <div class="col-md-2 classify-content-con">
+                        <div class="classify-con" onclick="clickCate(this)"><input type="hidden" name="10032">自然科学
+                        </div>
+                        <div class="classify-xian"></div>
+                    </div>
+                    <div class="col-md-2 classify-content-con">
+                        <div class="classify-con" onclick="clickCate(this)"><input type="hidden" name="10033">工业
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
+
         <div>
 
         </div>
@@ -285,7 +285,7 @@
     <!--中间的新书上架-->
     <div class="container">
         <div class="row">
-            <div class="col-lg-12 new-all">
+            <div class="col-lg-8 new-all">
                 <div class="new-title">新</div>
                 <div class="new-content">书上架</div>
             </div>
@@ -424,27 +424,11 @@
         <div class="information-work-xian"></div>
     </div>
     <!--作者作品介绍-->
-    <div class="row hot-author-work" id="first-author-books">
-
-    </div>
+    <div class="row hot-author-work" id="first-author-books"></div>
     <!--作者排行榜-->
-    <div class="row author-sort" id="author-sort">
-
-    </div>
-
-
+    <div class="row author-sort" id="author-sort"></div>
     <%--仨书单--%>
-    <div class="row books-order" id="orders">
-        <div class="col-lg-4 book-order-content">
-            <img src="images/book_order.jpg" alt="">
-        </div>
-        <div class="col-lg-4 book-order-content">
-            <img src="images/book_order.jpg" alt="">
-        </div>
-        <div class="col-lg-4 book-order-content">
-            <img src="images/book_order.jpg" alt="">
-        </div>
-    </div>
+    <div class="row books-order" id="orders"></div>
 </div>
 <%--引用底部--%>
 <jsp:include page="bottom.jsp"/>
