@@ -23,6 +23,7 @@ var url_contentphone = '/find/phonething?custPhone=';
 var xhr = null;
 var chuan = null;
 var dx = null;
+//根据手机号码查看用户是否存在
 function checkphone() {
     var inputPhone = document.getElementById("phonenb").value;
     chuan = inputPhone;
@@ -129,6 +130,7 @@ function loadmima() {
 }
 var url_uppwd = '/find/phonepwd?custPhone=';
 var xrh = null;
+//更改用户密码
 function uppassd() {
     var inputPwd = document.getElementById("newpwd").value;
     var url_doubletran = url_uppwd + chuan + "&custPassword=" + inputPwd;
