@@ -8,6 +8,7 @@ onload = function () {
 }
 var xhr = null;
 var xrh = null;
+//获取书籍二级类别
 function refreshCategory(url_getcategory){
     if(window.XMLHttpRequest){
         xrh = new XMLHttpRequest();
@@ -31,6 +32,7 @@ function loadCategory() {
         }
     }
 }
+//按总销量降序显示图书
 function refreshBookTotal(ugbt){
     if(window.XMLHttpRequest){
         xhr = new XMLHttpRequest();
@@ -49,12 +51,19 @@ function loadBookTotal() {
         var shulie = document.getElementById("shulie");
         shulie.innerHTML = "";
         for (var i = 0; i < relist.length; i++) {
-            shulie.innerHTML += ('<div class="shu"><div class="zuo"><a href="#" name="' + relist[i].bookId +
+            shulie.innerHTML += ('<div class="shu"><div class="zuo"><a id="bd" href="#" name="' + relist[i].bookId +
                 '" onclick="getDetail(this)"><img src="' + relist[i].bookImg + '"></a></div><div class="you">' +
                 '<span class="sqone"><a href="#" name="' + relist[i].bookId + '" onclick="getDetail(this)">' +
                 relist[i].bookName + '</a></span><span class="jia">¥</span><span class="jia">' +
                 relist[i].bookSellingPrice + '</span><span class="jiaxian">¥</span><span class="jiaxian">' +
-                relist[i].bookMarkedPrice + '</span><span class="che"><a href="#">加入购物车</a></span></div></div>');
+                relist[i].bookMarkedPrice + '</span><span class="che"><a id="gw" href="javascript:checklogin()">' +
+                '加入购物车</a></span></div></div>');
+        }
+        //判断是否登录
+        var su = sessionStorage.getItem("login");
+        if (su != "success") {
+            var df = document.getElementById("gw");
+            df.disabled = true;
         }
         var fenye = document.getElementById("fenye");
         fenye.innerHTML = "";
@@ -74,6 +83,35 @@ function loadBookTotal() {
         }
     }
 }
+function checklogin() {
+    var bd = document.getElementById("bd").name;
+    comecart(bd);
+}
+var url_gotocart = '/find/cart?bookId=';
+var ppx = null;
+//向购物车添加数据
+function comecart(dd) {
+    var ulr = url_gotocart + dd + "&bookCount=" + 1;
+    if(window.XMLHttpRequest){
+        ppx = new XMLHttpRequest();
+    }else {
+        ppx = new ActiveXObject('Microsoft.XMLHTTP');
+    }
+    ppx.open("GET",ulr,true);
+    ppx.setRequestHeader("Content-Type","application/json;charset=utf-8");
+    ppx.onreadystatechange = loadCart;
+    ppx.send();
+}
+//跳转到购物车
+function loadCart() {
+    if (xhr.readyState == 4 && xhr.status == 200){
+        var result = JSON.parse(xhr.responseText);
+        if (result != "添加失败") {
+            window.location = "custCart";
+        }
+    }
+}
+//按上月销量降序显示图书
 function getLastMonth(ugbl) {
     if(window.XMLHttpRequest){
         xhr = new XMLHttpRequest();
@@ -92,12 +130,18 @@ function loadBookLastMonth() {
         var shulie = document.getElementById("shulie");
         shulie.innerHTML = "";
         for (var i = 0; i < relist.length; i++) {
-            shulie.innerHTML += ('<div class="shu"><div class="zuo"><a href="#" name="' + relist[i].bookId +
+            shulie.innerHTML += ('<div class="shu"><div class="zuo"><a id="bd" href="#" name="' + relist[i].bookId +
                 '" onclick="getDetail(this)"><img src="' + relist[i].bookImg + '"></a></div><div class="you">' +
                 '<span class="sqone"><a href="#" name="' + relist[i].bookId + '" onclick="getDetail(this)">' +
                 relist[i].bookName + '</a></span><span class="jia">¥</span><span class="jia">' +
                 relist[i].bookSellingPrice + '</span><span class="jiaxian">¥</span><span class="jiaxian">' +
-                relist[i].bookMarkedPrice + '</span><span class="che"><a href="#">加入购物车</a></span></div></div>');
+                relist[i].bookMarkedPrice + '</span><span class="che"><a id="gw" href="javascript:checklogin()">' +
+                '加入购物车</a></span></div></div>');
+        }
+        var su = sessionStorage.getItem("login");
+        if (su != "success") {
+            var df = document.getElementById("gw");
+            df.disabled = true;
         }
         var fenye = document.getElementById("fenye");
         fenye.innerHTML = "";
@@ -118,6 +162,7 @@ function loadBookLastMonth() {
     }
 }
 var ugbc = null;
+//单一类别按总销量降序显示图书
 function getLastMonthCategory(pro) {
     ugbc = pro;
     if(window.XMLHttpRequest){
@@ -138,12 +183,18 @@ function loadBookLastMonthCategory() {
         var shulie = document.getElementById("shulie");
         shulie.innerHTML = "";
         for (var i = 0; i < relist.length; i++) {
-            shulie.innerHTML += ('<div class="shu"><div class="zuo"><a href="#" name="' + relist[i].bookId +
+            shulie.innerHTML += ('<div class="shu"><div class="zuo"><a id="bd" href="#" name="' + relist[i].bookId +
                 '" onclick="getDetail(this)"><img src="' + relist[i].bookImg + '"></a></div><div class="you">' +
                 '<span class="sqone"><a href="#" name="' + relist[i].bookId + '" onclick="getDetail(this)">' +
                 relist[i].bookName + '</a></span><span class="jia">¥</span><span class="jia">' +
                 relist[i].bookSellingPrice + '</span><span class="jiaxian">¥</span><span class="jiaxian">' +
-                relist[i].bookMarkedPrice + '</span><span class="che"><a href="#">加入购物车</a></span></div></div>');
+                relist[i].bookMarkedPrice + '</span><span class="che"><a id="gw" href="javascript:checklogin()">' +
+                '加入购物车</a></span></div></div>');
+        }
+        var su = sessionStorage.getItem("login");
+        if (su != "success") {
+            var df = document.getElementById("gw");
+            df.disabled = true;
         }
         var fenye = document.getElementById("fenye");
         fenye.innerHTML = "";
@@ -164,6 +215,7 @@ function loadBookLastMonthCategory() {
         }
     }
 }
+//跳转到图书详情
 function getDetail(pro) {
     window.location = "bookdetail?bookId=" + pro.name;
 }

@@ -5,6 +5,13 @@ import com.elegantcollection.service.*;
 import com.elegantcollection.util.CodeUtil;
 import com.elegantcollection.util.RandomNumberGeneration;
 import com.elegantcollection.util.SmsVerification;
+import com.elegantcollection.entity.Book;
+import com.elegantcollection.entity.Customer;
+import com.elegantcollection.entity.Evaluate;
+import com.elegantcollection.service.BookService;
+import com.elegantcollection.service.CustomerService;
+import com.elegantcollection.service.EvaluateService;
+import com.elegantcollection.util.*;
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,17 +68,32 @@ public class CustomerController {
         List<Customer> customerList;
         //判断用户输入的用户名为手机号,还是邮箱号
         if (custName.contains("@")) {
-            customerList = customerService.quaryCustomerByEmail(custName, pwd);
+            customerList = customerService.quaryCustomerByEmail(custName);
         } else {
-            customerList = customerService.quaryCustomerByPhone(custName, pwd);
+            customerList = customerService.quaryCustomerByPhone(custName);
         }
-
+        //判断用户名是否错误
         if (customerList.size() == 0){
             return "用户名或密码错误";
-        }else {
-            request.getSession().setAttribute("customer",customerList.get(0));
-            return  "success";
         }
+        //得到 该用户 对象
+        Customer customer = customerList.get(0);
+        //验证密码是否正确
+        boolean isCust = Md5.passwordEncryptionVerification(pwd,customer.getMore1(),customer.getCustPassword());
+
+
+        if (!isCust){
+            return "用户名或密码错误";
+        }else{
+            request.getSession().setAttribute("customer",customer);
+            return "success";
+
+        }
+
+
+
+
+
     }
 
 
@@ -150,8 +172,12 @@ public class CustomerController {
             return "短信验证码错误";
         }
         Customer customer = new Customer();
-        //用户密码
-        customer.setCustPassword(password);
+        Map<String,String> map = Md5.getMd5(password);
+
+        //用户密码(加密后)
+        customer.setCustPassword(map.get("md5"));
+        //该用户的盐值
+        customer.setMore1(map.get("secklillId"));
         //用户手机号
         customer.setCustPhone(phone);
         //用户注册时间
@@ -343,6 +369,67 @@ public class CustomerController {
         }
 
     }
+
+
+    @PostMapping("all")
+    public void updatePsw(){
+        List<Customer> customer = customerService.queryAllCust();
+        System.out.println(customer);
+        for (Customer customer1:customer){
+            Map<String,String> map = Md5.getMd5(customer1.getCustPassword());
+            customer1.setCustPassword(map.get("md5"));
+            customer1.setMore1(map.get("secklillId"));
+
+            customerService.updateCustomer(customer1);
+
+            System.out.println(map);
+           boolean a =  Md5.passwordEncryptionVerification(customer1.getCustPassword(),map.get("secklillId"),map.get("md5"));
+
+            System.out.println(a);
+        }
+
+
+
+    }
+
+
+    /**
+     * 查询我的评价
+     * @param pageCode 当前页码
+     * @param request  用来获取session
+     * @return 查询结果, 包含pagemodel booklist
+     */
+    @GetMapping("getMyEvaluate")
+    public HashMap myEvaluate(Integer pageCode, HttpServletRequest request) {
+        HashMap map = new HashMap();
+        PageModel pageModel = new PageModel();
+        Customer customer = (Customer) request.getSession().getAttribute("customer");
+        if (pageCode == null) {
+            pageModel.setCurrentPageCode(1);
+        } else {
+            pageModel.setCurrentPageCode(pageCode);
+        }
+        System.out.println("当前是第" + pageModel.getCurrentPageCode() + "页");
+        pageModel.setTotalRecord(evaluateService.countByCustomerId(customer.getCustId()));
+        System.out.println("共有 " + evaluateService.countByCustomerId(customer.getCustId()) + " 条记录");
+        pageModel.setTotalPages(pageModel.getTotalRecord() % pageModel.getPageSize() == 0 ? pageModel.getTotalRecord() / pageModel.getPageSize() : pageModel.getTotalRecord() / pageModel.getPageSize() + 1);
+        pageModel.setStartRecord((pageModel.getCurrentPageCode() - 1) * pageModel.getPageSize());
+
+        List<Evaluate> evaluateList = evaluateService.queryEvaluateByPage(pageModel, customer.getCustId());
+        List<Book> bookList = new ArrayList<>();
+        for (Evaluate e : evaluateList) {
+            Book book = bookService.quaryBookByBookId(e.getBookId());
+            bookList.add(book);
+        }
+
+        pageModel.setModelList(evaluateService.queryEvaluateByPage(pageModel, customer.getCustId()));
+
+
+        map.put("pageModel", pageModel);
+        map.put("bookList", bookList);
+        return map;
+    }
+
 
     /**
      * 根据用户的登录Id查询到订单

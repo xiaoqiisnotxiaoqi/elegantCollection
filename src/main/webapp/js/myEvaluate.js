@@ -7,12 +7,12 @@ function loadEvaluate() {
     } else {
         xhr = new ActiveXObject('Microsoft.XMLHTTP');//for ie6
     }
-    var pageCode = 1;
+    var pageCode = document.getElementById("currentPage").innerText;
     if (xhr != null) {
-        xhr.open("GET", "/getMyEvaluate", true);
+        xhr.open("GET", "/getMyEvaluate/?pageCode=" + pageCode, true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;");
         xhr.onreadystatechange = callFun;
-        xhr.send("pageCode=" + pageCode);
+        xhr.send();
     } else {
         alert("不能创建XMLHttpRequest对象实例");
     }
@@ -59,7 +59,6 @@ function loadEvaluate() {
 
 
             }
-
 
 
             //    渲染分页信息

@@ -23,16 +23,16 @@ public class CustomerServiceImpl implements CustomerService {
 
 
     @Override
-    public List<Customer> quaryCustomerByEmail(String email, String pwd) {
+    public List<Customer> quaryCustomerByEmail(String email) {
         CustomerExample customerExample = new CustomerExample();
-        customerExample.createCriteria().andCustMailEqualTo(email).andCustPasswordEqualTo(pwd);
+        customerExample.createCriteria().andCustMailEqualTo(email);
         return customerDao.selectByExample(customerExample);
     }
 
     @Override
-    public List<Customer> quaryCustomerByPhone(String phone, String pwd) {
+    public List<Customer> quaryCustomerByPhone(String phone) {
         CustomerExample customerExample = new CustomerExample();
-        customerExample.createCriteria().andCustPhoneEqualTo(phone).andCustPasswordEqualTo(pwd);
+        customerExample.createCriteria().andCustPhoneEqualTo(phone);
         return customerDao.selectByExample(customerExample);
     }
 
@@ -101,6 +101,20 @@ public class CustomerServiceImpl implements CustomerService {
         args.put("custPassword",custPassword);
         int t = customerDao.updateByPhone(args);
         return t;
+    }
+
+    @Override
+    public List<Customer> queryAllCust() {
+        CustomerExample customerExample = new CustomerExample();
+        List<Customer> customerList = customerDao.selectByExample(customerExample);
+        return customerList;
+    }
+
+    @Override
+    public Integer updateCustomer(Customer customer) {
+        CustomerExample customerExample = new CustomerExample();
+        customerExample.createCriteria().andCustIdEqualTo(customer.getCustId());
+        return customerDao.updateByExample(customer,customerExample);
     }
 
 

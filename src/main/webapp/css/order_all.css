@@ -16,21 +16,25 @@ li {
     display: inline-block;
     list-style: none;
 }
-th{
+
+th {
     color: gray;
 }
-td{
+
+td {
     text-align: center;
 }
+
 .block-segmentation {
     display: inline-block;
     width: 100%;
     height: 30px;
 }
 
-.order-introduction{
+.order-introduction {
     border: 1px rgb(205, 205, 205) solid;
     text-align: left;
+    background-color: rgb(245, 245, 245)
 }
 
 .order-introduction span {
@@ -48,8 +52,6 @@ td{
     border: 1px rgb(205, 205, 205) solid;
     background-color: rgb(255, 255, 255);
 }
-
-
 
 .order-tip {
     background-color: rgb(255, 255, 255);
@@ -75,12 +77,13 @@ td{
     border-collapse: collapse;
 }
 
-.order-time-filter{
+.order-time-filter {
     border: none;
     font-weight: bold;
     font-size: 11px;
     color: gray;
 }
+
 .order-state-list {
     display: inline-block;
     width: 70%;
@@ -93,7 +96,8 @@ td{
     width: 20%;
     height: 40px;
 }
-.order-state-filter a{
+
+.order-state-filter a {
     color: black;
 }
 
@@ -133,11 +137,11 @@ td{
 }
 
 .book-img img {
-    width: 200px;
-    height: 200px;
+    width: 100px;
+    height: 100px;
 }
 
-.order-one{
+.order-one {
     border: 1px rgb(205, 205, 205) solid;
 }
 
@@ -162,18 +166,20 @@ td{
     float: right;
     width: 60px;
 }
-.page-code{
+
+.page-code {
     text-align: center;
     display: inline-block;
     float: right;
     width: 40px;
 }
-.info-body{
+
+.info-body {
+    min-height: 500px;
     width: 70%;
     margin: 0 auto;
-    background-color: rgb(245, 245, 245);
 }
 
-.page-number{
+.page-number {
     float: left;
 }

@@ -6,6 +6,7 @@ onload = function () {
 }
 var xhr = null;
 var xrh = null;
+//获取作者信息
 function refreshAuthor(url_getauthor){
     if(window.XMLHttpRequest){
         xhr = new XMLHttpRequest();
@@ -26,6 +27,7 @@ function loadAuthor() {
             '<span>' + result.authorIntro + '</span></div></div>');
     }
 }
+//获取该作者的所有作品
 function refreshBook(url_getbook){
     if(window.XMLHttpRequest){
         xrh = new XMLHttpRequest();
@@ -54,6 +56,7 @@ function loadBook() {
         all.style.height=height+'px';
     }
 }
+//跳转到图书详情
 function getDetail(pro) {
     window.location = "bookdetail/?bookId=" + pro.name;
 }

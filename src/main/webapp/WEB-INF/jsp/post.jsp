@@ -31,6 +31,7 @@
             <div class="block-segmentation"></div>
         </div>
         <div class="all-popular-posts" id="all-popular-posts">
+            <span class="all-popular-posts-tip"> 热门书评榜</span>
         </div>
         <div class="pagination">
             <div id="pagination-btns">
