@@ -127,12 +127,12 @@ function getDate() {
         orderPage.innerHTML = "<tr>\n" +
             "            <td colspan=\"6\">\n" +
             "                <div class=\"page-information\">\n" +
+            "                    <span class=\"page-number\">总页数</span>\n" +
             (jsonText.currentPageCode != jsonText.totalPages ? "<a href=\"#\" onclick=\"refreshByPage(" + jsonText.totalPages + ")\">尾页</a>\n" : "<a href=\"#\">尾页</a>\n") +
             (jsonText.currentPageCode != jsonText.totalPages ? "<a href=\"#\" onclick=\"refreshByPage(" + nextNumber + ")\">下一页</a>\n" : "<a href=\"#\">下一页</a>\n") +
             "                    <span class=\"page-code\">" + jsonText.currentPageCode + "</span>\n" +
             (jsonText.currentPageCode != 1 ? "<a href=\"#\" onclick=\"refreshByPage(" + previousNumber + ")\">上一页</a>\n" : "<a href=\"#\">上一页</a>\n") +
             (jsonText.currentPageCode != 1 ? "<a href=\"#\" onclick=\"refreshByPage(1)\">首页</a>\n" : "<a href=\"#\">首页</a>\n") +
-            "                    <span class=\"page-number\">总页数</span>\n" +
             "               <span class=\"page-number\">" + jsonText.totalPages + "</span>\n" +
             "                </div>\n" +
             "            </td>\n" +
