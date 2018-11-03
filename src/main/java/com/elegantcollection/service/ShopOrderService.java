@@ -121,4 +121,12 @@ public interface ShopOrderService {
      * @return 结果数
      */
     Integer queryByBookName4Size(Integer custId, String bookName);
+
+    /**
+     * 根据用户Id查询所有订单
+     * @param custId  用户Id
+     * @return 订单集合
+     *
+     */
+    List<ShopOrder> queryByOreder(Integer custId,Integer orderStatus);
 }

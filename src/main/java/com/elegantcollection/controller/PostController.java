@@ -30,19 +30,26 @@ public class PostController {
         this.blockService = blockService;
     }
 
-@PostMapping("add")
-public String add(@Param("postTitle") String postTitle, @Param("postContext")String postContext, HttpServletRequest request){
-    Integer custId=10002;//(Integer) request.getSession().getAttribute("custId");
-    Integer blockId=10002;//(Integer) request.getSession().getAttribute("blockId");
-        Post post=new Post();
+    /**
+     * 发书评
+     * @param postTitle
+     * @param postContext
+     * @param request
+     * @return
+     */
+    @PostMapping("add")
+    public String add(@Param("postTitle") String postTitle, @Param("postContext") String postContext, HttpServletRequest request) {
+        Integer custId = (Integer) request.getSession().getAttribute("custId");
+        Integer blockId = 10002;//(Integer) request.getSession().getAttribute("blockId");
+        Post post = new Post();
         post.setCustId(custId);
         post.setPostPetname(String.valueOf(blockId));
         post.setPostTitle(postTitle);
         post.setPostText(postContext);
         post.setPostTime(new Date());
-        String.valueOf(postService.add(post,request));
+        String.valueOf(postService.add(post, request));
         return "post";
-}
+    }
 
     /**
      * 获取板块信息
@@ -52,7 +59,7 @@ public String add(@Param("postTitle") String postTitle, @Param("postContext")Str
      */
     @GetMapping("getBlock")
     HashMap<String, Object> showBlockInfo(HttpServletRequest request) {
-        Integer blockId=10002;//(Integer) request.getSession().getAttribute("blockId");
+        Integer blockId = 10002;//(Integer) request.getSession().getAttribute("blockId");
         HashMap<String, Object> hashMap = new HashMap<>();
         Block block = blockService.queryByBlockId(blockId);
         Integer postNumber = postService.queryPostNumber(blockId);
@@ -69,7 +76,7 @@ public String add(@Param("postTitle") String postTitle, @Param("postContext")Str
      */
     @GetMapping("queryStickPost")
     List<Post> queryStickPost(Integer blockId) {
-        blockId=10002;
+        blockId = 10002;
         return postService.queryStickPost(blockId);
     }
 
@@ -81,7 +88,7 @@ public String add(@Param("postTitle") String postTitle, @Param("postContext")Str
      */
     @GetMapping("queryPost")
     PageModel<Post> queryPost(HttpServletRequest request, Integer currentPageCode) {
-        Integer blockId=10002;//(Integer) request.getSession().getAttribute("blockId");
+        Integer blockId = 10002;//(Integer) request.getSession().getAttribute("blockId");
         initializePageModel(currentPageCode);
         pageModel.setPageSize(10);
         Integer size = postService.queryPost4Size(blockId);
@@ -99,7 +106,7 @@ public String add(@Param("postTitle") String postTitle, @Param("postContext")Str
      */
     @GetMapping("queryBestPost")
     PageModel<Post> queryBestPost(HttpServletRequest request, Integer currentPageCode) {
-        Integer blockId=10002;//(Integer) request.getSession().getAttribute("blockId");
+        Integer blockId = 10002;//(Integer) request.getSession().getAttribute("blockId");
         initializePageModel(currentPageCode);
         pageModel.setPageSize(1);
         Integer size = postService.queryBestPost4Size(blockId);
