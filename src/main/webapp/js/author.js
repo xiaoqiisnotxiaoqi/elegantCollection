@@ -19,7 +19,7 @@ function refreshAuthor(url_getauthor){
     xhr.send();
 }
 function loadAuthor() {
-    if (xhr.readyState == 4 && xhr.status == 200) {
+    if (xhr.readyState === 4 && xhr.status === 200) {
         var result = JSON.parse(xhr.responseText);
         var jian = document.getElementById("jian");
         jian.innerHTML += ('<div class="tu"><img src="' + result.authorImg + '"></div><div class="jie">' +
@@ -40,7 +40,7 @@ function refreshBook(url_getbook){
     xrh.send();
 }
 function loadBook() {
-    if (xrh.readyState == 4 && xrh.status == 200) {
+    if (xrh.readyState === 4 && xrh.status === 200) {
         var result = JSON.parse(xrh.responseText);
         var zuo = document.getElementById("zuo");
         zuo.innerHTML = "";
