@@ -157,7 +157,8 @@ td {
 }
 
 .page-information {
-    padding-right: 50px;
+    height: 1px;
+    margin: 10px 0 25px 0;
 }
 
 .page-information a {
@@ -181,5 +182,6 @@ td {
 }
 
 .page-number {
-    float: left;
+    color: dimgrey;
+    float: right;
 }

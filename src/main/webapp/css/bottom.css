@@ -1,4 +1,6 @@
 .page-body {
+    width: 100%;
+    float: left;
     border-top: red 1px solid;
     padding-top: 15px;
     float: left;

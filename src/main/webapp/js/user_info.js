@@ -230,7 +230,7 @@ function ShowHidDIV(divname)
 {
     var fileobj = document.getElementById('Myfile');
     var h_upload_state = document.getElementById('h_upload_state');
-    if (h_upload_state) h_upload_state.value=1;
+    if (h_upload_state)  h_upload_state.value=1;
     div_upload_state_opt('<img src="../images/loading.gif" title="上传状态中" /><p>上传中...</p>','loading');
 }
 

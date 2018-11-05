@@ -231,6 +231,11 @@ public class BookServiceImpl implements BookService {
         return bookDao.selectByPrimaryKey(bookId);
     }
 
+    @Override
+    public BookWithBLOBs queryBybookIntro(Integer BookId) {
+        return bookDao.selectByPrimaryKey(BookId);
+    }
+
 
     /**
      * 根据分类ID查询图书
