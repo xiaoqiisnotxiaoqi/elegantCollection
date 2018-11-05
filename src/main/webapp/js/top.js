@@ -80,11 +80,12 @@ function outli(ele){
 function showDiv(){
         var Idiv     = document.getElementById("loginModal");
         Idiv.className = "modal";
-        Idiv.style.display = "block";
-        Idiv.style.position = "absolute";
+        Idiv.style.zIndex = "600";
+        Idiv.style.display = "";
+        Idiv.style.position = "fixed";
         //以下部分要将弹出层居中显示
-        Idiv.style.left=(window.screen.availWidth - 540)/2 + 100 +"px";
-        Idiv.style.top =(window.screen.availHeight - 320)/2 - 100 +"px";
+        Idiv.style.left=(window.screen.availWidth )/2 - 100 +"px";
+        Idiv.style.top =(window.screen.availHeight )/2 - 150 +"px";
                          
         //以下部分使整个页面至灰不可点击
         var procbg = document.createElement("div"); //首先创建一个div
@@ -92,9 +93,12 @@ function showDiv(){
         procbg.style.background = "#000000";
         procbg.style.width = "100%";
         procbg.style.height = "100%";
-        procbg.style.position = "absolute";
+        procbg.style.position = "fixed";
+        procbg.style.overflowY = "hidden";
         procbg.style.top = "0";
         procbg.style.left = "0";
+        procbg.style.bottom = "0";
+        procbg.style.right = "0";
         procbg.style.zIndex = "500";
         procbg.style.opacity = "0.6";
         procbg.style.filter = 0.9;
@@ -124,9 +128,12 @@ function showDiv2(){
     procbg.style.background = "#000000";
     procbg.style.width = "100%";
     procbg.style.height = "100%";
-    procbg.style.position = "absolute";
+    procbg.style.position = "fixed";
+    procbg.style.overflowY = "hidden";
     procbg.style.top = "0";
     procbg.style.left = "0";
+    procbg.style.bottom = "0";
+    procbg.style.right = "0";
     procbg.style.zIndex = "500";
     procbg.style.opacity = "0.6";
     procbg.style.filter = 0.9;
@@ -136,7 +143,6 @@ function showDiv2(){
     isLogin = true;
 
 }
-
 
 
 
@@ -217,8 +223,8 @@ function showRegister(){
     Idiv.style.display = "block";
     Idiv.style.zIndex = "1000";
     //以下部分要将弹出层居中显示
-    Idiv.style.left=(document.documentElement.clientWidth-Idiv.clientWidth)/2+document.documentElement.scrollLeft - 500+"px";
-    Idiv.style.top =(document.documentElement.clientHeight-Idiv.clientHeight)/2+document.documentElement.scrollTop+"px";
+    Idiv.style.left=(window.screen.availWidth )/2 - 100 +"px";
+    Idiv.style.top =(window.screen.availHeight )/2 - 230 +"px";
 
     //以下部分使整个页面至灰不可点击
     var procbg = document.createElement("div"); //首先创建一个div
@@ -226,6 +232,39 @@ function showRegister(){
     procbg.style.background = "#000000";
     procbg.style.width = "100%";
     procbg.style.height = "100%";
+    procbg.style.position = "fixed";
+    procbg.style.overflowY = "hidden";
+    procbg.style.top = "0";
+    procbg.style.left = "0";
+    procbg.style.zIndex = "500";
+    procbg.style.opacity = "0.6";
+    procbg.style.filter = 0.9;
+    //背景层加入页面
+    document.body.appendChild(procbg);
+    document.body.style.overflow = "hidden"; //取消滚动条
+    isRegister = true;
+}
+
+
+
+/**
+ * 首页 点击 弹出注册页面
+ */
+function showRegister2(){
+    var Idiv     = document.getElementById("register");
+    Idiv.className = "modal";
+    Idiv.style.display = "block";
+    Idiv.style.zIndex = "1000";
+    //以下部分要将弹出层居中显示
+    Idiv.style.top =(window.screen.availHeight )/2 - 230 +"px";
+
+    //以下部分使整个页面至灰不可点击
+    var procbg = document.createElement("div"); //首先创建一个div
+    procbg.setAttribute("id","mybg"); //定义该div的id
+    procbg.style.background = "#000000";
+    procbg.style.width = "100%";
+    procbg.style.height = "100%";
+    procbg.style.overflowY = "hidden";
     procbg.style.position = "fixed";
     procbg.style.top = "0";
     procbg.style.left = "0";
@@ -237,6 +276,9 @@ function showRegister(){
     document.body.style.overflow = "hidden"; //取消滚动条
     isRegister = true;
 }
+
+
+
 
 /**
  * 点击关闭注册页面
@@ -296,11 +338,27 @@ function login2Register(){
 }
 
 /**
+ * 首页登录弹窗转到 注册弹窗
+ */
+function login2Register2(){
+    stopLoginDiv();
+    showRegister2();
+}
+
+/**
  * 注册弹窗 跳转 登录
  */
 function register2Login(){
     stopRegisterDiv();
     showDiv();
+}
+
+/**
+ * 首页注册弹窗 跳转 登录
+ */
+function register2Login2(){
+    stopRegisterDiv();
+    showDiv2();
 }
 
 
@@ -310,7 +368,6 @@ function register2Login(){
  */
 function loginOrCart() {
     var name = document.getElementsByClassName("DetermineWhetherLog");
-    alert(name[0].innerText);
     if (name[0].innerText == 1){
         window.location = "/custCart";
     } else {
@@ -324,9 +381,8 @@ function loginOrCart() {
  */
 function myOrder() {
     var name = document.getElementsByClassName("DetermineWhetherLog");
-    alert(name[0].innerText);
     if (name[0].innerText == 1){
-        window.top.location = "/order_all";
+        window.location = "/order_all";
     } else {
         showDiv();
     }
@@ -336,14 +392,14 @@ function myOrder() {
  * 跳转到讨论区
  */
 function  topDiscuss() {
-    window.top.location = "/post";
+    window.location.href = "/post";
 }
 
 /**
  * 跳转至首页
  */
 function homePage() {
-    window.top.location = "/index"
+    window.location = "/index"
 }
 
 
@@ -351,19 +407,19 @@ function homePage() {
  * 忘记密码
  */
 function forgetPassword() {
-    window.top.location = "/findpwd";
+    window.location = "/findpwd";
 }
 
 /**
  * 跳转到榜单页面
  */
 function rankingList() {
-    window.top.location = "/ranking";
+    window.location = "/ranking";
 }
 
 /**
  * 跳转到书单页面
  */
 function bookList() {
-    window.top.location = "booklist";
+    window.location = "booklist";
 }

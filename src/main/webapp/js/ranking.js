@@ -67,6 +67,9 @@ function loadBookTotal() {
         }
         var fenye = document.getElementById("fenye");
         fenye.innerHTML = "";
+        var gongPageEle = "<span class='er'>页</span><span class='er'>" + result.totalPages + "</span><span " +
+            "class='er'>共</span>";
+        fenye.innerHTML += gongPageEle;
         if(result.currentPageCode !== result.totalPages){
             var url_next_page = url_getbooktotal + "?page=" + (result.currentPageCode + 1);
             var href = 'javascript:refreshBookTotal("' + url_next_page + '")';
@@ -145,6 +148,9 @@ function loadBookLastMonth() {
         }
         var fenye = document.getElementById("fenye");
         fenye.innerHTML = "";
+        var gongPageEle = "<span class='er'>页</span><span class='er'>" + result.totalPages + "</span><span " +
+            "class='er'>共</span>";
+        fenye.innerHTML += gongPageEle;
         if(result.currentPageCode !== result.totalPages){
             var url_next_page = url_getbooklastmonth + "?page=" + (result.currentPageCode + 1);
             var href = 'javascript:getLastMonth("' + url_next_page + '")';
@@ -198,6 +204,9 @@ function loadBookLastMonthCategory() {
         }
         var fenye = document.getElementById("fenye");
         fenye.innerHTML = "";
+        var gongPageEle = "<span class='er'>页</span><span class='er'>" + result.totalPages + "</span><span " +
+            "class='er'>共</span>";
+        fenye.innerHTML += gongPageEle;
         if(result.currentPageCode !== result.totalPages){
             var url_next_page = ugbc + "&page=" + (result.currentPageCode + 1);
             alert(url_next_page);

@@ -28,7 +28,7 @@ var postTitle = document.getElementById("post-title");
 //帖子内容
 var postContext = document.getElementById("post-context");
 //帖子自身
-var thePost="";
+var thePost = "";
 postButton.addEventListener("click", function () {
     allUrl = "/post/add";
     if (window.XMLHttpRequest) {
@@ -137,8 +137,11 @@ function getStickPost() {
     if (xhr0.readyState === 4 && xhr0.status === 200) {
         var jsonText = JSON.parse(xhr0.responseText);
         var stickPostList = jsonText;
+        var postTime;
         for (var i = 0; i < stickPostList.length; i++) {
-            popularPosts.innerHTML += "<div class=\"popular-post\"><div class=\"reply-number\">" + stickPostList[i].replyCount + "</div><div class=\"post-all\"><a href=\"#\" onclick='toDetail("+stickPostList[i].postId+")'>" + stickPostList[i].postTitle + "</a><span class=\"post-text\">" + stickPostList[i].postText + "</span></div></div>\n"
+            postTime = getTime(stickPostList[i].postTime);
+            popularPosts.innerHTML += "<div class=\"popular-post\"><div class=\"reply-number\">" + stickPostList[i].replyCount + "</div><div class=\"post-all\"><a href=\"#\" onclick='toDetail(" + stickPostList[i].postId + ")'>" + stickPostList[i].postTitle + "</a><span class=\"post-text\">" + stickPostList[i].postText + "</span></div>\n" +
+                "<div class=\"post-date\">"+postTime+"</div>\n</div>\n\n"
         }
     } else {
         // alert("xhr0.readyState = " + xhr0.readyState + ", xhr0.status =  " + xhr0.status)
@@ -178,9 +181,11 @@ function getBestPostDate() {
         popularPosts.innerHTML = null;
         timePosts.innerHTML = null;
         paginationBtns.innerHTML = null;
+        var postTime;
         for (i = 0; i < postList.length; i++) {
-            timePosts.innerHTML += "<div class=\"time-post\"><div class=\"reply-number\">" + postList[i].replyCount + "</div><div class=\"post-all\"><a href=\"#\"onclick='toDetail("+postList[i].postId+")'>" + postList[i].postTitle + "</a><span class=\"post-text\">" + postList[i].postText + "</span></div></div>\n"
-        }
+            postTime = getTime(postList[i].postTime);
+            postContext.innerHTML += "<div class=\"popular-post\"><div class=\"reply-number\">" + postList[i].replyCount + "</div><div class=\"post-all\"><a href=\"#\" onclick='toDetail(" + postList[i].postId + ")'>" + postList[i].postTitle + "</a><span class=\"post-text\">" + postList[i].postText + "</span></div>\n" +
+                "<div class=\"post-date\">"+postTime+"</div>\n</div>\n\n"}
         var totalPages = jsonText.totalPages;
         var currentPageCode = jsonText.currentPageCode;
         if (totalPages < 10) {
@@ -260,9 +265,11 @@ function getPostDate() {
         var postList = jsonText.modelList;
         timePosts.innerHTML = null;
         paginationBtns.innerHTML = null;
+        var postTime;
         for (i = 0; i < postList.length; i++) {
-            timePosts.innerHTML += "<div class=\"time-post\"><div class=\"reply-number\">" + postList[i].replyCount + "</div><div class=\"post-all\"><a href=\"#\"onclick='toDetail("+postList[i].postId+")'>" + postList[i].postTitle + "</a><span class=\"post-text\">" + postList[i].postText + "</span></div></div>\n"
-        }
+            postTime = getTime(postList[i].postTime);
+            timePosts.innerHTML += "<div class=\"popular-post\"><div class=\"reply-number\">" + postList[i].replyCount + "</div><div class=\"post-all\"><a href=\"#\" onclick='toDetail(" + postList[i].postId + ")'>" + postList[i].postTitle + "</a><span class=\"post-text\">" + postList[i].postText + "</span></div>\n" +
+                "<div class=\"post-date\">"+postTime+"</div>\n</div>\n\n"}
         var totalPages = jsonText.totalPages;
         var currentPageCode = jsonText.currentPageCode;
         if (totalPages < 10) {
@@ -342,7 +349,11 @@ function getBestPopularPostDate() {
         var BestPopularPostList = jsonText;
         for (var i = 0; i < BestPopularPostList.length; i++) {
             var postNo = i + 1;
-            allPopularPosts.innerHTML += "<div class=\"all-popular-post\"><a href=\"#\"onclick='toDetail("+BestPopularPostList[i].postId+")'>" + "<div class='all-popular-post-tip'>" + postNo + "</div>" + BestPopularPostList[i].postTitle + "</a></div>";
+            if (postNo > 3)
+                allPopularPosts.innerHTML += "<div class=\"all-popular-post\"><a href=\"#\"onclick='toDetail(" + BestPopularPostList[i].postId + ")'>" + "<div class='all-popular-post-tip' style='background-color: rgb(247, 248, 250);color:rgb(102, 102, 102); '>" + postNo + "</div>" + BestPopularPostList[i].postTitle + "</a></div>";
+            else
+                allPopularPosts.innerHTML += "<div class=\"all-popular-post\"><a href=\"#\"onclick='toDetail(" + BestPopularPostList[i].postId + ")'>" + "<div class='all-popular-post-tip'>" + postNo + "</div>" + BestPopularPostList[i].postTitle + "</a></div>";
+
         }
     } else {
         //alert("xhr2.readyState = " + xhr2.readyState + ", xhr2.status =  " + xhr2.status)
@@ -354,5 +365,22 @@ function rePage() {
 }
 
 function toDetail(postId) {
-    window.location = "review?postId="+postId;
+    window.location = "review?postId=" + postId;
+}
+
+function getTime(value) {
+    var nowDate = new Date();
+    var date = new Date(value);
+    var year = date.getFullYear();
+    var month = date.getMonth();
+    var day = date.getDate();
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var seconds = date.getSeconds();
+    if (year != nowDate.getFullYear())
+        return year + "年" + month + "月" + day + "日";
+    else if (year != nowDate.getFullYear() && (month != nowDate.getMonth() || day != nowDate.getDate()))
+        return month + "月" + day + "日";
+    else
+        return (hours<10?"0"+hours:hours) + ":" + (minutes<10?"0"+minutes:minutes) + ":" + (seconds<10?"0"+seconds:seconds);
 }

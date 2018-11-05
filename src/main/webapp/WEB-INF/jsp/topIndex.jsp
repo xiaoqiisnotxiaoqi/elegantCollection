@@ -40,7 +40,7 @@
         <div class="not-login">
             <span class="top-wellcome">欢迎进入雅致藏书!</span>
             <span class="top-log"><a onclick="showDiv2()" id="asd">登录</a></span>
-            <span class="top-join" onclick="showRegister()">加入雅致</span>
+            <span class="top-join" onclick="showRegister2()">加入雅致</span>
         </div>
     <%
         }
@@ -85,9 +85,9 @@
                                         </ul>
                                     </form>
                                     <p class="good-tips marginB10">
-                                        <a id="btnForgetpsw" class="fr">忘记密码？</a>
+                                        <a id="btnForgetpsw" class="fr" onclick="forgetPassword()">忘记密码？</a>
                                         还没有账号？
-                                        <a href="javaScript:void(0)" target="_blank" id="btnRegister" onclick="login2Register()">立即注册</a>
+                                        <a href="javaScript:void(0)" target="_blank" id="btnRegister" onclick="login2Register2()">立即注册</a>
                                     </p>
                                     <div class="login-box marginB10">
                                         <span id="login_btn" class="btn btn-micv5 btn-block" onclick="login()">登录</span>
@@ -116,7 +116,7 @@
         <div>
             <span id="register-title">会员注册</span>
             <span id="register-having">已有账号</span>
-            <a href="#" onclick="register2Login()" id="register-now">立即登录</a>
+            <a href="#" onclick="register2Login2()" id="register-now">立即登录</a>
         </div>
         <div class="register-title"></div>
 
@@ -196,7 +196,6 @@
 <div style="width: 100%;height: 2px;background-color: red; margin-top: 20px"></div>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/common.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/login.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/register.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/top.js"></script>
