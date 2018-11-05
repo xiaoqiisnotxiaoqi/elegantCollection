@@ -26,21 +26,9 @@ public interface BookService {
     ServerResponse<HashMap> sjTest(HashMap conditions);
 
 
-    /**
-     * 多条件动态,分页查询图书总数用于分页
-     *
-     * @param map 封装查询条件
-     * @return 总数
-     */
-    Integer countByCondition(HashMap map);
 
-    /**
-     * 多条件动态,分页查询图书
-     *
-     * @param map 封装查询条件
-     * @return 查询结果集合
-     */
-    List<BookWithBLOBs> queryByCondition(HashMap map);
+
+
 
 
     /**

@@ -152,10 +152,11 @@ function indexData() {
             // 渲染新书上架数据
             var classList = document.getElementsByClassName("col-md-3");
             var newBookList = jsObj.data.bookList0;
+            var newBookAuthors = jsObj.data.newBookAuthors;
             for (let i = 0; i < 16; i++) {
                 classList[i].innerHTML = "  <a href=\"bookdetail/?bookId=" + newBookList[i].bookId + "\"> <img src=\"" + newBookList[i].bookImg + " \"width=150px height=150px>\n" +
                     "                    <div class=\"new-title-word\">" + newBookList[i].bookName + "</div>\n</a>" +
-                    "                    <div class=\"new-author\">" + newBookList[i].authorId + "</div>\n" +
+                    "                    <div class=\"new-author\">" + newBookAuthors[i].authorName + "</div>\n" +
                     "                    <div class=\"cost-price-icon\">¥</div>\n" +
                     "                    <div class=\"cost-price\">" + newBookList[i].bookSellingPrice + "</div>\n" +
                     "                    <div class=\"original-price-icon\">¥</div>\n" +

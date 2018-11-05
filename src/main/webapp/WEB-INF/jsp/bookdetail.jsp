@@ -79,24 +79,14 @@
                         <span class="youhui-title">组合优惠</span>
                         <span class="youhui-detail">同时购买以下商品更加优惠!</span>
                         <div id="zuhe-box">
-                            <div class="zuhe-detail"><a href=" ">
-                                <div class="zuhe-picbox">组合图片1</div>
-                            </a>
-                                <span class="zuhe-info">组合书名2组合书名2组合书名2</span>
+                            <div class="zuhe-detail">
+                                <a href="bookdetail/?bookId=">
+                                    <div class="zuhe-picbox"><img src=""/> </div>
+                                    <span class="zuhe-info">组合书名2组合书名2组合书名2</span>
+                                </a>
                                 <span class="zuhe-price">¥22.5</span>
                             </div>
-                            <div class="zuhe-detail"><a href=" ">
-                                <div class="zuhe-picbox">组合图片1</div>
-                            </a>
-                                <span class="zuhe-info">组合书名2组合书名2组合书名2</span>
-                                <span class="zuhe-price">¥22.5</span>
-                            </div>
-                            <div class="zuhe-detail"><a href=" ">
-                                <div class="zuhe-picbox">组合图片1</div>
-                            </a>
-                                <span class="zuhe-info">组合书名2组合书名2组合书名2</span>
-                                <span class="zuhe-price">¥22.5</span>
-                            </div>
+
                         </div>
 
                     </div>

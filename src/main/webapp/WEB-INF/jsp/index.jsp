@@ -22,7 +22,7 @@
 <body>
 <%--引入头部--%>
 <jsp:include page="topIndex.jsp"/>
-<%--<iframe src="/top" style="width: 100%; height: 220px;border: none;frameborder:0;"></iframe>--%>
+
 <div class="index-main">
     <!--左侧图书分类-->
 
