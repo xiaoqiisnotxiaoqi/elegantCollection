@@ -72,7 +72,7 @@ public class UploadController {
         String custProfile =filePath + savedFileName;
 
         try {
-            imageFile.transferTo(file);
+            imageFile.transferTo(file);//从内存保存到磁盘中
             LOGGER.info("上传成功");
             customer.setCustProfile(custProfile);
             customerService.updataCustProfile(customer);

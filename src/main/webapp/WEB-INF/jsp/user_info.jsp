@@ -46,7 +46,7 @@
 
                     <ul>个人中心</ul>
                     <li><a href="${pageContext.request.contextPath}/userinfo">个人信息</a></li>
-                   
+
                     <li><a href="${pageContext.request.contextPath}/myaddress">收货地址</a></li>
                     <ul>安全中心</ul>
                     <li><a href="#">登录密码</a></li>
