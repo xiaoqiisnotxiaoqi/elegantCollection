@@ -244,7 +244,7 @@ function searchBox() {
     //把keyword添加到jsSession
     sessionStorage.clear();
     sessionStorage.setItem("keyWord", document.getElementById("searchInput").value);
-    window.location = "allbooks";
+    window.location = "/allbooks";
 
 }
 

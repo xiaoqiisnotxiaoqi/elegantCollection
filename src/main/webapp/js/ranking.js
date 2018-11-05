@@ -21,7 +21,7 @@ function refreshCategory(url_getcategory){
     xrh.send();
 }
 function loadCategory() {
-    if (xrh.readyState == 4 && xrh.status == 200) {
+    if (xrh.readyState === 4 && xrh.status === 200) {
         var result = JSON.parse(xrh.responseText);
         var danxiang = document.getElementById("danxiang");
         danxiang.innerHTML = "";
@@ -45,7 +45,7 @@ function refreshBookTotal(ugbt){
     xhr.send();
 }
 function loadBookTotal() {
-    if (xhr.readyState == 4 && xhr.status == 200) {
+    if (xhr.readyState === 4 && xhr.status === 200) {
         var result = JSON.parse(xhr.responseText);
         var relist = result.modelList;
         var shulie = document.getElementById("shulie");
@@ -61,13 +61,13 @@ function loadBookTotal() {
         }
         //判断是否登录
         var su = sessionStorage.getItem("login");
-        if (su != "success") {
+        if (su !== "success") {
             var df = document.getElementById("gw");
             df.disabled = true;
         }
         var fenye = document.getElementById("fenye");
         fenye.innerHTML = "";
-        if(result.currentPageCode != result.totalPages){
+        if(result.currentPageCode !== result.totalPages){
             var url_next_page = url_getbooktotal + "?page=" + (result.currentPageCode + 1);
             var href = 'javascript:refreshBookTotal("' + url_next_page + '")';
             var nextPageEle = "<span class='ye'><a href='" + href + "'>下一页</a> </span>";
@@ -75,7 +75,7 @@ function loadBookTotal() {
         }
         var currentPageEle = "<span class='ma'>" + result.currentPageCode + "</span>";
         fenye.innerHTML += currentPageEle;
-        if(result.currentPageCode != 1){
+        if(result.currentPageCode !== 1){
             var url_pre_page = url_getbooktotal + "?page=" + (result.currentPageCode - 1);
             var href = 'javascript:refreshBookTotal("' + url_pre_page + '")';
             var prePageEle = "<span class='ye'><a href='" + href + "'>上一页</a> </span>";
@@ -104,9 +104,9 @@ function comecart(dd) {
 }
 //跳转到购物车
 function loadCart() {
-    if (xhr.readyState == 4 && xhr.status == 200){
+    if (xhr.readyState === 4 && xhr.status === 200){
         var result = JSON.parse(xhr.responseText);
-        if (result != "添加失败") {
+        if (result !== "添加失败") {
             window.location = "custCart";
         }
     }
@@ -124,7 +124,7 @@ function getLastMonth(ugbl) {
     xhr.send();
 }
 function loadBookLastMonth() {
-    if (xhr.readyState == 4 && xhr.status == 200) {
+    if (xhr.readyState === 4 && xhr.status === 200) {
         var result = JSON.parse(xhr.responseText);
         var relist = result.modelList;
         var shulie = document.getElementById("shulie");
@@ -139,13 +139,13 @@ function loadBookLastMonth() {
                 '加入购物车</a></span></div></div>');
         }
         var su = sessionStorage.getItem("login");
-        if (su != "success") {
+        if (su !== "success") {
             var df = document.getElementById("gw");
             df.disabled = true;
         }
         var fenye = document.getElementById("fenye");
         fenye.innerHTML = "";
-        if(result.currentPageCode != result.totalPages){
+        if(result.currentPageCode !== result.totalPages){
             var url_next_page = url_getbooklastmonth + "?page=" + (result.currentPageCode + 1);
             var href = 'javascript:getLastMonth("' + url_next_page + '")';
             var nextPageEle = "<span class='ye'><a href='" + href + "'>下一页</a> </span>";
@@ -153,7 +153,7 @@ function loadBookLastMonth() {
         }
         var currentPageEle = "<span class='ma'>" + result.currentPageCode + "</span>";
         fenye.innerHTML += currentPageEle;
-        if(result.currentPageCode != 1){
+        if(result.currentPageCode !== 1){
             var url_pre_page = url_getbooklastmonth + "?page=" + (result.currentPageCode - 1);
             var href = 'javascript:getLastMonth("' + url_pre_page + '")';
             var prePageEle = "<span class='ye'><a href='" + href + "'>上一页</a> </span>";
@@ -177,7 +177,7 @@ function getLastMonthCategory(pro) {
 }
 function loadBookLastMonthCategory() {
     console.log(xhr.responseText);
-    if (xhr.readyState == 4 && xhr.status == 200) {
+    if (xhr.readyState === 4 && xhr.status === 200) {
         var result = JSON.parse(xhr.responseText);
         var relist = result.modelList;
         var shulie = document.getElementById("shulie");
@@ -192,13 +192,13 @@ function loadBookLastMonthCategory() {
                 '加入购物车</a></span></div></div>');
         }
         var su = sessionStorage.getItem("login");
-        if (su != "success") {
+        if (su !== "success") {
             var df = document.getElementById("gw");
             df.disabled = true;
         }
         var fenye = document.getElementById("fenye");
         fenye.innerHTML = "";
-        if(result.currentPageCode != result.totalPages){
+        if(result.currentPageCode !== result.totalPages){
             var url_next_page = ugbc + "&page=" + (result.currentPageCode + 1);
             alert(url_next_page);
             var href = 'javascript:getLastMonthCategory("' + url_next_page + '")';
@@ -207,7 +207,7 @@ function loadBookLastMonthCategory() {
         }
         var currentPageEle = "<span class='ma'>" + result.currentPageCode + "</span>";
         fenye.innerHTML += currentPageEle;
-        if(result.currentPageCode != 1){
+        if(result.currentPageCode !== 1){
             var url_pre_page = ugbc + "&page=" + (result.currentPageCode - 1);
             var href = 'javascript:getLastMonthCategory("' + url_pre_page + '")';
             var prePageEle = "<span class='ye'><a href='" + href + "'>上一页</a> </span>";
