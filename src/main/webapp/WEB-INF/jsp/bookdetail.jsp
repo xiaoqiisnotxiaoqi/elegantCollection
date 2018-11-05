@@ -15,8 +15,7 @@
 </head>
 <body>
 <%--引入头部--%>
-<iframe src="${pageContext.request.contextPath}/top"
-        style="width: 100%; height: 220px;border: none;frameborder:0;"></iframe>
+<jsp:include page="top.jsp"/>
 
 
 <input type="hidden" value="" id="bookId">
@@ -80,24 +79,14 @@
                         <span class="youhui-title">组合优惠</span>
                         <span class="youhui-detail">同时购买以下商品更加优惠!</span>
                         <div id="zuhe-box">
-                            <div class="zuhe-detail"><a href=" ">
-                                <div class="zuhe-picbox">组合图片1</div>
-                            </a>
-                                <span class="zuhe-info">组合书名2组合书名2组合书名2</span>
+                            <div class="zuhe-detail">
+                                <a href="bookdetail/?bookId=">
+                                    <div class="zuhe-picbox"><img src=""/> </div>
+                                    <span class="zuhe-info">组合书名2组合书名2组合书名2</span>
+                                </a>
                                 <span class="zuhe-price">¥22.5</span>
                             </div>
-                            <div class="zuhe-detail"><a href=" ">
-                                <div class="zuhe-picbox">组合图片1</div>
-                            </a>
-                                <span class="zuhe-info">组合书名2组合书名2组合书名2</span>
-                                <span class="zuhe-price">¥22.5</span>
-                            </div>
-                            <div class="zuhe-detail"><a href=" ">
-                                <div class="zuhe-picbox">组合图片1</div>
-                            </a>
-                                <span class="zuhe-info">组合书名2组合书名2组合书名2</span>
-                                <span class="zuhe-price">¥22.5</span>
-                            </div>
+
                         </div>
 
                     </div>

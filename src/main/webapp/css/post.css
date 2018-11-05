@@ -182,16 +182,20 @@ body {
     color: white;
 }
 
+.pagination{
+    height: 70px;
+}
+
 .now-pagination-btn {
     border: none;
     color: rgb(77, 139, 242);
     width: 35px;
-    height: 90px;
+    height: 20px;
 }
 
 .pagination-btn {
     width: 35px;
-    height: 90px;
+    height: 20px;
 }
 
 .posts-info {

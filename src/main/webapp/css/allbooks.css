@@ -29,7 +29,7 @@ a {
 #main-area {
     width: 1200px;
     margin: 0 auto;
-    height: 1510px;
+    height: auto;
 }
 
 #fenji-nav-box {
@@ -457,6 +457,7 @@ a {
 }
 
 .tag_box {
+
     top: 0px;
     left: 158px;
     position: absolute;
@@ -477,6 +478,7 @@ a {
     color: white;
     border-radius: 3px;
     border: #ff6666;
+    padding: 5px 10px;
 }
 
 #fenye {

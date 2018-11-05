@@ -62,20 +62,38 @@ function getDetail() {
             document.getElementById("nav-bookname").innerText = book.bookName;
 
 
+            //渲染满减优惠
             if (jsObj.manjian == null) {
                 document.getElementById("manjian").style.display = "none";
             } else
                 document.getElementById("manjian-money").innerHTML = "满" + jsObj.manjian.more1 + "元立减" + jsObj.manjian.discountMoney + "元";
 
+            //渲染组合优惠
+            if (jsObj.zuheBooks == null || jsObj.zuheBooks == "") {
+                document.getElementById("zuhe").style.display = "none";
+            } else {
+                var zuhebooks = jsObj.zuheBooks;
+                document.getElementById("zuhe-box").innerHTML = "";
+                for (var i = 0; i < 3; i++) {
+                    document.getElementById("zuhe-box").innerHTML += "<div class=\"zuhe-detail\">\n" +
+                        "                                <a href=\"/bookdetail/?bookId=" + zuhebooks[i].bookId + "\">\n" +
+                        "                                    <div class=\"zuhe-picbox\"><img src=\"" + zuhebooks[i].bookImg + "\"/> </div>\n" +
+                        "                                    <span class=\"zuhe-info\">" + zuhebooks[i].bookName + "</span>\n" +
+                        "                                </a>\n" +
+                        "                                <span class=\"zuhe-price\">¥" + zuhebooks[i].bookSellingPrice + "</span>\n" +
+                        "                            </div>";
+                }
 
+            }
             //    渲染所有评论
             var evaluateList = pageModel.modelList;
+            var customers = jsObj.evaluateCustomers;
             document.getElementById("pingjia-ul").innerHTML = "";
             for (var i = 0; i < evaluateList.length; i++) {
                 document.getElementById("pingjia-ul").innerHTML += "           <li class=\"pingjias\">\n" +
                     "                    <div class=\"customerInfo\">\n" +
-                    "                        <img src=\" \" class=\"profile\"/>\n" +
-                    "                        <span class=\"evaluater\" >" + evaluateList[i].custId + "</span>\n" +
+                    "                        <img src=\" " + customers[i].custProfile + "  \" class=\"profile\"/>\n" +
+                    "                        <span class=\"evaluater\" >" + customers[i].custName + "</span>\n" +
                     "                    </div>\n" +
                     "                    <div class=\"evaldiv\">\n" +
                     "                        <p>\n" +
@@ -86,24 +104,6 @@ function getDetail() {
                     "                        <span class=\"evaluatetime\">" + fmtDate(evaluateList[i].evaluateTime) + "</span>\n" +
                     "                    </div>\n" +
                     "                </li>";
-
-                // var xhr1 = null;
-                // if (window.XMLHttpRequest) {
-                //     xhr1 = new XMLHttpRequest(); //for ie7+,FireFox,Chorme,Opera,Safai...
-                // } else {
-                //     xhr1 = new ActiveXObject('Microsoft.XMLHTTP');//for ie6
-                // }
-                //
-                // if (xhr1 != null) {
-                //     xhr1.open("GET", "/book/detail", true);
-                //     xhr1.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;");
-                //     xhr1.onreadystatechange = callFun;
-                //     xhr1.send();
-                // } else {
-                //     alert("不能创建XMLHttpRequest对象实例");
-                // }
-
-
             }
 
 

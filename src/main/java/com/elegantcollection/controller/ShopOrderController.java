@@ -94,12 +94,15 @@ public class ShopOrderController {
         objectHashMap.put("groupPrice", groupPrice);
         objectHashMap.put("fullReductionDiscount", fullReductionDiscount);
         objectHashMap.put("orderNumber", orderNumber);
+        //获取一个默认地址
+        Integer addressId=addressService.queryByCustId(custId).get(0).getAddressId();
         //插入数据库的订单容器
         ShopOrder shopOrder = new ShopOrder();
         shopOrder.setCustId(custId);
         shopOrder.setOrderNumber(orderNumber);
         shopOrder.setOrderPrice(allprice - groupPrice - fullReductionDiscount);
         shopOrder.setOrderCreateTime(new Date());
+        shopOrder.setAddressId(addressId);
         //添加订单
         if (shopOrderService.add(shopOrder) == 1) {
             //添加订单详情条目
