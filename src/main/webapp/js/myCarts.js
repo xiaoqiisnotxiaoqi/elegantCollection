@@ -331,14 +331,14 @@ function cartResolve() {
                     if (pageModel.totalPages <= 9 && pageModel.totalPages !== 1){
                         //总页数少于十页时,将所有页面全部渲染出来
                         page.innerHTML += ('<span class="adjacent-pages" onclick="previousPage()">〈 上一页</span>');
-                        for (var i = 1; i<pageModel.currentPageCode;i++) {
-                            page.innerHTML += ('<span class="page-num" onclick="toThisPageNum(this)">'+ i +'</span>');
+                        for (var i = 1; i <= pageModel.totalPages;i++) {
+                            if (i !=pageModel.currentPageCode ) {
+                                page.innerHTML += ('<span class="page-num" onclick="toThisPageNum(this)">'+ i +'</span>');
+                            }else{
+                                page.innerHTML += ('<span id="this-page"">'+ pageModel.currentPageCode +'</span>');
+                            }
                         }
-                        page.innerHTML += ('<span id="this-page"">'+ pageModel.currentPageCode +'</span>');
-                        for (var i = pageModel.currentPageCode; i <= pageModel.totalPages; i++ ){
-                            page.innerHTML += ('<span class="page-num" onclick="toThisPageNum(this)">'+ i +'</span>');
-                        }
-                        page.innerHTML += ('<span class="adjacent-pages" onclick="nextPage()">上一页 〉</span>' +
+                        page.innerHTML += ('<span class="adjacent-pages" onclick="nextPage()">下一页 〉</span>' +
                             '<span class="all-page">总共'+pageModel.totalPages+'页</span>' +
                             '<span class="all-page">跳转到</span>' +
                             '<span class="input-page"><input type="text" id="input-page" value="'+pageModel.currentPageCode+'"></span>' +
@@ -362,7 +362,7 @@ function cartResolve() {
                             page.innerHTML += ('<span class="page-num" onclick="toThisPageNum(this)">'+ i +'</span>');
                         }
 
-                        page.innerHTML += ('<span class="adjacent-pages" onclick="nextPage()">上一页 〉</span>' +
+                        page.innerHTML += ('<span class="adjacent-pages" onclick="nextPage()">下一页 〉</span>' +
                             '<span class="all-page">总共'+pageModel.totalPages+'页</span>' +
                             '<span class="all-page">跳转到</span>' +
                             '<span class="input-page"><input type="text" id="input-page" value="'+pageModel.currentPageCode+'"></span>' +
@@ -387,7 +387,7 @@ function cartResolve() {
                             page.innerHTML += ('<span class="page-num" onclick="toThisPageNum(this)">'+ i +'</span>');
                         }
 
-                        page.innerHTML += ('<span class="adjacent-pages" onclick="nextPage()">上一页 〉</span>' +
+                        page.innerHTML += ('<span class="adjacent-pages" onclick="nextPage()">下一页 〉</span>' +
                             '<span class="all-page">总共'+pageModel.totalPages+'页</span>' +
                             '<span class="all-page">跳转到</span>' +
                             '<span class="input-page"><input type="text" id="input-page" value="'+pageModel.currentPageCode+'"></span>' +

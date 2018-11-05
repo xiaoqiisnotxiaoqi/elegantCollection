@@ -1,5 +1,12 @@
 package com.elegantcollection.controller;
 
+import com.elegantcollection.entity.Book;
+import com.elegantcollection.entity.Customer;
+import com.elegantcollection.entity.Evaluate;
+import com.elegantcollection.service.BookService;
+import com.elegantcollection.service.CustomerService;
+import com.elegantcollection.service.EvaluateService;
+import com.elegantcollection.util.*;
 import com.elegantcollection.entity.*;
 import com.elegantcollection.service.*;
 import com.elegantcollection.util.CodeUtil;
@@ -445,18 +452,17 @@ public class CustomerController {
 
         // n+1 问题
         List<ShopOrder> orders = shopOrderService.queryByOreder(c.getCustId(),0);
+        int count = orders.size();
+
         List<Map<String, Object>>  resp= new ArrayList<>();
         Map<String, Object> item;
+        request.getSession().setAttribute("orders",orders);
         for (ShopOrder order:orders) {
             item = new HashMap<>();
-
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-              String  res = simpleDateFormat.format(order.getOrderCreateTime());
-
+            String  res = simpleDateFormat.format(order.getOrderCreateTime());
 
             item.put("orderCreateTime", res);
-
-
 
              double orderPrice = order.getOrderPrice();
             item.put("orderPrice", order.getOrderPrice());
@@ -482,6 +488,7 @@ public class CustomerController {
                 title+="等商品";
             }
             item.put("title", title);
+                item.put("count",count);
             resp.add(item);
         }
         return resp;

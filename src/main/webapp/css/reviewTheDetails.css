@@ -215,7 +215,7 @@
 }
 
 #subject{
-    width: 740px;
+    width: 980px;
     height: 56px;
     font-size: 16px;
     line-height: 56px;
@@ -554,9 +554,10 @@
     border: 1px solid #e4e6eb;
     border-left: none;
     background-color: #fbfbfd;
-    position: absolute ;
-    right: 184px;
-    top: 320px;
+    margin: 0 4px 0 0;
+    position: absolute;
+    right: 17%;
+    top: 376px;
 }
 
 #right-ranking div{

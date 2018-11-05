@@ -14,6 +14,7 @@ public class Md5 {
     public static Map<String,String> getMd5(String password) {
         //随机生成一个 盐值
         String salt = RandomNumberGeneration.getRandomString(8);
+        //将密码与 盐值一起 作为要加密 字段
         String base = password + salt;
         String md5 = DigestUtils.md5DigestAsHex(base.getBytes());
         Map<String,String> map = new HashMap<>();

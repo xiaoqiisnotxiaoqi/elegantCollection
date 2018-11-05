@@ -3,6 +3,8 @@
     float: left;
     border-top: red 1px solid;
     padding-top: 15px;
+    float: left;
+    width: 100%;
 }
 
 .business-items {

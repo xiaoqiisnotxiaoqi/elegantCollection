@@ -31,27 +31,26 @@
 
 
                 <ul>我的交易</ul>
-                <li><a href="#">我的订单</a></li>
+                <li><a href="${pageContext.request.contextPath}/order_all">我的订单</a></li>
                 <ul>我的钱包</ul>
-                <li><a href="#">我的礼券</a></li>
                 <!--<li><a href="#">我的余额</a></li>-->
-                <li><a href="#">我的积分</a></li>
+                <li><a href="${pageContext.request.contextPath}/myelegant">我的积分</a></li>
                 <ul>售后服务</ul>
                 <li><a href="#">申请/查询退换货</a></li>
 
                 <ul>个人中心</ul>
-                <li><a href="#">个人信息</a></li>
+                <li><a href="${pageContext.request.contextPath}/userinfo">个人信息</a></li>
 
-                <li><a href="#">收货地址</a></li>
+                <li><a href="${pageContext.request.contextPath}/myaddress">收货地址</a></li>
                 <ul>安全中心</ul>
                 <li><a href="#">登录密码</a></li>
                 <li><a href="#">邮箱验证</a></li>
                 <li><a href="#">手机绑定</a></li>
                 <ul>我的消息</ul>
-                <li><a href="#">消息查看</a></li>
+                <li><a href="${pageContext.request.contextPath}/postReply">消息查看</a></li>
                 <!--<li><a href="#">发帖记录</a></li>-->
-                <li><a href="#">评论/晒单</a></li>
-                <li><a href="#">提问/回答</a></li>
+                <li><a href="${pageContext.request.contextPath}/myEvaluate">评论/晒单</a></li>
+
             </div>
             <!--导航栏结束-->
         </div>

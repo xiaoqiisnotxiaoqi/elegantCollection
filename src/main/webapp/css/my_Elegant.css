@@ -561,6 +561,31 @@ table {
     color: #ff2832 !important;
 }
 
+.my_title .tab_list li .tip {
+    font-size: 12px;
+    width: 30px;
+    position: absolute;
+    right: 1px;
+    top: -14px;
+    color: #fff;
+    display: block;
+}
+
+.my_title .tip {
+    color: #313131;
+    font-size: 14px;
+    /*padding-left: 20px;*/
+}
+
+.my_title .tab_list li .tip strong {
+    padding: 1px 5px;
+    border-radius: 7px;
+    background: #ff2832;
+    display: inline-block;
+    font-style: normal
+
+}
+
 .info_list li .select_add {
     position: relative;
     display: inline-block;

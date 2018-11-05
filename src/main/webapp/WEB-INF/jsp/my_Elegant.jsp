@@ -30,26 +30,26 @@
                 <!--导航栏开始-->
 
                 <ul>我的交易</ul>
-                <li><a href="#">我的订单</a></li>
+                <li><a href="${pageContext.request.contextPath}/order_all">我的订单</a></li>
                 <ul>我的钱包</ul>
                 <!--<li><a href="#">我的余额</a></li>-->
-                <li><a href="#">我的积分</a></li>
+                <li><a href="${pageContext.request.contextPath}/myelegant">我的积分</a></li>
                 <ul>售后服务</ul>
                 <li><a href="#">申请/查询退换货</a></li>
 
                 <ul>个人中心</ul>
-                <li><a href="#">个人信息</a></li>
+                <li><a href="${pageContext.request.contextPath}/userinfo">个人信息</a></li>
 
-                <li><a href="#">收货地址</a></li>
+                <li><a href="${pageContext.request.contextPath}/myaddress">收货地址</a></li>
                 <ul>安全中心</ul>
                 <li><a href="#">登录密码</a></li>
                 <li><a href="#">邮箱验证</a></li>
                 <li><a href="#">手机绑定</a></li>
                 <ul>我的消息</ul>
-                <li><a href="#">消息查看</a></li>
+                <li><a href="${pageContext.request.contextPath}/postReply">消息查看</a></li>
                 <!--<li><a href="#">发帖记录</a></li>-->
-                <li><a href="#">评论/晒单</a></li>
-                <li><a href="#">提问/回答</a></li>
+                <li><a href="${pageContext.request.contextPath}/myEvaluate">评论/晒单</a></li>
+
             </div>
             <!--导航栏结束-->
         </div>
@@ -144,11 +144,19 @@
                     <div class="my_title">
                         <ul class="tab_list">
                             <li><a href="#" target="_blank">待付款</a>
+
+                                <%
+                                    if (request.getSession().getAttribute("orders") != null){
+                                %>
+
+                                <span class="tip"><strong>${orders.size()}</strong></span>
+
+                                <%}%>
                             </li>
-                            <li><a href="#" target="_blank">待收货</a>
-                            </li>
-                            <li><a href="#" target="_blank">待评价</a>
-                            </li>
+                            <%--<li><a href="#" target="_blank">待收货</a>--%>
+                            <%--</li>--%>
+                            <%--<li><a href="#" target="_blank">待评价</a>--%>
+                            <%--</li>--%>
                             <li class="last"><a href="#" target="_blank">全部订单</a></li>
                         </ul>
                         <span class="title">我的订单</span>
@@ -210,12 +218,12 @@
 
     var getOrder = "${pageContext.request.contextPath}/getallorder";
     window.onload=function() {
-        getAddress(getOrder);
+        getOrder4all(getOrder);
 
     }
 
     var xhr=null;
-    function getAddress(getOrder) {
+    function getOrder4all(getOrder) {
         if (window.XMLHttpRequest) {
             xhr = new XMLHttpRequest();
         } else {
@@ -236,34 +244,50 @@
         // console.log(xhr.responseText);
         if (xhr.readyState == 4 && xhr.status == 200) {
             var result = JSON.parse(xhr.responseText);
-            alert(result);
+
+                    var OrderList = document.getElementById("allOrder");
+                    OrderList.innerHTML = "";
+                    var allOrder = result;
+                    if (allOrder != null) {
+                        for (var i = 0; i < allOrder.length; i++) {
+
+                            //页面渲染
+                            OrderList.innerHTML += ('<tr>' +
+                                '                            <td class="tg">' +
+                                '                                <div class="goode_list">' +
+
+                                '                                    <a  title="' + allOrder[i].title + allOrder[i].bookIntro + '"' +
+                                '                                       href="' +
+                                '                                       target="_blank"><img src="' + allOrder[i].bookImg + '"></a>' +
+                                '                                </div>' +
+                                '                            </td>' +
+                                '                            <td>共' + allOrder[i].quality + '件商品<br><span class="data">' + allOrder[i].orderCreateTime + '</span></td>' +
+                                '                            <td><span class="price">' + allOrder[i].orderPrice + '<span>元</span></span><br>优惠金额 : ' + allOrder[i].discountAmount + '<span>元</span></td>' +
+                                '                            <td>' +
+                                '                                <span class="red">等待付款</span>' +
+                                '                            </td>' +
+                                '                            <td><a href=""' +
+                                '                                   target="_blank">查看</a></td>' +
+                                '                        </tr>');
+
+                        }
+
+                        $(function () {
+                            $(".none_box").css('display', 'none');
+
+                        });
+                    } else {
+                        $(function () {
+                            $(".none_box").css('display', 'block');
 
 
-            var OrderList = document.getElementById("allOrder");
-            OrderList.innerHTML = "";
-            var allOrder = result;
-            for (var i=0; i < allOrder.length; i++) {
+                        });
+                    }
 
-                //页面渲染
-                OrderList.innerHTML += ('<tr>' +
-                    '                            <td class="tg">' +
-                    '                                <div class="goode_list">' +
 
-                    '                                    <a  title="'+allOrder[i].title+allOrder[i].bookIntro+'"' +
-                    '                                       href="' +
-                    '                                       target="_blank"><img src="'+allOrder[i].bookImg+'"></a>' +
-                    '                                </div>' +
-                    '                            </td>' +
-                    '                            <td>共'+allOrder[i].quality+'件商品<br><span class="data">'+allOrder[i].orderCreateTime+'</span></td>' +
-                    '                            <td><span class="price">'+allOrder[i].orderPrice+'<span>元</span></span><br>优惠金额 : '+allOrder[i].discountAmount+'<span>元</span></td>' +
-                    '                            <td>' +
-                    '                                <span class="red">等待付款</span>' +
-                    '                            </td>' +
-                    '                            <td><a href=""' +
-                    '                                   target="_blank">查看</a></td>' +
-                    '                        </tr>');
 
-            }
+
+
 
 
         }
