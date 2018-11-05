@@ -199,8 +199,6 @@
 <div style="width: 100%;height: 2px;background-color: red; margin-top: 20px"></div>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-<%--<script type="text/javascript" src="${pageContext.request.contextPath}/js/common.js"></script>--%>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/login.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/register.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/top.js"></script>
 </body>
