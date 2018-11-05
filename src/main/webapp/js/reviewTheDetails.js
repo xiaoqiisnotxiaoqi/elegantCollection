@@ -431,7 +431,6 @@ function reply2Comment(ele){
     reviewDivNode = ele.parentNode.parentNode.parentNode;
     //得到回复的类容
     var text = ele.previousSibling.value;
-    alert(text);
     if (window.XMLHttpRequest) {
         xhr = new XMLHttpRequest();
     } else {
@@ -553,7 +552,6 @@ function pageTransfer(ele) {
     reviewDivNode = undefined;
     //得到页面渲染的div
     reviewDivNode = ele.parentNode.parentNode.parentNode.parentNode.parentNode;
-    alert(reviewDivNode.previousSibling.innerHTML);
     //得到要跳转的页面
     var page = ele.innerText;
     //得到 当前楼层
@@ -740,7 +738,6 @@ function replyTheOriginalPoster() {
         xhr = new ActiveXObject('Microsoft.XMLHTTP');
     }
     var sendText = "postId=" + pagePostId + "&text=" + text;
-    alert(sendText);
     xhr.open("PUT", "/replyOriginalPoster", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
     xhr.onreadystatechange = replyTheResults;
@@ -915,7 +912,6 @@ function postSearchDetialSearch() {
         var resous = document.getElementById("resoule");
         resous.innerHTML = "";
         var centent = text.modelList;
-        alert(centent);
         var a = "";
         for (var i = 0; i < centent.length ; i++){
             a += ('<li class="huifu">' +

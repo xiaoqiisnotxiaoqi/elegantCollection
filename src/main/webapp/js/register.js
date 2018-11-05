@@ -254,7 +254,6 @@ function searchBox() {
  */
 function clickcaterory(ele) {
     sessionStorage.clear();
-    alert(ele.id);
     sessionStorage.setItem("categoryId", ele.id);
     window.top.location = "allbooks";
 }
