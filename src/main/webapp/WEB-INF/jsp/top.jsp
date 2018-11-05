@@ -56,7 +56,7 @@
         <a style="color: black" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=954566097&site=qq&menu=yes">联系客服</a>
     </span>
     <span id="service-news"></span>
-    <span class="top-discuss" onclick="topDiscuss()">讨论区</span>
+    <span class="top-discuss" onclick="topDiscuss()">书评区</span>
     <span id="discuss-news"></span>
 
     <%--登录弹窗--%>
