@@ -37,7 +37,6 @@ postButton.addEventListener("click", function () {
         xhr4 = new ActiveXObject('Microsoft.XMLHTTP');//for ie6
     }
     thePost = "postTitle=" + postTitle.value + "&postContext=" + postContext.value;
-    alert(thePost)
     if (xhr4 != null) {
         xhr4.open("POST", allUrl, true);
         xhr4.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;");
@@ -141,7 +140,7 @@ function getStickPost() {
         for (var i = 0; i < stickPostList.length; i++) {
             postTime = getTime(stickPostList[i].postTime);
             popularPosts.innerHTML += "<div class=\"popular-post\"><div class=\"reply-number\">" + stickPostList[i].replyCount + "</div><div class=\"post-all\"><a href=\"#\" onclick='toDetail(" + stickPostList[i].postId + ")'>" + stickPostList[i].postTitle + "</a><span class=\"post-text\">" + stickPostList[i].postText + "</span></div>\n" +
-                "<div class=\"post-date\">"+postTime+"</div>\n</div>\n\n"
+                "<div class=\"post-date\">" + postTime + "</div>\n</div>\n\n"
         }
     } else {
         // alert("xhr0.readyState = " + xhr0.readyState + ", xhr0.status =  " + xhr0.status)
@@ -185,7 +184,8 @@ function getBestPostDate() {
         for (i = 0; i < postList.length; i++) {
             postTime = getTime(postList[i].postTime);
             postContext.innerHTML += "<div class=\"popular-post\"><div class=\"reply-number\">" + postList[i].replyCount + "</div><div class=\"post-all\"><a href=\"#\" onclick='toDetail(" + postList[i].postId + ")'>" + postList[i].postTitle + "</a><span class=\"post-text\">" + postList[i].postText + "</span></div>\n" +
-                "<div class=\"post-date\">"+postTime+"</div>\n</div>\n\n"}
+                "<div class=\"post-date\">" + postTime + "</div>\n</div>\n\n"
+        }
         var totalPages = jsonText.totalPages;
         var currentPageCode = jsonText.currentPageCode;
         if (totalPages < 10) {
@@ -269,7 +269,8 @@ function getPostDate() {
         for (i = 0; i < postList.length; i++) {
             postTime = getTime(postList[i].postTime);
             timePosts.innerHTML += "<div class=\"popular-post\"><div class=\"reply-number\">" + postList[i].replyCount + "</div><div class=\"post-all\"><a href=\"#\" onclick='toDetail(" + postList[i].postId + ")'>" + postList[i].postTitle + "</a><span class=\"post-text\">" + postList[i].postText + "</span></div>\n" +
-                "<div class=\"post-date\">"+postTime+"</div>\n</div>\n\n"}
+                "<div class=\"post-date\">" + postTime + "</div>\n</div>\n\n"
+        }
         var totalPages = jsonText.totalPages;
         var currentPageCode = jsonText.currentPageCode;
         if (totalPages < 10) {
@@ -361,7 +362,12 @@ function getBestPopularPostDate() {
 }
 
 function rePage() {
-    window.location = "post";
+    setTimeout(
+        function () {
+            window.location = "post";
+        }, 3000
+    )
+
 }
 
 function toDetail(postId) {
@@ -382,5 +388,5 @@ function getTime(value) {
     else if (year != nowDate.getFullYear() && (month != nowDate.getMonth() || day != nowDate.getDate()))
         return month + "月" + day + "日";
     else
-        return (hours<10?"0"+hours:hours) + ":" + (minutes<10?"0"+minutes:minutes) + ":" + (seconds<10?"0"+seconds:seconds);
+        return (hours < 10 ? "0" + hours : hours) + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
 }
