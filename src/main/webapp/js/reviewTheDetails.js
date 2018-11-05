@@ -22,7 +22,11 @@ function reviewOfTheBeginning() {
     } else {
         xhr = new ActiveXObject('Microsoft.XMLHTTP');
     }
-    xhr.open("GET", "/reviewHead", true);
+    var  ui = "/reviewHead";
+    if (thisPostId !== undefined){
+        ui += "?postId=" + thisPostId;
+    }
+    xhr.open("GET", ui, true);
     xhr.setRequestHeader("Content-Type", "application/json;charset=utf-8");
     xhr.onreadystatechange = reviewResouse;
     xhr.send();
@@ -48,7 +52,7 @@ function reviewResouse() {
         pageCustId = map.custId;
         pageCustName = map.custName;
 
-         replyContent();
+        replyContent();
 
     }
 }
@@ -63,16 +67,14 @@ function replyContent() {
         xhr = new ActiveXObject('Microsoft.XMLHTTP');
     }
     var url="/reviewTheDetails";
-    if (thisPostId !== null && currentPage !== null){
+    if (thisPostId !== undefined && currentPage !== undefined){
         url += "?postId="+thisPostId + "&currentPage=" + currentPage;
-    } else if (currentPage !== null){
+    } else if (currentPage !== undefined){
         url += "?currentPage=" + currentPage;
-    } else if (thisPostId !== null){
+    } else if (thisPostId !== undefined){
         url += "?postId="+thisPostId;
     }
-
-
-    xhr.open("GET", "/reviewTheDetails", true);
+    xhr.open("GET", url, true);
     xhr.setRequestHeader("Content-Type", "application/json;charset=utf-8");
     xhr.onreadystatechange = replyContentReoue;
     xhr.send();
@@ -329,6 +331,16 @@ function replyContentReoue() {
 }
 
 
+/**
+ * 排行榜点击进入
+ * @param ele 该排行标题所在的节点
+ */
+function toThisPage(ele) {
+    thisPostId = ele.nextSibling.nextSibling.innerText;
+    reviewOfTheBeginning();
+}
+
+
 
 /**
  * 发送请求 得到 一段时间内的评论热度 前十的书评帖
@@ -365,7 +377,7 @@ function topPortRedus(){
             }
 
 
-            b += ('<span class="topic_title">'+topJson[i].title+'</span>' +
+            b += ('<span class="topic_title" onclick="toThisPage(this)">'+topJson[i].title+'</span>' +
             '<span class="topic_num">'+topJson[i].num+'</span>' +
             '<span style="display: none">'+topJson[i].postId+'</span></li>');
            // console.log(a);
