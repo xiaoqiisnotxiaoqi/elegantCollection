@@ -26,6 +26,7 @@ body {
     height: 350px;
     width: 100%;
     background-color: rgb(240, 240, 240);
+    z-index: 1;
 }
 
 .block-top-image {
@@ -87,6 +88,14 @@ body {
     height: auto;
     background-color: white;
 }
+.post-date{
+    display: inline-block;
+    color: rgb(102, 102, 102);
+    float: right;
+    margin-top: 30px;
+    font-size: 12px;
+    margin-right: 20px;
+}
 
 .popular-post {
     border-bottom: rgb(215, 215, 215) 1px dashed;
@@ -118,6 +127,7 @@ body {
 }
 
 .post-text {
+    width: 95%;
     margin-top: 20px;
     margin-bottom: 10px;
     height: 38px;
@@ -138,7 +148,7 @@ body {
 
 .post-all {
     display: inline-block;
-    width: 80%;
+    width: 73%;
 }
 
 .all-popular-posts {
@@ -146,13 +156,13 @@ body {
     display: inline-block;
     border: none;
     width: 238px;
-    height: 450px;
+    height: 300px;
     font-size: 10px;
     background-color: rgb(247, 248, 250);
-    position: fixed;
+    float: right;
 }
 
-.all-popular-posts-tip{
+.all-popular-posts-tip {
     display: block;
     margin: 12px 0px 14px 25px;
     font-weight: bold;
@@ -163,11 +173,12 @@ body {
     margin-left: 1%;
     padding: 3px 0;
     width: 96%;
-    height: 34px;
+    height: 18px;
     overflow: hidden;
 }
 
 .all-popular-post a {
+    font-size: 12px;
     padding: 0 4px;
 }
 
@@ -182,7 +193,7 @@ body {
     color: white;
 }
 
-.pagination{
+.pagination {
     height: 70px;
 }
 
