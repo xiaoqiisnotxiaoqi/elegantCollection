@@ -28,7 +28,7 @@ function loginModeConversion(loginMode){
 }
 
 function topCustEle() {
-    window.top.location = "/userinfo"
+    window.top.location = "/myelegant"
 }
 
 

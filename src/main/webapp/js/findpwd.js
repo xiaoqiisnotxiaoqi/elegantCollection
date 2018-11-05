@@ -23,6 +23,7 @@ var url_contentphone = '/find/phonething?custPhone=';
 var xhr = null;
 var chuan = null;
 var dx = null;
+//根据手机号码查看用户是否存在
 function checkphone() {
     var inputPhone = document.getElementById("phonenb").value;
     chuan = inputPhone;
@@ -38,19 +39,19 @@ function checkphone() {
     xhr.send();
 }
 function loadPhone() {
-    if (xhr.readyState == 4 && xhr.status == 200){
+    if (xhr.readyState === 4 && xhr.status === 200){
         var result = JSON.parse(xhr.responseText);
         //校验验证码
         var inputCode = document.getElementById("textcode").value.toUpperCase(); //获取输入框内验证码并转化为大写
         if(inputCode.length <= 0) { //若输入的验证码长度为0
             alert("请输入验证码！"); //则弹出请输入验证码
         }
-        else if(inputCode != code.toUpperCase()) { //若输入的验证码与产生的验证码不一致时
+        else if(inputCode !== code.toUpperCase()) { //若输入的验证码与产生的验证码不一致时
             alert("验证码输入错误!"); //则弹出验证码输入错误
             createCode(); //刷新验证码
             document.getElementById("textcode").value = "";//清空文本框
         } else { //输入正确时
-            if(result = true){
+            if(result === true){
                 var hao = chuan.slice(0,3) + "****" + chuan.slice(7,11);
                 var bianhuan = document.getElementById("bianhuan");
                 bianhuan.innerHTML = ('<li class="xazi">手机号 :</li><li class="xazi">' + hao + '</li>' +
@@ -95,8 +96,8 @@ function doLoop() {
     }
 }
 function loadyzm() {
-    if (xxh.readyState == 4 && xxh.status == 200){
-        if(xxh.responseText != "success"){
+    if (xxh.readyState === 4 && xxh.status === 200){
+        if(xxh.responseText !== "success"){
             alert("短信验证码发送失败!");
         }
     }
@@ -117,9 +118,9 @@ function yanzheng() {
     xxx.send();
 }
 function loadmima() {
-    if (xxx.readyState == 4 && xxx.status == 200){
+    if (xxx.readyState === 4 && xxx.status === 200){
         var result = JSON.parse(xxx.responseText);
-        if(result = true){
+        if(result === true){
             var bianhuan = document.getElementById("bianhuan");
             bianhuan.innerHTML = ('<li class="xazi">新密码 :</li><li><input id="npwd" type="password" placeholder=""></li>' +
                 '<li class="xazi">确认密码 :</li><li><input id="newpwd" type="password" placeholder="请再次输入密码"></li>' +
@@ -129,6 +130,7 @@ function loadmima() {
 }
 var url_uppwd = '/find/phonepwd?custPhone=';
 var xrh = null;
+//更改用户密码
 function uppassd() {
     var inputPwd = document.getElementById("newpwd").value;
     var url_doubletran = url_uppwd + chuan + "&custPassword=" + inputPwd;
@@ -143,9 +145,9 @@ function uppassd() {
     xrh.send();
 }
 function loadPwd() {
-    if (xrh.readyState == 4 && xrh.status == 200){
+    if (xrh.readyState === 4 && xrh.status === 200){
         var result = JSON.parse(xrh.responseText);
-        if(result = true){
+        if(result === true){
             var bianhuan = document.getElementById("bianhuan");
             bianhuan.innerHTML = ('<li><span class="gong">登录密码重置成功!</span></li>');
         }else {

@@ -1,8 +1,30 @@
-.index{
-    height: 1780px;
+.box {
+    height: 1000px;
+    width: 1200px;
+    margin: 0 auto;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,body {
+    height: 100%;
+    width: 100%;
+
+}
+
+.index-main {
+    width: 1240px;
+    height: 1800px;
+    /*background: #1A66B3;*/
+    margin-top: 20px;
+    /*margin: 1px;*/
 }
 
 .classify {
+    margin-left: 160px;
     width: 188px;
 }
 
@@ -19,7 +41,7 @@
 }
 
 .classify-content-title {
-    cursor:pointer;
+    cursor: pointer;
     color: #ff2832;
     font-weight: 800;
 }
@@ -35,7 +57,7 @@
 }
 
 .classify-con {
-    cursor:pointer;
+    cursor: pointer;
     float: left;
     /*background:chocolate;*/
 }
@@ -112,7 +134,7 @@
     width: 240px;
     height: 180px;
     position: relative;
-    top: -895px;
+    top: -885px;
     left: 1150px;
     border: solid 1px #d6d6d6;
     border-radius: 2%;
@@ -173,8 +195,8 @@
 
 .new-all {
     position: relative;
-    top: -900px;
-    left: 200px;
+    top: -870px;
+    left: 133px;
 }
 
 .new-title {
@@ -204,8 +226,8 @@
     height: 1px;
     background: #ff2832;
     position: relative;
-    top: -905px;
-    left: 270px;
+    top: -873px;
+    left: 390px;
 }
 
 /*中间新书的轮播图*/
@@ -231,7 +253,7 @@
     width: 750px;
     height: 545px;
     position: relative;
-    top: -890px;
+    top: -860px;
     left: 370px;
 }
 
@@ -316,21 +338,21 @@
     height: 480px;
     border: solid 1px #d6d6d6;
     position: relative;
-    top: 45px;
+    top: 80px;
     left: 15px;
 }
 
 .hot-book-title {
     font-size: 18px;
     position: relative;
-    top: 15px;
+    top: 40px;
     left: -50px;
     color: red;
 }
 
 .hot-book-icon {
     position: relative;
-    top: 10px;
+    top: 40px;
     left: -10px;
 }
 
@@ -532,43 +554,49 @@
     left: 22px;
     margin-bottom: 15px;
 }
+
 /***************************************hot-author*********************/
-.hot-author{
+.hot-author {
     /*background: aqua;*/
     width: 1215px;
     height: 510px;
     border: solid 1px #d6d6d6;
-    position: relative;
-    left: 173px;
-    top: -1440px;
+    position: absolute;
+    left: 175px;
+    top: 1200px;
 }
-.hot-author-title{
+
+.hot-author-title {
     width: 1215px;
     height: 40px;
     /*background: blue;*/
     position: relative;
     left: 14px;
 }
-.hot-author-name{
+
+.hot-author-name {
     font-size: 19px;
     color: red;
     border-top: solid 2px red;
     text-align: center;
     line-height: 40px;
 }
-.hot-author-other{
+
+.hot-author-other {
     /*background: #D45328;*/
     height: 40px;
     border-left: solid 1px #d6d6d6;
     border-bottom: solid 1px #d6d6d6;
 }
-.hot-author-information{
+
+.hot-author-information {
     width: 900px;
     height: 175px;
     /*background: antiquewhite;*/
     margin-left: 0;
 }
-.num-1{
+
+.num-1 {
     float: left;
     color: red;
     font-weight: 600;
@@ -576,7 +604,8 @@
     position: relative;
     left: -170px;
 }
-.num-st{
+
+.num-st {
     margin-top: 13px;
     float: left;
     color: red;
@@ -585,14 +614,16 @@
     position: relative;
     left: -167px;
 }
-.hot-author-img{
+
+.hot-author-img {
     /*background: aqua;*/
     /*width: 180px;*/
     position: relative;
     left: -190px;
     top: 20px;
 }
-.author-name{
+
+.author-name {
     /*background: #D45328;*/
     float: left;
     font-size: 20px;
@@ -602,7 +633,8 @@
     left: 240px;
     top: -110px;
 }
-.author-content{
+
+.author-content {
     padding: 0;
     /*background: #D45328;*/
     width: 605px;
@@ -610,7 +642,8 @@
     left: 220px;
     top: -80px;
 }
-.author-content-p{
+
+.author-content-p {
     font-size: 13px;
     color: gray;
     width: 590px;
@@ -618,22 +651,25 @@
     left: 20px;
     top: -20px;
 }
-.infor-work-cut{
-    position: relative;
-    top: -1750px;
+
+.infor-work-cut {
+    position: absolute;
+    top: 1415px;
     left: 180px;
     width: 755px;
     height: 20px;
     /*background: #487A6F;*/
 }
-.cut-work{
+
+.cut-work {
     width: 65px;
     height: 20px;
     text-align: center;
     border-radius: 10%;
     background: #d6d6d6;
 }
-.information-work-xian{
+
+.information-work-xian {
     width: 800px;
     height: 1px;
     background: #d6d6d6;
@@ -641,13 +677,15 @@
     left: 90px;
     top: -10px;
 }
-.hot-author-work{
+
+.hot-author-work {
     width: 895px;
-    position: relative;
-    top: -1720px;
+    position: absolute;
+    top: 1460px;
     left: 230px;
 }
-.work-cost-icon{
+
+.work-cost-icon {
     margin-left: 20px;
     margin-top: 10px;
     float: left;
@@ -655,41 +693,47 @@
     font-weight: 600;
     color: #D45328;
 }
-.work-cost-price{
+
+.work-cost-price {
     margin-top: 10px;
     float: left;
     font-size: 15px;
     font-weight: 600;
     color: #D45328;
 }
-.work-original-icon{
+
+.work-original-icon {
     margin-top: 10px;
     margin-left: 10px;
     float: left;
     font-size: 14px;
     color: #929292;
-    text-decoration:line-through;
+    text-decoration: line-through;
 }
-.work-original-price{
+
+.work-original-price {
     margin-top: 10px;
     float: left;
     font-size: 14px;
     color: #929292;
-    text-decoration:line-through;
+    text-decoration: line-through;
 }
-.work-title{
+
+.work-title {
     margin-left: 20px;
     margin-top: 10px;
 }
-.author-sort{
+
+.author-sort {
     background-color: #f8f8f8;
     width: 230px;
     border: solid 1px #d6d6d6;
-    position: relative;
-    top: -2150px;
+    position: absolute;
+    top: 1250px;
     left: 1120px;
 }
-.author-sort-content{
+
+.author-sort-content {
     width: 210px;
     height: 45px;
     line-height: 45px;
@@ -697,25 +741,31 @@
     margin-left: 8px;
     border-bottom: solid 1px #d6d6d6;
 }
-.author-sort-num{
+
+.author-sort-num {
     float: left;
     color: red;
     font-size: 20px;
 }
-.author-sort-name{
+
+.author-sort-name {
     margin-left: 20px;
     float: left;
     font-size: 18px;
 }
 
-.books-order{
+.books-order {
     width: 1225px;
     /*background: #D45328;*/
-    position: relative;
-    top: -2130px;
+    position: absolute;
+    top: 1780px;
     left: 160px;
 }
-.book-order-content img{
+
+.book-order-content img {
     width: 400px;
     height: 167px;
 }
+
+
+

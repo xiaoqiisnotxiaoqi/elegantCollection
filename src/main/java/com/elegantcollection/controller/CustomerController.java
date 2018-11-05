@@ -7,6 +7,18 @@ import com.elegantcollection.service.BookService;
 import com.elegantcollection.service.CustomerService;
 import com.elegantcollection.service.EvaluateService;
 import com.elegantcollection.util.*;
+import com.elegantcollection.entity.*;
+import com.elegantcollection.service.*;
+import com.elegantcollection.util.CodeUtil;
+import com.elegantcollection.util.RandomNumberGeneration;
+import com.elegantcollection.util.SmsVerification;
+import com.elegantcollection.entity.Book;
+import com.elegantcollection.entity.Customer;
+import com.elegantcollection.entity.Evaluate;
+import com.elegantcollection.service.BookService;
+import com.elegantcollection.service.CustomerService;
+import com.elegantcollection.service.EvaluateService;
+import com.elegantcollection.util.*;
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +31,10 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.crypto.Data;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @SuppressWarnings("all")
@@ -30,6 +44,11 @@ public class CustomerController {
     private final CustomerService customerService;
     @Autowired
     private EvaluateService evaluateService;
+    @Autowired
+    private ShopOrderDetailService shopOrderDetailService;
+    @Autowired
+    private ShopOrderService shopOrderService;
+
 
     @Autowired
     private BookService bookService;
@@ -419,4 +438,59 @@ public class CustomerController {
     }
 
 
+    /**
+     * 根据用户的登录Id查询到订单
+     * @param request 服务请求
+     * @param response 服务响应
+     * @return 返回订单集合
+     * @throws ServletException 服务器异常
+     * @throws IOException 异常
+     */
+    @GetMapping("getallorder")
+    public List<Map<String, Object>> getaddress(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Customer c = (Customer) request.getSession().getAttribute("customer");
+
+        // n+1 问题
+        List<ShopOrder> orders = shopOrderService.queryByOreder(c.getCustId(),0);
+        int count = orders.size();
+
+        List<Map<String, Object>>  resp= new ArrayList<>();
+        Map<String, Object> item;
+        request.getSession().setAttribute("orders",orders);
+        for (ShopOrder order:orders) {
+            item = new HashMap<>();
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String  res = simpleDateFormat.format(order.getOrderCreateTime());
+
+            item.put("orderCreateTime", res);
+
+             double orderPrice = order.getOrderPrice();
+            item.put("orderPrice", order.getOrderPrice());
+            item.put("orderStatus", order.getOrderStatus());
+            HashMap<String,Object> firstDetail = shopOrderDetailService.queryByOrderId(order.getOrderId()).get(0);
+            int quality = (int)firstDetail.get("quality");
+            item.put("quality", quality);
+            int bookId =(int)firstDetail.get("bookId");
+
+            BookWithBLOBs book = bookService.queryBybookIntro(bookId);
+            item.put("bookIntro",book.getBookIntro());
+
+
+            int orderId = (int) firstDetail.get("orderId");
+            System.out.println("orderId======================================================>"+orderId);
+
+            ShopOrder shopOrder  = shopOrderService.queryByOrderId(orderId);
+            item.put("discountAmount",shopOrder.getDiscountAmount());
+
+            item.put("bookImg",firstDetail.get("bookImg"));
+            String title =(String) firstDetail.get("bookName");
+            if (quality>1){
+                title+="等商品";
+            }
+            item.put("title", title);
+                item.put("count",count);
+            resp.add(item);
+        }
+        return resp;
+    }
 }

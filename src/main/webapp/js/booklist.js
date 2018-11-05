@@ -6,6 +6,7 @@ onload = function () {
 }
 var xhr = null;
 var xrh = null;
+//获取书单信息
 function refreshBookOrder(url_getbookorder){
     if(window.XMLHttpRequest){
         xhr = new XMLHttpRequest();
@@ -18,7 +19,7 @@ function refreshBookOrder(url_getbookorder){
     xhr.send();
 }
 function loadBookOrder() {
-    if (xhr.readyState == 4 && xhr.status == 200) {
+    if (xhr.readyState === 4 && xhr.status === 200) {
         var result = JSON.parse(xhr.responseText);
         var neid = document.getElementById("neid");
         neid.innerHTML += ('<div class="oi"><img src="' + result.orderImg + '"></div>' +
@@ -26,6 +27,7 @@ function loadBookOrder() {
             '<span class="jieshao">' + result.orderIntro + '</span></div>');
     }
 }
+获取该书单内所有书籍
 function refreshBookOrderDetail(url_getbookorderdetail){
     if(window.XMLHttpRequest){
         xrh = new XMLHttpRequest();
@@ -38,7 +40,7 @@ function refreshBookOrderDetail(url_getbookorderdetail){
     xrh.send();
 }
 function loadBookOrderDetail() {
-    if (xrh.readyState == 4 && xrh.status == 200) {
+    if (xrh.readyState == 4= && xrh.status === 200) {
         var result = JSON.parse(xrh.responseText);
         var shen = document.getElementById("shen");
         shen.innerHTML = "";
@@ -54,6 +56,7 @@ function loadBookOrderDetail() {
         all.style.height=height+'px';
     }
 }
+//跳转到书籍详情
 function getDetail(pro) {
     window.location = "bookdetail/?bookId=" + pro.name;
 }

@@ -162,6 +162,13 @@ public class ShopOrderServiceImpl implements ShopOrderService {
         return shopOrderDao.selectByBookName4Size(condition).size();
     }
 
+    @Override
+    public List<ShopOrder> queryByOreder(Integer custId,Integer orderStatus) {
+        ShopOrderExample example = new ShopOrderExample();
+        example.createCriteria().andCustIdEqualTo(custId).andOrderStatusEqualTo(orderStatus);
+        return shopOrderDao.selectByExample(example);
+    }
+
     private Date getDate(String timeState, Integer timeOp) {
         Date baseDate = new Date();
         Calendar calendar = Calendar.getInstance();

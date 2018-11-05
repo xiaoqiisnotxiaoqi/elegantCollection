@@ -100,24 +100,24 @@ function getDate() {
                     "    <td>\n" +
                     "        <div class=\"book-msg\">" + orderDetailList[j].bookName + "</div>\n" +
                     "        <div class=\"book-number\">" + 'x' + bookNumber + "</div>\n" + "</td>\n" +
-                     (j == 0 ?"            <td>" +
-                    "        <div class=\"consignee-tooltip\">" + orderList[i].consigneeName + "</div>\n" +
-                    "    </td>\n" +
-                    "    <td>\n" +
-                    "        <div>\n" +
-                    "            " + orderDetailList[j].bookSellingPrice * orderDetailList[j].quality + "\n" +
-                    "        </div>\n" +
-                    "        <div>\n" +
-                    "            在线支付\n" +
-                    "        </div>\n" +
-                    "    </td>\n" +
-                    "    <td>\n" +
-                    "        <div>" + StatusJudge(orderList[i].shopOrder.orderStatus) + "</div>\n" +
-                    "        <div><a href='javascript:void(0)' onclick='javascript:orderDetail(" + orderList[i].shopOrder.orderId + ")'>订单详情</a></div>\n" +
-                    "    </td>\n" +
-                    "    <td>\n" +
-                    "        <a class=\"order-operate\" href=\"#\" onclick=\"remove(" + orderList[i].shopOrder.orderId + ")\">删除</a>\n" +
-                    "    </td>\n" : "<td colspan=\"4\"></td>") +
+                    (j == 0 ? "            <td>" +
+                        "        <div class=\"consignee-tooltip\">" + orderList[i].consigneeName + "</div>\n" +
+                        "    </td>\n" +
+                        "    <td>\n" +
+                        "        <div>\n" +
+                        "            " + orderDetailList[j].bookSellingPrice * orderDetailList[j].quality + "\n" +
+                        "        </div>\n" +
+                        "        <div>\n" +
+                        "            在线支付\n" +
+                        "        </div>\n" +
+                        "    </td>\n" +
+                        "    <td>\n" +
+                        "        <div>" + StatusJudge(orderList[i].shopOrder.orderStatus) + "</div>\n" +
+                        "        <div><a href='javascript:void(0)' onclick='javascript:orderDetail(" + orderList[i].shopOrder.orderId + ")'>订单详情</a></div>\n" +
+                        "    </td>\n" +
+                        "    <td>\n" +
+                        "        <a class=\"order-operate\" href=\"#\" onclick=\"remove(" + orderList[i].shopOrder.orderId + ")\">删除</a>\n" +
+                        "    </td>\n" : "<td colspan=\"4\"></td>") +
                     "</tr>\n" +
                     "\n";
             }
@@ -127,13 +127,13 @@ function getDate() {
         orderPage.innerHTML = "<tr>\n" +
             "            <td colspan=\"6\">\n" +
             "                <div class=\"page-information\">\n" +
+            "               <span class=\"page-number\">" + jsonText.totalPages + "  页</span>\n" +
+            "                    <span class=\"page-number\">共有：</span>\n" +
             (jsonText.currentPageCode != jsonText.totalPages ? "<a href=\"#\" onclick=\"refreshByPage(" + jsonText.totalPages + ")\">尾页</a>\n" : "<a href=\"#\">尾页</a>\n") +
             (jsonText.currentPageCode != jsonText.totalPages ? "<a href=\"#\" onclick=\"refreshByPage(" + nextNumber + ")\">下一页</a>\n" : "<a href=\"#\">下一页</a>\n") +
             "                    <span class=\"page-code\">" + jsonText.currentPageCode + "</span>\n" +
             (jsonText.currentPageCode != 1 ? "<a href=\"#\" onclick=\"refreshByPage(" + previousNumber + ")\">上一页</a>\n" : "<a href=\"#\">上一页</a>\n") +
             (jsonText.currentPageCode != 1 ? "<a href=\"#\" onclick=\"refreshByPage(1)\">首页</a>\n" : "<a href=\"#\">首页</a>\n") +
-            "                    <span class=\"page-number\">总页数</span>\n" +
-            "               <span class=\"page-number\">" + jsonText.totalPages + "</span>\n" +
             "                </div>\n" +
             "            </td>\n" +
             "        </tr>"
@@ -217,8 +217,8 @@ function getDate4State() {
                     "    <td>\n" +
                     "        <div class=\"book-msg\">" + orderDetailList[j].bookName + "</div>\n" +
                     "        <div class=\"book-number\">" + 'x' + bookNumber + "</div>\n" +
-                    "    </td>\n"  + (j == 0 ?
-                        "    <td>\n"+
+                    "    </td>\n" + (j == 0 ?
+                    "    <td>\n" +
                     "        <div class=\"consignee-tooltip\">" + orderList[i].consigneeName + "</div>\n" +
                     "    </td>\n" +
                     "    <td>\n" +
@@ -247,13 +247,13 @@ function getDate4State() {
         orderPage.innerHTML = "<tr>\n" +
             "            <td colspan=\"6\">\n" +
             "                <div class=\"page-information\">\n" +
+            "               <span class=\"page-number\">" + jsonText.totalPages + "  页</span>\n" +
+            "                    <span class=\"page-number\">共有：</span>\n" +
             (jsonText.currentPageCode != jsonText.totalPages ? "<a href=\"#\" onclick=\"refreshByState(" + State + ",0," + jsonText.totalPages + ")\">尾页</a>\n" : "<a href=\"#\">尾页</a>\n") +
             (jsonText.currentPageCode != jsonText.totalPages ? "<a href=\"#\" onclick=\"refreshByState(" + State + ",0," + nextNumber + ")\">下一页</a>\n" : "<a href=\"#\">下一页</a>\n") +
             "                    <span class=\"page-code\">" + jsonText.currentPageCode + "</span>\n" +
             (jsonText.currentPageCode != 1 ? "<a href=\"#\" onclick=\"refreshByState(" + State + ",0," + previousNumber + ")\">上一页</a>\n" : "<a href=\"#\">上一页</a>\n") +
             (jsonText.currentPageCode != 1 ? "<a href=\"#\" onclick=\"refreshByState(" + State + ",0,1)\">首页</a>\n" : "<a href=\"#\">首页</a>\n") +
-            "                    <span class=\"page-number\">总页数</span>\n" +
-            "               <span>" + jsonText.totalPages + "</span>\n" +
             "                </div>\n" +
             "            </td>\n" +
             "        </tr>"
@@ -336,24 +336,24 @@ function getDate4Condition() {
                     "        <div class=\"book-msg\">" + orderDetailList[j].bookName + "</div>\n" +
                     "        <div class=\"book-number\">" + 'x' + bookNumber + "</div>\n" +
                     "    </td>\n" +
-                     (j == 0 ?"    <td>\n" +
-                    "        <div class=\"consignee-tooltip\">" + orderList[i].consigneeName + "</div>\n" +
-                    "    </td>\n" +
-                    "    <td>\n" +
-                    "        <div>\n" +
-                    "            " + orderDetailList[j].bookSellingPrice * orderDetailList[j].quality + "\n" +
-                    "        </div>\n" +
-                    "        <div>\n" +
-                    "            在线支付\n" +
-                    "        </div>\n" +
-                    "    </td>\n" +
-                    "    <td>\n" +
-                    "        <div>" + StatusJudge(orderList[i].shopOrder.orderStatus) + "</div>\n" +
-                    "        <div><a href=\"#\"onclick='javascript:orderDetail(" + orderList[i].shopOrder.orderId + ")'>订单详情</a></div>\n" +
-                    "    </td>\n" +
-                    "    <td>\n" +
-                    "        <a class=\"order-operate\" href=\"#\" onclick=\"remove(" + orderList[i].shopOrder.orderId + ")\">删除</a>\n" +
-                    "    </td>\n" : "<td colspan=\"4\"></td>") +
+                    (j == 0 ? "    <td>\n" +
+                        "        <div class=\"consignee-tooltip\">" + orderList[i].consigneeName + "</div>\n" +
+                        "    </td>\n" +
+                        "    <td>\n" +
+                        "        <div>\n" +
+                        "            " + orderDetailList[j].bookSellingPrice * orderDetailList[j].quality + "\n" +
+                        "        </div>\n" +
+                        "        <div>\n" +
+                        "            在线支付\n" +
+                        "        </div>\n" +
+                        "    </td>\n" +
+                        "    <td>\n" +
+                        "        <div>" + StatusJudge(orderList[i].shopOrder.orderStatus) + "</div>\n" +
+                        "        <div><a href=\"#\"onclick='javascript:orderDetail(" + orderList[i].shopOrder.orderId + ")'>订单详情</a></div>\n" +
+                        "    </td>\n" +
+                        "    <td>\n" +
+                        "        <a class=\"order-operate\" href=\"#\" onclick=\"remove(" + orderList[i].shopOrder.orderId + ")\">删除</a>\n" +
+                        "    </td>\n" : "<td colspan=\"4\"></td>") +
                     "</tr>\n" +
                     "\n";
             }
@@ -364,13 +364,13 @@ function getDate4Condition() {
         orderPage.innerHTML = "<tr>\n" +
             "            <td colspan=\"6\">\n" +
             "                <div class=\"page-information\">\n" +
+            "               <span class=\"page-number\">" + jsonText.totalPages + "  页</span>\n" +
+            "                    <span class=\"page-number\">共有：</span>\n" +
             (jsonText.currentPageCode != jsonText.totalPages ? "<a href=\"#\" onclick=\"refreshByState(" + State + ",0," + jsonText.totalPages + ")\">尾页</a>\n" : "<a href=\"#\">尾页</a>\n") +
             (jsonText.currentPageCode != jsonText.totalPages ? "<a href=\"#\" onclick=\"refreshByState(" + State + ",0," + nextNumber + ")\">下一页</a>\n" : "<a href=\"#\">下一页</a>\n") +
             "                    <span class=\"page-code\">" + jsonText.currentPageCode + "</span>\n" +
             (jsonText.currentPageCode != 1 ? "<a href=\"#\" onclick=\"refreshByState(" + State + ",0," + previousNumber + ")\">上一页</a>\n" : "<a href=\"#\">上一页</a>\n") +
             (jsonText.currentPageCode != 1 ? "<a href=\"#\" onclick=\"refreshByState(" + State + ",0,1)\">首页</a>\n" : "<a href=\"#\">首页</a>\n") +
-            "                    <span class=\"page-number\">总页数</span>\n" +
-            "               <span>" + jsonText.totalPages + "</span>\n" +
             "                </div>\n" +
             "            </td>\n" +
             "        </tr>"

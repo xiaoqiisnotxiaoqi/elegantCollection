@@ -23,7 +23,7 @@ body{
 
 }
 .my_menu-title{
-    width: 67%;
+
    display: block;
     margin-top: 0px;
     font-weight: normal;
@@ -51,7 +51,7 @@ body{
 .my_menu .dl{
     border: 1px solid #dcdcdc;
     border-top: none 0;
-    width: 148px;
+    width: 195px;
     margin: 0 auto;
     padding: 16px 0 0 42px;
 }
@@ -85,10 +85,11 @@ a:link, a:visited {
     background: url(../images/user_message_bg.png) 0 0 no-repeat;
     padding: 8px 0 0 48px;
     height: 160px;
-    margin: 0 auto 10px;
-
+    margin: 0 auto 15px;
+    margin-left: -10px;
     text-align: center;
 }
+
 .user_info{
     float: left;
     width: 135px;
@@ -100,7 +101,7 @@ a:link, a:visited {
     background: url("../images/user_photo_bg.png") 0 0 no-repeat;
     width:85px;
     height:85px;
-    padding: 15px;
+
     margin-bottom: 2px;
     position: relative;
     cursor: pointer; /*光标呈现一只手*/
@@ -112,6 +113,8 @@ a:link, a:visited {
 .user_phone img {
     width: 85px;
     height: 85px;
+    margin-top: 18px;
+    margin-left: 15px;
 }
 .user_phone .edit_box {
     width: 85px;
@@ -161,11 +164,12 @@ a:link, a:visited {
     width: 25px;
     height: 28px;
     line-height: 28px;
-    padding: 0 3px 0 26px;
+    padding: 0 3px 0 50px;
     background: url(../images/icon.png) 0 -316px;
     position: absolute;
     left: 78px;
     top: 80px;
+    color: white;
 }
 
 .user_message .user_name {
@@ -178,6 +182,7 @@ a:link, a:visited {
     white-space: nowrap;
     text-overflow: ellipsis;
     font-size: 16px;
+    margin-top: 30px;
 }
 .safety_type .safety-level{
      padding: 15px 0 0;
@@ -215,6 +220,8 @@ a:link, a:visited {
     padding-left: 35px;
     float: left;
     width: 385px;
+    margin-top: 15px;
+    margin-left: 30px;
 }
 
 .account_message li {
@@ -229,6 +236,7 @@ a:link, a:visited {
     line-height: 20px;
     font-size: 14px;
     list-style-type: none;
+    margin-left: 100px;
 }
 .account_message li .lpk {
     background-position: 0 -373px;
@@ -269,6 +277,7 @@ a:link, a:visited {
     top:-10px;
 }
 .my_order{
+    margin-top: 15px;
     margin-bottom: 15px;
     z-index: 9;
 }
@@ -282,8 +291,12 @@ a:link, a:visited {
 .my_title .tab_list {
     float: right;
     font-size: 13px;
+    margin-top: 15px;
 
 }
+
+
+
 .my_title .tab_list li {
     padding: 0 21px;
     position: relative;
@@ -313,7 +326,77 @@ a:link, a:visited {
     display: inline-block;
 
 }
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
 
+
+.my_order .order_box td.tg {
+    width: 270px;
+    padding: 25px 0 0 15px;
+    height: 90px;
+}
+
+
+.my_order .order_box td {
+    height: 85px;
+    width: 135px;
+    padding: 30px 0 0 40px;
+    border-bottom: 1px solid #dcdcdc;
+    text-align: left;
+    line-height: 18px;
+    vertical-align: top;
+    z-index: 9;
+}
+
+
+.my_order .goode_list {
+    width: 270px;
+    text-align: left;
+    position: relative;
+}
+
+.my_order .order_box td a {
+    color: #646464;
+}
+
+.my_order .goode_list a {
+    display: block;
+    border: 1px solid #fff;
+    margin-right: 8px;
+    width: 54px;
+    height: 54px;
+    padding: 2px;
+    float: left;
+}
+
+.my_order .goode_list a img {
+    width: 54px;
+    height: 54px;
+}
+
+.my_order .order_box .data {
+    color: #969696;
+}
+
+.my_order .order_box .price {
+    color: #323232;
+    font-size: 14px;
+}
+
+.red {
+    color: #ff2832 !important;
+}
+
+.my_order .order_box {
+    border: 1px solid #dcdcdc;
+    border-width: 0 1px;
+    z-index: 9;
+
+    height: 115px;
+    max-height: 575px;
+}
 .my_title .tab_list li.last {
 
     border: none 0;
@@ -476,6 +559,31 @@ a:link, a:visited {
 }
 .red {
     color: #ff2832 !important;
+}
+
+.my_title .tab_list li .tip {
+    font-size: 12px;
+    width: 30px;
+    position: absolute;
+    right: 1px;
+    top: -14px;
+    color: #fff;
+    display: block;
+}
+
+.my_title .tip {
+    color: #313131;
+    font-size: 14px;
+    /*padding-left: 20px;*/
+}
+
+.my_title .tab_list li .tip strong {
+    padding: 1px 5px;
+    border-radius: 7px;
+    background: #ff2832;
+    display: inline-block;
+    font-style: normal
+
 }
 
 .info_list li .select_add {

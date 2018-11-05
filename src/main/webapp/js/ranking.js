@@ -8,6 +8,7 @@ onload = function () {
 }
 var xhr = null;
 var xrh = null;
+//获取书籍二级类别
 function refreshCategory(url_getcategory){
     if(window.XMLHttpRequest){
         xrh = new XMLHttpRequest();
@@ -20,7 +21,7 @@ function refreshCategory(url_getcategory){
     xrh.send();
 }
 function loadCategory() {
-    if (xrh.readyState == 4 && xrh.status == 200) {
+    if (xrh.readyState === 4 && xrh.status === 200) {
         var result = JSON.parse(xrh.responseText);
         var danxiang = document.getElementById("danxiang");
         danxiang.innerHTML = "";
@@ -31,6 +32,7 @@ function loadCategory() {
         }
     }
 }
+//按总销量降序显示图书
 function refreshBookTotal(ugbt){
     if(window.XMLHttpRequest){
         xhr = new XMLHttpRequest();
@@ -43,7 +45,7 @@ function refreshBookTotal(ugbt){
     xhr.send();
 }
 function loadBookTotal() {
-    if (xhr.readyState == 4 && xhr.status == 200) {
+    if (xhr.readyState === 4 && xhr.status === 200) {
         var result = JSON.parse(xhr.responseText);
         var relist = result.modelList;
         var shulie = document.getElementById("shulie");
@@ -57,14 +59,15 @@ function loadBookTotal() {
                 relist[i].bookMarkedPrice + '</span><span class="che"><a id="gw" href="javascript:checklogin()">' +
                 '加入购物车</a></span></div></div>');
         }
+        //判断是否登录
         var su = sessionStorage.getItem("login");
-        if (su != "success") {
+        if (su !== "success") {
             var df = document.getElementById("gw");
             df.disabled = true;
         }
         var fenye = document.getElementById("fenye");
         fenye.innerHTML = "";
-        if(result.currentPageCode != result.totalPages){
+        if(result.currentPageCode !== result.totalPages){
             var url_next_page = url_getbooktotal + "?page=" + (result.currentPageCode + 1);
             var href = 'javascript:refreshBookTotal("' + url_next_page + '")';
             var nextPageEle = "<span class='ye'><a href='" + href + "'>下一页</a> </span>";
@@ -72,7 +75,7 @@ function loadBookTotal() {
         }
         var currentPageEle = "<span class='ma'>" + result.currentPageCode + "</span>";
         fenye.innerHTML += currentPageEle;
-        if(result.currentPageCode != 1){
+        if(result.currentPageCode !== 1){
             var url_pre_page = url_getbooktotal + "?page=" + (result.currentPageCode - 1);
             var href = 'javascript:refreshBookTotal("' + url_pre_page + '")';
             var prePageEle = "<span class='ye'><a href='" + href + "'>上一页</a> </span>";
@@ -86,6 +89,7 @@ function checklogin() {
 }
 var url_gotocart = '/find/cart?bookId=';
 var ppx = null;
+//向购物车添加数据
 function comecart(dd) {
     var ulr = url_gotocart + dd + "&bookCount=" + 1;
     if(window.XMLHttpRequest){
@@ -98,14 +102,16 @@ function comecart(dd) {
     ppx.onreadystatechange = loadCart;
     ppx.send();
 }
+//跳转到购物车
 function loadCart() {
-    if (xhr.readyState == 4 && xhr.status == 200){
+    if (xhr.readyState === 4 && xhr.status === 200){
         var result = JSON.parse(xhr.responseText);
-        if (result != "添加失败") {
+        if (result !== "添加失败") {
             window.location = "custCart";
         }
     }
 }
+//按上月销量降序显示图书
 function getLastMonth(ugbl) {
     if(window.XMLHttpRequest){
         xhr = new XMLHttpRequest();
@@ -118,7 +124,7 @@ function getLastMonth(ugbl) {
     xhr.send();
 }
 function loadBookLastMonth() {
-    if (xhr.readyState == 4 && xhr.status == 200) {
+    if (xhr.readyState === 4 && xhr.status === 200) {
         var result = JSON.parse(xhr.responseText);
         var relist = result.modelList;
         var shulie = document.getElementById("shulie");
@@ -133,13 +139,13 @@ function loadBookLastMonth() {
                 '加入购物车</a></span></div></div>');
         }
         var su = sessionStorage.getItem("login");
-        if (su != "success") {
+        if (su !== "success") {
             var df = document.getElementById("gw");
             df.disabled = true;
         }
         var fenye = document.getElementById("fenye");
         fenye.innerHTML = "";
-        if(result.currentPageCode != result.totalPages){
+        if(result.currentPageCode !== result.totalPages){
             var url_next_page = url_getbooklastmonth + "?page=" + (result.currentPageCode + 1);
             var href = 'javascript:getLastMonth("' + url_next_page + '")';
             var nextPageEle = "<span class='ye'><a href='" + href + "'>下一页</a> </span>";
@@ -147,7 +153,7 @@ function loadBookLastMonth() {
         }
         var currentPageEle = "<span class='ma'>" + result.currentPageCode + "</span>";
         fenye.innerHTML += currentPageEle;
-        if(result.currentPageCode != 1){
+        if(result.currentPageCode !== 1){
             var url_pre_page = url_getbooklastmonth + "?page=" + (result.currentPageCode - 1);
             var href = 'javascript:getLastMonth("' + url_pre_page + '")';
             var prePageEle = "<span class='ye'><a href='" + href + "'>上一页</a> </span>";
@@ -156,6 +162,7 @@ function loadBookLastMonth() {
     }
 }
 var ugbc = null;
+//单一类别按总销量降序显示图书
 function getLastMonthCategory(pro) {
     ugbc = pro;
     if(window.XMLHttpRequest){
@@ -170,7 +177,7 @@ function getLastMonthCategory(pro) {
 }
 function loadBookLastMonthCategory() {
     console.log(xhr.responseText);
-    if (xhr.readyState == 4 && xhr.status == 200) {
+    if (xhr.readyState === 4 && xhr.status === 200) {
         var result = JSON.parse(xhr.responseText);
         var relist = result.modelList;
         var shulie = document.getElementById("shulie");
@@ -185,13 +192,13 @@ function loadBookLastMonthCategory() {
                 '加入购物车</a></span></div></div>');
         }
         var su = sessionStorage.getItem("login");
-        if (su != "success") {
+        if (su !== "success") {
             var df = document.getElementById("gw");
             df.disabled = true;
         }
         var fenye = document.getElementById("fenye");
         fenye.innerHTML = "";
-        if(result.currentPageCode != result.totalPages){
+        if(result.currentPageCode !== result.totalPages){
             var url_next_page = ugbc + "&page=" + (result.currentPageCode + 1);
             alert(url_next_page);
             var href = 'javascript:getLastMonthCategory("' + url_next_page + '")';
@@ -200,7 +207,7 @@ function loadBookLastMonthCategory() {
         }
         var currentPageEle = "<span class='ma'>" + result.currentPageCode + "</span>";
         fenye.innerHTML += currentPageEle;
-        if(result.currentPageCode != 1){
+        if(result.currentPageCode !== 1){
             var url_pre_page = ugbc + "&page=" + (result.currentPageCode - 1);
             var href = 'javascript:getLastMonthCategory("' + url_pre_page + '")';
             var prePageEle = "<span class='ye'><a href='" + href + "'>上一页</a> </span>";
@@ -208,6 +215,7 @@ function loadBookLastMonthCategory() {
         }
     }
 }
+//跳转到图书详情
 function getDetail(pro) {
     window.location = "bookdetail?bookId=" + pro.name;
 }

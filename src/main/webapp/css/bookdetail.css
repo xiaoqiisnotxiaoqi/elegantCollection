@@ -10,7 +10,7 @@ a span {
 
 a {
     text-decoration: none;
-    color: lightskyblue;
+    color: #444444;
 }
 
 img {
@@ -222,8 +222,8 @@ div {
 
 .zuhe-info {
     display: block;
-    width: 100px;
-    height: 32px;
+    width: 118px;
+    height: 40px;
     line-height: 16px;
     overflow: hidden;
     margin: 0 0 8px 0;
@@ -273,10 +273,11 @@ div {
 }
 
 input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button{
+input::-webkit-inner-spin-button {
     -webkit-appearance: none !important;
     margin: 0;
 }
+
 #booknum {
     text-align: center;
     float: left;
@@ -468,7 +469,6 @@ input::-webkit-inner-spin-button{
     font: 14px/22px "Microsoft Yahei";
     color: #323232;
 }
-
 
 /*分页样式*/
 .pagination ul {

@@ -6,6 +6,7 @@ onload = function () {
 }
 var xhr = null;
 var xrh = null;
+//获取作者信息
 function refreshAuthor(url_getauthor){
     if(window.XMLHttpRequest){
         xhr = new XMLHttpRequest();
@@ -18,7 +19,7 @@ function refreshAuthor(url_getauthor){
     xhr.send();
 }
 function loadAuthor() {
-    if (xhr.readyState == 4 && xhr.status == 200) {
+    if (xhr.readyState === 4 && xhr.status === 200) {
         var result = JSON.parse(xhr.responseText);
         var jian = document.getElementById("jian");
         jian.innerHTML += ('<div class="tu"><img src="' + result.authorImg + '"></div><div class="jie">' +
@@ -26,6 +27,7 @@ function loadAuthor() {
             '<span>' + result.authorIntro + '</span></div></div>');
     }
 }
+//获取该作者的所有作品
 function refreshBook(url_getbook){
     if(window.XMLHttpRequest){
         xrh = new XMLHttpRequest();
@@ -38,7 +40,7 @@ function refreshBook(url_getbook){
     xrh.send();
 }
 function loadBook() {
-    if (xrh.readyState == 4 && xrh.status == 200) {
+    if (xrh.readyState === 4 && xrh.status === 200) {
         var result = JSON.parse(xrh.responseText);
         var zuo = document.getElementById("zuo");
         zuo.innerHTML = "";
@@ -54,6 +56,7 @@ function loadBook() {
         all.style.height=height+'px';
     }
 }
+//跳转到图书详情
 function getDetail(pro) {
     window.location = "bookdetail/?bookId=" + pro.name;
 }
