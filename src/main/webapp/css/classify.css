@@ -278,6 +278,8 @@ html, body {
 }
 
 .new-title-word {
+    height: 35px;
+    overflow: hidden;
     margin-left: 20px;
     margin-top: 5px;
     margin-bottom: 5px;
@@ -614,7 +616,7 @@ html, body {
 }
 
 .hot-author-img {
-    
+    overflow: hidden;
     width: 150px;
     height: 150px;
     position: relative;

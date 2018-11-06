@@ -35,6 +35,14 @@ public interface BookService {
     List<BookImg> queryBookImgsById(Integer bookId);
 
     /**
+     * 查询出商品详情图片
+     *
+     * @param bookId 图书ID
+     * @return 详情图片集合
+     */
+    List<BookImg> queryBookDetailImgsById(Integer bookId);
+
+    /**
      * 根据bookid查询评论数
      *
      * @param bookId 图书ID
@@ -76,9 +84,11 @@ public interface BookService {
 
     BookWithBLOBs queryBybookIntro(Integer BookId);
 
-    /**根据图书Id查询版块
-     * @param bookId    图书ID
-     * @return  版块
+    /**
+     * 根据图书Id查询版块
+     *
+     * @param bookId 图书ID
+     * @return 版块
      */
     Block queryBlockByBookId(Integer bookId);
 

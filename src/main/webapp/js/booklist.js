@@ -27,7 +27,7 @@ function loadBookOrder() {
             '<span class="jieshao">' + result.orderIntro + '</span></div>');
     }
 }
-获取该书单内所有书籍
+// 获取该书单内所有书籍
 function refreshBookOrderDetail(url_getbookorderdetail){
     if(window.XMLHttpRequest){
         xrh = new XMLHttpRequest();

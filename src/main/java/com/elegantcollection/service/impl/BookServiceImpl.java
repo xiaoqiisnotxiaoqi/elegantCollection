@@ -175,10 +175,25 @@ public class BookServiceImpl implements BookService {
         BookImgExample.Criteria criteria = bookImgExample.createCriteria();
 
         criteria.andBookIdEqualTo(bookId);
-
+        criteria.andRedundancyFieldEqualTo("1");
         return bookImgDao.selectByExample(bookImgExample);
     }
 
+    /**
+     * 查询出商品详情图片
+     *
+     * @param bookId
+     * @return
+     */
+    @Override
+    public List<BookImg> queryBookDetailImgsById(Integer bookId) {
+        BookImgExample bookImgExample = new BookImgExample();
+        BookImgExample.Criteria criteria = bookImgExample.createCriteria();
+
+        criteria.andBookIdEqualTo(bookId);
+        criteria.andRedundancyFieldEqualTo("2");
+        return bookImgDao.selectByExample(bookImgExample);
+    }
 
     /**
      * 根据bookID获得评论数

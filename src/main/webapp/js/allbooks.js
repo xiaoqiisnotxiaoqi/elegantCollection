@@ -84,7 +84,7 @@ function refresh() {
                     "            </p>\n" +
                     "            <p class=\"star\">\n" +
                     "                <span class=\"level\">\n" +
-                    "                    <span style=\"width: 100%\"></span>\n" +
+                    "                    <img src=\"../images/fivestars.png \" /> \n" +
                     "\n" +
                     "                </span>\n" +
                     "                <a href=\"\">xxx条评论</a>\n" +
