@@ -362,6 +362,8 @@ function getBestPopularPostDate() {
 }
 
 function rePage() {
+    var jsonText = JSON.parse(xhr4.responseText);
+    alert(jsonText);
     setTimeout(
         function () {
             window.location = "post";
