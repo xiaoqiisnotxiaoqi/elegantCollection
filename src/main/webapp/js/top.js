@@ -203,7 +203,7 @@ function sendCode(thisBtn) {
         formData = "phone=" + phone + "&num=1";
     }
     //将手机号传置后台 发送验证码
-    /*if (window.XMLHttpRequest) {
+    if (window.XMLHttpRequest) {
         xhr = new XMLHttpRequest();
     } else {
         xhr = new ActiveXObject('Microsoft.XMLHTTP');
@@ -211,8 +211,8 @@ function sendCode(thisBtn) {
     xhr.open("POST", "/sendText" , true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
     xhr.onreadystatechange = reult;
-    xhr.send(formData);*/
-    alert("短信功能占时关闭")
+    xhr.send(formData);
+    // alert("短信功能占时关闭")
 }
 
 /**
