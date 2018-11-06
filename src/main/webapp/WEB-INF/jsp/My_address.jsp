@@ -25,7 +25,7 @@
     <div class="my_left">
         <div class="my_menu">
 
-            <h3 class="my_menu-title"><a href="#">我的雅志</a></h3>
+            <h3 class="my_menu-title"><a href="${pageContext.request.contextPath}/myelegant">我的雅志</a></h3>
             <div class="dl">
                 <!--导航栏开始-->
 
@@ -42,10 +42,7 @@
                 <li><a href="${pageContext.request.contextPath}/userinfo">个人信息</a></li>
 
                 <li><a href="${pageContext.request.contextPath}/myaddress">收货地址</a></li>
-                <ul>安全中心</ul>
-                <li><a href="#">登录密码</a></li>
-                <li><a href="#">邮箱验证</a></li>
-                <li><a href="#">手机绑定</a></li>
+
                 <ul>我的消息</ul>
                 <li><a href="${pageContext.request.contextPath}/postReply">消息查看</a></li>
                 <!--<li><a href="#">发帖记录</a></li>-->
@@ -64,7 +61,7 @@
 
 
             <span class="title">收货地址管理</span>
-            <span class="tip">您已创建了<span class="red" id="J-Address-Num"> </span>个收货地址，最多可以创建
+            <span class="tip">您已创建了<span class="red" id="J-Address-Num">0</span>个收货地址，最多可以创建
             <span class="red">20</span>个</span>
         </div>
 
@@ -170,10 +167,10 @@
         </div>
         <!--购物车-->
         <div class="sidebar_cart">
-            <a href="#" target="_blank">
+            <a href="${pageContext.request.contextPath}/custCart">
                 <span></span>
                 购<br>物<br>车<br>
-                <em>0</em>
+                <em id="cartnum"></em>
             </a>
         </div>
         <!--页面回滚-->
@@ -184,6 +181,37 @@
 </div>
 <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 <script>
+    var getCart ="${pageContext.request.contextPath}/cartNum";
+
+    var xhr=null;
+    function getCartNum() {
+        if (window.XMLHttpRequest) {
+            xhr = new XMLHttpRequest();
+        } else {
+            xhr = new ActiveXObject("Microsoft.XMLHTTP")
+        }
+        // console.log(area);
+        xhr.open("GET", getCart, true);
+
+        xhr.setRequestHeader("Content-Type","application/json;charset=utf-8");
+
+        xhr.onreadystatechange =loadCartNum;
+        xhr.send();
+    }
+    function loadCartNum() {
+        if(xhr.readyState==4 || xhr.state ==200){
+            var result =JSON.parse(xhr.responseText)
+            // alert(result);
+            var cartnum =   document.getElementById("cartnum");
+            cartnum.innerText="";
+            cartnum.innerText+=(result);
+        }
+
+    }
+
+
+
+
     function showaddress() {
         document.getElementById("J-Pop-Content").style.display="block";
         document.getElementById("save").style.display ="block";
@@ -283,6 +311,11 @@
 
 
                 }
+                var OrderNum =   document.getElementById('J-Address-Num');
+                OrderNum.innerHTML= "";
+                OrderNum.innerHTML+=('<strong>'+addresslist.length+'</strong>');
+              getCartNum();
+
             }
     }
 
@@ -371,7 +404,7 @@
         document.getElementById("J-Pop-Content").style.display="block";
         document.getElementById("updata1").style.display="block";
         document.getElementById("J-Save-Address").style.display="none";
-        modId = ele.name;;
+        modId = ele.name;
     }
     var delId;
     function isdel(ele) {

@@ -31,7 +31,7 @@
         <div class="my_left">
             <div class="my_menu">
 
-                <h3 class="my_menu-title"><a href="#">我的雅志</a></h3>
+                <h3 class="my_menu-title"><a href="${pageContext.request.contextPath}/myelegant">我的雅志</a></h3>
                 <div class="dl">
                     <!--导航栏开始-->
 
@@ -48,10 +48,6 @@
                     <li><a href="${pageContext.request.contextPath}/userinfo">个人信息</a></li>
 
                     <li><a href="${pageContext.request.contextPath}/myaddress">收货地址</a></li>
-                    <ul>安全中心</ul>
-                    <li><a href="#">登录密码</a></li>
-                    <li><a href="#">邮箱验证</a></li>
-                    <li><a href="#">手机绑定</a></li>
                     <ul>我的消息</ul>
                     <li><a href="${pageContext.request.contextPath}/postReply">消息查看</a></li>
                     <!--<li><a href="#">发帖记录</a></li>-->

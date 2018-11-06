@@ -25,7 +25,7 @@
     <div class="my_left">
         <div class="my_menu">
 
-            <h3 class="my_menu-title"><a href="#">我的雅志</a></h3>
+            <h3 class="my_menu-title"><a href="${pageContext.request.contextPath}/myelegant">我的雅志</a></h3>
             <div class="dl">
                 <!--导航栏开始-->
 
@@ -41,10 +41,7 @@
                 <li><a href="${pageContext.request.contextPath}/userinfo">个人信息</a></li>
 
                 <li><a href="${pageContext.request.contextPath}/myaddress">收货地址</a></li>
-                <ul>安全中心</ul>
-                <li><a href="#">登录密码</a></li>
-                <li><a href="#">邮箱验证</a></li>
-                <li><a href="#">手机绑定</a></li>
+
                 <ul>我的消息</ul>
                 <li><a href="${pageContext.request.contextPath}/postReply">消息查看</a></li>
                 <!--<li><a href="#">发帖记录</a></li>-->
@@ -62,7 +59,7 @@
                 <div class="user_info">
                     <div class="user_phone">
 
-                        <a href="#" target="blank">
+                        <a href="${pageContext.request.contextPath}/userinfo"   target="blank">
                             <% if (request.getSession().getAttribute("customer") != null) {
 
                             %>
@@ -71,10 +68,10 @@
 
                             <div class="edit_box">
                                 <span class="edit">&nbsp</span>
-                                <span class="edit_a">编辑资料</span>
+                                <span class="edit_a" >编辑资料</span>
                             </div>
                         </a>
-                        <span class="opacity_mask"></span>
+                        <span class="opacity_mask"  onclick="userinfo()"></span>
 
                     </div>
                     <a href="#" title="站内信" target="blank">
@@ -107,14 +104,14 @@
                         <p>
 
                             <% if (request.getSession().getAttribute("customer") != null) {%>
-                            <a href="#" target="_blank"><span class="setting">手机已设置</span></a>
+                            <a ><span class="setting">手机已设置</span></a>
                             <%}%>
                             <c:if test="${customer.custPhone ==null}">
-                                <a href="#" target="_blank"><span class="setting ">邮箱未设置</span></a>
+                                <a  ><span class="setting ">邮箱未设置</span></a>
                             </c:if>
 
                             <c:if test="${customer.custPhone !=null}">
-                                <a href="#" target="_blank"><span class="setting ">邮箱已设置</span></a>
+                                <a ><span class="setting ">邮箱已设置</span></a>
                             </c:if>
 
                         </p>
@@ -125,14 +122,14 @@
                 <div class="account_message">
                     <ul>
                         <li>
-                            <a class="pic jf" href="#" target="_blank"></a>
-                            <a href="#" target="_blank">积分</a>
+                            <a class="pic jf"></a>
+                            <a >积分</a>
                             <%if (request.getSession().getAttribute("customer") == null) { %>
-                            <a href="#" target="_blank">0</a>
+                            <a>0</a>
                             <%}%>
 
                             <%if (request.getSession().getAttribute("customer") != null) { %>
-                            <a href="#" target="_blank">${customer.custPoints}</a>
+                            <a >${customer.custPoints}</a>
                             <%}%>
                         </li>
                     </ul>
@@ -143,21 +140,15 @@
                 <div class="my_order">
                     <div class="my_title">
                         <ul class="tab_list">
-                            <li><a href="#" target="_blank">待付款</a>
+                            <li><a >待付款</a>
 
-                                <%
-                                    if (request.getSession().getAttribute("orders") != null){
-                                %>
-
-                                <span class="tip"><strong>${orders.size()}</strong></span>
-
-                                <%}%>
+                                <span class="tip" id="tip"></span>
                             </li>
                             <%--<li><a href="#" target="_blank">待收货</a>--%>
                             <%--</li>--%>
                             <%--<li><a href="#" target="_blank">待评价</a>--%>
                             <%--</li>--%>
-                            <li class="last"><a href="#" target="_blank">全部订单</a></li>
+                            <li class="last"><a href="${pageContext.request.contextPath}/order_all" target="_blank">全部订单</a></li>
                         </ul>
                         <span class="title">我的订单</span>
                     </div>
@@ -195,10 +186,10 @@
         </div>
         <!--购物车-->
         <div class="sidebar_cart">
-            <a href="#" target="_blank">
+            <a href="${pageContext.request.contextPath}/custCart">
                 <span></span>
                 购<br>物<br>车<br>
-                <em>0</em>
+                <em id="cartnum"></em>
             </a>
         </div>
         <!--页面回滚-->
@@ -215,15 +206,46 @@
             $('html , body').animate({scrollTop: 0}, 400);
         });
     });
+    window.onload=function () {
+       getOrder4all();
+    }
+    function userinfo() {
+        window.location ="/userinfo";
+    }
 
     var getOrder = "${pageContext.request.contextPath}/getallorder";
-    window.onload=function() {
-        getOrder4all(getOrder);
+    var getCart ="${pageContext.request.contextPath}/cartNum";
+
+
+
+    var xhr=null;
+    function getCartNum() {
+        if (window.XMLHttpRequest) {
+            xhr = new XMLHttpRequest();
+        } else {
+            xhr = new ActiveXObject("Microsoft.XMLHTTP")
+        }
+        // console.log(area);
+        xhr.open("GET", getCart, true);
+
+        xhr.setRequestHeader("Content-Type","application/json;charset=utf-8");
+
+        xhr.onreadystatechange =loadCartNum;
+        xhr.send();
+    }
+    function loadCartNum() {
+        if(xhr.readyState==4 || xhr.state ==200){
+            var result =JSON.parse(xhr.responseText)
+            // alert(result);
+          var cartnum =   document.getElementById("cartnum");
+            cartnum.innerText="";
+            cartnum.innerText+=(result);
+        }
 
     }
 
     var xhr=null;
-    function getOrder4all(getOrder) {
+    function getOrder4all() {
         if (window.XMLHttpRequest) {
             xhr = new XMLHttpRequest();
         } else {
@@ -257,7 +279,7 @@
                                 '                                <div class="goode_list">' +
 
                                 '                                    <a  title="' + allOrder[i].title + allOrder[i].bookIntro + '"' +
-                                '                                       href="' +
+                                '                                    onclick="showDetail(this)"  name="'+allOrder[i].bookId+'"' +
                                 '                                       target="_blank"><img src="' + allOrder[i].bookImg + '"></a>' +
                                 '                                </div>' +
                                 '                            </td>' +
@@ -266,11 +288,16 @@
                                 '                            <td>' +
                                 '                                <span class="red">等待付款</span>' +
                                 '                            </td>' +
-                                '                            <td><a href=""' +
-                                '                                   target="_blank">查看</a></td>' +
+                                '                            <td> <a onclick="showOrder(this)" id="OrderId" name="'+allOrder[i].orderId+'">查看</a></td>' +
                                 '                        </tr>');
 
                         }
+
+                       var OrderLeng=  document.getElementById("tip");
+                        OrderLeng.innerHTML="";
+                       OrderLeng.innerHTML+=('<strong>'+allOrder.length+'</strong>');
+
+
 
                         $(function () {
                             $(".none_box").css('display', 'none');
@@ -283,15 +310,26 @@
 
                         });
                     }
-
-
-
-
-
-
-
+            getCartNum();
         }
+
     }
+
+    function showOrder(ele){
+        var OrderId =  ele.name;
+        window.location = "${pageContext.request.contextPath}/showOrderDetail?orderId=" + OrderId;
+
+    }
+    function showDetail(ele) {
+        var DetailId =ele.name;
+        alert(DetailId);
+        window.location="${pageContext.request.contextPath}/bookdetail/?bookId="+DetailId;
+
+    }
+
+
+
+
 
 </script>
 </body>
