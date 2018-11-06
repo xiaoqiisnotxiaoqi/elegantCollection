@@ -13,7 +13,7 @@ function refresh() {
     else
         document.getElementById("current-category").name = '';
 
-    // sessionStorage.clear();
+
 
     var categoryId = document.getElementById("current-category").name;
     var keyWord = document.getElementById("keyword").name;

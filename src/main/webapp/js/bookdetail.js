@@ -36,7 +36,7 @@ function getDetail() {
             }
             //渲染详情图片
             for (var i = 0; i < bookDetailImgList.length; i++) {
-                document.getElementById("")
+                document.getElementById("book-imgs").innerHTML += "<img class=\"detail-img\" src=\"" + bookDetailImgList[i].imgAddress + "\">";
             }
 
             document.getElementById("main-pic-box").innerHTML = "<img src=\"" + book.bookImg + "\"/>"
@@ -178,7 +178,7 @@ function page(ele) {
 }
 
 // 添加到购物车
-function add2Cart(btn) {
+function add2Cart() {
     var bookId = document.getElementById("bookId").value;
     var count = document.getElementById("booknum").value;
 

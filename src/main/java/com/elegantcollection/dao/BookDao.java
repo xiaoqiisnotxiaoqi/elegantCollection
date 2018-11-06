@@ -24,6 +24,7 @@ public interface BookDao {
      */
     List<Book> selectIndexData(HashMap map);
 
+
     /**
      * 自定义多条件动态分页查询-分页计数
      *
@@ -62,7 +63,7 @@ public interface BookDao {
 
     List<Book> selectBookByBookSalesLastMonth(PageModel<Book> pageModel);
 
-    List<Book> selectBookByBookSalesLastMonthAndBookCategory(Map<String,Object> map);
+    List<Book> selectBookByBookSalesLastMonthAndBookCategory(Map<String, Object> map);
 
     Integer selectCountAll();
 

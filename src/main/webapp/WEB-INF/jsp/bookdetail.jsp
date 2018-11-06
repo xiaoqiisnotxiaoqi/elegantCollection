@@ -118,7 +118,7 @@
                     <button class="num-buttons" onclick=minus()>-
                     </button>
                 </div>
-                <button id="addtocart" onclick="add2Cart()">加入购物车</button>
+                <button id="addtocart" onclick="add2CartFinal()">加入购物车</button>
                 <button id="buynow" onclick="buyNow()">立即购买</button>
             </div>
             <!--加入购物车按钮-->
@@ -180,7 +180,7 @@
                 <span class="detail-infos">国际标准书号ISBN：<span id="isbn"></span></span>
                 <span class="detail-infos">所属分类：<span id="detail-category"></span></span>
             </div>
-            <div id="book-imgs">详情图片</div>
+            <div id="book-imgs"></div>
 
             <!--内容简介-->
             <div class="details-1">
@@ -221,5 +221,16 @@
 <jsp:include page="bottom.jsp"/>
 <%--引用js--%>
 <script src="${pageContext.request.contextPath}/js/bookdetail.js"></script>
+<script>
+    function add2CartFinal() {
+        if (sessionStorage.getItem("login") == "success") {
+            add2Cart();
+        } else {
+            showDiv();
+        }
+    }
+
+
+</script>
 </body>
 </html>

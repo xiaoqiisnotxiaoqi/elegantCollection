@@ -51,6 +51,10 @@ div {
     height: 500px;
 }
 
+.detail-img {
+    height: auto;
+}
+
 /*商品图片区域*/
 #pic-area {
     float: left;
@@ -456,10 +460,11 @@ input::-webkit-inner-spin-button {
 #book-imgs {
     width: 100%;
     height: auto;
-    background-color: lawngreen;
+    /*background-color: lawngreen;*/
 }
 
-#bookimgs img {
+.detail-img {
+    height: auto;
     width: 100%;
 }
 

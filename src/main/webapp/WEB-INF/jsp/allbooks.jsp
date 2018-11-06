@@ -119,6 +119,14 @@
 <jsp:include page="bottom.jsp"/>
 <%--加载js--%>
 <script src="${pageContext.request.contextPath}/js/allbooks.js"></script>
+<script>
+    function add2CartFinal() {
+        if (sessionStorage.getItem("login") == "success") {
+            add2Cart();
+        } else {
 
+        }
+    }
+</script>
 </body>
 </html>
