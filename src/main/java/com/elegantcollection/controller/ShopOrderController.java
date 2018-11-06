@@ -69,7 +69,7 @@ public class ShopOrderController {
         //购物车内的书籍总价
         Float allprice = Float.parseFloat(map.get("allprice"));
         //购物车内的书籍组合优惠价格
-        Float groupPrice = Float.parseFloat(map.get("groupPrice"));
+        Float groupPrice = Float.valueOf (Math.round(Float.parseFloat(map.get("groupPrice"))*100)/100);
         //购物车内的书籍满减价格
         Float fullReductionDiscount = Float.parseFloat(map.get("fullReductionDiscount"));
         //获取详细图书信息存入图书列表booklist
