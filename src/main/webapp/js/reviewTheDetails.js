@@ -831,6 +831,12 @@ function blockSearch(ele){
     xhr.send();
 }
 
+
+function goToIndex() {
+    window.location = "/index"
+}
+
+
 /**
  * 解析 搜索书评区 从后台 返回的数据
  */

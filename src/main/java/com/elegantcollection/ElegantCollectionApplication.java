@@ -10,7 +10,7 @@ import org.springframework.cache.annotation.EnableCaching;
 @MapperScan("com.elegantcollection.dao")
 @SpringBootApplication
 @EnableCaching
-public class ElegantCollectionApplication {
+public class ElegantCollectionApplication{
 
 	public static void main(String[] args) {
 		SpringApplication.run(ElegantCollectionApplication.class, args);

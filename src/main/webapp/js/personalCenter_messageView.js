@@ -5,14 +5,6 @@ var replyId;
 var xhr;
 
 
-/**
- *  跳转到 消息中心 查看自己未回复的消息
- */
-function goToMessage() {
-    document.getElementById("J_userInfo").style.display = "none";
-    document.getElementById("input-text").style.display = "";
-    renderingPostReply()
-}
 
 /**
  * 请求 查看所有的未查看消息
