@@ -388,7 +388,7 @@
             <div class="col-lg-2 hot-author-name">
                 热门作者
             </div>
-            <div class="col-lg-10 hot-author-other"></div>
+            <div class="col-lg-7 hot-author-other"></div>
         </div>
         <!--作者照片和简介-->
         <div class="row hot-author-information" id="first-author">

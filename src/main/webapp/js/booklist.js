@@ -22,12 +22,12 @@ function loadBookOrder() {
     if (xhr.readyState === 4 && xhr.status === 200) {
         var result = JSON.parse(xhr.responseText);
         var neid = document.getElementById("neid");
-        neid.innerHTML += ('<div class="oi"><img src="' + result.orderImg + '"></div>' +
+        neid.innerHTML += ('<div class="oi"><img src="../images/shudan.jpg"></div>' +
             '<div class="xiang"><span class="dati">' + result.orderTitle + '</span>' +
             '<span class="jieshao">' + result.orderIntro + '</span></div>');
     }
 }
-获取该书单内所有书籍
+// 获取该书单内所有书籍
 function refreshBookOrderDetail(url_getbookorderdetail){
     if(window.XMLHttpRequest){
         xrh = new XMLHttpRequest();
@@ -40,7 +40,7 @@ function refreshBookOrderDetail(url_getbookorderdetail){
     xrh.send();
 }
 function loadBookOrderDetail() {
-    if (xrh.readyState == 4= && xrh.status === 200) {
+    if (xrh.readyState === 4 && xrh.status === 200) {
         var result = JSON.parse(xrh.responseText);
         var shen = document.getElementById("shen");
         shen.innerHTML = "";

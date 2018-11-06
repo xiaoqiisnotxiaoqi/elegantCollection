@@ -22,11 +22,11 @@
 <div id="main-box">
     <!--分类导航1-->
     <div id="category-nav">
-        <a href="">图书</a>
+        <a href="/allbooks">图书</a>
         <span class="">></span>
         <a href="" id="nav-bookcategory">分类</a>
         <span class="">></span>
-        <a href="nav-bookname" id="nav-bookname">书名</a>
+        <a href="" id="nav-bookname">书名</a>
     </div>
     <!--主区域-->
     <div id="main-area">
@@ -40,10 +40,15 @@
         </div>
         <!--买书区域-->
         <div id="info-area">
-            <!--书名-->
-            <div id="name-info">
 
+            <div class="nameandpost">
+                <!--书名-->
+                <div id="name-info"></div>
+                <%--讨论区按钮--%>
+                <button id="postbtn" name="" onclick="gotoPost(this)">讨论</button>
             </div>
+
+
             <!--出版信息-->
             <div id="publish-info">
                 <span class="publish-spans" id="author">作者:<a href=""></a></span>
@@ -81,7 +86,7 @@
                         <div id="zuhe-box">
                             <div class="zuhe-detail">
                                 <a href="bookdetail/?bookId=">
-                                    <div class="zuhe-picbox"><img src=""/> </div>
+                                    <div class="zuhe-picbox"><img src=""/></div>
                                     <span class="zuhe-info">组合书名2组合书名2组合书名2</span>
                                 </a>
                                 <span class="zuhe-price">¥22.5</span>

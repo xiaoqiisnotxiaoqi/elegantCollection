@@ -27,6 +27,8 @@ public class BookServiceImpl implements BookService {
     private BookOrderDao bookOrderDao;
     @Autowired
     private CartDao cartDao;
+    @Autowired
+    private BlockDao blockDao;
 
     @Autowired
     public BookServiceImpl(BookDao bookDao) {
@@ -137,6 +139,13 @@ public class BookServiceImpl implements BookService {
 
         result.put("pageModel", pageModel);
 
+        List<Map<Integer, Integer>> evaluateCountList = new ArrayList<>();
+        for (BookWithBLOBs book : bookList) {
+            evaluateCountList.add(evaluateDao.selectEvaluateCountByBookId(book.getBookId()));
+        }
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + evaluateCountList);
+
+
 //        根据分类ID查询子分类
         Integer categoryId = (Integer) conditions.get("categoryId");
         if (categoryId == null) {
@@ -166,10 +175,25 @@ public class BookServiceImpl implements BookService {
         BookImgExample.Criteria criteria = bookImgExample.createCriteria();
 
         criteria.andBookIdEqualTo(bookId);
-
+        criteria.andRedundancyFieldEqualTo("1");
         return bookImgDao.selectByExample(bookImgExample);
     }
 
+    /**
+     * 查询出商品详情图片
+     *
+     * @param bookId
+     * @return
+     */
+    @Override
+    public List<BookImg> queryBookDetailImgsById(Integer bookId) {
+        BookImgExample bookImgExample = new BookImgExample();
+        BookImgExample.Criteria criteria = bookImgExample.createCriteria();
+
+        criteria.andBookIdEqualTo(bookId);
+        criteria.andRedundancyFieldEqualTo("2");
+        return bookImgDao.selectByExample(bookImgExample);
+    }
 
     /**
      * 根据bookID获得评论数
@@ -234,6 +258,11 @@ public class BookServiceImpl implements BookService {
     @Override
     public BookWithBLOBs queryBybookIntro(Integer BookId) {
         return bookDao.selectByPrimaryKey(BookId);
+    }
+
+    @Override
+    public Block queryBlockByBookId(Integer bookId) {
+        return blockDao.selectBlockByBookId(bookId);
     }
 
 

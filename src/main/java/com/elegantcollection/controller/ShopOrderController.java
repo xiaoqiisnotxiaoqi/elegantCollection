@@ -103,6 +103,7 @@ public class ShopOrderController {
         shopOrder.setOrderPrice(allprice - groupPrice - fullReductionDiscount);
         shopOrder.setOrderCreateTime(new Date());
         shopOrder.setAddressId(addressId);
+        shopOrder.setDiscountAmount(String.valueOf(groupPrice+fullReductionDiscount));
         //添加订单
         if (shopOrderService.add(shopOrder) == 1) {
             //添加订单详情条目

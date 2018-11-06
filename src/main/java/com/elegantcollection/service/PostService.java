@@ -6,6 +6,7 @@ import com.elegantcollection.entity.PostReply;
 import com.elegantcollection.util.PageModel;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -101,7 +102,7 @@ public interface PostService {
      * @param post 帖子
      * @return 添加结果
      */
-    Integer add(Post post, HttpServletRequest request);
+    HashMap<String,String> add(Post post, HttpServletRequest request);
     /**
      * 置顶帖查询（前五条）
      *

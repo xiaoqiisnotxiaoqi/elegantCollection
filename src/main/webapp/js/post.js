@@ -14,9 +14,9 @@ var blockName = document.getElementById("block-name");
 var blockInfo = document.getElementById("block-info");
 var postsNumber = document.getElementById("posts-number");
 //置顶帖
-var popularPosts = document.getElementById("popular-posts")
+var popularPosts = document.getElementById("popular-posts");
 //普通贴
-var timePosts = document.getElementById("time-posts")
+var timePosts = document.getElementById("time-posts");
 //火力贴
 var allPopularPosts = document.getElementById("all-popular-posts");
 //页面按钮
@@ -29,6 +29,8 @@ var postTitle = document.getElementById("post-title");
 var postContext = document.getElementById("post-context");
 //帖子自身
 var thePost = "";
+//登陆提示
+var remindLogin = document.getElementById("remind-login");
 postButton.addEventListener("click", function () {
     allUrl = "/post/add";
     if (window.XMLHttpRequest) {
@@ -37,23 +39,21 @@ postButton.addEventListener("click", function () {
         xhr4 = new ActiveXObject('Microsoft.XMLHTTP');//for ie6
     }
     thePost = "postTitle=" + postTitle.value + "&postContext=" + postContext.value;
-    alert(thePost)
     if (xhr4 != null) {
         xhr4.open("POST", allUrl, true);
         xhr4.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;");
         xhr4.onreadystatechange = rePage;
         xhr4.send(thePost);
-    } else {
-        alert("不能创建XMLHttpRequest对象实例");
     }
 })
+
 
 function referPage() {
     refreblock();
     refreshBestPopularPost();
     refreshStickPost();
     refreshPost(1);
-};
+}
 
 var columns = document.getElementById("columns");
 for (var i = 1; i < columns.childNodes.length; i = i + 2) {
@@ -89,8 +89,6 @@ function refreshblockDate(url) {
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;");
         xhr.onreadystatechange = getblockDate;
         xhr.send();
-    } else {
-        alert("不能创建XMLHttpRequest对象实例");
     }
 }
 
@@ -128,20 +126,17 @@ function refreshStickPostDate(url) {
         xhr0.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;");
         xhr0.onreadystatechange = getStickPost;
         xhr0.send();
-    } else {
-        alert("不能创建XMLHttpRequest对象实例");
     }
 }
 
 function getStickPost() {
     if (xhr0.readyState === 4 && xhr0.status === 200) {
-        var jsonText = JSON.parse(xhr0.responseText);
-        var stickPostList = jsonText;
+        var stickPostList = JSON.parse(xhr0.responseText);
         var postTime;
         for (var i = 0; i < stickPostList.length; i++) {
             postTime = getTime(stickPostList[i].postTime);
             popularPosts.innerHTML += "<div class=\"popular-post\"><div class=\"reply-number\">" + stickPostList[i].replyCount + "</div><div class=\"post-all\"><a href=\"#\" onclick='toDetail(" + stickPostList[i].postId + ")'>" + stickPostList[i].postTitle + "</a><span class=\"post-text\">" + stickPostList[i].postText + "</span></div>\n" +
-                "<div class=\"post-date\">"+postTime+"</div>\n</div>\n\n"
+                "<div class=\"post-date\">" + postTime + "</div>\n</div>\n\n"
         }
     } else {
         // alert("xhr0.readyState = " + xhr0.readyState + ", xhr0.status =  " + xhr0.status)
@@ -169,8 +164,6 @@ function refreshBestPostDate(url) {
         xhr3.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;");
         xhr3.onreadystatechange = getBestPostDate;
         xhr3.send();
-    } else {
-        alert("不能创建XMLHttpRequest对象实例");
     }
 }
 
@@ -185,44 +178,45 @@ function getBestPostDate() {
         for (i = 0; i < postList.length; i++) {
             postTime = getTime(postList[i].postTime);
             postContext.innerHTML += "<div class=\"popular-post\"><div class=\"reply-number\">" + postList[i].replyCount + "</div><div class=\"post-all\"><a href=\"#\" onclick='toDetail(" + postList[i].postId + ")'>" + postList[i].postTitle + "</a><span class=\"post-text\">" + postList[i].postText + "</span></div>\n" +
-                "<div class=\"post-date\">"+postTime+"</div>\n</div>\n\n"}
+                "<div class=\"post-date\">" + postTime + "</div>\n</div>\n\n"
+        }
         var totalPages = jsonText.totalPages;
         var currentPageCode = jsonText.currentPageCode;
         if (totalPages < 10) {
             for (var j = 1; j <= totalPages; j++) {
-                if (currentPageCode == j) {
-                    paginationBtns.innerHTML += " <input type=\"button\" class=\"now-pagination-btn\"value=\"" + j + "\">"
+                if (currentPageCode === j) {
+                    paginationBtns.innerHTML += " <input type=\"button\" class=\"now-pagination-btn\"value=\"" + j + "\">";
                 } else {
-                    paginationBtns.innerHTML += " <input type=\"button\" class=\"pagination-btn\" onclick='refreshBestPost(" + j + ")' value=\"" + j + "\">"
+                    paginationBtns.innerHTML += " <input type=\"button\" class=\"pagination-btn\" onclick='refreshBestPost(" + j + ")' value=\"" + j + "\">";
                 }
             }
         } else {
             if (currentPageCode >= 5 && totalPages - currentPageCode >= 5) {
-                paginationBtns.innerHTML += " <input type=\"button\" class=\"pagination-btn\" onclick='refreshBestPost(" + 1 + ")' value=\"首页\">"
+                paginationBtns.innerHTML += " <input type=\"button\" class=\"pagination-btn\" onclick='refreshBestPost(" + 1 + ")' value=\"首页\">";
                 for (var k = currentPageCode - 5; k < currentPageCode + 5; k++) {
-                    if (currentPageCode == k) {
-                        paginationBtns.innerHTML += " <input type=\"button\" class=\"now-pagination-btn\"value=\"" + k + "\">"
+                    if (currentPageCode === k) {
+                        paginationBtns.innerHTML += " <input type=\"button\" class=\"now-pagination-btn\"value=\"" + k + "\">";
                     } else {
-                        paginationBtns.innerHTML += " <input type=\"button\" class=\"pagination-btn\" onclick='refreshBestPost(" + k + ")' value=\"" + k + "\">"
+                        paginationBtns.innerHTML += " <input type=\"button\" class=\"pagination-btn\" onclick='refreshBestPost(" + k + ")' value=\"" + k + "\">";
                     }
                 }
-                paginationBtns.innerHTML += " <input type=\"button\" class=\"pagination-btn\" onclick='refreshBestPost(" + totalPages + ")' value=\"尾页\">"
+                paginationBtns.innerHTML += " <input type=\"button\" class=\"pagination-btn\" onclick='refreshBestPost(" + totalPages + ")' value=\"尾页\">";
             } else if (currentPageCode < 5) {
                 for (var p = currentPageCode; p <= 10; p++) {
-                    if (currentPageCode == p) {
-                        paginationBtns.innerHTML += " <input type=\"button\" class=\"now-pagination-btn\"value=\"" + p + "\">"
+                    if (currentPageCode === p) {
+                        paginationBtns.innerHTML += " <input type=\"button\" class=\"now-pagination-btn\"value=\"" + p + "\">";
                     } else {
-                        paginationBtns.innerHTML += " <input type=\"button\" class=\"pagination-btn\" onclick='refreshBestPost(" + p + ")' value=\"" + p + "\">"
+                        paginationBtns.innerHTML += " <input type=\"button\" class=\"pagination-btn\" onclick='refreshBestPost(" + p + ")' value=\"" + p + "\">";
                     }
                 }
-                paginationBtns.innerHTML += " <input type=\"button\" class=\"pagination-btn\" onclick='refreshBestPost(" + totalPages + ")' value=\"尾页\">"
+                paginationBtns.innerHTML += " <input type=\"button\" class=\"pagination-btn\" onclick='refreshBestPost(" + totalPages + ")' value=\"尾页\">";
             } else if (totalPages - currentPageCode < 5) {
-                paginationBtns.innerHTML += " <input type=\"button\" class=\"pagination-btn\" onclick='refreshBestPost(" + 1 + ")' value=\"首页\">"
+                paginationBtns.innerHTML += " <input type=\"button\" class=\"pagination-btn\" onclick='refreshBestPost(" + 1 + ")' value=\"首页\">";
                 for (var q = totalPages - 9; q <= totalPages; q++) {
-                    if (currentPageCode == q) {
-                        paginationBtns.innerHTML += " <input type=\"button\" class=\"now-pagination-btn\"value=\"" + q + "\">"
+                    if (currentPageCode === q) {
+                        paginationBtns.innerHTML += " <input type=\"button\" class=\"now-pagination-btn\"value=\"" + q + "\">";
                     } else {
-                        paginationBtns.innerHTML += " <input type=\"button\" class=\"pagination-btn\" onclick='refreshBestPost(" + q + ")' value=\"" + q + "\">"
+                        paginationBtns.innerHTML += " <input type=\"button\" class=\"pagination-btn\" onclick='refreshBestPost(" + q + ")' value=\"" + q + "\">";
                     }
                 }
 
@@ -254,8 +248,6 @@ function refreshPostDate(url) {
         xhr1.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;");
         xhr1.onreadystatechange = getPostDate;
         xhr1.send();
-    } else {
-        alert("不能创建XMLHttpRequest对象实例");
     }
 }
 
@@ -269,44 +261,45 @@ function getPostDate() {
         for (i = 0; i < postList.length; i++) {
             postTime = getTime(postList[i].postTime);
             timePosts.innerHTML += "<div class=\"popular-post\"><div class=\"reply-number\">" + postList[i].replyCount + "</div><div class=\"post-all\"><a href=\"#\" onclick='toDetail(" + postList[i].postId + ")'>" + postList[i].postTitle + "</a><span class=\"post-text\">" + postList[i].postText + "</span></div>\n" +
-                "<div class=\"post-date\">"+postTime+"</div>\n</div>\n\n"}
+                "<div class=\"post-date\">" + postTime + "</div>\n</div>\n\n"
+        }
         var totalPages = jsonText.totalPages;
         var currentPageCode = jsonText.currentPageCode;
         if (totalPages < 10) {
             for (var j = 1; j <= totalPages; j++) {
-                if (currentPageCode == j) {
-                    paginationBtns.innerHTML += " <input type=\"button\" class=\"now-pagination-btn\"value=\"" + j + "\">"
+                if (currentPageCode === j) {
+                    paginationBtns.innerHTML += " <input type=\"button\" class=\"now-pagination-btn\"value=\"" + j + "\">";
                 } else {
-                    paginationBtns.innerHTML += " <input type=\"button\" class=\"pagination-btn\" onclick='refreshPost(" + j + ")' value=\"" + j + "\">"
+                    paginationBtns.innerHTML += " <input type=\"button\" class=\"pagination-btn\" onclick='refreshPost(" + j + ")' value=\"" + j + "\">";
                 }
             }
         } else {
             if (currentPageCode >= 5 && totalPages - currentPageCode >= 5) {
-                paginationBtns.innerHTML += " <input type=\"button\" class=\"pagination-btn\" onclick='refreshPost(" + 1 + ")' value=\"首页\">"
+                paginationBtns.innerHTML += " <input type=\"button\" class=\"pagination-btn\" onclick='refreshPost(" + 1 + ")' value=\"首页\">";
                 for (var k = currentPageCode - 5; k < currentPageCode + 5; k++) {
-                    if (currentPageCode == k) {
+                    if (currentPageCode === k) {
                         paginationBtns.innerHTML += " <input type=\"button\" class=\"now-pagination-btn\"value=\"" + k + "\">"
                     } else {
-                        paginationBtns.innerHTML += " <input type=\"button\" class=\"pagination-btn\" onclick='refreshPost(" + k + ")' value=\"" + k + "\">"
+                        paginationBtns.innerHTML += " <input type=\"button\" class=\"pagination-btn\" onclick='refreshPost(" + k + ")' value=\"" + k + "\">";
                     }
                 }
-                paginationBtns.innerHTML += " <input type=\"button\" class=\"pagination-btn\" onclick='refreshPost(" + totalPages + ")' value=\"尾页\">"
+                paginationBtns.innerHTML += " <input type=\"button\" class=\"pagination-btn\" onclick='refreshPost(" + totalPages + ")' value=\"尾页\">";
             } else if (currentPageCode < 5) {
                 for (var p = currentPageCode; p <= 10; p++) {
-                    if (currentPageCode == p) {
-                        paginationBtns.innerHTML += " <input type=\"button\" class=\"now-pagination-btn\"value=\"" + p + "\">"
+                    if (currentPageCode === p) {
+                        paginationBtns.innerHTML += " <input type=\"button\" class=\"now-pagination-btn\"value=\"" + p + "\">";
                     } else {
-                        paginationBtns.innerHTML += " <input type=\"button\" class=\"pagination-btn\" onclick='refreshPost(" + p + ")' value=\"" + p + "\">"
+                        paginationBtns.innerHTML += " <input type=\"button\" class=\"pagination-btn\" onclick='refreshPost(" + p + ")' value=\"" + p + "\">";
                     }
                 }
-                paginationBtns.innerHTML += " <input type=\"button\" class=\"pagination-btn\" onclick='refreshPost(" + totalPages + ")' value=\"尾页\">"
+                paginationBtns.innerHTML += " <input type=\"button\" class=\"pagination-btn\" onclick='refreshPost(" + totalPages + ")' value=\"尾页\">";
             } else if (totalPages - currentPageCode < 5) {
-                paginationBtns.innerHTML += " <input type=\"button\" class=\"pagination-btn\" onclick='refreshPost(" + 1 + ")' value=\"首页\">"
+                paginationBtns.innerHTML += " <input type=\"button\" class=\"pagination-btn\" onclick='refreshPost(" + 1 + ")' value=\"首页\">";
                 for (var q = totalPages - 9; q <= totalPages; q++) {
-                    if (currentPageCode == q) {
-                        paginationBtns.innerHTML += " <input type=\"button\" class=\"now-pagination-btn\"value=\"" + q + "\">"
+                    if (currentPageCode === q) {
+                        paginationBtns.innerHTML += " <input type=\"button\" class=\"now-pagination-btn\"value=\"" + q + "\">";
                     } else {
-                        paginationBtns.innerHTML += " <input type=\"button\" class=\"pagination-btn\" onclick='refreshPost(" + q + ")' value=\"" + q + "\">"
+                        paginationBtns.innerHTML += " <input type=\"button\" class=\"pagination-btn\" onclick='refreshPost(" + q + ")' value=\"" + q + "\">";
                     }
                 }
 
@@ -338,15 +331,12 @@ function refreshBestPopularPostDate(url) {
         xhr2.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;");
         xhr2.onreadystatechange = getBestPopularPostDate;
         xhr2.send();
-    } else {
-        alert("不能创建XMLHttpRequest对象实例");
     }
 }
 
 function getBestPopularPostDate() {
     if (xhr2.readyState === 4 && xhr2.status === 200) {
-        var jsonText = JSON.parse(xhr2.responseText);
-        var BestPopularPostList = jsonText;
+        var BestPopularPostList = JSON.parse(xhr2.responseText);
         for (var i = 0; i < BestPopularPostList.length; i++) {
             var postNo = i + 1;
             if (postNo > 3)
@@ -361,7 +351,20 @@ function getBestPopularPostDate() {
 }
 
 function rePage() {
-    window.location = "post";
+    if (xhr4.readyState === 4 && xhr4.status === 200) {
+        var JsonText = JSON.parse(xhr4.responseText);
+        var result = JsonText.result;
+        if (result === "发表成功") {
+            setTimeout(
+                function () {
+                    window.location = "post";
+                }, 3000
+            )
+        }
+        else if (result === "发表失败") {
+            remindLogin.style.display = "inline-block";
+        }
+    }
 }
 
 function toDetail(postId) {
@@ -377,10 +380,10 @@ function getTime(value) {
     var hours = date.getHours();
     var minutes = date.getMinutes();
     var seconds = date.getSeconds();
-    if (year != nowDate.getFullYear())
+    if (year !== nowDate.getFullYear())
         return year + "年" + month + "月" + day + "日";
-    else if (year != nowDate.getFullYear() && (month != nowDate.getMonth() || day != nowDate.getDate()))
+    else if (year !== nowDate.getFullYear() && (month !== nowDate.getMonth() || day !== nowDate.getDate()))
         return month + "月" + day + "日";
     else
-        return (hours<10?"0"+hours:hours) + ":" + (minutes<10?"0"+minutes:minutes) + ":" + (seconds<10?"0"+seconds:seconds);
+        return (hours < 10 ? "0" + hours : hours) + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
 }
