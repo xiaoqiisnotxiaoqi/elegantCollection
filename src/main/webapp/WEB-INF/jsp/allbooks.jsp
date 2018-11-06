@@ -119,6 +119,6 @@
 <jsp:include page="bottom.jsp"/>
 <%--加载js--%>
 <script src="${pageContext.request.contextPath}/js/allbooks.js"></script>
-<%--<script src="${pageContext.request.contextPath}/js/utilsnotoken.js"></script>--%>
+
 </body>
 </html>

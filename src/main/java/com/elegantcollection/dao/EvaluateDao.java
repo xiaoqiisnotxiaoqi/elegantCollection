@@ -2,12 +2,23 @@ package com.elegantcollection.dao;
 
 import com.elegantcollection.entity.Evaluate;
 import com.elegantcollection.entity.EvaluateExample;
+
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 @Component
 public interface EvaluateDao {
+    /**
+     * 根据bookId获取评论数量
+     *
+     * @param bookId 图书ID
+     * @return map, key为bookID, value为评论数
+     */
+    Map selectEvaluateCountByBookId(Integer bookId);
+
     long countByExample(EvaluateExample example);
 
     int deleteByExample(EvaluateExample example);

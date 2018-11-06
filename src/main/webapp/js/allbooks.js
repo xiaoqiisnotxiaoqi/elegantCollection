@@ -98,8 +98,8 @@ function refresh() {
                     "            <span class=\"tag_box\">\n" +
                     "            </span>\n" +
                     "            <div class=\"shop-button\">\n" +
-                    "                <button class=\"btn-cart\">加入购物车</button>\n" +
-                    "                <button class=\"btn-cart\">购买</button>\n" +
+                    "                <button class=\"btn-cart\" onclick=\"  add2Cart(" + bookList[i].bookId + ")\" > 加入购物车 </button>\n" +
+                    "                <button class=\"btn-cart\" onclick= \" buyNow(" + bookList[i].bookId + ")\">购买</button>\n" +
                     "\n" +
                     "            </div>\n" +
                     "        </li>";
@@ -234,4 +234,63 @@ function clickIsDiscount(ele) {
 function clickZhekou(ele) {
     document.getElementById("zhekou").name = ele.name;
     refresh();
+}
+
+
+// 添加到购物车
+function add2Cart(ele) {
+    var bookId = ele;
+    var count = 1;
+
+    var xhr1 = null;
+    if (window.XMLHttpRequest) {
+        xhr1 = new XMLHttpRequest(); //for ie7+,FireFox,Chorme,Opera,Safai...
+    } else {
+        xhr1 = new ActiveXObject('Microsoft.XMLHTTP');//for ie6
+    }
+    if (xhr1 != null) {
+        var url = "?bookId=" + bookId + "&count=" + count
+
+        xhr1.open("GET", "/book/add2Cart" + url, true);
+        xhr1.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;");
+        xhr1.onreadystatechange = add2CartResp;
+        xhr1.send();
+    } else {
+        alert("不能创建XMLHttpRequest对象实例");
+    }
+
+    function add2CartResp() {
+        if (xhr1.readyState == 4 && xhr1.status == 200) {
+            var jsObj = JSON.parse(xhr1.responseText);
+            alert(jsObj.msg);
+        }
+    }
+}
+
+function buyNow(ele) {
+    var bookId = ele;
+    var count = 1;
+
+    var xhr1 = null;
+    if (window.XMLHttpRequest) {
+        xhr1 = new XMLHttpRequest(); //for ie7+,FireFox,Chorme,Opera,Safai...
+    } else {
+        xhr1 = new ActiveXObject('Microsoft.XMLHTTP');//for ie6
+    }
+    if (xhr1 != null) {
+        var url = "?bookId=" + bookId + "&count=" + count
+
+        xhr1.open("GET", "/book/add2Cart" + url, true);
+        xhr1.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;");
+        xhr1.onreadystatechange = buyResp;
+        xhr1.send();
+    } else {
+        alert("不能创建XMLHttpRequest对象实例");
+    }
+
+    function buyResp() {
+        if (xhr1.readyState == 4 && xhr1.status == 200) {
+            window.location = "/custCart";
+        }
+    }
 }

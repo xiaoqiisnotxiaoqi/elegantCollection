@@ -220,7 +220,7 @@ function indexData() {
             var orders = jsObj.data.bookOrders;
             for (var i = 0; i < orders.length; i++) {
                 document.getElementById("orders").innerHTML += "<div class=\"col-lg-4 book-order-content\">\n" +
-                    "        <img src=\"" + orders[i].orderImg + "\" alt=\"\">\n" +
+                    "        <img src=\"" + orders[i].orderImg + "\"  onclick= \"clickOrder(" + orders[i].orderId + ")\">\n" +
                     "    </div>";
             }
 
@@ -272,8 +272,8 @@ function writeData(ele, bookList) {
 
 }
 
-function clickCategoryName(ele) {
-
+function clickOrder(ele) {
+    window.location = "/booklist/?orderId=" + ele;
 
 }
 
