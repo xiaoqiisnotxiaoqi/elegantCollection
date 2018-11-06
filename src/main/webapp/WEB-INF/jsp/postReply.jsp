@@ -1,6 +1,6 @@
 <%--
   Created by IntelliJ IDEA.
-  User: Administrator
+  User: qjb
   Date: 2018\10\20 0020
   Time: 10:20
   To change this template use File | Settings | File Templates.
@@ -13,7 +13,9 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/reset.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/personalCenter_messageView.css">
 </head>
-<body>
+<body onload="renderingPostReply()">
+<jsp:include page="top.jsp" flush="true"/>
+
 <div class="mydang" id="J_muneAndContentWrap">
     <div class="my_left">
         <div class="my_menu">
@@ -23,24 +25,26 @@
                 <!--导航栏开始-->
 
                 <ul>我的交易</ul>
-                <li><a href="#">我的订单</a></li>
-                <li><a href="#">电子节</a></li>
-                <li><a href="#">我的账单</a></li>
+                <li><a href="${pageContext.request.contextPath}/order_all">我的订单</a></li>
                 <ul>我的钱包</ul>
-                <li><a href="#">我的礼券</a></li>
-                <li><a href="#">我的余额</a></li>
-                <li><a href="#">我的积分</a></li>
+                <!--<li><a href="#">我的余额</a></li>-->
+                <li><a href="${pageContext.request.contextPath}/myelegant">我的积分</a></li>
                 <ul>售后服务</ul>
                 <li><a href="#">申请/查询退换货</a></li>
-                <li><a href="#">补开发票</a></li>
+
                 <ul>个人中心</ul>
-                <li><a href="#">个人信息</a></li>
-                <li><a href="#">安全中心</a></li>
-                <li><a href="#">收货地址</a></li>
-                <li><a href="#">邮件/短信订阅</a></li>
-                <ul>社区</ul>
-                <li><a href="javaScript:void(0);" onclick="renderingPostReply()">消息中心</a></li>
-                <li><a href="#">提问/回答</a></li>
+                <li><a href="${pageContext.request.contextPath}/userinfo">个人信息</a></li>
+
+                <li><a href="${pageContext.request.contextPath}/myaddress">收货地址</a></li>
+                <ul>安全中心</ul>
+                <li><a href="#">登录密码</a></li>
+                <li><a href="#">邮箱验证</a></li>
+                <li><a href="#">手机绑定</a></li>
+                <ul>我的消息</ul>
+                <li><a href="${pageContext.request.contextPath}/postReply">消息查看</a></li>
+                <!--<li><a href="#">发帖记录</a></li>-->
+                <li><a href="${pageContext.request.contextPath}/myEvaluate">评论/晒单</a></li>
+
             </div>
             <!--导航栏结束-->
         </div>
@@ -54,7 +58,11 @@
                     <div class="user_phone">
 
                         <a href="#" target="blank">
-                            <img src="${pageContext.request.contextPath}/images/header_o.jpg" alt="">
+                            <% if (request.getSession().getAttribute("customer") != null) {
+
+                            %>
+                            <img src="${pageContext.request.contextPath}/${customer.custProfile}" alt="">
+                            <%}%>
 
                             <div class="edit_box">
                                 <span class="edit">&nbsp</span>
@@ -66,11 +74,15 @@
                     </div>
                     <a href="#" title="站内信" target="blank">
                         <div class="message no_msg">
-                            <span>0</span>
+
 
                         </div>
                     </a>
-                    <sapn class="user_name" id="user_Nick">17751124276</sapn>
+                    <%
+                        if (request.getSession().getAttribute("customer") != null) {
+                    %>
+                    <sapn class="user_name" id="user_Nick">${customer.custPhone}</sapn>
+                    <% }%>
 
                 </div>
                 <!--头像结束-->
@@ -82,14 +94,24 @@
                         <!--加载状态-->
                         <!--
                         <div id="vip_type_box_loading" class="vip_type_box123 loading" style="display:none;"></div>
-                        -->
+                    -->
                     </div>
                     <div class="safety_level middle">
                         <p class="to_left">账户安全: <span class="level">中</span></p>
                         <p class="level_line"></p>
                         <p>
+
+                            <% if (request.getSession().getAttribute("customer") != null) {%>
                             <a href="#" target="_blank"><span class="setting">手机已设置</span></a>
-                            <a href="#" target="_blank"><span class="setting ">邮箱未设置</span></a>
+                            <%}%>
+                            <c:if test="${customer.custPhone ==null}">
+                                <a href="#" target="_blank"><span class="setting ">邮箱未设置</span></a>
+                            </c:if>
+
+                            <c:if test="${customer.custPhone !=null}">
+                                <a href="#" target="_blank"><span class="setting ">邮箱已设置</span></a>
+                            </c:if>
+
                         </p>
                     </div>
                 </div>
@@ -97,23 +119,16 @@
 
                 <div class="account_message">
                     <ul>
-
-                        <li>
-                            <a class="pic ye" href="#" target="_blank" id="pic1"></a>
-                            <a href="#" target="_blank">余额</a>
-                            <a href="#" target="_blank">0</a>
-                        </li>
-                        <li>
-                            <a class="pic lq" href="#" target="_blank"></a>
-                            <a href="#" target="_blank">礼券</a>
-
-                            <a href="#" target="_blank">0张</a>
-                        </li>
                         <li>
                             <a class="pic jf" href="#" target="_blank"></a>
                             <a href="#" target="_blank">积分</a>
+                            <%if (request.getSession().getAttribute("customer") == null) { %>
                             <a href="#" target="_blank">0</a>
-                            <span class="price_show">(价值￥0)</span>
+                            <%}%>
+
+                            <%if (request.getSession().getAttribute("customer") != null) { %>
+                            <a href="#" target="_blank">${customer.custPoints}</a>
+                            <%}%>
                         </li>
                     </ul>
                 </div>
@@ -123,7 +138,6 @@
 
             </div>
 
-            <!--我的订单结束-->
 
         </div>
         <!--J_userInfo 结束-->
@@ -162,6 +176,12 @@
     <p>您确认要删除该宝贝吗？</p>
     <div class="opBtn"><a href="javascript:void(0);" onclick="deleteTheMessage()" class="dialog-sure">确定</a><a href="javascript:void(0);" onclick="closeDed()" class="dialog-close">关闭</a></div>
 </section>
+
+
+
+<jsp:include page="bottom.jsp" flush="true"/>
+
+
 
 <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 <script>
