@@ -71,6 +71,9 @@ public class CartController {
         //根据用户id查找 用户购物车中所有物品
         List<Cart> cartList = cartService.quaryCartByCustId(custId);
 
+        //每页显示商品的数量
+        pageModel.setPageSize(8);
+
         //用户购物车商品种类数量
         pageModel.setTotalRecord(cartList.size());
 
@@ -301,7 +304,8 @@ public class CartController {
             }
 
             for (Book book : bookList) {
-                if (book.getRedundancyField2().indexOf(i) != -1) {
+                System.out.println(book);
+                if (book.getRedundancyField2() != null && book.getRedundancyField2().indexOf(i) != -1) {
                     preferentialReduction += book.getBookSellingPrice();
                 }
             }
