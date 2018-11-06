@@ -170,7 +170,8 @@ public class Ui {
      * @return
      */
     @RequestMapping("booklist")
-    public String uih() {
+    public String uih(Integer orderId, HttpServletRequest request) {
+        request.getSession().setAttribute("orderId", orderId);
         return "booklist";
     }
 

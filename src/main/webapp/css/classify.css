@@ -9,7 +9,7 @@
     padding: 0;
 }
 
-html,body {
+html, body {
     height: 100%;
     width: 100%;
 
@@ -86,7 +86,8 @@ html,body {
     margin-bottom: 10px;
 }
 
-.trun_img {float: left;
+.trun_img {
+    float: left;
     margin-left: 40px;
 
 }
@@ -613,8 +614,9 @@ html,body {
 }
 
 .hot-author-img {
-    /*background: aqua;*/
-    /*width: 180px;*/
+    
+    width: 150px;
+    height: 150px;
     position: relative;
     left: -190px;
     top: 20px;

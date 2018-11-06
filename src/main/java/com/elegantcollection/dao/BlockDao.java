@@ -2,12 +2,22 @@ package com.elegantcollection.dao;
 
 import com.elegantcollection.entity.Block;
 import com.elegantcollection.entity.BlockExample;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BlockDao {
+    /**
+     * 根据图书ID获得版块
+     *
+     * @param bookId 图书ID
+     * @return 版块
+     */
+    Block selectBlockByBookId(Integer bookId);
+
     long countByExample(BlockExample example);
 
     int deleteByExample(BlockExample example);

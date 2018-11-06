@@ -26,11 +26,6 @@ public interface BookService {
     ServerResponse<HashMap> sjTest(HashMap conditions);
 
 
-
-
-
-
-
     /**
      * 根据图书ID查询所有图片
      *
@@ -74,11 +69,18 @@ public interface BookService {
 
     /**
      * 根据bookId查询书的对象
+     *
      * @param BookId
      * @return 返回一个BookWithBlOBs对象
      */
 
     BookWithBLOBs queryBybookIntro(Integer BookId);
+
+    /**根据图书Id查询版块
+     * @param bookId    图书ID
+     * @return  版块
+     */
+    Block queryBlockByBookId(Integer bookId);
 
 
     /**

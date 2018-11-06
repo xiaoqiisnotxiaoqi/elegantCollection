@@ -27,6 +27,8 @@ public class BookServiceImpl implements BookService {
     private BookOrderDao bookOrderDao;
     @Autowired
     private CartDao cartDao;
+    @Autowired
+    private BlockDao blockDao;
 
     @Autowired
     public BookServiceImpl(BookDao bookDao) {
@@ -241,6 +243,11 @@ public class BookServiceImpl implements BookService {
     @Override
     public BookWithBLOBs queryBybookIntro(Integer BookId) {
         return bookDao.selectByPrimaryKey(BookId);
+    }
+
+    @Override
+    public Block queryBlockByBookId(Integer bookId) {
+        return blockDao.selectBlockByBookId(bookId);
     }
 
 

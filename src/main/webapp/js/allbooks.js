@@ -99,7 +99,7 @@ function refresh() {
                     "            </span>\n" +
                     "            <div class=\"shop-button\">\n" +
                     "                <button class=\"btn-cart\" onclick=\"  add2Cart(" + bookList[i].bookId + ")\" > 加入购物车 </button>\n" +
-                    "                <button class=\"btn-cart\" onclick= \" buyNow(\" + bookList[i].bookId + \")\">购买</button>\n" +
+                    "                <button class=\"btn-cart\" onclick= \" buyNow(" + bookList[i].bookId + ")\">购买</button>\n" +
                     "\n" +
                     "            </div>\n" +
                     "        </li>";
