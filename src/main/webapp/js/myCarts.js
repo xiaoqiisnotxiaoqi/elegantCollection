@@ -302,7 +302,7 @@ function cartResolve() {
                             '</li>' +
                             '<li class="list_con">' +
                             '<div class="list_img"><a href="javascript:;"><img src="' + books[i].bookImg + '" alt=""></a></div>' +
-                            '<div class="list_text"><a href="javascript:;">' + books[i].bookName + '</a></div>' +
+                            '<div class="list_text"><a href="javascript:;" onclick="goToThisBook(this)">' + books[i].bookName + '</a></div>' +
                             '</li>' +
                             '<li class="list_info">' +
                             '<p>' + '作者: ' + books[i].authorName + '</p>' +
@@ -458,6 +458,15 @@ function prices2ceshi() {
         //用户选择的商品的总价格
         document.getElementsByClassName("total_text")[0].innerText = 0;
     }
+}
+
+/**
+ * 购物车跳转到商品详情页面
+ * @param ele
+ */
+function goToThisBook(ele) {
+    // ele.parentNode.parentNode.parentNode.getAttribute("id");
+    window.location = "bookdetail?bookId=" + ele.parentNode.parentNode.parentNode.getAttribute("id")
 }
 
 
