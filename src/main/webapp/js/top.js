@@ -27,8 +27,30 @@ function loginModeConversion(loginMode){
     }
 }
 
+/**
+ * 跳转至 我的雅致(以登录)
+ * 弹出登录窗口(未登录)
+ */
+function topCustEle2() {
+    var name = document.getElementsByClassName("DetermineWhetherLog");
+    if (name[0].innerText == 1){
+        window.top.location = "/myelegant"
+    } else {
+        showDiv2();
+    }
+}
+
+/**
+ * 跳转至 我的雅致(以登录)
+ * 弹出登录窗口(未登录)
+ */
 function topCustEle() {
-    window.top.location = "/myelegant"
+    var name = document.getElementsByClassName("DetermineWhetherLog");
+    if (name[0].innerText == 1){
+        window.top.location = "/myelegant"
+    } else {
+        showDiv();
+    }
 }
 
 
@@ -377,6 +399,19 @@ function loginOrCart() {
 
 
 /**
+ * 首页 跳转到购物车
+ */
+function loginOrCart2() {
+    var name = document.getElementsByClassName("DetermineWhetherLog");
+    if (name[0].innerText == 1){
+        window.location = "/custCart";
+    } else {
+        showDiv2();
+    }
+}
+
+
+/**
  * 跳转到我的订单
  */
 function myOrder() {
@@ -387,6 +422,20 @@ function myOrder() {
         showDiv();
     }
 }
+
+
+/**
+ * 首页 跳转到我的订单
+ */
+function myOrder2() {
+    var name = document.getElementsByClassName("DetermineWhetherLog");
+    if (name[0].innerText == 1){
+        window.location = "/order_all";
+    } else {
+        showDiv2();
+    }
+}
+
 
 /**
  * 跳转到讨论区

@@ -46,9 +46,9 @@
         }
     %>
 
-    <span class="top-myEle" onclick="topCustEle()">我的雅致</span>
-    <span class="top-cart" onclick="loginOrCart()">购物车</span>
-    <span class="top-order" onclick="myOrder()">订单</span>
+    <span class="top-myEle" onclick="topCustEle2()">我的雅致</span>
+    <span class="top-cart" onclick="loginOrCart2()">购物车</span>
+    <span class="top-order" onclick="myOrder2()">订单</span>
     <span class="top-service">
         <a style="color: black" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=954566097&site=qq&menu=yes">联系客服</a>
     </span>
@@ -168,12 +168,12 @@
             <button onclick="searchBox()">搜索</button>
     </div>
     <div class="left-nav">
-        <div id="cart" onclick="loginOrCart()" onmouseover="onCart()" onmouseout="outCart()">
+        <div id="cart" onclick="loginOrCart2()" onmouseover="onCart()" onmouseout="outCart()">
             <img src="${pageContext.request.contextPath}/images/cart-white.png" id="cart-img">
             <span id="cart-span">购物车</span>
             <span id="cart-num"></span>
         </div>
-        <div id="order-span" onclick="myOrder()">我的订单</div>
+        <div id="order-span" onclick="myOrder2()">我的订单</div>
     </div>
     <div class="classify-nav">
         <ul>
@@ -196,7 +196,6 @@
 <div style="width: 100%;height: 2px;background-color: red; margin-top: 20px"></div>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/login.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/register.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/top.js"></script>
 </body>

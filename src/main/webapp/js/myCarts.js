@@ -174,8 +174,8 @@ function openDelete(ele){
     Bdiv.style.display = "block";
     Idiv.style.display = "block";
 
-    Idiv.style.left=(document.documentElement.clientWidth-Idiv.clientWidth)/2+document.documentElement.scrollLeft + 200 +"px";
-    Idiv.style.top =(document.documentElement.clientHeight-Idiv.clientHeight)/2+document.documentElement.scrollTop - 160 +"px";
+    Idiv.style.left=(window.screen.availWidth )/2 + 50 +"px";
+    Idiv.style.top =(window.screen.availHeight )/2 - 100 +"px";
 }
 
 /**
