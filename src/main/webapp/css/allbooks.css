@@ -418,11 +418,11 @@ a {
 }
 
 .new-lable {
-    margin-top: 30px;
+    margin-top: 26px;
     height: 20px;
     display: block;
     float: none !important;
-    margin-left: 0 !important;
+    margin-left: 35px !important;
     overflow: hidden;
     line-height: 16px;
 }

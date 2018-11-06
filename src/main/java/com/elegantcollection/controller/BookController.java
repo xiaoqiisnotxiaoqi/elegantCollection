@@ -92,6 +92,9 @@ public class BookController {
         } else {
             map.put("manjian", null);
         }
+//        查询版块
+        Block block = bookService.queryBlockByBookId(bookId);
+        map.put("blockId", block.getBlockId());
 
         //        查询组合优惠
         List<Book> zuheBooks = new ArrayList<>();

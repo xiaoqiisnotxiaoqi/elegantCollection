@@ -20,7 +20,7 @@ import java.util.Map;
 
 
 @Service
-public class PostServiceImpl implements PostService{
+public class PostServiceImpl implements PostService {
     private final PostReplyDao postReplyDao;
     private final PostDao postDao;
     private final CustomerDao customerDao;
@@ -73,7 +73,7 @@ public class PostServiceImpl implements PostService{
         postReplyExample.createCriteria().andByReadEqualTo(replyId);
         PostReply postReply = new PostReply();
         postReply.setReplyStatus(1);
-        return postReplyDao.updateByExample(postReply,postReplyExample);
+        return postReplyDao.updateByExample(postReply, postReplyExample);
     }
 
     @Override
@@ -83,9 +83,9 @@ public class PostServiceImpl implements PostService{
         List<PostReply> postReplies = postReplyDao.selectByExample(postReplyExample);
         PostReply postReply;
         //判断查询结果是否为空
-        if (postReplies != null){
+        if (postReplies != null) {
             postReply = postReplies.get(0);
-        }else {
+        } else {
             return null;
         }
 
@@ -96,7 +96,7 @@ public class PostServiceImpl implements PostService{
         if (posts.size() != 0) {
             Post post = posts.get(0);
             return post.getCustId().equals(custId);
-        }else {
+        } else {
             return null;
         }
     }
@@ -123,17 +123,18 @@ public class PostServiceImpl implements PostService{
 
     /**
      * 将用户回复内容持久化到数据库中
-     * @param postId 书评帖id
-     * @param text 回复的内容
+     *
+     * @param postId  书评帖id
+     * @param text    回复的内容
      * @param request 用户的请求信息
      * @return 持久化操作是否成功 ("err","用户未登陆") ("success","回复添加完成") ("err","回复添加失败")
      */
     @Override
-    public Map<String,String> replyOriginalPoster(Integer postId, String text, HttpServletRequest request) {
-        Map<String,String> map = new HashMap<>();
-        Customer customer = (Customer)request.getSession().getAttribute("customer");
-        if (customer == null){
-            map.put("err","用户未登陆");
+    public Map<String, String> replyOriginalPoster(Integer postId, String text, HttpServletRequest request) {
+        Map<String, String> map = new HashMap<>();
+        Customer customer = (Customer) request.getSession().getAttribute("customer");
+        if (customer == null) {
+            map.put("err", "用户未登陆");
             return map;
         }
         //查询 该书评帖 详情
@@ -167,11 +168,11 @@ public class PostServiceImpl implements PostService{
         System.out.println(postReply);
         //将回复详情 持久化到数据库中
         int a = postReplyDao.insert(postReply);
-        if (a == 1){
-            map.put("success","回复添加完成");
+        if (a == 1) {
+            map.put("success", "回复添加完成");
             return map;
-        }else {
-            map.put("err","回复添加失败");
+        } else {
+            map.put("err", "回复添加失败");
             return map;
         }
     }
@@ -180,10 +181,21 @@ public class PostServiceImpl implements PostService{
 
 
     @Override
-    public Integer add(Post post, HttpServletRequest request) {
-        Integer result =postDao.insertSelective(post);
-        replyOriginalPoster(post.getPostId(),post.getPostText(),request);
-        return result;
+    public HashMap<String, String> add(Post post, HttpServletRequest request) {
+        Integer result = 1;
+        if (post.getCustId() == null) {
+            result = 0;
+        } else {
+            postDao.insertSelective(post);
+            replyOriginalPoster(post.getPostId(), post.getPostText(), request);
+        }
+        HashMap<String, String> hashMap = new HashMap<>();
+        if (result == 0) {
+            hashMap.put("result", "发表失败");
+        } else {
+            hashMap.put("result", "发表成功");
+        }
+        return hashMap;
     }
 
     @Override
@@ -235,7 +247,7 @@ public class PostServiceImpl implements PostService{
         PostExample postExample = new PostExample();
         postExample.setLimit(10);
         postExample.setOffset(0L);
-        postExample.setOrderByClause("reply_count");
+        postExample.setOrderByClause("reply_count desc");
         postExample.createCriteria().andPostStatusBetween(0, 1);
         return postDao.selectByExample(postExample);
     }

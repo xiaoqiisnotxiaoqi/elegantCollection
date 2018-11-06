@@ -37,7 +37,7 @@ function getDetail() {
             document.getElementById("name-info").innerHTML = "<h2>" + book.bookName + "</h2>";
             if (jsObj.author != null) {
                 document.getElementById("zuozhe").innerText = jsObj.author.authorIntro;
-                document.getElementById("author").innerText = "作者:" + jsObj.author.authorName + " ";
+                document.getElementById("author").innerHTML = "作者:<a href=\"/author/?authorId=" + jsObj.author.authorId + "\">" + jsObj.author.authorName + "</a> ";
             }
             document.getElementById("chubanshe").innerText = "出版社:" + book.publishingName + "";
             document.getElementById("publish-time").innerText = "出版时间:" + fmtDate(book.bookTime) + "";
@@ -46,7 +46,7 @@ function getDetail() {
             document.getElementById("mark-price").innerText = " " + book.bookMarkedPrice + "";
             document.getElementById("discount").innerText = "(" + parseFloat(book.bookSellingPrice * 10 / book.bookMarkedPrice).toFixed(1) + ")折";
             document.getElementById("neirong").innerText = book.bookIntro;
-
+            document.getElementById("postbtn").name = jsObj.blockId;
             document.getElementById("mulu").innerText = book.bookCatalog;
             document.getElementById("jingcai").innerText = book.bookWonderful;
             document.getElementById("meiti").innerText = book.bookMediaEvaluation;
@@ -227,4 +227,8 @@ function buyNow() {
             window.location = "/custCart";
         }
     }
+}
+
+function gotoPost(ele) {
+    window.location = "/post/?blockId=" + ele.name;
 }

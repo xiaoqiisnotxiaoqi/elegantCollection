@@ -183,9 +183,11 @@ function indexData() {
                 "        </div>\n" +
                 "        <div class=\"col-md-8\">\n" +
                 "            <div class=\"row\" >\n" +
+
                 "                <div class=\"col-md-12 author-name\">\n" +
-                "                    " + authorList[0].authorName + "\n" +
+                "                 <a href=\"/author/?authorId=" + authorList[0].authorId + "\">   " + authorList[0].authorName + "</a>\n" +
                 "                </div>\n" +
+
                 "                <div class=\"col-md-12\">\n" +
                 "                    <div class=\"author-content\">\n" +
                 "                        <p class=\"author-content-p\">" + authorList[0].authorIntro + "</p>\n" +
@@ -210,7 +212,7 @@ function indexData() {
             for (var i = 0; i < authorList.length; i++) {
                 document.getElementById("author-sort").innerHTML += "<div class=\"col-md-12 author-sort-content\">\n" +
                     "        <div class=\"author-sort-num\">" + (i + 1) + "</div>\n" +
-                    "        <div class=\"author-sort-name\">" + authorList[i].authorName + "</div>\n" +
+                    "        <div class=\"author-sort-name\"> <a href=\"author/?authorId=" + authorList[i].authorId + "\"> " + authorList[i].authorName + "</a></div>\n" +
                     "    </div>";
             }
 
@@ -220,7 +222,7 @@ function indexData() {
             var orders = jsObj.data.bookOrders;
             for (var i = 0; i < orders.length; i++) {
                 document.getElementById("orders").innerHTML += "<div class=\"col-lg-4 book-order-content\">\n" +
-                    "        <img src=\"" + orders[i].orderImg + "\" alt=\"\">\n" +
+                    "        <img src=\"" + orders[i].orderImg + "\"  onclick= \"clickOrder(" + orders[i].orderId + ")\">\n" +
                     "    </div>";
             }
 
@@ -272,8 +274,8 @@ function writeData(ele, bookList) {
 
 }
 
-function clickCategoryName(ele) {
-
+function clickOrder(ele) {
+    window.location = "/booklist/?orderId=" + ele;
 
 }
 

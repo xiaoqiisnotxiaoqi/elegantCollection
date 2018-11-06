@@ -32,13 +32,14 @@ public class PostController {
 
     /**
      * 发书评
+     *
      * @param postTitle
      * @param postContext
      * @param request
      * @return
      */
     @PostMapping("add")
-    public String add(@Param("postTitle") String postTitle, @Param("postContext") String postContext, HttpServletRequest request) {
+    public HashMap add(@Param("postTitle") String postTitle, @Param("postContext") String postContext, HttpServletRequest request) {
         Integer custId = (Integer) request.getSession().getAttribute("custId");
         Integer blockId = 10002;//(Integer) request.getSession().getAttribute("blockId");
         Post post = new Post();
@@ -47,8 +48,8 @@ public class PostController {
         post.setPostTitle(postTitle);
         post.setPostText(postContext);
         post.setPostTime(new Date());
-        String.valueOf(postService.add(post, request));
-        return "post";
+        HashMap<String, String> hashMap = postService.add(post, request);
+        return hashMap;
     }
 
     /**
@@ -71,12 +72,12 @@ public class PostController {
     /**
      * 获取置顶贴(取5条)
      *
-     * @param blockId 板块id
+     * @param request blockId 板块id
      * @return 置顶帖集合（5条）
      */
     @GetMapping("queryStickPost")
-    List<Post> queryStickPost(Integer blockId) {
-        blockId = 10002;
+    List<Post> queryStickPost(HttpServletRequest request) {
+        Integer blockId = 10002;//(Integer) request.getSession().getAttribute("blockId");
         return postService.queryStickPost(blockId);
     }
 
