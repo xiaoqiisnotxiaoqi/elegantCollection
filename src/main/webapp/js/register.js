@@ -129,9 +129,10 @@ function responselogin() {
     if (xhr.readyState === 4 && xhr.status === 200){
         if(xhr.responseText != "success"){
             document.getElementById("loginModalLabel").innerText +="              " + xhr.responseText;
-            sessionStorage.setItem("login","success");
+
         }else {
             document.getElementById("loginModalLabel").innerText = "登录";
+            sessionStorage.setItem("login","success");
             window.location = "/index";
         }
     }
