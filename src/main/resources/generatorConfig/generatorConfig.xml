@@ -42,7 +42,7 @@
         </javaClientGenerator>
 
         <!-- 要生成哪些表 -->
-        <!--<table tableName="address" domainObjectName="Address"/>
+       <!-- <table tableName="address" domainObjectName="Address"/>
         <table tableName="admin" domainObjectName="Admin"/>
         <table tableName="author" domainObjectName="Author"/>
         <table tableName="block" domainObjectName="Block"/>
@@ -55,14 +55,14 @@
         <table tableName="discount" domainObjectName="DiscountService"/>
         <table tableName="discount_detail" domainObjectName="DiscountDetail"/>
         <table tableName="evaluate" domainObjectName="Evaluate"/>
-        <table tableName="login" domainObjectName="Login"/>-->
+        <table tableName="login" domainObjectName="Login"/>
         <table tableName="message" domainObjectName="Message"/>
-        <!--<table tableName="post" domainObjectName="Post"/>
+        <table tableName="post" domainObjectName="Post"/>
         <table tableName="post_reply" domainObjectName="PostReply"/>
         <table tableName="shop_order" domainObjectName="ShopOrder"/>
-        <table tableName="shop_order_detail" domainObjectName="ShopOrderDetail"/>
+        <table tableName="shop_order_detail" domainObjectName="ShopOrderDetail"/>-->
         <table tableName="waiter" domainObjectName="Waiter"/>
--->
+
 
     </context>
 </generatorConfiguration>
