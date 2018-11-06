@@ -349,6 +349,12 @@ public class CartController {
     }
 
 
+    /**
+     * 根据用户 选择结算的书籍 将其从购物车中删除
+     * @param map 用户 选择的 书籍对应的map(图书id:数量 以及 价格详情)
+     * @param request 用户的请求信息
+     * @return "success"
+     */
     @PostMapping("butNow")
     public String butNow(@RequestParam Map<String, String> map, HttpServletRequest request) {
         request.getSession().setAttribute("buyThis", map);
@@ -359,7 +365,7 @@ public class CartController {
             String value = entry.getValue();
             System.out.println("key=" + key + " value=" + value);
             if (i < a - 3) {
-                cartService.removeByBookId(((Customer) request.getSession().getAttribute("customer")).getCustId().toString(), Integer.valueOf(key));
+                cartService.removeByBookId(key,((Customer) request.getSession().getAttribute("customer")).getCustId());
             }
             i++;
         }
