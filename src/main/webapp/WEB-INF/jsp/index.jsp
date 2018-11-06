@@ -416,17 +416,17 @@
             </div>
         </div>
 
+        <!--中间的分割线-->
+        <div class="infor-work-cut">
+            <div class="cut-work">作品</div>
+            <div class="information-work-xian"></div>
+        </div>
+        <!--作者作品介绍-->
+        <div class="row hot-author-work" id="first-author-books"></div>
+        <!--作者排行榜-->
+        <div class="row author-sort" id="author-sort"></div>
+    </div>
 
-    </div>
-    <!--中间的分割线-->
-    <div class="infor-work-cut">
-        <div class="cut-work">作品</div>
-        <div class="information-work-xian"></div>
-    </div>
-    <!--作者作品介绍-->
-    <div class="row hot-author-work" id="first-author-books"></div>
-    <!--作者排行榜-->
-    <div class="row author-sort" id="author-sort"></div>
     <%--仨书单--%>
     <div class="row books-order" id="orders"></div>
 </div>
