@@ -59,8 +59,10 @@ public class BookController {
 //        查询出book对象
         Book book = bookService.quaryBookByBookId(bookId);
         map.put("book", book);
-//        查询出所有图片
+//        查询出展示图片
         map.put("bookImgList", bookService.queryBookImgsById(bookId));
+//        查询出详情图片
+        map.put("bookDetailImgList", bookService.queryBookDetailImgsById(bookId));
 //        查询出主分类信息
         map.put("mainCategory", bookCategoryService.queryCategoryById(bookService.quaryBookByBookId(bookId).getBookMainCategory()));
         PageModel pageModel = new PageModel();
