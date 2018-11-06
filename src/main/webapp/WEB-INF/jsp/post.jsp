@@ -41,7 +41,7 @@
     </div>
     <div class="posting">
         <div class="posting-form">
-            <input type="text" class="post-title" placeholder="请填写标题" id="post-title">
+            <input type="text" class="post-title" placeholder="请填写标题" id="post-title"><span class="remind-login" id="remind-login">请登陆后发帖</span>
             <textarea class="post-context" id="post-context"></textarea>
             <input type="button" class="post-button" value="发表" id="post-button">
         </div>

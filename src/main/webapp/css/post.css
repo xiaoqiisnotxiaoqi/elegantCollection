@@ -173,8 +173,9 @@ body {
     margin-left: 1%;
     padding: 3px 0;
     width: 96%;
-    height: 18px;
+    height: 15px;
     overflow: hidden;
+    margin-bottom: 3px;
 }
 
 .all-popular-post a {
@@ -232,12 +233,16 @@ body {
     height: 300px;
     margin-left: 2%;
 }
-
+.remind-login{
+    display: none;
+    color: red;
+}
 .post-title {
-    display: block;
+    display: inline-block;
     line-height: 16px;
     width: 640px;
     height: 30px;
+    margin-right: 20px;
 }
 
 .post-context {
