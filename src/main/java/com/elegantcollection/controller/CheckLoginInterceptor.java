@@ -21,7 +21,7 @@ public class CheckLoginInterceptor extends HandlerInterceptorAdapter {
             return true;
         } else {
             System.out.println("拦截器:用户未登录");
-            response.sendRedirect("/top");
+            response.sendRedirect("/index");
             return false;
         }
     }
