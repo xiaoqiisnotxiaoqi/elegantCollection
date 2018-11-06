@@ -22,7 +22,7 @@ function loadBookOrder() {
     if (xhr.readyState === 4 && xhr.status === 200) {
         var result = JSON.parse(xhr.responseText);
         var neid = document.getElementById("neid");
-        neid.innerHTML += ('<div class="oi"><img src="' + result.orderImg + '"></div>' +
+        neid.innerHTML += ('<div class="oi"><img src="../images/shudan.jpg"></div>' +
             '<div class="xiang"><span class="dati">' + result.orderTitle + '</span>' +
             '<span class="jieshao">' + result.orderIntro + '</span></div>');
     }
