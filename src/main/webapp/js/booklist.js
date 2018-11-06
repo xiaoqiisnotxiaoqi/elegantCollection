@@ -40,7 +40,7 @@ function refreshBookOrderDetail(url_getbookorderdetail){
     xrh.send();
 }
 function loadBookOrderDetail() {
-    if (xrh.readyState == 4= && xrh.status === 200) {
+    if (xrh.readyState === 4 && xrh.status === 200) {
         var result = JSON.parse(xrh.responseText);
         var shen = document.getElementById("shen");
         shen.innerHTML = "";
