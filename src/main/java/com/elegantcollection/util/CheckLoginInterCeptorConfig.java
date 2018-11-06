@@ -15,6 +15,7 @@ public class CheckLoginInterCeptorConfig extends WebMvcConfigurerAdapter {
         //addPathPattern后跟拦截地址，excludePathPatterns后跟排除拦截地址
         registry.addInterceptor(new CheckLoginInterceptor()).
                 excludePathPatterns("/login").
-                addPathPatterns("/loginOut").addPathPatterns("/getMyEvaluate").addPathPatterns("/book/add2Cart");
+                addPathPatterns("/loginOut").addPathPatterns("/getMyEvaluate").addPathPatterns("/book/add2Cart")
+                .addPathPatterns("/myaddress").addPathPatterns("/myelegant");
     }
 }

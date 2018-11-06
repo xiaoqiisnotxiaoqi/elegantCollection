@@ -471,12 +471,13 @@ public class CustomerController {
             int quality = (int)firstDetail.get("quality");
             item.put("quality", quality);
             int bookId =(int)firstDetail.get("bookId");
-
+            item.put("bookId",bookId);
             BookWithBLOBs book = bookService.queryBybookIntro(bookId);
             item.put("bookIntro",book.getBookIntro());
 
 
             int orderId = (int) firstDetail.get("orderId");
+            item.put("orderId",orderId);
             System.out.println("orderId======================================================>"+orderId);
 
             ShopOrder shopOrder  = shopOrderService.queryByOrderId(orderId);
