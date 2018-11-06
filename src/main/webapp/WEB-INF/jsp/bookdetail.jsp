@@ -119,7 +119,7 @@
                     </button>
                 </div>
                 <button id="addtocart" onclick="add2CartFinal()">加入购物车</button>
-                <button id="buynow" onclick="buyNow()">立即购买</button>
+                <button id="buynow" onclick="buyNowFinal()">立即购买</button>
             </div>
             <!--加入购物车按钮-->
 
@@ -230,6 +230,14 @@
         }
     }
 
+
+    function buyNowFinal() {
+        if (sessionStorage.getItem("login") == "success") {
+            buyNow()
+        } else {
+            showDiv();
+        }
+    }
 
 </script>
 </body>
