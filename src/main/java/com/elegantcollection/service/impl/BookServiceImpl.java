@@ -137,6 +137,13 @@ public class BookServiceImpl implements BookService {
 
         result.put("pageModel", pageModel);
 
+        List<Map<Integer, Integer>> evaluateCountList = new ArrayList<>();
+        for (BookWithBLOBs book : bookList) {
+            evaluateCountList.add(evaluateDao.selectEvaluateCountByBookId(book.getBookId()));
+        }
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + evaluateCountList);
+
+
 //        根据分类ID查询子分类
         Integer categoryId = (Integer) conditions.get("categoryId");
         if (categoryId == null) {
