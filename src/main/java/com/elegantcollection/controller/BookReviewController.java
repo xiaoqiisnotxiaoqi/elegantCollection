@@ -40,7 +40,6 @@ public class BookReviewController {
     @GetMapping("/reviewHead")
     public Map<String, Object> getReviewHead(Integer postId, HttpServletRequest request) {
         if (postId == null) {
-            request.getSession().setAttribute("postId", 10004);
             postId = (Integer) request.getSession().getAttribute("postId");
         }
         //根据书评id 查询出书评的详细信息

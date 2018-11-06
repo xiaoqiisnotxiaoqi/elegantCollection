@@ -13,7 +13,8 @@ import javax.servlet.http.HttpSession;
 public class CheckLoginInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        System.out.println("request URL = " + request.getServletPath());
+        System.out.println("CheckLoginInterceptor request getServletPath = " + request.getServletPath());
+        System.out.println("CheckLoginInterceptor request URI = " +  request.getRequestURI());
         HttpSession session = request.getSession();
         if (session.getAttribute("customer") != null) {
             System.out.println("拦截器:用户已登录");

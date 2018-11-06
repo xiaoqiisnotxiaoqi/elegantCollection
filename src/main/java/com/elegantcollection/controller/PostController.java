@@ -32,6 +32,7 @@ public class PostController {
 
     /**
      * 发书评
+     *
      * @param postTitle
      * @param postContext
      * @param request
@@ -40,15 +41,18 @@ public class PostController {
     @PostMapping("add")
     public String add(@Param("postTitle") String postTitle, @Param("postContext") String postContext, HttpServletRequest request) {
         Integer custId = (Integer) request.getSession().getAttribute("custId");
-        Integer blockId = 10002;//(Integer) request.getSession().getAttribute("blockId");
+        Integer blockId = (Integer) request.getSession().getAttribute("blockId");
         Post post = new Post();
-        post.setCustId(custId);
-        post.setPostPetname(String.valueOf(blockId));
-        post.setPostTitle(postTitle);
-        post.setPostText(postContext);
-        post.setPostTime(new Date());
-        String.valueOf(postService.add(post, request));
-        return "post";
+        if (custId != null) {
+            post.setCustId(custId);
+            post.setPostPetname(String.valueOf(blockId));
+            post.setPostTitle(postTitle);
+            post.setPostText(postContext);
+            post.setPostTime(new Date());
+            String.valueOf(postService.add(post, request));
+            return "success";
+        }else
+            return "fail";
     }
 
     /**
@@ -76,7 +80,6 @@ public class PostController {
      */
     @GetMapping("queryStickPost")
     List<Post> queryStickPost(Integer blockId) {
-        blockId = 10002;
         return postService.queryStickPost(blockId);
     }
 
@@ -88,7 +91,7 @@ public class PostController {
      */
     @GetMapping("queryPost")
     PageModel<Post> queryPost(HttpServletRequest request, Integer currentPageCode) {
-        Integer blockId = 10002;//(Integer) request.getSession().getAttribute("blockId");
+        Integer blockId = (Integer) request.getSession().getAttribute("blockId");
         initializePageModel(currentPageCode);
         pageModel.setPageSize(10);
         Integer size = postService.queryPost4Size(blockId);
@@ -106,7 +109,7 @@ public class PostController {
      */
     @GetMapping("queryBestPost")
     PageModel<Post> queryBestPost(HttpServletRequest request, Integer currentPageCode) {
-        Integer blockId = 10002;//(Integer) request.getSession().getAttribute("blockId");
+        Integer blockId = (Integer) request.getSession().getAttribute("blockId");
         initializePageModel(currentPageCode);
         pageModel.setPageSize(1);
         Integer size = postService.queryBestPost4Size(blockId);

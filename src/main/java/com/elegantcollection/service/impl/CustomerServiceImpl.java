@@ -25,7 +25,8 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public List<Customer> quaryCustomerByEmail(String email) {
         CustomerExample customerExample = new CustomerExample();
-        customerExample.createCriteria().andCustMailEqualTo(email);
+        // 查询
+        customerExample.createCriteria().andCustMailEqualTo(email).andCustStatusEqualTo(0);
         return customerDao.selectByExample(customerExample);
     }
 

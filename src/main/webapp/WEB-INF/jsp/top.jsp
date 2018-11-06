@@ -56,7 +56,7 @@
         <a style="color: black" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=954566097&site=qq&menu=yes">联系客服</a>
     </span>
     <span id="service-news"></span>
-    <span class="top-discuss" onclick="topDiscuss()">讨论区</span>
+    <span class="top-discuss" onclick="topDiscuss()">书评区</span>
     <span id="discuss-news"></span>
 
     <%--登录弹窗--%>
@@ -88,7 +88,7 @@
                                         </ul>
                                     </form>
                                     <p class="good-tips marginB10">
-                                        <a id="btnForgetpsw" class="fr">忘记密码？</a>
+                                        <a id="btnForgetpsw" class="fr" onclick="forgetPassword()">忘记密码？</a>
                                         还没有账号？
                                         <a href="javaScript:void(0)" target="_blank" id="btnRegister" onclick="login2Register()">立即注册</a>
                                     </p>
@@ -199,8 +199,6 @@
 <div style="width: 100%;height: 2px;background-color: red; margin-top: 20px"></div>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/common.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/login.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/register.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/top.js"></script>
 </body>

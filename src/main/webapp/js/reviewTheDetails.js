@@ -22,7 +22,11 @@ function reviewOfTheBeginning() {
     } else {
         xhr = new ActiveXObject('Microsoft.XMLHTTP');
     }
-    xhr.open("GET", "/reviewHead", true);
+    var  ui = "/reviewHead";
+    if (thisPostId !== undefined){
+        ui += "?postId=" + thisPostId;
+    }
+    xhr.open("GET", ui, true);
     xhr.setRequestHeader("Content-Type", "application/json;charset=utf-8");
     xhr.onreadystatechange = reviewResouse;
     xhr.send();
@@ -48,7 +52,7 @@ function reviewResouse() {
         pageCustId = map.custId;
         pageCustName = map.custName;
 
-         replyContent();
+        replyContent();
 
     }
 }
@@ -63,16 +67,14 @@ function replyContent() {
         xhr = new ActiveXObject('Microsoft.XMLHTTP');
     }
     var url="/reviewTheDetails";
-    if (thisPostId !== null && currentPage !== null){
+    if (thisPostId !== undefined && currentPage !== undefined){
         url += "?postId="+thisPostId + "&currentPage=" + currentPage;
-    } else if (currentPage !== null){
+    } else if (currentPage !== undefined){
         url += "?currentPage=" + currentPage;
-    } else if (thisPostId !== null){
+    } else if (thisPostId !== undefined){
         url += "?postId="+thisPostId;
     }
-
-
-    xhr.open("GET", "/reviewTheDetails", true);
+    xhr.open("GET", url, true);
     xhr.setRequestHeader("Content-Type", "application/json;charset=utf-8");
     xhr.onreadystatechange = replyContentReoue;
     xhr.send();
@@ -329,6 +331,16 @@ function replyContentReoue() {
 }
 
 
+/**
+ * 排行榜点击进入
+ * @param ele 该排行标题所在的节点
+ */
+function toThisPage(ele) {
+    thisPostId = ele.nextSibling.nextSibling.innerText;
+    reviewOfTheBeginning();
+}
+
+
 
 /**
  * 发送请求 得到 一段时间内的评论热度 前十的书评帖
@@ -365,7 +377,7 @@ function topPortRedus(){
             }
 
 
-            b += ('<span class="topic_title">'+topJson[i].title+'</span>' +
+            b += ('<span class="topic_title" onclick="toThisPage(this)">'+topJson[i].title+'</span>' +
             '<span class="topic_num">'+topJson[i].num+'</span>' +
             '<span style="display: none">'+topJson[i].postId+'</span></li>');
            // console.log(a);
@@ -419,7 +431,6 @@ function reply2Comment(ele){
     reviewDivNode = ele.parentNode.parentNode.parentNode;
     //得到回复的类容
     var text = ele.previousSibling.value;
-    alert(text);
     if (window.XMLHttpRequest) {
         xhr = new XMLHttpRequest();
     } else {
@@ -541,7 +552,6 @@ function pageTransfer(ele) {
     reviewDivNode = undefined;
     //得到页面渲染的div
     reviewDivNode = ele.parentNode.parentNode.parentNode.parentNode.parentNode;
-    alert(reviewDivNode.previousSibling.innerHTML);
     //得到要跳转的页面
     var page = ele.innerText;
     //得到 当前楼层
@@ -728,7 +738,6 @@ function replyTheOriginalPoster() {
         xhr = new ActiveXObject('Microsoft.XMLHTTP');
     }
     var sendText = "postId=" + pagePostId + "&text=" + text;
-    alert(sendText);
     xhr.open("PUT", "/replyOriginalPoster", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
     xhr.onreadystatechange = replyTheResults;
@@ -903,7 +912,6 @@ function postSearchDetialSearch() {
         var resous = document.getElementById("resoule");
         resous.innerHTML = "";
         var centent = text.modelList;
-        alert(centent);
         var a = "";
         for (var i = 0; i < centent.length ; i++){
             a += ('<li class="huifu">' +

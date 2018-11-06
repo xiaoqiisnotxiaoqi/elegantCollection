@@ -40,15 +40,15 @@
         <div class="not-login">
             <span class="top-wellcome">欢迎进入雅致藏书!</span>
             <span class="top-log"><a onclick="showDiv2()" id="asd">登录</a></span>
-            <span class="top-join" onclick="showRegister()">加入雅致</span>
+            <span class="top-join" onclick="showRegister2()">加入雅致</span>
         </div>
     <%
         }
     %>
 
-    <span class="top-myEle" onclick="topCustEle()">我的雅致</span>
-    <span class="top-cart" onclick="loginOrCart()">购物车</span>
-    <span class="top-order" onclick="myOrder()">订单</span>
+    <span class="top-myEle" onclick="topCustEle2()">我的雅致</span>
+    <span class="top-cart" onclick="loginOrCart2()">购物车</span>
+    <span class="top-order" onclick="myOrder2()">订单</span>
     <span class="top-service">
         <a style="color: black" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=954566097&site=qq&menu=yes">联系客服</a>
     </span>
@@ -85,9 +85,9 @@
                                         </ul>
                                     </form>
                                     <p class="good-tips marginB10">
-                                        <a id="btnForgetpsw" class="fr">忘记密码？</a>
+                                        <a id="btnForgetpsw" class="fr" onclick="forgetPassword()">忘记密码？</a>
                                         还没有账号？
-                                        <a href="javaScript:void(0)" target="_blank" id="btnRegister" onclick="login2Register()">立即注册</a>
+                                        <a href="javaScript:void(0)" target="_blank" id="btnRegister" onclick="login2Register2()">立即注册</a>
                                     </p>
                                     <div class="login-box marginB10">
                                         <span id="login_btn" class="btn btn-micv5 btn-block" onclick="login()">登录</span>
@@ -116,7 +116,7 @@
         <div>
             <span id="register-title">会员注册</span>
             <span id="register-having">已有账号</span>
-            <a href="#" onclick="register2Login()" id="register-now">立即登录</a>
+            <a href="#" onclick="register2Login2()" id="register-now">立即登录</a>
         </div>
         <div class="register-title"></div>
 
@@ -168,12 +168,12 @@
             <button onclick="searchBox()">搜索</button>
     </div>
     <div class="left-nav">
-        <div id="cart" onclick="loginOrCart()" onmouseover="onCart()" onmouseout="outCart()">
+        <div id="cart" onclick="loginOrCart2()" onmouseover="onCart()" onmouseout="outCart()">
             <img src="${pageContext.request.contextPath}/images/cart-white.png" id="cart-img">
             <span id="cart-span">购物车</span>
             <span id="cart-num"></span>
         </div>
-        <div id="order-span" onclick="myOrder()">我的订单</div>
+        <div id="order-span" onclick="myOrder2()">我的订单</div>
     </div>
     <div class="classify-nav">
         <ul>
@@ -196,8 +196,6 @@
 <div style="width: 100%;height: 2px;background-color: red; margin-top: 20px"></div>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/common.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/login.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/register.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/top.js"></script>
 </body>
