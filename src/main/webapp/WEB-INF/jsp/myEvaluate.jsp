@@ -11,6 +11,7 @@
     <meta charset="UTF-8">
     <title>我的评价</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/myEvaluate.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/my_Elegant.css">
     <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/user_info.js"></script>
 </head>
@@ -19,82 +20,41 @@
 <jsp:include page="top.jsp"/>
 
 
-<div class="mydnew_break">
-    您现在的位置：
-    <a href="#">雅志</a> &gt;
-    <span><a href="#">我的Elegant</a></span> &gt;
-    <span>个人档案</span>
-</div>
 <!--个人信息开始操作-->
-<div class="main_frame">
+<div class="main_frame" style="width: 1000px">
     <!--左侧栏开始-->
-    <div class="mydang_left">
-        <div class="mydang_left_inner">
-            <h3 class="mydang_left_title border_top0">我的长用链接
-                <a id="DocPersonal_set" name="setting" href="#" style="font-size: 12px; color:#1A66B3;
-                    font-family: 宋体; font-weight:normal; padding-left: 40px;">设置</a>
-            </h3>
-            <ul style="padding:0px;" class="my_href" id="myfavoriteLink"></ul>
-            <h3 class="mydang_left_title">我的交易
-                <a class="slide_up" id="class600" href="javascript:click_a('class600','display600')"></a>
-            </h3>
+    <div class="my_left">
+        <div class="my_menu">
 
-            <ul class="my_content" style="display:block;" id="display600">
-
-                <li><a class="" target="_parent" href="#"
-                       name="myallorders">我的订单test</a>
-                </li>
-
-            </ul>
+            <h3 class="my_menu-title"><a href="${pageContext.request.contextPath}/myelegant">我的雅志</a></h3>
+            <div class="dl">
+                <!--导航栏开始-->
 
 
-            <h3 class="mydang_left_title">我的钱包
-                <a class="slide_up" id="class620" href="javascript:click_a('class620','display620')"></a>
-            </h3>
-            <ul class="my_content" style="display:block;" id="display620">
+                <ul>我的交易</ul>
+                <li><a href="${pageContext.request.contextPath}/order_all">我的订单</a></li>
+                <ul>我的钱包</ul>
+                <!--<li><a href="#">我的余额</a></li>-->
+                <li><a href="${pageContext.request.contextPath}/myelegant">我的积分</a></li>
+                <ul>售后服务</ul>
+                <li><a href="#">申请/查询退换货</a></li>
 
-                <li><a class="" target="_parent" href="#" name="mycoupons">我的礼券</a></li>
+                <ul>个人中心</ul>
+                <li><a href="${pageContext.request.contextPath}/userinfo">个人信息</a></li>
 
-                <li><a class="" target="_parent" href="#" name="points_index_list">我的积分</a></li>
-            </ul>
-            <h3 class="mydang_left_title">售后服务
-                <a class="slide_up" id="class630" href="javascript:click_a('class630','display630')"></a>
-            </h3>
-            <ul class="my_content" style="display:block;" id="display630">
-                <li><a class="" target="_parent" href="#" name="re_list">申请/查询退换货</a></li>
-                <li><a class="" target="_parent" href="#" name="myinvoice">补开发票</a></li>
-            </ul>
-            <h3 class="mydang_left_title">个人中心
-                <a class="slide_up" id="class640" href="javascript:click_a('class640','display640')"></a>
-            </h3>
-            <ul class="my_content" style="display:block;" id="display640">
-                <li><a href="#" class="on">个人信息</a></li>
+                <li><a href="${pageContext.request.contextPath}/myaddress">收货地址</a></li>
+                <ul>我的消息</ul>
+                <li><a href="${pageContext.request.contextPath}/postReply">消息查看</a></li>
+                <!--<li><a href="#">发帖记录</a></li>-->
+                <li><a href="${pageContext.request.contextPath}/myEvaluate">评论/晒单</a></li>
 
-                <li><a class="" target="_parent" href="#" name="myaddress">收货地址</a></li>
-                <li><a class="" target="_parent" href="#" name="myfeed">邮件/短信订阅</a></li>
-            </ul>
-            <h3 class="mydang_left_title">安全中心
-                <a class="slide_up" id="class610" href="javascript:click_a('class610','display610')"></a>
-            </h3>
-            <ul class="my_content" style="display:block;" id="display610">
-                <li><a class="" target="_parent" href="#" name="my_login_pwd">登录密码</a></li>
-                <li><a class="" target="_parent" href="#" name="my_email">邮箱验证</a></li>
-                <li><a class="" target="_parent" href="#" name="my_phone">手机绑定</a></li>
-
-            </ul>
-
-            <h3 class="mydang_left_title">社区
-                <a class="slide_up" id="class650" href="javascript:click_a('class650','display650')"></a>
-            </h3>
-            <ul class="my_content" style="display:block;" id="display650">
-                <li><a class="" target="_parent" href="#" name="myreview">评论/晒单</a></li>
-                <li><a class="" target="_parent" href="#" name="myquestion">提问/回答</a></li>
-            </ul>
+            </div>
+            <!--导航栏结束-->
         </div>
     </div>
     <!--左侧结束-->
     <!--右侧开始-->
-    <div class="account_right" id="your_position">
+    <div class="account_right" id="your_position" style="float: right">
         <div class="archives_title">
             <h2>
                 我的评价

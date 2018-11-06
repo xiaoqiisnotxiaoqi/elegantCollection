@@ -17,8 +17,7 @@ html, body {
 
 .index-main {
     width: 1240px;
-    height: 1250px;
-
+    height: auto;
     margin: 20px auto;
 }
 

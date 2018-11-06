@@ -25,14 +25,20 @@ function getDetail() {
             //    渲染页面
             var book = jsObj.book;
             var bookImgList = jsObj.bookImgList;
+            var bookDetailImgList = jsObj.bookDetailImgList;
             var pageModel = jsObj.evaluatePageModel;
             document.getElementById("book-imgs-box").innerHTML = " ";
             document.getElementById("bookId").value = book.bookId;
-
+            //渲染展示图片
             for (var i = 0; i < bookImgList.length; i++) {
                 document.getElementById("book-imgs-box").innerHTML += "<div class=\"other-pic\"><img  onmouseover=changePic(this) src=\" " + bookImgList[i].imgAddress + "\"></div>";
 
             }
+            //渲染详情图片
+            for (var i = 0; i < bookDetailImgList.length; i++) {
+                document.getElementById("")
+            }
+
             document.getElementById("main-pic-box").innerHTML = "<img src=\"" + book.bookImg + "\"/>"
             document.getElementById("name-info").innerHTML = "<h2>" + book.bookName + "</h2>";
             if (jsObj.author != null) {
