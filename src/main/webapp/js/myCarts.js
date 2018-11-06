@@ -479,7 +479,16 @@ function  priceStatistics() {
         if (bookPrice !== null){
             allprice = bookPrice.groupPrice;
             fullReductionDiscount = bookPrice.fullReductionDiscount;
-            groupPrice = bookPrice.groupDiscount;
+            if (bookPrice.groupDiscount == undefined){
+                groupPrice = 0
+            } else {
+                groupPrice = bookPrice.groupDiscount;
+            }
+            alert(allprice);
+            alert(fullReductionDiscount);
+            alert(groupPrice);
+
+
             //组合优惠 优惠额
             document.getElementById("price1").innerText = groupPrice;
             //满减优惠 优惠额
