@@ -361,6 +361,7 @@ public class CartController {
             if (i < a - 3) {
                 cartService.removeByBookId(((Customer) request.getSession().getAttribute("customer")).getCustId().toString(), Integer.valueOf(key));
             }
+            i++;
         }
         System.out.println(map);
         return "success";
