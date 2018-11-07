@@ -463,6 +463,18 @@ input::-webkit-inner-spin-button {
     /*background-color: lawngreen;*/
 }
 
+.kucun {
+    float: left;
+    margin-left: 20px;
+    height: 40px;
+    width: 100px;
+    line-height: 40px;
+}
+
+.kucunNum {
+    color: #444444;
+}
+
 .detail-img {
     height: auto;
     width: 100%;

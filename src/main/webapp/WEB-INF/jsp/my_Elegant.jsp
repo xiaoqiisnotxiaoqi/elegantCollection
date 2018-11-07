@@ -144,10 +144,6 @@
 
                                 <span class="tip" id="tip"></span>
                             </li>
-                            <%--<li><a href="#" target="_blank">待收货</a>--%>
-                            <%--</li>--%>
-                            <%--<li><a href="#" target="_blank">待评价</a>--%>
-                            <%--</li>--%>
                             <li class="last"><a href="${pageContext.request.contextPath}/order_all" target="_blank">全部订单</a></li>
                         </ul>
                         <span class="title">我的订单</span>
@@ -201,6 +197,8 @@
 <jsp:include page="bottom.jsp" flush="true"/>
 <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 <script>
+
+
     $(function () {
         $('.back_top').click(function () {
             $('html , body').animate({scrollTop: 0}, 400);
@@ -212,6 +210,10 @@
     function userinfo() {
         window.location ="/userinfo";
     }
+    window.onload=function () {
+        getOrder4all();
+
+    };
 
     var getOrder = "${pageContext.request.contextPath}/getallorder";
     var getCart ="${pageContext.request.contextPath}/cartNum";
@@ -258,11 +260,11 @@
 
         xhr.setRequestHeader("Content-Type","application/json;charset=utf-8");
 
-        xhr.onreadystatechange =loadaddress;
+        xhr.onreadystatechange =loadOrder;
         xhr.send();
 
     }
-    function loadaddress(){
+    function loadOrder(){
         // console.log(xhr.responseText);
         if (xhr.readyState == 4 && xhr.status == 200) {
             var result = JSON.parse(xhr.responseText);
@@ -270,7 +272,7 @@
                     var OrderList = document.getElementById("allOrder");
                     OrderList.innerHTML = "";
                     var allOrder = result;
-                    if (allOrder != null) {
+                    if (allOrder.length != 0) {
                         for (var i = 0; i < allOrder.length; i++) {
 
                             //页面渲染
@@ -303,6 +305,11 @@
                             $(".none_box").css('display', 'none');
 
                         });
+
+                            var OrderLeng = document.getElementById("tip");
+                            OrderLeng.innerHTML = "";
+                            OrderLeng.innerHTML += ('<strong>' + allOrder.length + '</strong>');
+
                     } else {
                         $(function () {
                             $(".none_box").css('display', 'block');
