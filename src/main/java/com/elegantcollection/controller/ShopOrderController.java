@@ -213,7 +213,7 @@ public class ShopOrderController {
         AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.URL, AlipayConfig.APPID, AlipayConfig.RSA_PRIVATE_KEY, AlipayConfig.FORMAT, AlipayConfig.CHARSET, AlipayConfig.ALIPAY_PUBLIC_KEY, AlipayConfig.SIGNTYPE);
         AlipayTradePagePayRequest alipayRequest = new AlipayTradePagePayRequest();//创建API对应的request
         //返回客户网页
-        alipayRequest.setReturnUrl("http://localhost:8080/showOrderDetail0");
+        alipayRequest.setReturnUrl("http://134.175.17.147:8080/showOrderDetail0");
         //alipayRequest.setNotifyUrl("http://localhost:8080/notify");//在公共参数中设置回跳和通知地址（无法使用）
         alipayRequest.setBizContent("{" +
                 //订单id

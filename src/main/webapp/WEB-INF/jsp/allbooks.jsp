@@ -120,7 +120,7 @@
 <%--加载js--%>
 <script src="${pageContext.request.contextPath}/js/allbooks.js"></script>
 <script>
-    function add2CartFinal(ele) {
+    function add2CartFinal1(ele) {
         if (sessionStorage.getItem("login") == "success") {
             add2Cart1(ele)
         } else {
@@ -128,7 +128,7 @@
         }
     }
 
-    function buyNowFinal(ele) {
+    function buyNowFinal1(ele) {
         if (sessionStorage.getItem("login") == "success") {
             buyNow1(ele)
         } else {
