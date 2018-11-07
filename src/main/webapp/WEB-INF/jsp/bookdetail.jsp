@@ -118,6 +118,10 @@
                     <button class="num-buttons" onclick=minus()>-
                     </button>
                 </div>
+                <div class="kucun">当前库存
+                    <span class="kucunNum" id="kucunNum">100</span>
+                    本
+                </div>
                 <button id="addtocart" onclick="add2CartFinal()">加入购物车</button>
                 <button id="buynow" onclick="buyNowFinal()">立即购买</button>
             </div>
