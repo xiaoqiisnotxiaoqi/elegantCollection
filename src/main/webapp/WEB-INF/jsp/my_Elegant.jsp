@@ -197,6 +197,8 @@
 <jsp:include page="bottom.jsp" flush="true"/>
 <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 <script>
+
+
     $(function () {
         $('.back_top').click(function () {
             $('html , body').animate({scrollTop: 0}, 400);
@@ -208,6 +210,10 @@
     function userinfo() {
         window.location ="/userinfo";
     }
+    window.onload=function () {
+        getOrder4all();
+
+    };
 
     var getOrder = "${pageContext.request.contextPath}/getallorder";
     var getCart ="${pageContext.request.contextPath}/cartNum";
@@ -266,7 +272,7 @@
                     var OrderList = document.getElementById("allOrder");
                     OrderList.innerHTML = "";
                     var allOrder = result;
-                    if (allOrder != null) {
+                    if (allOrder.length != 0) {
                         for (var i = 0; i < allOrder.length; i++) {
 
                             //页面渲染
