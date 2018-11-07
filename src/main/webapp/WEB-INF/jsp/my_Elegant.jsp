@@ -144,10 +144,6 @@
 
                                 <span class="tip" id="tip"></span>
                             </li>
-                            <%--<li><a href="#" target="_blank">待收货</a>--%>
-                            <%--</li>--%>
-                            <%--<li><a href="#" target="_blank">待评价</a>--%>
-                            <%--</li>--%>
                             <li class="last"><a href="${pageContext.request.contextPath}/order_all" target="_blank">全部订单</a></li>
                         </ul>
                         <span class="title">我的订单</span>
@@ -258,11 +254,11 @@
 
         xhr.setRequestHeader("Content-Type","application/json;charset=utf-8");
 
-        xhr.onreadystatechange =loadaddress;
+        xhr.onreadystatechange =loadOrder;
         xhr.send();
 
     }
-    function loadaddress(){
+    function loadOrder(){
         // console.log(xhr.responseText);
         if (xhr.readyState == 4 && xhr.status == 200) {
             var result = JSON.parse(xhr.responseText);
