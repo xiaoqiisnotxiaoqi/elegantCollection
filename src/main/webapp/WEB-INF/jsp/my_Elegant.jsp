@@ -299,6 +299,11 @@
                             $(".none_box").css('display', 'none');
 
                         });
+
+                            var OrderLeng = document.getElementById("tip");
+                            OrderLeng.innerHTML = "";
+                            OrderLeng.innerHTML += ('<strong>' + allOrder.length + '</strong>');
+
                     } else {
                         $(function () {
                             $(".none_box").css('display', 'block');
