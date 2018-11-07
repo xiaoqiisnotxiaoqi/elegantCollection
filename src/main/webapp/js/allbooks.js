@@ -13,7 +13,6 @@ function refresh() {
     else
         document.getElementById("current-category").name = '';
 
-    // sessionStorage.clear();
 
     var categoryId = document.getElementById("current-category").name;
     var keyWord = document.getElementById("keyword").name;
@@ -98,8 +97,8 @@ function refresh() {
                     "            <span class=\"tag_box\">\n" +
                     "            </span>\n" +
                     "            <div class=\"shop-button\">\n" +
-                    "                <button class=\"btn-cart\" onclick=\"  add2Cart(" + bookList[i].bookId + ")\" > 加入购物车 </button>\n" +
-                    "                <button class=\"btn-cart\" onclick= \" buyNow(" + bookList[i].bookId + ")\">购买</button>\n" +
+                    "                <button class=\"btn-cart\" onclick=\"  add2CartFinal(" + bookList[i].bookId + ")\" > 加入购物车 </button>\n" +
+                    "                <button class=\"btn-cart\" onclick= \" buyNowFinal(" + bookList[i].bookId + ")\">购买</button>\n" +
                     "\n" +
                     "            </div>\n" +
                     "        </li>";
@@ -237,8 +236,9 @@ function clickZhekou(ele) {
 }
 
 
+
 // 添加到购物车
-function add2Cart(ele) {
+function add2Cart1(ele) {
     var bookId = ele;
     var count = 1;
 
@@ -267,7 +267,7 @@ function add2Cart(ele) {
     }
 }
 
-function buyNow(ele) {
+function buyNow1(ele) {
     var bookId = ele;
     var count = 1;
 

@@ -36,7 +36,7 @@ function getDetail() {
             }
             //渲染详情图片
             for (var i = 0; i < bookDetailImgList.length; i++) {
-                document.getElementById("")
+                document.getElementById("book-imgs").innerHTML += "<img class=\"detail-img\" src=\"" + bookDetailImgList[i].imgAddress + "\">";
             }
 
             document.getElementById("main-pic-box").innerHTML = "<img src=\"" + book.bookImg + "\"/>"
@@ -59,7 +59,7 @@ function getDetail() {
             document.getElementById("isbn").innerText = book.bookIsbn;
             document.getElementById("kaiben").innerText = book.bookSize;
             document.getElementById("baozhuang").innerText = book.bookPacking;
-
+            document.getElementById("kucunNum").innerText = book.bookStock;
 
             document.getElementById("nav-bookcategory").innerText = "" + jsObj.mainCategory.categoryName + "";
             document.getElementById("info-cateName").innerText = "" + jsObj.mainCategory.categoryName + "";
@@ -178,25 +178,28 @@ function page(ele) {
 }
 
 // 添加到购物车
-function add2Cart(btn) {
+function add2Cart() {
     var bookId = document.getElementById("bookId").value;
     var count = document.getElementById("booknum").value;
-
-    var xhr1 = null;
-    if (window.XMLHttpRequest) {
-        xhr1 = new XMLHttpRequest(); //for ie7+,FireFox,Chorme,Opera,Safai...
+    if (count > document.getElementById("kucunNum").innerText) {
+        alert("库存不足,请重新输入");
     } else {
-        xhr1 = new ActiveXObject('Microsoft.XMLHTTP');//for ie6
-    }
-    if (xhr1 != null) {
-        var url = "?bookId=" + bookId + "&count=" + count
+        var xhr1 = null;
+        if (window.XMLHttpRequest) {
+            xhr1 = new XMLHttpRequest(); //for ie7+,FireFox,Chorme,Opera,Safai...
+        } else {
+            xhr1 = new ActiveXObject('Microsoft.XMLHTTP');//for ie6
+        }
+        if (xhr1 != null) {
+            var url = "?bookId=" + bookId + "&count=" + count
 
-        xhr1.open("GET", "/book/add2Cart" + url, true);
-        xhr1.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;");
-        xhr1.onreadystatechange = add2CartResp;
-        xhr1.send();
-    } else {
-        alert("不能创建XMLHttpRequest对象实例");
+            xhr1.open("GET", "/book/add2Cart" + url, true);
+            xhr1.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;");
+            xhr1.onreadystatechange = add2CartResp;
+            xhr1.send();
+        } else {
+            alert("不能创建XMLHttpRequest对象实例");
+        }
     }
 
     function add2CartResp() {
@@ -210,22 +213,25 @@ function add2Cart(btn) {
 function buyNow() {
     var bookId = document.getElementById("bookId").value;
     var count = document.getElementById("booknum").value;
-
-    var xhr1 = null;
-    if (window.XMLHttpRequest) {
-        xhr1 = new XMLHttpRequest(); //for ie7+,FireFox,Chorme,Opera,Safai...
+    if (count > document.getElementById("kucunNum").innerText) {
+        alert("库存不足,请重新输入");
     } else {
-        xhr1 = new ActiveXObject('Microsoft.XMLHTTP');//for ie6
-    }
-    if (xhr1 != null) {
-        var url = "?bookId=" + bookId + "&count=" + count
+        var xhr1 = null;
+        if (window.XMLHttpRequest) {
+            xhr1 = new XMLHttpRequest(); //for ie7+,FireFox,Chorme,Opera,Safai...
+        } else {
+            xhr1 = new ActiveXObject('Microsoft.XMLHTTP');//for ie6
+        }
+        if (xhr1 != null) {
+            var url = "?bookId=" + bookId + "&count=" + count
 
-        xhr1.open("GET", "/book/add2Cart" + url, true);
-        xhr1.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;");
-        xhr1.onreadystatechange = buyResp;
-        xhr1.send();
-    } else {
-        alert("不能创建XMLHttpRequest对象实例");
+            xhr1.open("GET", "/book/add2Cart" + url, true);
+            xhr1.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;");
+            xhr1.onreadystatechange = buyResp;
+            xhr1.send();
+        } else {
+            alert("不能创建XMLHttpRequest对象实例");
+        }
     }
 
     function buyResp() {

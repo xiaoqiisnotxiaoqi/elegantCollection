@@ -86,6 +86,7 @@ public class BookServiceImpl implements BookService {
 
 
 //        获取前十的作者
+        
         AuthorExample authorExample = new AuthorExample();
         authorExample.setOffset(0l);
         authorExample.setLimit(10);
@@ -176,6 +177,7 @@ public class BookServiceImpl implements BookService {
 
         criteria.andBookIdEqualTo(bookId);
         criteria.andRedundancyFieldEqualTo("1");
+        bookImgExample.setOrderByClause("img_id");
         return bookImgDao.selectByExample(bookImgExample);
     }
 
@@ -192,6 +194,7 @@ public class BookServiceImpl implements BookService {
 
         criteria.andBookIdEqualTo(bookId);
         criteria.andRedundancyFieldEqualTo("2");
+        bookImgExample.setOrderByClause("img_id");
         return bookImgDao.selectByExample(bookImgExample);
     }
 
