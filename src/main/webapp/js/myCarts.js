@@ -314,7 +314,7 @@ function cartResolve() {
                             '<li class="list_amount">' +
                             '<div class="amount_box">' +
                             '<a href="javascript:void(0);" onclick="reduceNumber(this)" class="reduce reSty">-</a>' +
-                            '<input type="text" value="' + books[i].bookNum + '" class="sum">' +
+                            '<input type="text" value="' + books[i].bookNum + '" class="sum" readonly="readonly">' +
                             '<a href="javascript:javascript:void(0);" onclick="addNumber(this)" class="plus">+</a>' +
                             '</div>' +
                             '</li>' +

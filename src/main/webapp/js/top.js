@@ -441,7 +441,7 @@ function myOrder2() {
  * 跳转到讨论区
  */
 function  topDiscuss() {
-    window.location.href = "/post";
+    window.open("/post");
 }
 
 /**
