@@ -535,7 +535,7 @@ table {
     list-style-type: none;
 }
 .info_list li .name {
-    width: 76px;
+
     text-align: right;
     padding-right: 10px;
     display: inline-block;

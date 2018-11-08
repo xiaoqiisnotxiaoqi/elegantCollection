@@ -59,7 +59,7 @@
                 <div class="user_info">
                     <div class="user_phone">
 
-                        <a href="${pageContext.request.contextPath}/userinfo" target="blank">
+                        <a href="${pageContext.request.contextPath}/userinfo"   target="blank">
                             <% if (request.getSession().getAttribute("customer") != null) {
 
                             %>
@@ -68,10 +68,10 @@
 
                             <div class="edit_box">
                                 <span class="edit">&nbsp</span>
-                                <span class="edit_a">编辑资料</span>
+                                <span class="edit_a" >编辑资料</span>
                             </div>
                         </a>
-                        <span class="opacity_mask" onclick="userinfo()"></span>
+                        <span class="opacity_mask"  onclick="userinfo()"></span>
 
                     </div>
                     <a href="#" title="站内信" target="blank">
@@ -104,14 +104,14 @@
                         <p>
 
                             <% if (request.getSession().getAttribute("customer") != null) {%>
-                            <a><span class="setting">手机已设置</span></a>
+                            <a ><span class="setting">手机已设置</span></a>
                             <%}%>
                             <c:if test="${customer.custPhone ==null}">
-                                <a><span class="setting ">邮箱未设置</span></a>
+                                <a  ><span class="setting ">邮箱未设置</span></a>
                             </c:if>
 
                             <c:if test="${customer.custPhone !=null}">
-                                <a><span class="setting ">邮箱已设置</span></a>
+                                <a ><span class="setting ">邮箱已设置</span></a>
                             </c:if>
 
                         </p>
@@ -123,13 +123,13 @@
                     <ul>
                         <li>
                             <a class="pic jf"></a>
-                            <a>积分</a>
+                            <a >积分</a>
                             <%if (request.getSession().getAttribute("customer") == null) { %>
                             <a>0</a>
                             <%}%>
 
                             <%if (request.getSession().getAttribute("customer") != null) { %>
-                            <a>${customer.custPoints}</a>
+                            <a >${customer.custPoints}</a>
                             <%}%>
                         </li>
                     </ul>
@@ -140,16 +140,11 @@
                 <div class="my_order">
                     <div class="my_title">
                         <ul class="tab_list">
-                            <li><a>待付款</a>
+                            <li><a >待付款</a>
 
                                 <span class="tip" id="tip"></span>
                             </li>
-                            <%--<li><a href="#" target="_blank">待收货</a>--%>
-                            <%--</li>--%>
-                            <%--<li><a href="#" target="_blank">待评价</a>--%>
-                            <%--</li>--%>
-                            <li class="last"><a href="${pageContext.request.contextPath}/order_all"
-                                                target="_blank">全部订单</a></li>
+                            <li class="last"><a href="${pageContext.request.contextPath}/order_all" target="_blank">全部订单</a></li>
                         </ul>
                         <span class="title">我的订单</span>
                     </div>
@@ -162,8 +157,7 @@
 
 
                     <div class="none_box">
-                        <h3>您暂时没有未完成交易的订单，<a href="${pageContext.request.contextPath}/index"
-                                             target="_blank">挑选喜欢的产品去~~</a></h3>
+                        <h3>您暂时没有未完成交易的订单，<a href="${pageContext.request.contextPath}/index" target="_blank">挑选喜欢的产品去~~</a></h3>
                     </div>
 
 
@@ -203,25 +197,30 @@
 <jsp:include page="bottom.jsp" flush="true"/>
 <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 <script>
+
+
     $(function () {
         $('.back_top').click(function () {
             $('html , body').animate({scrollTop: 0}, 400);
         });
     });
-    window.onload = function () {
-        getOrder4all();
+    window.onload=function () {
+       getOrder4all();
     }
-
     function userinfo() {
-        window.location = "/userinfo";
+        window.location ="/userinfo";
     }
+    window.onload=function () {
+        getOrder4all();
+
+    };
 
     var getOrder = "${pageContext.request.contextPath}/getallorder";
-    var getCart = "${pageContext.request.contextPath}/cartNum";
+    var getCart ="${pageContext.request.contextPath}/cartNum";
 
 
-    var xhr = null;
 
+    var xhr=null;
     function getCartNum() {
         if (window.XMLHttpRequest) {
             xhr = new XMLHttpRequest();
@@ -231,25 +230,23 @@
         // console.log(area);
         xhr.open("GET", getCart, true);
 
-        xhr.setRequestHeader("Content-Type", "application/json;charset=utf-8");
+        xhr.setRequestHeader("Content-Type","application/json;charset=utf-8");
 
-        xhr.onreadystatechange = loadCartNum;
+        xhr.onreadystatechange =loadCartNum;
         xhr.send();
     }
-
     function loadCartNum() {
-        if (xhr.readyState == 4 || xhr.state == 200) {
-            var result = JSON.parse(xhr.responseText)
+        if(xhr.readyState==4 || xhr.state ==200){
+            var result =JSON.parse(xhr.responseText)
             // alert(result);
-            var cartnum = document.getElementById("cartnum");
-            cartnum.innerText = "";
-            cartnum.innerText += (result);
+          var cartnum =   document.getElementById("cartnum");
+            cartnum.innerText="";
+            cartnum.innerText+=(result);
         }
 
     }
 
-    var xhr = null;
-
+    var xhr=null;
     function getOrder4all() {
         if (window.XMLHttpRequest) {
             xhr = new XMLHttpRequest();
@@ -261,75 +258,84 @@
         // console.log(area);
         xhr.open("GET", getOrder, true);
 
-        xhr.setRequestHeader("Content-Type", "application/json;charset=utf-8");
+        xhr.setRequestHeader("Content-Type","application/json;charset=utf-8");
 
-        xhr.onreadystatechange = loadaddress;
+        xhr.onreadystatechange =loadOrder;
         xhr.send();
 
     }
-
-    function loadaddress() {
+    function loadOrder(){
         // console.log(xhr.responseText);
         if (xhr.readyState == 4 && xhr.status == 200) {
             var result = JSON.parse(xhr.responseText);
 
-            var OrderList = document.getElementById("allOrder");
-            OrderList.innerHTML = "";
-            var allOrder = result;
-            if (allOrder.length != 0) {
-                for (var i = 0; i < allOrder.length; i++) {
+                    var OrderList = document.getElementById("allOrder");
+                    OrderList.innerHTML = "";
+                    var allOrder = result;
+                    if (allOrder.length != 0) {
+                        for (var i = 0; i < allOrder.length; i++) {
 
-                    //页面渲染
-                    OrderList.innerHTML += ('<tr>' +
-                        '                            <td class="tg">' +
-                        '                                <div class="goode_list">' +
+                            //页面渲染
+                            OrderList.innerHTML += ('<tr>' +
+                                '                            <td class="tg">' +
+                                '                                <div class="goode_list">' +
 
-                        '                                    <a  title="' + allOrder[i].title + allOrder[i].bookIntro + '"' +
-                        '                                    onclick="showDetail(this)"  name="' + allOrder[i].bookId + '"' +
-                        '                                       target="_blank"><img src="' + allOrder[i].bookImg + '"></a>' +
-                        '                                </div>' +
-                        '                            </td>' +
-                        '                            <td>共' + allOrder[i].quality + '件商品<br><span class="data">' + allOrder[i].orderCreateTime + '</span></td>' +
-                        '                            <td><span class="price">' + allOrder[i].orderPrice + '<span>元</span></span><br>优惠金额 : ' + allOrder[i].discountAmount + '<span>元</span></td>' +
-                        '                            <td>' +
-                        '                                <span class="red">等待付款</span>' +
-                        '                            </td>' +
-                        '                            <td> <a onclick="showOrder(this)" id="OrderId" name="' + allOrder[i].orderId + '">查看</a></td>' +
-                        '                        </tr>');
+                                '                                    <a  title="' + allOrder[i].title + allOrder[i].bookIntro + '"' +
+                                '                                    onclick="showDetail(this)"  name="'+allOrder[i].bookId+'"' +
+                                '                                       target="_blank"><img src="' + allOrder[i].bookImg + '"></a>' +
+                                '                                </div>' +
+                                '                            </td>' +
+                                '                            <td>共' + allOrder[i].quality + '件商品<br><span class="data">' + allOrder[i].orderCreateTime + '</span></td>' +
+                                '                            <td><span class="price">' + allOrder[i].orderPrice + '<span>元</span></span><br>优惠金额 : ' + allOrder[i].discountAmount + '<span>元</span></td>' +
+                                '                            <td>' +
+                                '                                <span class="red">等待付款</span>' +
+                                '                            </td>' +
+                                '                            <td> <a onclick="showOrder(this)" id="OrderId" name="'+allOrder[i].orderId+'">查看</a></td>' +
+                                '                        </tr>');
 
-                }
+                        }
 
-                var OrderLeng = document.getElementById("tip");
-                OrderLeng.innerHTML = "";
-                OrderLeng.innerHTML += ('<strong>' + allOrder.length + '</strong>');
+                       var OrderLeng=  document.getElementById("tip");
+                        OrderLeng.innerHTML="";
+                       OrderLeng.innerHTML+=('<strong>'+allOrder.length+'</strong>');
 
 
-                $(function () {
-                    $(".none_box").css('display', 'none');
 
-                });
-            } else {
-                $(function () {
-                    $(".none_box").css('display', 'block');
-                });
-            }
+                        $(function () {
+                            $(".none_box").css('display', 'none');
+
+                        });
+
+                            var OrderLeng = document.getElementById("tip");
+                            OrderLeng.innerHTML = "";
+                            OrderLeng.innerHTML += ('<strong>' + allOrder.length + '</strong>');
+
+                    } else {
+                        $(function () {
+                            $(".none_box").css('display', 'block');
+
+
+                        });
+                    }
             getCartNum();
         }
 
     }
 
-    function showOrder(ele) {
-        var OrderId = ele.name;
+    function showOrder(ele){
+        var OrderId =  ele.name;
         window.location = "${pageContext.request.contextPath}/showOrderDetail?orderId=" + OrderId;
 
     }
-
     function showDetail(ele) {
-        var DetailId = ele.name;
+        var DetailId =ele.name;
         alert(DetailId);
-        window.location = "${pageContext.request.contextPath}/bookdetail/?bookId=" + DetailId;
+        window.location="${pageContext.request.contextPath}/bookdetail/?bookId="+DetailId;
 
     }
+
+
+
 
 
 </script>
