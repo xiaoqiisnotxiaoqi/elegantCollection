@@ -79,7 +79,7 @@
 
 <div class="pop" style="display: none" id="J-Pop-Content">
     <a href="javascript:closeaddress()" class="close" id="J-Pop-Close"></a>
-    <div class="pop_title">新增收货地址</div>
+    <div class="pop_title" id="modtext">新增收货地址</div>
     <div class="pop_con">
         <form action="" method="" class="info_list">
             <ul>
@@ -215,6 +215,7 @@
     function showaddress() {
         document.getElementById("J-Pop-Content").style.display="block";
         document.getElementById("save").style.display ="block";
+        document.getElementById("modtext").innerText="新增收货地址";
     }
     //回滚到头部
     $(function () {
@@ -404,12 +405,14 @@
         document.getElementById("J-Pop-Content").style.display="block";
         document.getElementById("updata1").style.display="block";
         document.getElementById("J-Save-Address").style.display="none";
+        document.getElementById("modtext").innerText="修改收货地址";
         modId = ele.name;
     }
     var delId;
     function isdel(ele) {
         // alert("是否进来")
         document.getElementById("delete_sure").style.display="block";
+
         delId= ele.name;
     }
 //更新地址
@@ -436,7 +439,7 @@ function updataadd() {
     var area = "addressId=" +addressId+ "&consigneeName=" + consigneeName + "&province=" + province + "&city=" + city + "&district=" + district
         + "&addressDetail=" + addressDetail + "&consigneePhone=" + consigneePhone;
 
-    alert(area);
+
     // console.log(area);
     xhr.open("POST",updataAddress , true);
 
