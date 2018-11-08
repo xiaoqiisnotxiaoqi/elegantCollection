@@ -13,6 +13,6 @@ import org.springframework.cache.annotation.EnableCaching;
 public class ElegantCollectionApplication{
 
 	public static void main(String[] args) {
-		SpringApplication.run(ElegantCollectionApplication.class, args);
+		SpringApplication.run(ElegantCollectionApplication.class,args);
 	}
 }

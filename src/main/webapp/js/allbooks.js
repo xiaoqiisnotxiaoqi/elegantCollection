@@ -97,12 +97,11 @@ function refresh() {
                     "            <span class=\"tag_box\">\n" +
                     "            </span>\n" +
                     "            <div class=\"shop-button\">\n" +
-                    "                <button class=\"btn-cart\" onclick=\"  add2CartFinal(" + bookList[i].bookId + ")\" > 加入购物车 </button>\n" +
-                    "                <button class=\"btn-cart\" onclick= \" buyNowFinal(" + bookList[i].bookId + ")\">购买</button>\n" +
+                    "                <button class=\"btn-cart\" onclick=\"  add2CartFinal1(" + bookList[i].bookId + ")\" > 加入购物车 </button>\n" +
+                    "                <button class=\"btn-cart\" onclick= \" buyNowFinal1(" + bookList[i].bookId + ")\">购买</button>\n" +
                     "\n" +
                     "            </div>\n" +
                     "        </li>";
-
             }
             //    渲染分页信息
             document.getElementById("last").value = pageModel.totalPages;

@@ -122,7 +122,7 @@ function getDate() {
 
         allUrl = null;
         allUrl = "/order/getTransport?no=" + logisticsId + "&com=" + courierCompanyId;
-        //refreshTransport(allUrl);
+        refreshTransport(allUrl);
     }
     else {
         // alert("xhr.readyState = " + xhr.readyState + ", xhr.status =  " + xhr.status)
