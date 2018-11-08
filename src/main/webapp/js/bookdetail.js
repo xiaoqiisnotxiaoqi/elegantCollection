@@ -150,7 +150,7 @@ function fmtDate(obj) {
 
 //改变展示图片的js
 function changePic(ele) {
-    document.getElementById("main-pic-box").innerHTML = "<img  src=\"" + ele.src.substring(21) + "\"/>";
+    document.getElementById("main-pic-box").innerHTML = "<img  src=\"" + ele.src.substring(25) + "\"/>";
 }
 
 //切换评价和详情
