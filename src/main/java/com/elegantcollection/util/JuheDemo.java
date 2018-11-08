@@ -31,7 +31,7 @@ public class JuheDemo {
     public static final String APPKEY = "7228757b88313740a1bd501c40e33fd4";
 
     //1.常用快递查询API
-    public static JSONObject getRequest1(Long no, String com) throws Exception {
+    public static JSONObject getRequest1(String no, String com) throws Exception {
         String result = null;
         String url = "http://v.juhe.cn/exp/index";//请求接口地址
         Map params = new HashMap();//请求参数

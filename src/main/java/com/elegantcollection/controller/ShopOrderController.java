@@ -498,7 +498,7 @@ public class ShopOrderController {
      * @throws Exception
      */
     @GetMapping("getTransport")
-    public JSONObject getTransport(Long no, String com) throws Exception {
+    public JSONObject getTransport(String no, String com) throws Exception {
         return JuheDemo.getRequest1(no, com);
     }
 }
