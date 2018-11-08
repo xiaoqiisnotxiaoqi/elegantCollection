@@ -40,7 +40,7 @@ function reviewResouse() {
         var map = JSON.parse(xhr.responseText);
 
         //将 板块的图片 引入页面
-        document.getElementById("block-img").src  += map.blockImg;
+        document.getElementById("block-img").src  = map.blockImg;
         //将板块名写入页面
         document.getElementById("block-name").innerText = map.blockName;
         //将书评数量写入页面
