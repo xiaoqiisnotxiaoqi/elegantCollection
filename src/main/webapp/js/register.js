@@ -130,7 +130,7 @@ function login() {
 function responselogin() {
     if (xhr.readyState === 4 && xhr.status === 200) {
         if (xhr.responseText != "success") {
-            document.getElementById("loginModalLabel").innerText += "              " + xhr.responseText;
+            document.getElementById("loginModalLabel").innerText = "登录                  " + xhr.responseText;
 
         } else {
             document.getElementById("loginModalLabel").innerText = "登录";
