@@ -45,8 +45,8 @@ function loadBookOrderDetail() {
         var shen = document.getElementById("shen");
         shen.innerHTML = "";
         for (var i = 0; i < result.length; i++) {
-            shen.innerHTML += ('<div class="danshu"><a href="#" name="' + result[i].bookId + '" onclick="' +
-                'getDetail(this)"> <img src="' + result[i].bookImg + '"></a><a href="#" name="' + result[i].bookId +
+            shen.innerHTML += ('<div class="danshu"><a href="/bookdetail/?bookId=' + result[i].bookId + '" name="' +
+                result[i].bookId + '" onclick=""> <img src="' + result[i].bookImg + '"></a><a href="#" name="' + result[i].bookId +
                 '" onclick="getDetail(this)"><span class="shuzi">' + result[i].bookName + '</span></a>' +
                 '<label class="jia">¥</label><span class="jia">' + result[i].bookSellingPrice + '</span></div>');
         }
@@ -55,8 +55,4 @@ function loadBookOrderDetail() {
         var height=parseInt(style.height)+330+parseInt(style1.height);
         all.style.height=height+'px';
     }
-}
-//跳转到书籍详情
-function getDetail(pro) {
-    window.location = "bookdetail/?bookId=" + pro.name;
 }
