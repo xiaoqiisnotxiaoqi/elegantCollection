@@ -1,6 +1,7 @@
 package com.elegantcollection.controller;
 
 import com.elegantcollection.entity.Block;
+import com.elegantcollection.entity.Customer;
 import com.elegantcollection.entity.Post;
 import com.elegantcollection.service.BlockService;
 import com.elegantcollection.service.PostService;
@@ -40,7 +41,7 @@ public class PostController {
      */
     @PostMapping("add")
     public HashMap add(@Param("postTitle") String postTitle, @Param("postContext") String postContext, HttpServletRequest request) {
-        Integer custId = (Integer) request.getSession().getAttribute("custId");
+        Integer custId = ((Customer) request.getSession().getAttribute("customer")).getCustId();
         Integer blockId = 10002;//(Integer) request.getSession().getAttribute("blockId");
         Post post = new Post();
         post.setCustId(custId);
