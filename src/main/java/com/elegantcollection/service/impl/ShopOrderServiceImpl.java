@@ -72,6 +72,7 @@ public class ShopOrderServiceImpl implements ShopOrderService {
     public Integer queryByOrderNumber(Long orderNumber) {
         ShopOrderExample shopOrderExample = new ShopOrderExample();
         shopOrderExample.createCriteria().andOrderNumberEqualTo(orderNumber);
+        shopOrderExample.setOrderByClause("order_create_time  desc");
         return shopOrderDao.selectByExample(shopOrderExample).get(0).getOrderId();
     }
 
@@ -81,6 +82,7 @@ public class ShopOrderServiceImpl implements ShopOrderService {
         shopOrderExample.setLimit(pageModel.getPageSize());
         shopOrderExample.setOffset(pageModel.getStartRecord().longValue());
         shopOrderExample.createCriteria().andCustIdEqualTo(custId).andOrderStatusBetween(0, 3);
+        shopOrderExample.setOrderByClause("order_create_time  desc");
         return shopOrderDao.selectByExample(shopOrderExample);
     }
 
@@ -109,6 +111,7 @@ public class ShopOrderServiceImpl implements ShopOrderService {
             shopOrderExample.createCriteria().andCustIdEqualTo(custId).andOrderStatusEqualTo(orderStatus).andOrderCreateTimeBetween(startDate, endDate);
         else
             shopOrderExample.createCriteria().andCustIdEqualTo(custId).andOrderStatusBetween(0, 3).andOrderCreateTimeBetween(startDate, endDate);
+        shopOrderExample.setOrderByClause("order_create_time  desc");
         return shopOrderDao.selectByExample(shopOrderExample);
     }
 
@@ -140,6 +143,7 @@ public class ShopOrderServiceImpl implements ShopOrderService {
         if (!pattern.matcher(orderNumber).matches()) {
             return null;
         }
+        shopOrderExample.setOrderByClause("order_create_time  desc");
         shopOrderExample.createCriteria().andCustIdEqualTo(custId).andOrderNumberEqualTo(Long.valueOf(orderNumber));
         return shopOrderDao.selectByExample(shopOrderExample);
     }

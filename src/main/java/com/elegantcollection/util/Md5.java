@@ -34,6 +34,7 @@ public class Md5 {
     public static boolean passwordEncryptionVerification(String password,String salt,String md5){
         String base = password + salt;
         String md = DigestUtils.md5DigestAsHex(base.getBytes());
+        System.out.println(md);
         return md.equals(md5);
     }
 
