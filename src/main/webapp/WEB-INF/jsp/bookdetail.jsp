@@ -112,7 +112,7 @@
             <!--添加按钮等-->
             <div id="num-box">
                 <div id="num-botton">
-                    <input id="booknum" type="number" value="1">
+                    <input id="booknum" type="number" value="1" min="1" max="" onchange="checkBookCount(this)">
                     <button class="num-buttons" onclick=add()>+
                     </button>
                     <button class="num-buttons" onclick=minus()>-
@@ -226,8 +226,16 @@
 <%--引用js--%>
 <script src="${pageContext.request.contextPath}/js/bookdetail.js"></script>
 <script>
+    function checkBookCount(ele) {
+        if (ele.value > ele.max) {
+            ele.value = ele.max;
+        }
+    }
+
+
     function add2CartFinal() {
         if (sessionStorage.getItem("login") == "success") {
+            checkBookCount(document.getElementById("booknum"));
             add2Cart();
         } else {
             showDiv();
@@ -237,6 +245,7 @@
 
     function buyNowFinal() {
         if (sessionStorage.getItem("login") == "success") {
+            checkBookCount(document.getElementById("booknum"));
             buyNow()
         } else {
             showDiv();

@@ -60,7 +60,8 @@ function getDetail() {
             document.getElementById("kaiben").innerText = book.bookSize;
             document.getElementById("baozhuang").innerText = book.bookPacking;
             document.getElementById("kucunNum").innerText = book.bookStock;
-
+            document.getElementById("booknum").max = book.bookStock;
+            document.getElementById("booknum").min = 1;
             document.getElementById("nav-bookcategory").innerText = "" + jsObj.mainCategory.categoryName + "";
             document.getElementById("info-cateName").innerText = "" + jsObj.mainCategory.categoryName + "";
 
@@ -130,7 +131,10 @@ function getDetail() {
 
 //数量加减
 function add() {
-    document.getElementById("booknum").value++;
+    var booknum = document.getElementById("booknum");
+    if (booknum.value < booknum.max) {
+        document.getElementById("booknum").value++;
+    }
 }
 
 function minus() {
@@ -178,61 +182,55 @@ function page(ele) {
 }
 
 // 添加到购物车
+var xhr1 = null;
+
 function add2Cart() {
     var bookId = document.getElementById("bookId").value;
-    var count = document.getElementById("booknum").value;
-    if (count > document.getElementById("kucunNum").innerText) {
-        alert("库存不足,请重新输入");
+    if (window.XMLHttpRequest) {
+        xhr1 = new XMLHttpRequest(); //for ie7+,FireFox,Chorme,Opera,Safai...
     } else {
-        var xhr1 = null;
-        if (window.XMLHttpRequest) {
-            xhr1 = new XMLHttpRequest(); //for ie7+,FireFox,Chorme,Opera,Safai...
-        } else {
-            xhr1 = new ActiveXObject('Microsoft.XMLHTTP');//for ie6
-        }
-        if (xhr1 != null) {
-            var url = "?bookId=" + bookId + "&count=" + count
-
-            xhr1.open("GET", "/book/add2Cart" + url, true);
-            xhr1.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;");
-            xhr1.onreadystatechange = add2CartResp;
-            xhr1.send();
-        } else {
-            alert("不能创建XMLHttpRequest对象实例");
-        }
+        xhr1 = new ActiveXObject('Microsoft.XMLHTTP');//for ie6
+    }
+    if (xhr1 != null) {
+        var url = "?bookId=" + bookId + "&count=" + document.getElementById("booknum").value;
+        xhr1.open("GET", "/book/add2Cart" + url, true);
+        xhr1.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;");
+        xhr1.onreadystatechange = add2CartResp;
+        xhr1.send();
+    } else {
+        alert("不能创建XMLHttpRequest对象实例");
     }
 
-    function add2CartResp() {
-        if (xhr1.readyState == 4 && xhr1.status == 200) {
-            var jsObj = JSON.parse(xhr1.responseText);
-            alert(jsObj.msg);
-        }
+}
+
+function add2CartResp() {
+    if (xhr1.readyState == 4 && xhr1.status == 200) {
+        var jsObj = JSON.parse(xhr1.responseText);
+        alert(jsObj.msg);
     }
 }
 
 function buyNow() {
     var bookId = document.getElementById("bookId").value;
     var count = document.getElementById("booknum").value;
-    if (count > document.getElementById("kucunNum").innerText) {
-        alert("库存不足,请重新输入");
-    } else {
-        var xhr1 = null;
-        if (window.XMLHttpRequest) {
-            xhr1 = new XMLHttpRequest(); //for ie7+,FireFox,Chorme,Opera,Safai...
-        } else {
-            xhr1 = new ActiveXObject('Microsoft.XMLHTTP');//for ie6
-        }
-        if (xhr1 != null) {
-            var url = "?bookId=" + bookId + "&count=" + count
 
-            xhr1.open("GET", "/book/add2Cart" + url, true);
-            xhr1.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;");
-            xhr1.onreadystatechange = buyResp;
-            xhr1.send();
-        } else {
-            alert("不能创建XMLHttpRequest对象实例");
-        }
+    var xhr1 = null;
+    if (window.XMLHttpRequest) {
+        xhr1 = new XMLHttpRequest(); //for ie7+,FireFox,Chorme,Opera,Safai...
+    } else {
+        xhr1 = new ActiveXObject('Microsoft.XMLHTTP');//for ie6
     }
+    if (xhr1 != null) {
+        var url = "?bookId=" + bookId + "&count=" + count;
+
+        xhr1.open("GET", "/book/add2Cart" + url, true);
+        xhr1.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;");
+        xhr1.onreadystatechange = buyResp;
+        xhr1.send();
+    } else {
+        alert("不能创建XMLHttpRequest对象实例");
+    }
+
 
     function buyResp() {
         if (xhr1.readyState == 4 && xhr1.status == 200) {
