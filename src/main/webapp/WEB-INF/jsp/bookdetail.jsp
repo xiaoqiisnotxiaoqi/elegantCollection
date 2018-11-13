@@ -227,7 +227,7 @@
 <script src="${pageContext.request.contextPath}/js/bookdetail.js"></script>
 <script>
     function checkBookCount(ele) {
-        if (ele.value > ele.max) {
+        if (parseInt(ele.value) > parseInt(ele.max)) {
             ele.value = ele.max;
         }
     }

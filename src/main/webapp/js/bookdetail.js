@@ -132,13 +132,13 @@ function getDetail() {
 //数量加减
 function add() {
     var booknum = document.getElementById("booknum");
-    if (booknum.value < booknum.max) {
+    if (parseInt(booknum.value) < parseInt(booknum.max)) {
         document.getElementById("booknum").value++;
     }
 }
 
 function minus() {
-    if (document.getElementById("booknum").value > 0)
+    if (parseInt(document.getElementById("booknum").value) > 0)
         document.getElementById("booknum").value--;
 }
 
