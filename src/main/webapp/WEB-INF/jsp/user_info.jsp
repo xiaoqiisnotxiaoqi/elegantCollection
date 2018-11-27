@@ -481,7 +481,7 @@
             }
            var custProfile =document.getElementById("img_head_select").src;
 
-            var message = "custProfile=" +custProfile.substring(22);
+            var message = "custProfile=" +custProfile;
 
             // alert(message);
 
